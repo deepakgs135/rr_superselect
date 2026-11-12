@@ -814,12 +814,14 @@ class _PandasNamespace:
 
     @staticmethod
     def read_csv(path: str | Path, low_memory: bool = False) -> DataFrame:
-        with open(path, encoding="utf-8") as f:
+        with open(path, encoding="utf-8-sig") as f:
             reader = csv.DictReader(f)
-            cols = list(reader.fieldnames or [])
+            raw_cols = list(reader.fieldnames or [])
+            cols = [c.lstrip("\ufeff").strip() for c in raw_cols]
+            col_map = dict(zip(raw_cols, cols))
             rows = []
             for raw_row in reader:
-                rows.append({k: _try_num(v) for k, v in raw_row.items()})
+                rows.append({col_map.get(k, k): _try_num(v) for k, v in raw_row.items() if k is not None})
         return DataFrame(rows, columns=cols)
 
     @staticmethod

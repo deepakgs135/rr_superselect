@@ -480,9 +480,36 @@ DISMISSAL_LABELS = {
 
 @st.cache_data
 def load_dismissals(path: Path):
-    if not path.exists():
+    if path.exists():
+        d = pd.read_csv(path)
+        if {"player_id", "dismissal_type", "dismissal_count"}.issubset(d.columns):
+            d["player_id"] = pd.to_numeric(d["player_id"], errors="coerce")
+            d["dismissal_count"] = pd.to_numeric(d["dismissal_count"], errors="coerce").fillna(0).astype(int)
+            d = d[d["dismissal_type"].notna() & (d["dismissal_type"].astype(str).str.strip() != "")].copy()
+            d["dismissal_type"] = d["dismissal_type"].map(DISMISSAL_LABELS).fillna(d["dismissal_type"])
+            return d
+    bbb_file = RAW_BASE / "ball_by_ball.csv"
+    if not bbb_file.exists():
         return None
-    d = pd.read_csv(path)
+    bbb = pd.read_csv(bbb_file, low_memory=False)
+    bbb["innings"] = pd.to_numeric(bbb["innings"], errors="coerce")
+    bbb = bbb[bbb["innings"].isin([1, 2])].copy()
+    is_wk = bbb["is_wicket"].astype(str).str.strip().str.lower().isin(["true", "1", "1.0"])
+    wk = bbb[is_wk & bbb["dismissal_type"].notna() & (bbb["dismissal_type"].astype(str).str.strip() != "")].copy()
+    wk["player_id"] = pd.to_numeric(wk["dismissed_player_id"], errors="coerce").fillna(
+        pd.to_numeric(wk["striker_id"], errors="coerce")
+    ).astype(int)
+    wk["player_name"] = np.where(
+        wk["player_id"].eq(pd.to_numeric(wk["non_striker_id"], errors="coerce")),
+        wk["non_striker_name"],
+        wk["striker_name"],
+    )
+    d = (wk.groupby(["player_id", "player_name", "dismissal_type"], as_index=False)
+         .agg(dismissal_count=("runs", "size")))
+    try:
+        d.to_csv(path, index=False)
+    except OSError:
+        pass
     d["dismissal_type"] = d["dismissal_type"].map(DISMISSAL_LABELS).fillna(d["dismissal_type"])
     return d
 
@@ -959,11 +986,15 @@ with tab_profile:
     with right:
         if dismissals_raw is not None and len(p):
             pid = p["striker_id"].iloc[0]
-            dd = dismissals_raw[dismissals_raw["player_id"] == pid]
+            if "player_name" in dismissals_raw.columns:
+                dd = dismissals_raw[(dismissals_raw["player_id"] == pid) | (dismissals_raw["player_name"] == player)]
+            else:
+                dd = dismissals_raw[dismissals_raw["player_id"] == pid]
+            dd = dd[dd["dismissal_type"].notna() & (dd["dismissal_type"].astype(str).str.strip() != "")]
             dd = dd.groupby("dismissal_type", as_index=False)["dismissal_count"].sum()
             dd = dd[dd.dismissal_count > 0]
             if dd.empty:
-                st.info("No dismissal data for this batter in the file.")
+                st.info("No dismissals recorded for this batter (not out in all innings).")
             else:
                 fig = px.pie(dd, names="dismissal_type", values="dismissal_count", hole=0.52,
                              color_discrete_sequence=CATEGORY)

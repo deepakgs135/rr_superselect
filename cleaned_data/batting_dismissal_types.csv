@@ -1,28 +1,27 @@
-﻿player_id,player_name,dismissal_type,dismissal_count
+player_id,player_name,dismissal_type,dismissal_count
 8,Mahendra Singh Dhoni,Bowled,1
 8,Mahendra Singh Dhoni,Caught,18
 8,Mahendra Singh Dhoni,LBW,2
-8,Mahendra Singh Dhoni,Retire Out,1
 8,Mahendra Singh Dhoni,RunOut,1
 23,Piyush Chawla,Caught,5
 23,Piyush Chawla,RunOut,1
 47,Virat Kohli,Bowled,12
 47,Virat Kohli,Caught,57
 47,Virat Kohli,LBW,2
-47,Virat Kohli,RunOut,2
+47,Virat Kohli,RunOut,3
 47,Virat Kohli,Stump,2
 88,Faf du Plessis,Bowled,2
 88,Faf du Plessis,Caught,47
-88,Faf du Plessis,RunOut,2
+88,Faf du Plessis,RunOut,3
 109,Wriddhiman Saha,Bowled,5
 109,Wriddhiman Saha,Caught,27
 109,Wriddhiman Saha,LBW,1
+109,Wriddhiman Saha,RunOut,1
 109,Wriddhiman Saha,Stump,1
 126,Rohit Sharma,Bowled,10
 126,Rohit Sharma,Caught,69
 126,Rohit Sharma,LBW,5
 126,Rohit Sharma,RunOut,1
-126,Rohit Sharma,,1
 142,Shikhar Dhawan,Bowled,6
 142,Shikhar Dhawan,Caught,17
 142,Shikhar Dhawan,LBW,1
@@ -30,6 +29,7 @@
 143,Dinesh Karthik,Bowled,2
 143,Dinesh Karthik,Caught,28
 143,Dinesh Karthik,LBW,4
+143,Dinesh Karthik,RunOut,4
 147,Pradeep Sangwan,Bowled,1
 152,Ravindra Jadeja,Bowled,5
 152,Ravindra Jadeja,Caught,25
@@ -41,6 +41,7 @@
 167,Ajinkya Rahane,Bowled,4
 167,Ajinkya Rahane,Caught,42
 167,Ajinkya Rahane,LBW,4
+167,Ajinkya Rahane,RunOut,1
 167,Ajinkya Rahane,Stump,2
 169,Robin Uthappa,Caught,7
 169,Robin Uthappa,LBW,3
@@ -53,10 +54,11 @@
 220,David Warner,Bowled,4
 220,David Warner,Caught,29
 220,David Warner,LBW,6
+220,David Warner,RunOut,2
 223,Steven Smith,Bowled,2
 223,Steven Smith,Caught,4
 223,Steven Smith,LBW,2
-223,Steven Smith,RunOut,1
+223,Steven Smith,RunOut,2
 223,Steven Smith,Stump,1
 232,Tom Cooper,Caught,2
 250,Aaron Finch,Bowled,6
@@ -73,7 +75,7 @@
 305,Ravichandran Ashwin,Bowled,1
 305,Ravichandran Ashwin,Caught,21
 305,Ravichandran Ashwin,Retire Out,1
-305,Ravichandran Ashwin,RunOut,1
+305,Ravichandran Ashwin,RunOut,2
 332,Angelo Mathews,Caught,3
 332,Angelo Mathews,LBW,1
 344,Sheldon Jackson,Bowled,1
@@ -81,7 +83,9 @@
 360,Bhuvneshwar Kumar,Bowled,3
 360,Bhuvneshwar Kumar,Caught,11
 360,Bhuvneshwar Kumar,LBW,1
+360,Bhuvneshwar Kumar,RunOut,1
 395,Karn Sharma,Caught,4
+395,Karn Sharma,RunOut,1
 403,Umesh Yadav,Bowled,3
 403,Umesh Yadav,Caught,4
 418,Richard Berrington,Bowled,1
@@ -93,6 +97,7 @@
 478,Eoin Morgan,Caught,2
 479,Adil Rashid,Bowled,3
 479,Adil Rashid,Caught,7
+479,Adil Rashid,RunOut,2
 479,Adil Rashid,Stump,1
 492,Andre Fletcher,Bowled,1
 492,Andre Fletcher,Caught,3
@@ -109,6 +114,7 @@
 507,Mohammad Mahmudullah,LBW,2
 535,Ambati Rayudu,Bowled,6
 535,Ambati Rayudu,Caught,14
+535,Ambati Rayudu,RunOut,1
 722,Liam Dawson,Caught,3
 722,Liam Dawson,RunOut,1
 728,Dawid Malan,Bowled,3
@@ -130,7 +136,7 @@
 781,Sunil Narine,Bowled,10
 781,Sunil Narine,Caught,27
 781,Sunil Narine,LBW,2
-781,Sunil Narine,RunOut,1
+781,Sunil Narine,RunOut,3
 781,Sunil Narine,Stump,1
 786,Chris Jordan,Caught,10
 786,Chris Jordan,LBW,1
@@ -138,15 +144,16 @@
 796,Matthew Wade,Bowled,2
 796,Matthew Wade,Caught,13
 796,Matthew Wade,LBW,2
+796,Matthew Wade,RunOut,1
 813,Jos Buttler,Bowled,22
 813,Jos Buttler,Caught,75
 813,Jos Buttler,LBW,6
-813,Jos Buttler,RunOut,2
+813,Jos Buttler,RunOut,3
 813,Jos Buttler,Stump,1
 818,Mitchell Marsh,Bowled,12
 818,Mitchell Marsh,Caught,56
 818,Mitchell Marsh,LBW,5
-818,Mitchell Marsh,RunOut,1
+818,Mitchell Marsh,RunOut,4
 829,Mitchell Starc,Bowled,2
 829,Mitchell Starc,Caught,3
 829,Mitchell Starc,RunOut,1
@@ -155,16 +162,18 @@
 838,Glenn Maxwell,Bowled,14
 838,Glenn Maxwell,Caught,46
 838,Glenn Maxwell,LBW,3
-838,Glenn Maxwell,RunOut,1
+838,Glenn Maxwell,RunOut,4
 914,Krishnappa Gowtham,Caught,2
 914,Krishnappa Gowtham,LBW,1
 914,Krishnappa Gowtham,RunOut,2
 930,Karun Nair,Bowled,3
 930,Karun Nair,Caught,7
 930,Karun Nair,LBW,1
+930,Karun Nair,RunOut,1
 953,Lokesh Rahul,Bowled,5
 953,Lokesh Rahul,Caught,54
 953,Lokesh Rahul,LBW,5
+953,Lokesh Rahul,RunOut,2
 985,Brendan Taylor,Bowled,2
 985,Brendan Taylor,Caught,4
 985,Brendan Taylor,RunOut,1
@@ -176,10 +185,11 @@
 1039,Mandeep Singh,Caught,4
 1040,Harpreet Bhatia,Bowled,1
 1040,Harpreet Bhatia,Caught,2
-1040,Harpreet Bhatia,RunOut,1
+1040,Harpreet Bhatia,RunOut,2
 1045,David Wiese,LBW,1
 1071,Jaydev Unadkat,Caught,3
 1071,Jaydev Unadkat,LBW,1
+1071,Jaydev Unadkat,RunOut,3
 1077,David Miller,Bowled,12
 1077,David Miller,Caught,36
 1077,David Miller,LBW,1
@@ -188,6 +198,7 @@
 1101,George Dockrell,Bowled,6
 1101,George Dockrell,Caught,18
 1101,George Dockrell,LBW,1
+1101,George Dockrell,RunOut,1
 1107,Mohammad Nabi,Bowled,6
 1107,Mohammad Nabi,Caught,26
 1107,Mohammad Nabi,LBW,3
@@ -209,7 +220,7 @@
 1205,Jonny Bairstow,Bowled,5
 1205,Jonny Bairstow,Caught,21
 1205,Jonny Bairstow,LBW,2
-1205,Jonny Bairstow,RunOut,1
+1205,Jonny Bairstow,RunOut,2
 1210,James Vince,Bowled,1
 1210,James Vince,Caught,4
 1219,David Willey,Bowled,3
@@ -218,25 +229,27 @@
 1318,Andre Russell,Bowled,10
 1318,Andre Russell,Caught,29
 1318,Andre Russell,LBW,1
-1318,Andre Russell,RunOut,2
+1318,Andre Russell,RunOut,4
 1318,Andre Russell,Stump,2
 1327,Johnson Charles,Bowled,7
 1327,Johnson Charles,Caught,15
 1327,Johnson Charles,LBW,3
+1327,Johnson Charles,RunOut,1
 1327,Johnson Charles,Stump,1
 1389,Sean Abbott,Bowled,4
 1389,Sean Abbott,Caught,2
 1440,Rahul Tripathi,Bowled,1
 1440,Rahul Tripathi,Caught,36
 1440,Rahul Tripathi,LBW,1
-1440,Rahul Tripathi,,1
+1440,Rahul Tripathi,RunOut,1
 1481,Kusal Perera,Bowled,3
-1481,Kusal Perera,Caught,21
+1481,Kusal Perera,Caught,19
 1481,Kusal Perera,LBW,5
 1481,Kusal Perera,RunOut,1
 1481,Kusal Perera,Stump,1
 1487,Adam Milne,Bowled,2
 1487,Adam Milne,Caught,6
+1487,Adam Milne,RunOut,1
 1541,Sean Williams,Bowled,5
 1541,Sean Williams,Caught,6
 1541,Sean Williams,LBW,2
@@ -246,7 +259,7 @@
 1568,Kane Williamson,Bowled,5
 1568,Kane Williamson,Caught,14
 1568,Kane Williamson,LBW,1
-1568,Kane Williamson,,1
+1568,Kane Williamson,RunOut,1
 1596,Moeen Ali,Bowled,6
 1596,Moeen Ali,Caught,34
 1596,Moeen Ali,RunOut,2
@@ -254,15 +267,18 @@
 1612,Yuzvendra Chahal,Caught,1
 1617,Rishi Dhawan,Bowled,2
 1617,Rishi Dhawan,Caught,1
+1617,Rishi Dhawan,RunOut,1
 1649,Regis Chakabva,Caught,5
 1699,Suryakumar Yadav,Bowled,8
 1699,Suryakumar Yadav,Caught,98
 1699,Suryakumar Yadav,LBW,9
+1699,Suryakumar Yadav,RunOut,2
 1699,Suryakumar Yadav,Stump,2
 1701,Swapnil Singh,Caught,2
 1758,Patrick Cummins,Bowled,3
 1758,Patrick Cummins,Caught,15
 1758,Patrick Cummins,LBW,1
+1758,Patrick Cummins,RunOut,1
 1791,Wesley Barresi,Bowled,1
 1791,Wesley Barresi,LBW,1
 1801,Nitish Kumar,Bowled,1
@@ -277,13 +293,16 @@
 1941,Devon Conway,Bowled,9
 1941,Devon Conway,Caught,37
 1941,Devon Conway,LBW,6
+1941,Devon Conway,Retire Out,1
+1941,Devon Conway,RunOut,2
 1944,Keshav Maharaj,Bowled,4
 1944,Keshav Maharaj,Caught,6
 2001,Yashodha Lanka,Caught,4
+2001,Yashodha Lanka,Obstracting the field,1
 2003,Bhanuka Rajapaksa,Bowled,5
 2003,Bhanuka Rajapaksa,Caught,17
 2003,Bhanuka Rajapaksa,LBW,2
-2003,Bhanuka Rajapaksa,RunOut,1
+2003,Bhanuka Rajapaksa,RunOut,2
 2101,Quinton de Kock,Bowled,10
 2101,Quinton de Kock,Caught,43
 2101,Quinton de Kock,LBW,5
@@ -293,6 +312,7 @@
 2213,Soumya Sarkar,Bowled,3
 2213,Soumya Sarkar,Caught,7
 2213,Soumya Sarkar,LBW,2
+2213,Soumya Sarkar,RunOut,1
 2214,Gulbadin Naib,Bowled,1
 2214,Gulbadin Naib,Caught,8
 2214,Gulbadin Naib,LBW,1
@@ -305,18 +325,17 @@
 2258,Sanju Samson,Bowled,22
 2258,Sanju Samson,Caught,76
 2258,Sanju Samson,LBW,4
-2258,Sanju Samson,RunOut,1
+2258,Sanju Samson,RunOut,3
 2258,Sanju Samson,Stump,4
-2258,Sanju Samson,,1
 2261,Harshal Patel,Bowled,4
 2261,Harshal Patel,Caught,13
-2261,Harshal Patel,RunOut,1
+2261,Harshal Patel,RunOut,3
 2304,Tymal Mills,Caught,3
 2315,Reece Topley,Caught,1
 2315,Reece Topley,RunOut,1
 2320,Trent Boult,Bowled,1
 2320,Trent Boult,Caught,4
-2320,Trent Boult,RunOut,2
+2320,Trent Boult,RunOut,3
 2321,Olly Stone,Bowled,1
 2334,Dwaine Pretorius,Bowled,1
 2334,Dwaine Pretorius,Caught,6
@@ -342,6 +361,7 @@
 2399,Dushmantha Chameera,Bowled,5
 2399,Dushmantha Chameera,Caught,9
 2399,Dushmantha Chameera,LBW,2
+2399,Dushmantha Chameera,RunOut,2
 2407,Dhananjaya de Silva,Caught,14
 2416,Kyle Mayers,Bowled,8
 2416,Kyle Mayers,Caught,32
@@ -350,11 +370,12 @@
 2417,Akeal Hosein,Bowled,3
 2417,Akeal Hosein,Caught,12
 2417,Akeal Hosein,LBW,1
+2417,Akeal Hosein,RunOut,2
 2418,Justin Greaves,Caught,2
 2436,Dasun Shanaka,Bowled,6
-2436,Dasun Shanaka,Caught,37
+2436,Dasun Shanaka,Caught,36
 2436,Dasun Shanaka,LBW,2
-2436,Dasun Shanaka,RunOut,3
+2436,Dasun Shanaka,RunOut,6
 2436,Dasun Shanaka,Stump,1
 2463,Ryan Burl,Bowled,7
 2463,Ryan Burl,Caught,23
@@ -362,6 +383,7 @@
 2463,Ryan Burl,RunOut,2
 2483,Lizaad Williams,Caught,3
 2483,Lizaad Williams,LBW,2
+2483,Lizaad Williams,RunOut,1
 2485,Babar Azam,Bowled,6
 2485,Babar Azam,Caught,32
 2485,Babar Azam,LBW,6
@@ -369,7 +391,7 @@
 2490,Mohammad Nawaz,Bowled,3
 2490,Mohammad Nawaz,Caught,26
 2490,Mohammad Nawaz,LBW,2
-2490,Mohammad Nawaz,RunOut,2
+2490,Mohammad Nawaz,RunOut,4
 2523,Will Young,Bowled,2
 2523,Will Young,Caught,8
 2523,Will Young,LBW,1
@@ -382,8 +404,7 @@
 2533,Najibullah Zadran,Bowled,3
 2533,Najibullah Zadran,Caught,10
 2533,Najibullah Zadran,LBW,1
-2533,Najibullah Zadran,RunOut,1
-2533,Najibullah Zadran,,1
+2533,Najibullah Zadran,RunOut,2
 2534,Rahmat Shah,Bowled,1
 2573,Evin Lewis,Bowled,1
 2573,Evin Lewis,Caught,11
@@ -398,9 +419,10 @@
 2639,Marcus Stoinis,Bowled,9
 2639,Marcus Stoinis,Caught,46
 2639,Marcus Stoinis,LBW,4
-2639,Marcus Stoinis,RunOut,2
+2639,Marcus Stoinis,RunOut,3
 2639,Marcus Stoinis,Stump,2
 2650,Raymon Reifer,Caught,1
+2650,Raymon Reifer,RunOut,1
 2661,Shamarh Brooks,Bowled,2
 2661,Shamarh Brooks,Caught,3
 2661,Shamarh Brooks,Stump,1
@@ -416,7 +438,7 @@
 2681,Taskin Ahmed,Caught,5
 2681,Taskin Ahmed,Hit Wicket,1
 2681,Taskin Ahmed,LBW,1
-2681,Taskin Ahmed,RunOut,2
+2681,Taskin Ahmed,RunOut,3
 2687,Roston Chase,Bowled,8
 2687,Roston Chase,Caught,16
 2687,Roston Chase,LBW,3
@@ -425,7 +447,7 @@
 2756,Shashank Singh,Bowled,1
 2756,Shashank Singh,Caught,17
 2756,Shashank Singh,LBW,4
-2756,Shashank Singh,RunOut,2
+2756,Shashank Singh,RunOut,3
 2790,Praveen Dubey,Bowled,1
 2847,Shardul Thakur,Bowled,1
 2847,Shardul Thakur,Caught,15
@@ -437,7 +459,7 @@
 2876,Axar Patel,Bowled,8
 2876,Axar Patel,Caught,58
 2876,Axar Patel,LBW,1
-2876,Axar Patel,RunOut,7
+2876,Axar Patel,RunOut,10
 2876,Axar Patel,Stump,1
 2877,Vijay Shankar,Bowled,7
 2877,Vijay Shankar,Caught,12
@@ -453,23 +475,24 @@
 2921,Fakhar Zaman,Bowled,4
 2921,Fakhar Zaman,Caught,34
 2921,Fakhar Zaman,LBW,2
-2921,Fakhar Zaman,RunOut,1
+2921,Fakhar Zaman,RunOut,2
 2921,Fakhar Zaman,Stump,2
 2930,Rassie van der Dussen,Bowled,3
 2930,Rassie van der Dussen,Caught,11
 2930,Rassie van der Dussen,LBW,2
 2933,Jasprit Bumrah,Caught,3
-2933,Jasprit Bumrah,RunOut,1
+2933,Jasprit Bumrah,RunOut,2
 2972,Yasim Murtaza,Bowled,2
 2972,Yasim Murtaza,Caught,8
 2972,Yasim Murtaza,LBW,2
-2972,Yasim Murtaza,RunOut,1
+2972,Yasim Murtaza,RunOut,2
 2984,Sikandar Raza,Bowled,6
 2984,Sikandar Raza,Caught,43
 2984,Sikandar Raza,RunOut,1
 2984,Sikandar Raza,Stump,1
 2985,Mark Wood,Bowled,1
 2985,Mark Wood,Caught,1
+2985,Mark Wood,RunOut,1
 2996,Stephanus Myburgh,Caught,2
 2997,Paul van Meekeren,Bowled,1
 2997,Paul van Meekeren,Caught,1
@@ -477,6 +500,7 @@
 3024,Mohammad Rizwan,Bowled,4
 3024,Mohammad Rizwan,Caught,18
 3024,Mohammad Rizwan,LBW,4
+3024,Mohammad Rizwan,RunOut,2
 3024,Mohammad Rizwan,Stump,1
 3033,Usman Qadir,Caught,1
 3033,Usman Qadir,RunOut,1
@@ -492,12 +516,13 @@
 3091,Sahibzada Farhan,LBW,2
 3097,Shan Masood,Caught,7
 3097,Shan Masood,LBW,2
-3125,Nicholas Pooran,Bowled,13
+3125,Nicholas Pooran,Bowled,12
 3125,Nicholas Pooran,Caught,67
 3125,Nicholas Pooran,LBW,9
-3125,Nicholas Pooran,RunOut,2
+3125,Nicholas Pooran,RunOut,4
 3125,Nicholas Pooran,Stump,3
 3174,Matt Henry,Caught,6
+3174,Matt Henry,RunOut,1
 3260,Hashmatullah Shahidi,Caught,2
 3272,Fabian Allen,Bowled,1
 3272,Fabian Allen,Caught,5
@@ -506,7 +531,7 @@
 3275,Alzarri Joseph,Caught,4
 3276,Gudakesh Motie,Bowled,2
 3276,Gudakesh Motie,Caught,9
-3276,Gudakesh Motie,RunOut,1
+3276,Gudakesh Motie,RunOut,2
 3276,Gudakesh Motie,Stump,1
 3280,Nazmul Hossain Shanto,Bowled,7
 3280,Nazmul Hossain Shanto,Caught,15
@@ -521,21 +546,22 @@
 3297,Shimron Hetmyer,Bowled,7
 3297,Shimron Hetmyer,Caught,57
 3297,Shimron Hetmyer,LBW,2
-3297,Shimron Hetmyer,RunOut,4
+3297,Shimron Hetmyer,RunOut,6
 3298,Jofra Archer,Bowled,3
 3298,Jofra Archer,Caught,11
-3298,Jofra Archer,RunOut,2
+3298,Jofra Archer,RunOut,4
 3304,Munim Shahriar,Bowled,1
 3304,Munim Shahriar,Caught,2
 3306,Afsar Zazai,Bowled,1
 3323,Jimmy Neesham,Bowled,2
 3323,Jimmy Neesham,Caught,24
 3323,Jimmy Neesham,LBW,1
-3323,Jimmy Neesham,RunOut,1
+3323,Jimmy Neesham,RunOut,3
 3330,Hardik Pandya,Bowled,7
 3330,Hardik Pandya,Caught,75
 3330,Hardik Pandya,LBW,4
 3330,Hardik Pandya,Retire Out,1
+3330,Hardik Pandya,RunOut,4
 3361,Michael Leask,Bowled,2
 3361,Michael Leask,Caught,3
 3361,Michael Leask,LBW,1
@@ -544,7 +570,7 @@
 3373,Aizaz Khan,LBW,1
 3374,Mark Chapman,Bowled,4
 3374,Mark Chapman,Caught,34
-3374,Mark Chapman,RunOut,2
+3374,Mark Chapman,RunOut,3
 3374,Mark Chapman,Stump,2
 3377,Babar Hayat,Bowled,5
 3377,Babar Hayat,Caught,5
@@ -552,7 +578,7 @@
 3382,Nizakat Khan,Bowled,1
 3382,Nizakat Khan,Caught,7
 3382,Nizakat Khan,LBW,3
-3382,Nizakat Khan,RunOut,1
+3382,Nizakat Khan,RunOut,2
 3383,Kinchit Shah,Caught,5
 3383,Kinchit Shah,LBW,2
 3383,Kinchit Shah,RunOut,1
@@ -562,6 +588,7 @@
 3451,Baba Indrajith,Caught,3
 3489,Salman Agha,Caught,25
 3489,Salman Agha,LBW,7
+3489,Salman Agha,RunOut,2
 3539,Ben McDermott,Bowled,1
 3539,Ben McDermott,Caught,5
 3539,Ben McDermott,LBW,1
@@ -577,16 +604,18 @@
 3578,Imad Wasim,Caught,5
 3578,Imad Wasim,RunOut,1
 3595,Andy McBrine,Caught,1
+3595,Andy McBrine,RunOut,1
 3605,Aiden Markram,Bowled,14
-3605,Aiden Markram,Caught,57
+3605,Aiden Markram,Caught,56
 3605,Aiden Markram,LBW,6
+3605,Aiden Markram,RunOut,1
 3605,Aiden Markram,Stump,2
 3613,Shakeel Ahmed,Caught,1
 3623,Hasan Ali,Caught,3
 3627,Andile Phehlukwayo,Caught,4
 3628,Kagiso Rabada,Bowled,5
 3628,Kagiso Rabada,Caught,6
-3628,Kagiso Rabada,RunOut,2
+3628,Kagiso Rabada,RunOut,3
 3628,Kagiso Rabada,Stump,1
 3629,Corbin Bosch,Bowled,3
 3629,Corbin Bosch,Caught,5
@@ -603,7 +632,7 @@
 3644,Kuldeep Yadav,Bowled,3
 3644,Kuldeep Yadav,Caught,6
 3644,Kuldeep Yadav,LBW,3
-3644,Kuldeep Yadav,RunOut,3
+3644,Kuldeep Yadav,RunOut,5
 3645,Sarfaraz Khan,Bowled,3
 3645,Sarfaraz Khan,Caught,9
 3645,Sarfaraz Khan,LBW,1
@@ -617,7 +646,7 @@
 3648,Deepak Hooda,Bowled,3
 3648,Deepak Hooda,Caught,35
 3648,Deepak Hooda,LBW,4
-3648,Deepak Hooda,RunOut,1
+3648,Deepak Hooda,RunOut,3
 3648,Deepak Hooda,Stump,3
 3651,Ricky Bhui,Caught,2
 3653,Avesh Khan,Bowled,3
@@ -634,9 +663,10 @@
 3672,Kusal Mendis,Caught,44
 3672,Kusal Mendis,Hit Wicket,2
 3672,Kusal Mendis,LBW,7
-3672,Kusal Mendis,RunOut,2
+3672,Kusal Mendis,RunOut,4
 3673,Ramesh Mendis,Bowled,2
 3673,Ramesh Mendis,Caught,3
+3673,Ramesh Mendis,RunOut,1
 3673,Ramesh Mendis,Stump,1
 3683,Gavin Main,LBW,1
 3686,CB Sole,Bowled,2
@@ -662,7 +692,7 @@
 3782,M Shahrukh Khan,Bowled,4
 3782,M Shahrukh Khan,Caught,16
 3782,M Shahrukh Khan,LBW,3
-3782,M Shahrukh Khan,RunOut,2
+3782,M Shahrukh Khan,RunOut,5
 3782,M Shahrukh Khan,Stump,3
 3802,Anshuman Rath,Bowled,2
 3802,Anshuman Rath,Caught,7
@@ -674,7 +704,8 @@
 3871,Aamir Kaleem,Caught,4
 3871,Aamir Kaleem,LBW,2
 3876,Sufyan Mehmood,Caught,2
-3916,Jitesh Sharma,Bowled,7
+3876,Sufyan Mehmood,RunOut,1
+3916,Jitesh Sharma,Bowled,6
 3916,Jitesh Sharma,Caught,44
 3916,Jitesh Sharma,Hit Wicket,1
 3916,Jitesh Sharma,LBW,6
@@ -682,7 +713,7 @@
 3926,Rahul Tewatia,Bowled,1
 3926,Rahul Tewatia,Caught,24
 3926,Rahul Tewatia,LBW,2
-3926,Rahul Tewatia,RunOut,4
+3926,Rahul Tewatia,RunOut,6
 3954,Andrew Balbirnie,Bowled,7
 3954,Andrew Balbirnie,Caught,20
 3954,Andrew Balbirnie,LBW,2
@@ -701,13 +732,13 @@
 4101,Mitchell Santner,Bowled,8
 4101,Mitchell Santner,Caught,19
 4101,Mitchell Santner,LBW,1
-4101,Mitchell Santner,RunOut,1
+4101,Mitchell Santner,RunOut,3
 4101,Mitchell Santner,Stump,1
 4102,George Munsey,Caught,5
 4106,Daryl Mitchell,Bowled,6
 4106,Daryl Mitchell,Caught,46
 4106,Daryl Mitchell,LBW,3
-4106,Daryl Mitchell,RunOut,1
+4106,Daryl Mitchell,RunOut,2
 4106,Daryl Mitchell,Stump,2
 4111,Khushdil Shah,Bowled,1
 4111,Khushdil Shah,Caught,11
@@ -716,7 +747,7 @@
 4117,Ishan Kishan,Bowled,16
 4117,Ishan Kishan,Caught,90
 4117,Ishan Kishan,LBW,2
-4117,Ishan Kishan,RunOut,3
+4117,Ishan Kishan,RunOut,6
 4117,Ishan Kishan,Stump,2
 4201,Fareed Malik,Caught,2
 4211,Vishnu Vinod,Caught,3
@@ -738,12 +769,13 @@
 4260,Heinrich Klaasen,Bowled,11
 4260,Heinrich Klaasen,Caught,44
 4260,Heinrich Klaasen,LBW,3
+4260,Heinrich Klaasen,RunOut,1
 4260,Heinrich Klaasen,Stump,1
 4288,Navdeep Saini,Caught,1
 4369,Shai Hope,Bowled,7
 4369,Shai Hope,Caught,32
 4369,Shai Hope,LBW,2
-4369,Shai Hope,RunOut,2
+4369,Shai Hope,RunOut,4
 4369,Shai Hope,Stump,2
 4372,Rony Talukder,Bowled,3
 4372,Rony Talukder,Caught,5
@@ -754,7 +786,7 @@
 4391,Liam Livingstone,Bowled,10
 4391,Liam Livingstone,Caught,38
 4391,Liam Livingstone,LBW,5
-4391,Liam Livingstone,Retire Out,1
+4391,Liam Livingstone,RunOut,1
 4391,Liam Livingstone,Stump,3
 4409,Sam Curran,Bowled,7
 4409,Sam Curran,Caught,35
@@ -811,12 +843,14 @@
 4695,Nick Kelly,Caught,2
 4703,Rishabh Pant,Bowled,6
 4703,Rishabh Pant,Caught,50
+4703,Rishabh Pant,RunOut,2
 4703,Rishabh Pant,Stump,2
 4708,Rinku Singh,Bowled,5
 4708,Rinku Singh,Caught,39
 4708,Rinku Singh,LBW,4
 4708,Rinku Singh,RunOut,1
 4708,Rinku Singh,Stump,1
+4716,Mayank Dagar,RunOut,1
 4722,Rashid Khan,Bowled,4
 4722,Rashid Khan,Caught,37
 4722,Rashid Khan,LBW,1
@@ -829,15 +863,15 @@
 4755,Shivam Dube,Bowled,14
 4755,Shivam Dube,Caught,51
 4755,Shivam Dube,LBW,2
-4755,Shivam Dube,RunOut,2
+4755,Shivam Dube,RunOut,5
 4773,Jaker Ali Anik,Bowled,5
 4773,Jaker Ali Anik,Caught,13
 4773,Jaker Ali Anik,LBW,6
+4773,Jaker Ali Anik,RunOut,2
 4779,Pieter Willem Mulder,Caught,9
 4780,Mohammad Saif Hassan,Bowled,4
 4780,Mohammad Saif Hassan,Caught,17
 4780,Mohammad Saif Hassan,LBW,2
-4780,Mohammad Saif Hassan,,1
 4784,Tony de Zorzi,Caught,5
 4784,Tony de Zorzi,LBW,1
 4784,Tony de Zorzi,Stump,1
@@ -845,13 +879,15 @@
 4793,Dean Foxcroft,Bowled,1
 4793,Dean Foxcroft,Caught,4
 4802,Stephen Doheny,Caught,3
+4807,Joshua Little,RunOut,1
 4812,Harry Tector,Bowled,10
 4812,Harry Tector,Caught,21
 4812,Harry Tector,LBW,3
-4812,Harry Tector,RunOut,1
+4812,Harry Tector,RunOut,2
 4814,Lorcan Tucker,Bowled,3
 4814,Lorcan Tucker,Caught,33
 4814,Lorcan Tucker,LBW,1
+4814,Lorcan Tucker,RunOut,2
 4814,Lorcan Tucker,Stump,1
 4815,Benjamin White,Bowled,1
 4815,Benjamin White,Caught,1
@@ -866,17 +902,19 @@
 4823,Washington Sundar,Bowled,6
 4823,Washington Sundar,Caught,26
 4823,Washington Sundar,LBW,1
-4823,Washington Sundar,RunOut,2
+4823,Washington Sundar,RunOut,4
 4826,George Garton,Bowled,1
 4830,Keacy Carty,Caught,4
 4830,Keacy Carty,RunOut,1
 4837,Obed McCoy,Bowled,2
 4837,Obed McCoy,Caught,1
+4837,Obed McCoy,RunOut,1
 4838,Keemo Paul,Caught,1
 4838,Keemo Paul,LBW,1
 4840,Odean Smith,Bowled,2
 4840,Odean Smith,Caught,7
 4840,Odean Smith,LBW,1
+4840,Odean Smith,RunOut,1
 4840,Odean Smith,Stump,1
 4842,Shamar Springer,Caught,4
 4847,Finn Allen,Bowled,13
@@ -889,7 +927,7 @@
 4854,Rachin Ravindra,Bowled,4
 4854,Rachin Ravindra,Caught,27
 4854,Rachin Ravindra,LBW,2
-4854,Rachin Ravindra,RunOut,1
+4854,Rachin Ravindra,RunOut,2
 4854,Rachin Ravindra,Stump,2
 4856,Benjamin Sears,Bowled,1
 4856,Benjamin Sears,Caught,1
@@ -902,6 +940,7 @@
 4871,Brandon Mavuta,Caught,1
 4874,Richard Ngarava,Bowled,5
 4874,Richard Ngarava,Caught,5
+4874,Richard Ngarava,RunOut,2
 4876,Milton Shumba,Bowled,1
 4876,Milton Shumba,Caught,3
 4876,Milton Shumba,Stump,1
@@ -913,43 +952,44 @@
 4895,Charith Asalanka,Bowled,7
 4895,Charith Asalanka,Caught,36
 4895,Charith Asalanka,LBW,1
-4895,Charith Asalanka,RunOut,3
+4895,Charith Asalanka,RunOut,4
 4900,Wanindu Hasaranga,Bowled,11
 4900,Wanindu Hasaranga,Caught,34
 4900,Wanindu Hasaranga,Hit Wicket,1
-4900,Wanindu Hasaranga,RunOut,3
+4900,Wanindu Hasaranga,RunOut,5
 4902,Avishka Fernando,Caught,7
 4902,Avishka Fernando,LBW,1
 4904,Kamindu Mendis,Bowled,3
 4904,Kamindu Mendis,Caught,23
 4904,Kamindu Mendis,LBW,4
 4904,Kamindu Mendis,RunOut,2
-4904,Kamindu Mendis,,1
 4926,Shadab Khan,Bowled,2
 4926,Shadab Khan,Caught,19
 4926,Shadab Khan,Hit Wicket,1
 4926,Shadab Khan,LBW,1
-4926,Shadab Khan,RunOut,2
+4926,Shadab Khan,RunOut,3
+4947,Kasun Rajitha,RunOut,1
 4974,Mohammad Nadeem,Bowled,1
 4974,Mohammad Nadeem,Caught,3
 4983,Sikander Zulfiqar,Bowled,1
 4986,Rovman Powell,Bowled,14
 4986,Rovman Powell,Caught,58
 4986,Rovman Powell,LBW,9
+4986,Rovman Powell,RunOut,1
 4986,Rovman Powell,Stump,1
 5029,Prerak Mankad,Caught,3
 5034,Murugan Ashwin,Caught,1
-5034,Murugan Ashwin,RunOut,1
+5034,Murugan Ashwin,RunOut,2
 5039,Rajat Patidar,Bowled,2
 5039,Rajat Patidar,Caught,38
 5039,Rajat Patidar,LBW,2
-5039,Rajat Patidar,RunOut,1
+5039,Rajat Patidar,RunOut,2
 5041,Mukesh Kumar,Bowled,1
 5041,Mukesh Kumar,Caught,1
 5189,Faheem Ashraf,Bowled,2
 5189,Faheem Ashraf,Caught,13
 5189,Faheem Ashraf,LBW,1
-5189,Faheem Ashraf,RunOut,3
+5189,Faheem Ashraf,RunOut,4
 5379,Mark Adair,Bowled,5
 5379,Mark Adair,Caught,12
 5379,Mark Adair,LBW,3
@@ -959,33 +999,34 @@
 5547,Nosthush Kenjige,Bowled,1
 5553,Phil Salt,Bowled,14
 5553,Phil Salt,Caught,57
-5553,Phil Salt,RunOut,1
+5553,Phil Salt,RunOut,2
 5553,Phil Salt,Stump,3
 5561,Brad Wheal,Caught,1
 5562,Richard Gleeson,Caught,2
 5577,Sai Kishore,Bowled,2
 5577,Sai Kishore,Caught,1
+5577,Sai Kishore,RunOut,1
 5608,Narayan Jagadeesan,Caught,6
 5608,Narayan Jagadeesan,LBW,1
 5665,Sanjay Yadav,Caught,1
 5738,Xavier Bartlett,Bowled,3
 5738,Xavier Bartlett,Caught,3
-5738,Xavier Bartlett,RunOut,1
+5738,Xavier Bartlett,RunOut,2
 5750,Ehsan Khan,Bowled,1
 5750,Ehsan Khan,Caught,2
 5808,Karim Janat,Bowled,4
 5808,Karim Janat,Caught,14
 5808,Karim Janat,LBW,2
-5808,Karim Janat,RunOut,1
+5808,Karim Janat,RunOut,2
 5808,Karim Janat,Stump,1
 5809,Naveen ul Haq,Bowled,2
 5809,Naveen ul Haq,Caught,3
 5837,Mahedi Hasan,Bowled,4
 5837,Mahedi Hasan,Caught,11
 5837,Mahedi Hasan,LBW,2
-5837,Mahedi Hasan,RunOut,1
+5837,Mahedi Hasan,RunOut,2
 5839,Yasir Ali Chowdhury,Bowled,1
-5839,Yasir Ali Chowdhury,Caught,7
+5839,Yasir Ali Chowdhury,Caught,6
 5839,Yasir Ali Chowdhury,LBW,1
 5866,Patrick Kruger,Bowled,1
 5866,Patrick Kruger,Caught,3
@@ -994,18 +1035,18 @@
 5882,Afif Hossain,Bowled,3
 5882,Afif Hossain,Caught,10
 5882,Afif Hossain,LBW,1
-5882,Afif Hossain,RunOut,1
+5882,Afif Hossain,RunOut,2
 5892,Blair Tickner,Caught,1
 5928,Prithvi Shaw,Bowled,4
 5928,Prithvi Shaw,Caught,21
 5928,Prithvi Shaw,RunOut,1
 5939,Cameron Green,Bowled,13
 5939,Cameron Green,Caught,28
-5939,Cameron Green,RunOut,1
+5939,Cameron Green,RunOut,2
 5939,Cameron Green,Stump,1
 5944,Mohammed Siraj,Caught,6
 5944,Mohammed Siraj,LBW,1
-5944,Mohammed Siraj,RunOut,1
+5944,Mohammed Siraj,RunOut,2
 5977,Khary Pierre,Bowled,1
 5977,Khary Pierre,Caught,1
 5977,Khary Pierre,LBW,1
@@ -1017,14 +1058,14 @@
 6059,Ruturaj Gaikwad,Bowled,6
 6059,Ruturaj Gaikwad,Caught,58
 6059,Ruturaj Gaikwad,LBW,1
-6059,Ruturaj Gaikwad,RunOut,1
+6059,Ruturaj Gaikwad,RunOut,3
 6059,Ruturaj Gaikwad,Stump,1
 6097,Brydon Carse,Caught,4
 6097,Brydon Carse,RunOut,1
 6160,Chamika Karunaratne,Bowled,1
 6160,Chamika Karunaratne,Caught,5
 6160,Chamika Karunaratne,LBW,1
-6160,Chamika Karunaratne,RunOut,1
+6160,Chamika Karunaratne,RunOut,2
 6161,Rahul Chahar,Bowled,2
 6161,Rahul Chahar,Caught,5
 6161,Rahul Chahar,LBW,1
@@ -1034,13 +1075,15 @@
 6172,Lasith Croospulle,Caught,3
 6172,Lasith Croospulle,LBW,1
 6179,Nipun Ransika,Bowled,1
+6188,Simi Singh,RunOut,1
 6203,Surendran Chandramohan,Caught,3
 6256,Varun Chakravarthy,Bowled,2
 6256,Varun Chakravarthy,Caught,3
+6256,Varun Chakravarthy,RunOut,1
 6272,William Jacks,Bowled,6
 6272,William Jacks,Caught,35
 6272,William Jacks,LBW,2
-6272,William Jacks,RunOut,3
+6272,William Jacks,RunOut,4
 6273,Tom Banton,Bowled,1
 6273,Tom Banton,Caught,12
 6273,Tom Banton,LBW,1
@@ -1052,6 +1095,7 @@
 6281,Abhishek Sharma,Bowled,8
 6281,Abhishek Sharma,Caught,115
 6281,Abhishek Sharma,LBW,3
+6281,Abhishek Sharma,RunOut,3
 6281,Abhishek Sharma,Stump,1
 6284,Anukul Roy,Caught,7
 6284,Anukul Roy,LBW,1
@@ -1062,7 +1106,7 @@
 6288,Shubman Gill,Bowled,14
 6288,Shubman Gill,Caught,64
 6288,Shubman Gill,LBW,10
-6288,Shubman Gill,RunOut,3
+6288,Shubman Gill,RunOut,4
 6288,Shubman Gill,Stump,8
 6297,Matthew Parkinson,Bowled,1
 6297,Matthew Parkinson,Caught,1
@@ -1072,7 +1116,7 @@
 6342,Matthew Breetzke,Bowled,4
 6342,Matthew Breetzke,Caught,6
 6342,Matthew Breetzke,LBW,1
-6342,Matthew Breetzke,RunOut,1
+6342,Matthew Breetzke,RunOut,2
 6350,Matthew Kuhnemann,Caught,2
 6354,Spencer Johnson,Caught,2
 6355,Shaheen Afridi,Bowled,4
@@ -1085,7 +1129,7 @@
 6396,Tim David,Bowled,5
 6396,Tim David,Caught,50
 6396,Tim David,LBW,5
-6396,Tim David,RunOut,2
+6396,Tim David,RunOut,3
 6398,Aaron Hardie,Bowled,2
 6398,Aaron Hardie,Caught,6
 6423,Riyan Parag,Bowled,10
@@ -1095,7 +1139,7 @@
 6433,Darwish Rasooli,Bowled,6
 6433,Darwish Rasooli,Caught,18
 6433,Darwish Rasooli,LBW,1
-6433,Darwish Rasooli,,1
+6433,Darwish Rasooli,RunOut,1
 6436,Qais Ahmad,Caught,2
 6440,Omair Yousuf,Caught,6
 6440,Omair Yousuf,RunOut,1
@@ -1104,11 +1148,12 @@
 6448,Ibrahim Zadran,Bowled,7
 6448,Ibrahim Zadran,Caught,27
 6448,Ibrahim Zadran,LBW,1
-6448,Ibrahim Zadran,RunOut,1
+6448,Ibrahim Zadran,RunOut,2
 6448,Ibrahim Zadran,Stump,2
 6450,Mujeeb Ur Rahman,Bowled,3
 6450,Mujeeb Ur Rahman,Caught,1
 6450,Mujeeb Ur Rahman,LBW,1
+6450,Mujeeb Ur Rahman,RunOut,2
 6457,Urvil Patel,Bowled,2
 6457,Urvil Patel,Caught,7
 6457,Urvil Patel,Stump,1
@@ -1116,20 +1161,23 @@
 6460,Ayush Badoni,Caught,35
 6460,Ayush Badoni,Hit Wicket,1
 6460,Ayush Badoni,LBW,1
-6460,Ayush Badoni,RunOut,3
+6460,Ayush Badoni,RunOut,4
 6460,Ayush Badoni,Stump,4
 6464,Arshdeep Singh,Bowled,1
 6464,Arshdeep Singh,Caught,11
 6464,Arshdeep Singh,LBW,1
-6464,Arshdeep Singh,RunOut,5
+6464,Arshdeep Singh,RunOut,7
 6466,Atharwa Taide,Bowled,1
 6466,Atharwa Taide,Caught,7
 6466,Atharwa Taide,LBW,1
+6466,Atharwa Taide,Retire Out,1
 6467,Anuj Rawat,Bowled,1
 6467,Anuj Rawat,Caught,10
 6467,Anuj Rawat,LBW,3
+6467,Anuj Rawat,RunOut,2
 6473,Nuwanidu Fernando,Caught,6
 6473,Nuwanidu Fernando,LBW,2
+6473,Nuwanidu Fernando,RunOut,1
 6473,Nuwanidu Fernando,Stump,1
 6483,Nishan Madushka,Caught,1
 6483,Nishan Madushka,LBW,3
@@ -1143,7 +1191,7 @@
 6512,Michael Bracewell,Bowled,4
 6512,Michael Bracewell,Caught,13
 6512,Michael Bracewell,LBW,2
-6512,Michael Bracewell,RunOut,1
+6512,Michael Bracewell,RunOut,3
 6514,Anil Nidamanuru,Bowled,1
 6514,Anil Nidamanuru,Caught,4
 6515,Benjamin Lister,Bowled,2
@@ -1164,6 +1212,7 @@
 6591,KM Asif,Caught,1
 6628,Gerald Coetzee,Bowled,2
 6628,Gerald Coetzee,Caught,12
+6628,Gerald Coetzee,RunOut,1
 6643,Hasan Mahmud,Caught,1
 6644,Mahidul Ankon,Bowled,1
 6644,Mahidul Ankon,Caught,1
@@ -1174,16 +1223,18 @@
 6651,Towhid Hridoy,Bowled,5
 6651,Towhid Hridoy,Caught,29
 6651,Towhid Hridoy,LBW,5
-6651,Towhid Hridoy,RunOut,2
+6651,Towhid Hridoy,RunOut,3
 6664,Dion Myers,Bowled,4
 6664,Dion Myers,Caught,12
 6664,Dion Myers,LBW,1
 6664,Dion Myers,RunOut,2
 6669,Mohsin Khan,Bowled,2
 6669,Mohsin Khan,Caught,2
+6669,Mohsin Khan,RunOut,1
 6671,Lalit Yadav,Bowled,5
 6671,Lalit Yadav,Caught,6
 6671,Lalit Yadav,LBW,2
+6671,Lalit Yadav,RunOut,1
 6674,Rahmanullah Gurbaz,Bowled,9
 6674,Rahmanullah Gurbaz,Caught,50
 6674,Rahmanullah Gurbaz,LBW,5
@@ -1201,7 +1252,7 @@
 6726,Romario Shepherd,Bowled,5
 6726,Romario Shepherd,Caught,27
 6726,Romario Shepherd,LBW,7
-6726,Romario Shepherd,RunOut,1
+6726,Romario Shepherd,RunOut,3
 6739,Amir Jangoo,Bowled,1
 6739,Amir Jangoo,Caught,2
 6739,Amir Jangoo,LBW,2
@@ -1214,6 +1265,7 @@
 6819,Yashasvi Jaiswal,Bowled,10
 6819,Yashasvi Jaiswal,Caught,68
 6819,Yashasvi Jaiswal,LBW,2
+6819,Yashasvi Jaiswal,RunOut,1
 6819,Yashasvi Jaiswal,Stump,1
 6881,Scott Edwards,Bowled,2
 6881,Scott Edwards,Caught,7
@@ -1225,10 +1277,10 @@
 6922,Abdul Samad,LBW,1
 6922,Abdul Samad,Stump,1
 6931,Pathum Nissanka,Bowled,11
-6931,Pathum Nissanka,Caught,53
+6931,Pathum Nissanka,Caught,52
 6931,Pathum Nissanka,LBW,4
+6931,Pathum Nissanka,RunOut,1
 6931,Pathum Nissanka,Stump,3
-6931,Pathum Nissanka,,1
 6932,Pramod Madushan,Bowled,1
 6932,Pramod Madushan,Caught,1
 6985,Bas de Leede,Caught,2
@@ -1252,7 +1304,7 @@
 7059,Nehal Wadhera,Bowled,10
 7059,Nehal Wadhera,Caught,24
 7059,Nehal Wadhera,LBW,1
-7059,Nehal Wadhera,RunOut,2
+7059,Nehal Wadhera,RunOut,3
 7059,Nehal Wadhera,Stump,1
 7060,Arjun Tendulkar,Caught,1
 7094,Curtis Campher,Bowled,8
@@ -1267,21 +1319,24 @@
 7152,Hazratullah Zazai,LBW,3
 7155,Sahan Arachchige,Bowled,1
 7155,Sahan Arachchige,Caught,5
+7155,Sahan Arachchige,RunOut,1
 7201,Haroon Arshad,Bowled,1
 7216,Prabhsimran Singh,Bowled,6
 7216,Prabhsimran Singh,Caught,47
 7216,Prabhsimran Singh,LBW,5
-7216,Prabhsimran Singh,RunOut,1
+7216,Prabhsimran Singh,RunOut,2
 7216,Prabhsimran Singh,Stump,1
 7240,FazalHaq Farooqi,Caught,1
+7240,FazalHaq Farooqi,RunOut,1
+7250,Mukesh Choudhary,RunOut,1
 7260,Dhruv Jurel,Bowled,7
 7260,Dhruv Jurel,Caught,26
 7260,Dhruv Jurel,LBW,4
-7260,Dhruv Jurel,RunOut,1
+7260,Dhruv Jurel,RunOut,3
 7260,Dhruv Jurel,Stump,1
 7270,Anrich Nortje,Bowled,4
 7270,Anrich Nortje,Caught,3
-7270,Anrich Nortje,RunOut,1
+7270,Anrich Nortje,RunOut,2
 7270,Anrich Nortje,Stump,1
 7304,Sanvir Singh,Bowled,1
 7304,Sanvir Singh,Caught,1
@@ -1299,29 +1354,32 @@
 7338,Haider Ali,Caught,7
 7338,Haider Ali,Stump,1
 7341,Jake McGurk,Caught,22
+7341,Jake McGurk,RunOut,1
 7344,Shoriful Islam,Bowled,3
 7344,Shoriful Islam,Caught,8
+7344,Shoriful Islam,RunOut,1
 7355,Tayyab Tahir,Caught,6
 7364,Haris Rauf,Bowled,3
 7364,Haris Rauf,Caught,7
-7364,Haris Rauf,RunOut,1
+7364,Haris Rauf,RunOut,4
 7406,Rizwan CP,Caught,2
 7406,Rizwan CP,Stump,1
 7409,Sundeep Jora,Caught,3
 7446,Abdul Samad,Bowled,6
 7446,Abdul Samad,Caught,20
 7446,Abdul Samad,LBW,1
-7446,Abdul Samad,RunOut,2
+7446,Abdul Samad,RunOut,3
 7472,Shahbaz Ahmed,Bowled,4
 7472,Shahbaz Ahmed,Caught,14
 7472,Shahbaz Ahmed,LBW,2
+7472,Shahbaz Ahmed,RunOut,1
 7472,Shahbaz Ahmed,Stump,1
 7473,Akash Deep,Caught,3
 7498,Abhijeet Tomar,Caught,1
 7503,Ravi Bishnoi,Bowled,4
 7503,Ravi Bishnoi,Caught,5
 7503,Ravi Bishnoi,LBW,2
-7503,Ravi Bishnoi,RunOut,5
+7503,Ravi Bishnoi,RunOut,6
 7533,Simarjeet Singh,Bowled,2
 7533,Simarjeet Singh,LBW,1
 7544,Venkatesh Iyer,Bowled,6
@@ -1331,17 +1389,18 @@
 7544,Venkatesh Iyer,Stump,1
 7566,Ben Curran,Caught,4
 7574,Kumar Kartikeya Singh,Caught,2
-7574,Kumar Kartikeya Singh,RunOut,1
+7574,Kumar Kartikeya Singh,RunOut,2
 7625,Suryansh Shedge,Caught,9
 7634,Aaron Jones,Bowled,1
 7634,Aaron Jones,Caught,1
 7634,Aaron Jones,Stump,1
 7689,Dilshan Madushanka,Bowled,3
 7689,Dilshan Madushanka,Caught,1
+7689,Dilshan Madushanka,RunOut,1
 7690,Saim Ayub,Bowled,5
 7690,Saim Ayub,Caught,41
 7690,Saim Ayub,LBW,4
-7690,Saim Ayub,RunOut,2
+7690,Saim Ayub,RunOut,4
 7690,Saim Ayub,Stump,1
 7692,Qasim Akram,Bowled,1
 7692,Qasim Akram,Caught,4
@@ -1354,6 +1413,7 @@
 7704,Pavan Rathnayake,Bowled,1
 7704,Pavan Rathnayake,Caught,6
 7704,Pavan Rathnayake,LBW,1
+7704,Pavan Rathnayake,RunOut,1
 7704,Pavan Rathnayake,Stump,1
 7741,Gareth Delany,Bowled,6
 7741,Gareth Delany,Caught,12
@@ -1363,6 +1423,7 @@
 7744,Jordan Cox,Caught,3
 7755,Harsh Thaker,Bowled,1
 7755,Harsh Thaker,Caught,2
+7755,Harsh Thaker,RunOut,1
 7761,Ravinderpal Singh,Caught,1
 7761,Ravinderpal Singh,LBW,1
 7808,Marco Jansen,Bowled,7
@@ -1371,21 +1432,22 @@
 7894,Tony Munyonga,Bowled,3
 7894,Tony Munyonga,Caught,5
 7894,Tony Munyonga,LBW,2
-7894,Tony Munyonga,RunOut,1
+7894,Tony Munyonga,RunOut,2
 7897,Namboori Tilak Varma,Bowled,12
 7897,Namboori Tilak Varma,Caught,65
 7897,Namboori Tilak Varma,LBW,3
-7897,Namboori Tilak Varma,RunOut,6
+7897,Namboori Tilak Varma,RunOut,9
 7897,Namboori Tilak Varma,Stump,1
 7900,Tanzid Hasan,Bowled,8
 7900,Tanzid Hasan,Caught,29
-7900,Tanzid Hasan,RunOut,1
+7900,Tanzid Hasan,RunOut,2
 7901,Parvez Emon,Bowled,5
 7901,Parvez Emon,Caught,29
 7901,Parvez Emon,LBW,3
 7903,Shamim Hossain,Bowled,6
 7903,Shamim Hossain,Caught,16
 7903,Shamim Hossain,LBW,3
+7903,Shamim Hossain,RunOut,2
 7903,Shamim Hossain,Stump,1
 7904,Mohammad Chowdhury,Bowled,1
 7905,Tanzim Sakib,Bowled,3
@@ -1408,6 +1470,7 @@
 7920,Nathan Ellis,Caught,1
 7920,Nathan Ellis,RunOut,1
 7924,Kushal Malla,Caught,2
+7924,Kushal Malla,RunOut,1
 7925,Rohan Rangarajan,Bowled,1
 7926,Manpreet Singh,Caught,1
 7927,Janak Prakash,Bowled,2
@@ -1416,7 +1479,9 @@
 7929,Aryaman Sunil Uchil,Bowled,1
 7929,Aryaman Sunil Uchil,Caught,1
 7931,Aritra Dutta,Caught,2
+7931,Aritra Dutta,RunOut,1
 7935,Mohammad Ghazanfar,LBW,1
+7935,Mohammad Ghazanfar,RunOut,1
 7937,Wasim Ali,Bowled,1
 7937,Wasim Ali,Caught,3
 7937,Wasim Ali,LBW,2
@@ -1426,9 +1491,9 @@
 7966,Farmanullah Safi,LBW,1
 7967,Noor Ahmad,Bowled,3
 7967,Noor Ahmad,Caught,12
-7967,Noor Ahmad,RunOut,2
+7967,Noor Ahmad,RunOut,3
 7978,Johnathan Campbell,Caught,6
-7978,Johnathan Campbell,RunOut,1
+7978,Johnathan Campbell,RunOut,2
 7981,Imran Mir,Bowled,1
 7981,Imran Mir,Caught,2
 8005,Zawar Farid,Caught,3
@@ -1438,19 +1503,19 @@
 8014,Avi Dixit,Caught,1
 8033,Abdul Rahmani,Bowled,1
 8040,Ripal Patel,Caught,2
-8040,Ripal Patel,RunOut,1
+8040,Ripal Patel,RunOut,2
 8049,Naseem Shah,Bowled,2
 8049,Naseem Shah,Caught,4
 8049,Naseem Shah,Hit Wicket,1
 8049,Naseem Shah,LBW,1
 8085,Suyash Prabhudessai,Bowled,1
 8085,Suyash Prabhudessai,Caught,6
-8085,Suyash Prabhudessai,RunOut,1
+8085,Suyash Prabhudessai,RunOut,2
 8085,Suyash Prabhudessai,Stump,1
 8093,Nikhil Chaudhary,Caught,1
 8093,Nikhil Chaudhary,LBW,1
 8101,Ashutosh Sharma,Bowled,2
-8101,Ashutosh Sharma,Caught,14
+8101,Ashutosh Sharma,Caught,13
 8101,Ashutosh Sharma,LBW,2
 8101,Ashutosh Sharma,RunOut,3
 8101,Ashutosh Sharma,Stump,1
@@ -1458,9 +1523,10 @@
 8182,Donovan Ferreira,Bowled,7
 8182,Donovan Ferreira,Caught,13
 8182,Donovan Ferreira,LBW,1
-8182,Donovan Ferreira,RunOut,1
+8182,Donovan Ferreira,RunOut,2
 8182,Donovan Ferreira,Stump,1
 8217,Ansh Tandon,Caught,1
+8217,Ansh Tandon,RunOut,1
 8221,Nitish Reddy,Bowled,2
 8221,Nitish Reddy,Caught,31
 8221,Nitish Reddy,LBW,1
@@ -1498,6 +1564,7 @@
 8600,Tadiwanashe Marumani,LBW,8
 8600,Tadiwanashe Marumani,RunOut,1
 8600,Tadiwanashe Marumani,Stump,2
+8614,William ORourke,RunOut,1
 8623,Kristian Clarke,Caught,1
 8637,Vriitya Aravind,Bowled,3
 8637,Vriitya Aravind,Caught,4
@@ -1531,6 +1598,7 @@
 8729,Haider Shah,Caught,3
 8739,Muhammad Irfan,Caught,8
 8739,Muhammad Irfan,LBW,1
+8739,Muhammad Irfan,RunOut,1
 8741,Mohammad Haris,Bowled,8
 8741,Mohammad Haris,Caught,20
 8741,Mohammad Haris,LBW,2
@@ -1549,9 +1617,11 @@
 15274,Ravija Sandaruwan,Caught,3
 15279,Shiraz Khan,Caught,1
 15279,Shiraz Khan,LBW,1
+15280,Sayed Monib,RunOut,1
 15303,Bilal Tahir,Caught,2
 15551,Ackeem Auguste,Bowled,3
 15551,Ackeem Auguste,Caught,4
+15551,Ackeem Auguste,RunOut,1
 15629,Shayan Jahangir,Caught,1
 15629,Shayan Jahangir,LBW,1
 16284,Habibur Rahman Sohan,Caught,3
@@ -1566,6 +1636,7 @@
 17424,Graham Hume,RunOut,1
 17432,Ross Adair,Bowled,6
 17432,Ross Adair,Caught,10
+17898,Bilal Sami,RunOut,1
 17910,Mohammad Akram,Caught,2
 17910,Mohammad Akram,LBW,1
 17911,Nangeyalia Kharote,Bowled,1
@@ -1573,7 +1644,7 @@
 17911,Nangeyalia Kharote,RunOut,1
 17937,Zubaid Akbari,Bowled,1
 17937,Zubaid Akbari,Caught,5
-17937,Zubaid Akbari,RunOut,1
+17937,Zubaid Akbari,RunOut,2
 19012,Zeeshan Ali,Bowled,1
 19012,Zeeshan Ali,Caught,9
 19012,Zeeshan Ali,LBW,1
@@ -1587,8 +1658,10 @@
 19309,Lahiru Udara,Bowled,2
 19309,Lahiru Udara,Caught,8
 19309,Lahiru Udara,LBW,1
+19315,Vijayakanth Viyaskanth,RunOut,1
 19316,Maheesh Theekshana,Bowled,6
 19316,Maheesh Theekshana,Caught,19
+19316,Maheesh Theekshana,RunOut,2
 19530,Shahnawaz Dhani,Bowled,1
 19714,Abishek Porel,Bowled,5
 19714,Abishek Porel,Caught,23
@@ -1597,6 +1670,7 @@
 19781,Mitchell Owen,Bowled,3
 19781,Mitchell Owen,Caught,6
 19781,Mitchell Owen,LBW,1
+19781,Mitchell Owen,RunOut,1
 19894,Mitchell Hay,Bowled,3
 19894,Mitchell Hay,Caught,3
 19894,Mitchell Hay,LBW,1
@@ -1607,15 +1681,18 @@
 20005,Arshad Khan,LBW,1
 20006,Ramandeep Singh,Bowled,3
 20006,Ramandeep Singh,Caught,16
+20006,Ramandeep Singh,RunOut,2
 20023,Karan Sharma,Caught,3
 20163,Aasif Sheikh,Caught,1
 20310,Ahmed Daniyal,Caught,2
+20310,Ahmed Daniyal,RunOut,1
 20327,Usman Khan,Bowled,1
 20327,Usman Khan,Caught,16
 20327,Usman Khan,Stump,1
 20702,Tristan Stubbs,Bowled,7
 20702,Tristan Stubbs,Caught,30
 20702,Tristan Stubbs,LBW,5
+20702,Tristan Stubbs,RunOut,4
 20702,Tristan Stubbs,Stump,1
 20704,Salman Mirza,RunOut,2
 20894,Aman Khan,Bowled,2
@@ -1629,6 +1706,7 @@
 21781,Clive Madande,Bowled,4
 21781,Clive Madande,Caught,11
 21781,Clive Madande,LBW,2
+21781,Clive Madande,RunOut,1
 21781,Clive Madande,Stump,1
 21784,Brad Evans,Bowled,2
 21784,Brad Evans,Caught,7
@@ -1653,7 +1731,7 @@
 22471,Matthew Humphreys,RunOut,1
 22565,Muhammad Waseem,Caught,12
 22565,Muhammad Waseem,LBW,5
-22565,Muhammad Waseem,RunOut,1
+22565,Muhammad Waseem,RunOut,3
 22920,Jacob Duffy,Caught,3
 23311,Jacob Bethell,Bowled,4
 23311,Jacob Bethell,Caught,23
@@ -1662,7 +1740,7 @@
 23450,Sai Sudharsan,Hit Wicket,3
 23450,Sai Sudharsan,LBW,3
 23450,Sai Sudharsan,Retire Out,1
-23450,Sai Sudharsan,RunOut,1
+23450,Sai Sudharsan,RunOut,2
 24017,Brian Bennett,Bowled,12
 24017,Brian Bennett,Caught,28
 24017,Brian Bennett,Hit Wicket,1
@@ -1681,16 +1759,18 @@
 24779,Ijaz Ahmadzai,Stump,1
 24803,Gulshan Jha,Caught,1
 24803,Gulshan Jha,LBW,1
+24803,Gulshan Jha,RunOut,1
 24812,Chris Greaves,Caught,3
 24887,Innocent Kaia,Bowled,3
 24887,Innocent Kaia,Caught,4
-24887,Innocent Kaia,RunOut,2
+24887,Innocent Kaia,RunOut,3
 24978,Jack Jarvis,Caught,2
 24982,Charlie Tear,Bowled,1
 24982,Charlie Tear,Caught,1
 24982,Charlie Tear,LBW,1
 25011,Liam Mccarthy,Caught,2
 25048,Umran Malik,LBW,1
+25048,Umran Malik,RunOut,1
 25128,Nqabayomzi Peter,Caught,1
 25128,Nqabayomzi Peter,LBW,1
 25132,Praful Hinge,Stump,1
@@ -1736,7 +1816,7 @@
 26646,Rahul Chopra,Stump,1
 26663,Kwena Maphaka,Caught,1
 26830,Nishant Kumar Sindhu,Caught,5
-26830,Nishant Kumar Sindhu,RunOut,1
+26830,Nishant Kumar Sindhu,RunOut,2
 26834,Raj Bawa,Bowled,1
 26834,Raj Bawa,Caught,1
 26834,Raj Bawa,LBW,1
@@ -1750,6 +1830,7 @@
 26906,Angkrish Raghuvanshi,Caught,20
 26906,Angkrish Raghuvanshi,LBW,2
 26906,Angkrish Raghuvanshi,Obstructing the field,1
+26906,Angkrish Raghuvanshi,RunOut,2
 26909,Yash Dhull,Caught,2
 26909,Yash Dhull,LBW,1
 26913,Shaik Rasheed,Caught,4
@@ -1766,7 +1847,7 @@
 27071,Vinayak Shukla,RunOut,1
 27137,Hammad Mirza,Caught,7
 27137,Hammad Mirza,RunOut,1
-27259,Jishan Alam,Bowled,2
+27259,Jishan Alam,Bowled,1
 27259,Jishan Alam,Caught,5
 27259,Jishan Alam,LBW,1
 27364,Simranjeet Kang,LBW,1
@@ -1787,6 +1868,7 @@
 27469,Aryansh Sharma,Caught,5
 27469,Aryansh Sharma,Stump,2
 27504,Dushan Hemantha,LBW,2
+27504,Dushan Hemantha,RunOut,1
 27517,Yasir Khan,Bowled,1
 27517,Yasir Khan,Caught,6
 27517,Yasir Khan,RunOut,1
@@ -1811,12 +1893,13 @@
 28967,Tim Robinson,Bowled,9
 28967,Tim Robinson,Caught,12
 28967,Tim Robinson,LBW,1
-28967,Tim Robinson,RunOut,1
+28967,Tim Robinson,RunOut,2
 28970,Connor Esterhuizen,Caught,4
 29066,Zakary Foulkes,Bowled,1
 29066,Zakary Foulkes,Caught,5
 29066,Zakary Foulkes,RunOut,1
 29075,Aadil Ansari,LBW,1
+29075,Aadil Ansari,RunOut,1
 29080,Muhammad Khan,Caught,3
 29558,Muhammad Arfan,Bowled,2
 29558,Muhammad Arfan,Caught,1
@@ -1849,11 +1932,13 @@
 33675,Mohammad Naeem,Caught,3
 33969,Tinotenda Maposa,Bowled,3
 33969,Tinotenda Maposa,Caught,1
+33969,Tinotenda Maposa,RunOut,2
 34466,Arafat Minhas,Bowled,1
 34466,Arafat Minhas,Caught,1
 34466,Arafat Minhas,LBW,1
 34485,Sufiyan Muqeem,Bowled,2
 34485,Sufiyan Muqeem,Caught,1
+34485,Sufiyan Muqeem,RunOut,1
 34522,Brandon McMullen,Caught,3
 34546,Aryan Bisht,Bowled,1
 34546,Aryan Bisht,Caught,2
@@ -1915,7 +2000,7 @@
 42548,Muhammad Jawadullah,Stump,1
 42810,Noah Croes,Caught,1
 42810,Noah Croes,LBW,1
-42810,Noah Croes,RunOut,1
+42810,Noah Croes,RunOut,2
 42811,Michael Levitt,Bowled,2
 42811,Michael Levitt,Caught,5
 42845,Arshin Kulkarni,Caught,3
@@ -1923,6 +2008,7 @@
 43250,Dilpreet Singh Bajwa,Bowled,1
 43250,Dilpreet Singh Bajwa,LBW,1
 43798,Lhuan Pretorius,Caught,7
+43798,Lhuan Pretorius,RunOut,1
 43798,Lhuan Pretorius,Stump,1
 43917,Krish Bhagat,Caught,1
 45457,Zach Lion Cachet,Bowled,2
@@ -1933,6 +2019,7 @@
 45966,Prashant Veer,Caught,2
 46066,Vipraj Nigam,Bowled,1
 46066,Vipraj Nigam,Caught,4
+46066,Vipraj Nigam,RunOut,2
 46066,Vipraj Nigam,Stump,1
 46137,Kartik Sharma,Caught,6
 46137,Kartik Sharma,LBW,2
@@ -1951,7 +2038,7 @@
 47314,Wafiullah Tarakhil,Caught,2
 47370,Aniket Verma,Caught,12
 47370,Aniket Verma,LBW,1
-47370,Aniket Verma,RunOut,1
+47370,Aniket Verma,RunOut,2
 47371,Zuhaid Zubair,Caught,1
 47403,Newman Nyamhuri,Bowled,2
 47403,Newman Nyamhuri,Caught,1
@@ -1961,7 +2048,7 @@
 48504,Ayush Mhatre,Caught,12
 48575,Sahil Parakh,Bowled,1
 48575,Sahil Parakh,Caught,3
-48616,Abdul Saqlain,Caught,2
+48616,Abdul Saqlain,Caught,1
 48953,Danish Malewar,Caught,1
 48953,Danish Malewar,LBW,1
 49003,Hasan Nawaz,Bowled,1
@@ -1969,7 +2056,7 @@
 49003,Hasan Nawaz,LBW,1
 49027,Bevon Jacobs,Bowled,2
 49027,Bevon Jacobs,Caught,4
-49027,Bevon Jacobs,RunOut,1
+49027,Bevon Jacobs,RunOut,3
 49265,Ahmed Tariq,Caught,1
 49265,Ahmed Tariq,LBW,1
 49268,Sohaib Khan,Caught,4
