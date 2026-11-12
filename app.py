@@ -447,7 +447,8 @@ def load_innings(path: Path) -> pd.DataFrame:
 
     df["fifty"] = (df["runs"] >= 50) & (df["runs"] < 100)
     df["hundred"] = df["runs"] >= 100
-    df["season"] = df["season"].astype(str)
+    df["year"] = df["year"].fillna(df["date"].dt.year).astype(int)
+    df["season"] = df["year"].astype(str)
     df["venue"] = "Venue " + df["venue_id"].astype(str)
     if "venue_country" in df.columns:
         df["venue_country"] = df["venue_country"].fillna("Unknown").astype(str)
@@ -742,7 +743,8 @@ with tab_over:
                 "Runs: <b>%{customdata[0]:,}</b> (%{customdata[1]:,} inns)<extra></extra>"
             ),
         )
-        fig.update_layout(yaxis=dict(title="Runs"),
+        fig.update_layout(xaxis=dict(type="category", title="Year"),
+                          yaxis=dict(title="Runs"),
                           yaxis2=dict(title="Strike rate", overlaying="y", side="right", showgrid=False),
                           legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"))
         st.plotly_chart(style(fig, "Runs and strike rate by season"), width="stretch", theme=None)
@@ -834,7 +836,8 @@ with tab_over:
             "Runs: <b>%{y:,}</b> (<b>%{customdata[0]:.1f}%</b> of %{customdata[1]:,})<extra></extra>"
         )
     )
-    fig.update_layout(legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"))
+    fig.update_layout(xaxis=dict(type="category"),
+                      legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"))
     st.plotly_chart(style(fig, "Runs from boundaries against other runs, by season", height=340),
                     width="stretch", theme=None)
 
@@ -1077,7 +1080,8 @@ with tab_h2h:
                     "Season %{x}: <b>%{y:,} runs</b><extra></extra>"
                 ),
             )
-            fig.update_layout(legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"))
+            fig.update_layout(xaxis=dict(type="category"),
+                              legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"))
             st.plotly_chart(style(fig, "Runs by season, head to head", height=350), width="stretch", theme=None)
 
             va = f[f.striker_name == a].groupby("venue", as_index=False).agg(
@@ -1293,9 +1297,11 @@ with tab_venue:
 # ----------------------------------------------------------------------------
 with tab_pressure:
     st.markdown(
-        "<div class='note'><b>Pressure definition:</b> "
-        "Innings = 2 · Legal Balls Remaining ≤ 30 · Wickets Down ≥ 3 · Required Run Rate ≥ 15.0 "
-        "· Targets reconstructed with bye & leg-bye extra-run adjustment · Default minimum threshold: <b>≥ 30 pressure balls</b>.</div>",
+        "<div class='note'><b>Pressure Situation Storytelling & India Finisher Scouting:</b> "
+        "Deliveries where <b>Innings = 2</b> · <b>Legal Balls Remaining ≤ 30</b> · <b>Wickets Down ≥ 3</b> · "
+        "<b>Required Run Rate ≥ 15.0</b> (targets reconstructed with bye & leg-bye extra-run adjustment). "
+        "This view separates batters who dominate specifically on <b>Indian pitches under pressure</b> from those whose "
+        "pressure record comes primarily on <b>Overseas pitches</b>.</div>",
         unsafe_allow_html=True,
     )
     pressure = load_pressure(PRESSURE_FILE)
@@ -1306,111 +1312,32 @@ with tab_pressure:
             "Pressure is defined as: Innings = 2, Legal Balls Remaining <= 30, Wickets Down >= 3, and Required Run Rate >= 15."
         )
     else:
-        min_b = st.slider("Minimum pressure balls", 10, 100, 30)
+        ctrl1, ctrl2 = st.columns([1.2, 1])
+        with ctrl1:
+            min_b = st.slider(
+                "Minimum total pressure balls",
+                min_value=10,
+                max_value=100,
+                value=30,
+                step=5,
+                help="Default 30 balls (5 full overs faced under all 4 simultaneous pressure conditions).",
+            )
+        with ctrl2:
+            min_ind_b = st.slider(
+                "Minimum pressure balls in India (for Top-10 India Fit ranking)",
+                min_value=10,
+                max_value=60,
+                value=25,
+                step=5,
+                help="Ensures the Top-10 India shortlist only ranks batters tested repeatedly on Indian pitches under RRR ≥ 15.",
+            )
+
         pr = pressure[pressure.pressure_balls >= min_b].copy()
         pr["gap"] = pr.pressure_sr - pr.ordinary_sr
-
-        # Compute Indian vs Overseas pressure ratings (0-100 percentile among eligible batters) and best pitch badge
-        ind_valid = pr.loc[pr.get("india_pressure_balls", pd.Series(0, index=pr.index)) >= 6, "india_pressure_sr"].dropna()
-        ovr_valid = pr.loc[pr.get("overseas_pressure_balls", pd.Series(0, index=pr.index)) >= 6, "overseas_pressure_sr"].dropna()
-
-        def pct_score(series, val):
-            if pd.isna(val) or series.empty:
-                return np.nan
-            return 100.0 * (series < val).mean()
-
-        if "india_pressure_sr" in pr.columns and "overseas_pressure_sr" in pr.columns:
-            pr["india_rating"] = [
-                pct_score(ind_valid, s) if b >= 6 else np.nan
-                for s, b in zip(pr["india_pressure_sr"], pr["india_pressure_balls"])
-            ]
-            pr["overseas_rating"] = [
-                pct_score(ovr_valid, s) if b >= 6 else np.nan
-                for s, b in zip(pr["overseas_pressure_sr"], pr["overseas_pressure_balls"])
-            ]
-
-            def pick_best_pitch(row):
-                ib = row.get("india_pressure_balls", 0)
-                ob = row.get("overseas_pressure_balls", 0)
-                isr = row.get("india_pressure_sr", np.nan)
-                osr = row.get("overseas_pressure_sr", np.nan)
-                if ib > 0 and ob > 0 and pd.notna(isr) and pd.notna(osr):
-                    if isr >= osr:
-                        return f"<span class='pill ok'>Indian pitches (+{isr - osr:.1f} SR)</span>"
-                    return f"<span class='pill overseas'>Overseas pitches (+{osr - isr:.1f} SR)</span>"
-                if ib > 0 and pd.notna(isr):
-                    return "<span class='pill ok'>Indian pitches (only)</span>"
-                if ob > 0 and pd.notna(osr):
-                    return "<span class='pill overseas'>Overseas pitches (only)</span>"
-                return "–"
-
-            pr["best_pitch"] = [pick_best_pitch(r) for _, r in pr.iterrows()]
-
-        pr = pr.sort_values("gap", ascending=True)
-        left_p, right_p = st.columns([1.15, 1])
-        with left_p:
-            fig = px.bar(pr.tail(20), x="gap", y="striker_name", orientation="h",
-                         custom_data=["pressure_balls", "pressure_sr", "ordinary_sr", "india_pressure_sr", "overseas_pressure_sr"],
-                         labels={"gap": "Strike rate gap: pressure minus ordinary (points)", "striker_name": ""})
-            fig.update_traces(
-                marker_color=TEAL,
-                hovertemplate=(
-                    "<b>%{y}</b><br>"
-                    "SR gap: <b>%{x:+.1f} pts</b><br>"
-                    "Pressure SR: <b>%{customdata[1]:.1f}</b> · Ordinary SR: <b>%{customdata[2]:.1f}</b><br>"
-                    "Indian Pressure SR: <b>%{customdata[3]:.1f}</b> · Overseas Pressure SR: <b>%{customdata[4]:.1f}</b><br>"
-                    "Pressure balls faced: <b>%{customdata[0]:,.0f}</b><extra></extra>"
-                ),
-            )
-            fig.add_vline(x=0, line_color=NAVY, line_width=1.5)
-            st.plotly_chart(style(fig, "Top 20 by pressure SR gap (RRR ≥ 15, ≤ 30 balls, ≥ 3 wkts)",
-                                  height=560), width="stretch", theme=None)
-
-        with right_p:
-            top20_p = pr.tail(20).copy()
-            if {"india_pressure_sr", "overseas_pressure_sr"}.issubset(top20_p.columns):
-                p_long = top20_p.melt(
-                    id_vars=["striker_name", "india_pressure_balls", "overseas_pressure_balls"],
-                    value_vars=["india_pressure_sr", "overseas_pressure_sr"],
-                    var_name="pitch_type",
-                    value_name="sr",
-                ).dropna(subset=["sr"])
-                p_long["pitch_type"] = p_long["pitch_type"].map({
-                    "india_pressure_sr": "Indian pitches",
-                    "overseas_pressure_sr": "Overseas pitches",
-                })
-                p_long["balls"] = np.where(
-                    p_long["pitch_type"].eq("Indian pitches"),
-                    p_long["india_pressure_balls"],
-                    p_long["overseas_pressure_balls"],
-                )
-                fig_split = px.bar(
-                    p_long,
-                    x="sr",
-                    y="striker_name",
-                    color="pitch_type",
-                    barmode="group",
-                    orientation="h",
-                    custom_data=["balls", "pitch_type"],
-                    color_discrete_map={"Indian pitches": TEAL, "Overseas pitches": "#0284c7"},
-                    category_orders={"striker_name": top20_p["striker_name"].tolist()[::-1]},
-                    labels={"sr": "Pressure strike rate", "striker_name": "", "pitch_type": ""},
-                )
-                fig_split.update_traces(
-                    hovertemplate=(
-                        "<b>%{y}</b> · %{customdata[1]}<br>"
-                        "Pressure SR: <b>%{x:.1f}</b><br>"
-                        "Pressure balls: <b>%{customdata[0]:,.0f}</b><extra></extra>"
-                    )
-                )
-                fig_split.update_layout(legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"))
-                st.plotly_chart(
-                    style(fig_split, "Top 20: Pressure SR on Indian vs Overseas pitches", height=560),
-                    width="stretch",
-                    theme=None,
-                )
-
-        st.markdown("#### Pressure batters table (with Indian vs Overseas pitch performance)")
+        pr["india_gap"] = pr["india_pressure_sr"] - pr["india_sr"]
+        pr["overseas_gap"] = pr["overseas_pressure_sr"] - pr["overseas_sr"]
+        pr["india_vs_overseas_sr"] = pr["india_pressure_sr"] - pr["overseas_pressure_sr"]
+        pr["india_ball_share"] = 100.0 * pr["india_pressure_balls"] / pr["pressure_balls"].replace(0, np.nan)
 
         # Compute Overall Average, Last 10 Matches Overall Average, and Last 10 Matches in India Average
         f_chron = f.sort_values(["date", "match_id", "innings"])
@@ -1436,10 +1363,541 @@ with tab_pressure:
             else:
                 last10_ind_avg_map[s_name] = np.nan
 
-        pr_sorted = pr.sort_values("gap", ascending=False).copy()
-        pr_sorted["overall_avg"] = pr_sorted["striker_name"].map(overall_avg_map)
-        pr_sorted["last10_avg"] = pr_sorted["striker_name"].map(last10_avg_map)
-        pr_sorted["last10_india_avg"] = pr_sorted["striker_name"].map(last10_ind_avg_map)
+        pr["overall_avg"] = pr["striker_name"].map(overall_avg_map)
+        pr["last10_avg"] = pr["striker_name"].map(last10_avg_map)
+        pr["last10_india_avg"] = pr["striker_name"].map(last10_ind_avg_map)
+
+        # Compute Indian vs Overseas pressure ratings (0-100 percentile among eligible batters) and India Fit Score
+        ind_valid = pr.loc[pr["india_pressure_balls"] >= 6, "india_pressure_sr"].dropna()
+        ovr_valid = pr.loc[pr["overseas_pressure_balls"] >= 6, "overseas_pressure_sr"].dropna()
+        ind_gap_valid = pr.loc[pr["india_pressure_balls"] >= 6, "india_gap"].dropna()
+        ind_vol_valid = pr.loc[pr["india_pressure_balls"] >= 6, "india_pressure_balls"].dropna()
+
+        def pct_score(series, val):
+            if pd.isna(val) or series.empty:
+                return np.nan
+            return 100.0 * (series < val).mean()
+
+        pr["india_rating"] = [
+            pct_score(ind_valid, s) if b >= 6 else np.nan
+            for s, b in zip(pr["india_pressure_sr"], pr["india_pressure_balls"])
+        ]
+        pr["overseas_rating"] = [
+            pct_score(ovr_valid, s) if b >= 6 else np.nan
+            for s, b in zip(pr["overseas_pressure_sr"], pr["overseas_pressure_balls"])
+        ]
+
+        # Composite India Pressure Fit Score (0-100):
+        # 60% India Pressure SR percentile + 25% India Clutch Lift (Pressure vs Ordinary in India) + 15% India Pressure Volume
+        india_fit_scores = []
+        for _, r in pr.iterrows():
+            ib = r.get("india_pressure_balls", 0)
+            isr = r.get("india_pressure_sr", np.nan)
+            igap = r.get("india_gap", np.nan)
+            if ib >= 6 and pd.notna(isr):
+                p_sr = pct_score(ind_valid, isr)
+                p_gap = pct_score(ind_gap_valid, igap) if pd.notna(igap) else p_sr
+                p_vol = pct_score(ind_vol_valid, ib)
+                india_fit_scores.append(0.60 * p_sr + 0.25 * p_gap + 0.15 * p_vol)
+            else:
+                india_fit_scores.append(np.nan)
+        pr["india_fit_score"] = india_fit_scores
+
+        def pick_best_pitch(row):
+            ib = row.get("india_pressure_balls", 0)
+            ob = row.get("overseas_pressure_balls", 0)
+            isr = row.get("india_pressure_sr", np.nan)
+            osr = row.get("overseas_pressure_sr", np.nan)
+            if ib > 0 and ob > 0 and pd.notna(isr) and pd.notna(osr):
+                if isr >= osr:
+                    return f"<span class='pill ok'>Indian pitches (+{isr - osr:.1f} SR)</span>"
+                return f"<span class='pill overseas'>Overseas pitches (+{osr - isr:.1f} SR)</span>"
+            if ib > 0 and pd.notna(isr):
+                return "<span class='pill ok'>Indian pitches (only)</span>"
+            if ob > 0 and pd.notna(osr):
+                return "<span class='pill overseas'>Overseas pitches (only)</span>"
+            return "–"
+
+        def classify_archetype(row):
+            ib = row.get("india_pressure_balls", 0)
+            ob = row.get("overseas_pressure_balls", 0)
+            isr = row.get("india_pressure_sr", np.nan)
+            osr = row.get("overseas_pressure_sr", np.nan)
+            psr = row.get("pressure_sr", np.nan)
+            if ib >= min_ind_b and pd.notna(isr) and isr >= 185:
+                if ob >= 15 and pd.notna(osr) and osr >= 185:
+                    return "Dual Finisher (India + Overseas)"
+                return "India Pressure Specialist"
+            if (ob >= 15 and pd.notna(osr) and osr >= 170) or (ib < min_ind_b and pd.notna(psr) and psr >= 170):
+                return "Overseas / Non-India Performer"
+            if ib >= min_ind_b:
+                return "India Tested (Moderate SR)"
+            return "Lower-Order / Other"
+
+        pr["best_pitch"] = [pick_best_pitch(r) for _, r in pr.iterrows()]
+        pr["archetype"] = [classify_archetype(r) for _, r in pr.iterrows()]
+
+        # Top 10 Players Best Suited to Bat in India Under Pressure
+        india_candidates = pr[pr["india_pressure_balls"] >= min_ind_b].copy()
+        top10_india = india_candidates.sort_values(
+            ["india_pressure_sr", "india_fit_score", "india_pressure_balls"], ascending=[False, False, False]
+        ).head(10).copy()
+        top10_india["rank"] = range(1, len(top10_india) + 1)
+        top10_names = set(top10_india["striker_name"].tolist())
+
+        # Performers who excelled under pressure overall/overseas, but are NOT in the Top 10 India list
+        overseas_stars = pr[
+            (~pr["striker_name"].isin(top10_names))
+            & ((pr["overseas_pressure_sr"] >= 175) | (pr["pressure_sr"] >= 180))
+            & ((pr["overseas_pressure_balls"] >= 12) | (pr["india_pressure_balls"] < min_ind_b))
+        ].sort_values("pressure_sr", ascending=False).copy()
+
+        # --------------------------------------------------------------------
+        # 1. Headline Storytelling KPIs
+        # --------------------------------------------------------------------
+        st.markdown("#### 1 · Pressure landscape at a glance")
+        kcols = st.columns(6)
+        tot_p_balls = int(pr["pressure_balls"].sum())
+        ind_p_balls = int(pr["india_pressure_balls"].sum())
+        ovr_p_balls = int(pr["overseas_pressure_balls"].sum())
+        w_ind_sr = 100.0 * pr["india_pressure_runs"].sum() / ind_p_balls if ind_p_balls > 0 else np.nan
+        w_ovr_sr = 100.0 * pr["overseas_pressure_runs"].sum() / ovr_p_balls if ovr_p_balls > 0 else np.nan
+        best_ind_name = top10_india.iloc[0]["striker_name"] if not top10_india.empty else "–"
+        best_ind_sr = top10_india.iloc[0]["india_pressure_sr"] if not top10_india.empty else np.nan
+
+        with kcols[0]:
+            kpi("Qualified batters", f"{len(pr):,}")
+        with kcols[1]:
+            kpi("Pressure balls (India / Ovr)", f"{ind_p_balls:,} / {ovr_p_balls:,}")
+        with kcols[2]:
+            kpi("India pressure SR", fmt(w_ind_sr))
+        with kcols[3]:
+            kpi("Overseas pressure SR", fmt(w_ovr_sr))
+        with kcols[4]:
+            kpi("#1 India pressure SR", f"{best_ind_name} ({fmt(best_ind_sr)})")
+        with kcols[5]:
+            kpi("Overseas-first finishers", f"{len(overseas_stars):,}")
+
+        st.markdown("")
+
+        # --------------------------------------------------------------------
+        # 2. Top 10 Best-Fit Batters for India Under Pressure
+        # --------------------------------------------------------------------
+        st.markdown(
+            "#### 2 · Top 10 batters best suited for Indian pitches under pressure "
+            f"<span style='font-size:0.88rem;font-weight:500;color:#475569'>(≥ {min_b} total pressure balls & ≥ {min_ind_b} balls in India)</span>",
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            "<div class='note'><b>Why these 10 stand out for India:</b> Each batter below has faced at least "
+            f"<b>{min_ind_b} pressure deliveries specifically on Indian venues</b> (Innings = 2, ≤ 30 balls left, "
+            "≥ 3 wickets down, RRR ≥ 15) and delivered the highest strike rates and clutch lift over their normal "
+            "Indian strike rate.</div>",
+            unsafe_allow_html=True,
+        )
+
+        if top10_india.empty:
+            st.info("No batters meet the current minimum Indian pressure balls filter. Lower the slider above.")
+        else:
+            c_ind_left, c_ind_right = st.columns([1.15, 1])
+            with c_ind_left:
+                t10_plot = top10_india.sort_values("india_pressure_sr", ascending=True).copy()
+                fig_t10 = go.Figure()
+                fig_t10.add_bar(
+                    x=t10_plot["india_pressure_sr"],
+                    y=t10_plot["striker_name"],
+                    orientation="h",
+                    name="India Pressure SR (RRR ≥ 15)",
+                    marker_color=TEAL,
+                    text=[f"{v:.1f} ({int(b)}b)" for v, b in zip(t10_plot["india_pressure_sr"], t10_plot["india_pressure_balls"])],
+                    textposition="inside",
+                    insidetextanchor="end",
+                    textfont=dict(color="#ffffff", size=11),
+                    customdata=t10_plot[["india_pressure_balls", "india_pressure_runs", "india_sr", "india_gap", "india_fit_score"]],
+                    hovertemplate=(
+                        "<b>%{y}</b><br>"
+                        "India Pressure SR: <b>%{x:.1f}</b> (%{customdata[1]:,.0f} runs off %{customdata[0]:,.0f}b)<br>"
+                        "Normal India SR: <b>%{customdata[2]:.1f}</b> · Clutch Lift: <b>%{customdata[3]:+.1f} pts</b><br>"
+                        "India Fit Score: <b>%{customdata[4]:.1f} / 100</b><extra></extra>"
+                    ),
+                )
+                fig_t10.add_scatter(
+                    x=t10_plot["india_sr"],
+                    y=t10_plot["striker_name"],
+                    mode="markers",
+                    name="Normal India SR (all balls)",
+                    marker=dict(size=11, color=AMBER, symbol="diamond", line=dict(width=1.5, color="#ffffff")),
+                    customdata=t10_plot[["india_balls", "india_runs", "india_gap"]],
+                    hovertemplate=(
+                        "<b>%{y}</b><br>"
+                        "Normal India SR: <b>%{x:.1f}</b> (%{customdata[1]:,.0f} runs off %{customdata[0]:,.0f}b)<br>"
+                        "Pressure boost in India: <b>%{customdata[2]:+.1f} pts</b><extra></extra>"
+                    ),
+                )
+                fig_t10.update_layout(
+                    xaxis_title="Strike rate on Indian pitches",
+                    yaxis_title="",
+                    legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"),
+                )
+                st.plotly_chart(
+                    style(fig_t10, "Top 10 for India: Pressure SR (bars) vs Normal India SR (diamonds)", height=440),
+                    width="stretch",
+                    theme=None,
+                )
+
+            with c_ind_right:
+                fig_bub = px.scatter(
+                    top10_india,
+                    x="india_pressure_balls",
+                    y="india_pressure_sr",
+                    size="india_pressure_runs",
+                    color="last10_india_avg",
+                    text="striker_name",
+                    color_continuous_scale=SCALE,
+                    size_max=34,
+                    custom_data=["india_pressure_runs", "india_fit_score", "overall_avg", "last10_avg", "last10_india_avg"],
+                    labels={
+                        "india_pressure_balls": "Pressure balls faced in India",
+                        "india_pressure_sr": "India pressure strike rate",
+                        "last10_india_avg": "Last 10 India Avg",
+                    },
+                )
+                fig_bub.update_traces(
+                    textposition="top center",
+                    textfont=dict(color=INK, size=11),
+                    marker=dict(line=dict(width=1.5, color=NAVY), opacity=0.9),
+                    hovertemplate=(
+                        "<b>%{text}</b><br>"
+                        "India Pressure SR: <b>%{y:.1f}</b> (%{customdata[0]:,.0f} runs off %{x:,.0f} balls)<br>"
+                        "India Fit Score: <b>%{customdata[1]:.1f} / 100</b><br>"
+                        "Overall Avg: <b>%{customdata[2]:.1f}</b> · Last 10 Avg: <b>%{customdata[3]:.1f}</b> · "
+                        "Last 10 India Avg: <b>%{customdata[4]:.1f}</b><extra></extra>"
+                    ),
+                )
+                y_min = float(top10_india["india_pressure_sr"].min()) - 15
+                y_max = float(top10_india["india_pressure_sr"].max()) + 22
+                fig_bub.update_yaxes(range=[y_min, y_max])
+                fig_bub.update_layout(coloraxis_colorbar_title="L10 Ind Avg")
+                st.plotly_chart(
+                    style(fig_bub, "Top 10 India finishers: volume vs strike rate (colour = Last 10 India Avg)", height=440),
+                    width="stretch",
+                    theme=None,
+                )
+
+            # Top 10 India curated table
+            t10_tbl = top10_india.copy()
+            t10_tbl["Rank"] = [f"<span class='pill ok'>#{r} India Fit</span>" for r in t10_tbl["rank"]]
+            t10_tbl["India Pressure Record"] = [
+                f"{int(r)} runs ({int(b)}b)" for r, b in zip(t10_tbl["india_pressure_runs"], t10_tbl["india_pressure_balls"])
+            ]
+            t10_tbl["Overseas Pressure SR"] = [
+                f"{sr:.1f} ({int(b)}b)" if b > 0 and pd.notna(sr) else "Not tested (0b)"
+                for sr, b in zip(t10_tbl["overseas_pressure_sr"], t10_tbl["overseas_pressure_balls"])
+            ]
+            t10_display = t10_tbl[[
+                "Rank", "striker_name", "india_fit_score", "india_pressure_sr", "India Pressure Record",
+                "india_gap", "overall_avg", "last10_avg", "last10_india_avg", "Overseas Pressure SR"
+            ]].rename(columns={
+                "striker_name": "Batter",
+                "india_fit_score": "India Fit Score (0–100)",
+                "india_pressure_sr": "India Pressure SR",
+                "india_gap": "India SR Lift (Δ)",
+                "overall_avg": "Overall Avg",
+                "last10_avg": "Last 10 Matches Avg",
+                "last10_india_avg": "Last 10 India Avg",
+            })
+            html_table(
+                t10_display,
+                formats={
+                    "India Fit Score (0–100)": "{:.1f}",
+                    "India Pressure SR": "{:.1f}",
+                    "India SR Lift (Δ)": "{:+.1f}",
+                    "Overall Avg": "{:.1f}",
+                    "Last 10 Matches Avg": "{:.1f}",
+                    "Last 10 India Avg": "{:.1f}",
+                },
+                bar_cols={"India Fit Score (0–100)": 100.0},
+                num_cols=[
+                    "India Fit Score (0–100)", "India Pressure SR", "India Pressure Record",
+                    "India SR Lift (Δ)", "Overall Avg", "Last 10 Matches Avg",
+                    "Last 10 India Avg", "Overseas Pressure SR",
+                ],
+            )
+
+        st.markdown("")
+
+        # --------------------------------------------------------------------
+        # 3. India Specialists vs Overseas Performers (Why Some High-SR Batters Aren't Top 10 in India)
+        # --------------------------------------------------------------------
+        st.markdown("#### 3 · India specialists vs Overseas pressure performers")
+        st.markdown(
+            "<div class='note'><b>Storytelling insight:</b> Several batters post high overall pressure strike rates "
+            "(≥ 180 SR), but their sample comes almost entirely <b>outside India</b> (e.g. Akeal Hosein, Gareth Delany, "
+            "Shakib Al Hasan, Mark Adair with 0 pressure balls in India) or they score much faster on overseas tracks "
+            "than Indian surfaces (e.g. Marco Jansen <b>281.8 SR Overseas</b> vs <b>136.0 SR in India</b>; Rovman Powell "
+            "<b>225.5 SR Overseas</b> vs <b>182.8 SR in India</b>). The charts below separate true India finishers from "
+            "overseas-weighted performers.</div>",
+            unsafe_allow_html=True,
+        )
+
+        q_left, q_right = st.columns([1.1, 1])
+        with q_left:
+            # Plot Overall Pressure SR vs Share of Pressure Balls in India (%)
+            quad_df = pr[pr["pressure_sr"] >= 120].copy()
+            fig_quad = px.scatter(
+                quad_df,
+                x="india_ball_share",
+                y="pressure_sr",
+                size="pressure_balls",
+                color="archetype",
+                hover_name="striker_name",
+                size_max=28,
+                color_discrete_map={
+                    "India Pressure Specialist": TEAL,
+                    "Dual Finisher (India + Overseas)": "#0284c7",
+                    "Overseas / Non-India Performer": AMBER,
+                    "India Tested (Moderate SR)": "#64748b",
+                    "Lower-Order / Other": "#94a3b8",
+                },
+                custom_data=[
+                    "pressure_balls", "india_pressure_balls", "india_pressure_sr",
+                    "overseas_pressure_balls", "overseas_pressure_sr",
+                ],
+                labels={
+                    "india_ball_share": "Share of pressure balls played in India (%)",
+                    "pressure_sr": "Overall pressure strike rate",
+                    "archetype": "",
+                },
+            )
+            fig_quad.update_traces(
+                marker=dict(line=dict(width=1, color=NAVY), opacity=0.88),
+                hovertemplate=(
+                    "<b>%{hovertext}</b><br>"
+                    "Overall Pressure SR: <b>%{y:.1f}</b> (%{customdata[0]:,.0f} balls)<br>"
+                    "India share: <b>%{x:.0f}%</b> (%{customdata[1]:,.0f}b · SR: <b>%{customdata[2]:.1f}</b>)<br>"
+                    "Overseas: <b>%{customdata[3]:,.0f}b</b> · SR: <b>%{customdata[4]:.1f}</b><extra></extra>"
+                ),
+            )
+            fig_quad.add_hline(y=185, line_dash="dash", line_color="#64748b", line_width=1.2)
+            fig_quad.add_vline(x=50, line_dash="dash", line_color="#64748b", line_width=1.2)
+            fig_quad.update_layout(legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"))
+            st.plotly_chart(
+                style(fig_quad, "Pressure matrix: Overall SR vs % of pressure balls played in India", height=450),
+                width="stretch",
+                theme=None,
+            )
+
+        with q_right:
+            # Diverging bar chart for players tested in BOTH India (>= 8b) and Overseas (>= 8b)
+            both_venues = pr[(pr["india_pressure_balls"] >= 8) & (pr["overseas_pressure_balls"] >= 8)].copy()
+            both_venues = both_venues.sort_values("india_vs_overseas_sr", ascending=True)
+            if both_venues.empty:
+                st.info("Not enough batters tested in both India and Overseas at this filter level.")
+            else:
+                both_venues["pref_label"] = np.where(
+                    both_venues["india_vs_overseas_sr"] >= 0,
+                    "Better in India",
+                    "Better Overseas",
+                )
+                fig_div = px.bar(
+                    both_venues,
+                    x="india_vs_overseas_sr",
+                    y="striker_name",
+                    orientation="h",
+                    color="pref_label",
+                    color_discrete_map={"Better in India": TEAL, "Better Overseas": "#0284c7"},
+                    custom_data=[
+                        "india_pressure_sr", "india_pressure_balls",
+                        "overseas_pressure_sr", "overseas_pressure_balls",
+                    ],
+                    labels={
+                        "india_vs_overseas_sr": "India Pressure SR minus Overseas Pressure SR (points)",
+                        "striker_name": "",
+                        "pref_label": "",
+                    },
+                )
+                fig_div.update_traces(
+                    hovertemplate=(
+                        "<b>%{y}</b><br>"
+                        "India vs Overseas gap: <b>%{x:+.1f} SR pts</b><br>"
+                        "India Pressure SR: <b>%{customdata[0]:.1f}</b> (%{customdata[1]:,.0f}b)<br>"
+                        "Overseas Pressure SR: <b>%{customdata[2]:.1f}</b> (%{customdata[3]:,.0f}b)<extra></extra>"
+                    )
+                )
+                fig_div.add_vline(x=0, line_color=NAVY, line_width=1.5)
+                fig_div.update_layout(legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"))
+                st.plotly_chart(
+                    style(fig_div, "Batters tested in both: India vs Overseas pressure SR differential", height=450),
+                    width="stretch",
+                    theme=None,
+                )
+
+        # Callout table of strong Overseas / Non-India performers
+        if not overseas_stars.empty:
+            st.markdown(
+                "##### High-performing pressure batters outside the India Top-10 (Strong Overseas / Limited India Sample)"
+            )
+            ovr_tbl = overseas_stars.head(10).copy()
+            ovr_tbl["India Pressure (balls)"] = [
+                f"{sr:.1f} ({int(b)}b)" if b > 0 and pd.notna(sr) else "0 balls in India"
+                for sr, b in zip(ovr_tbl["india_pressure_sr"], ovr_tbl["india_pressure_balls"])
+            ]
+            ovr_tbl["Overseas Pressure (balls)"] = [
+                f"{sr:.1f} ({int(b)}b)" if b > 0 and pd.notna(sr) else "–"
+                for sr, b in zip(ovr_tbl["overseas_pressure_sr"], ovr_tbl["overseas_pressure_balls"])
+            ]
+            ovr_tbl["Why Outside India Top-10"] = [
+                "No pressure balls in India (100% Overseas)"
+                if ib == 0
+                else (
+                    f"Small India sample ({int(ib)}b < {min_ind_b}b)"
+                    if ib < min_ind_b
+                    else f"Higher Overseas SR ({osr:.1f} vs {isr:.1f} in India)"
+                )
+                for ib, isr, osr in zip(
+                    ovr_tbl["india_pressure_balls"],
+                    ovr_tbl["india_pressure_sr"],
+                    ovr_tbl["overseas_pressure_sr"],
+                )
+            ]
+            ovr_display = ovr_tbl[[
+                "striker_name", "pressure_balls", "pressure_sr", "Overseas Pressure (balls)",
+                "India Pressure (balls)", "overall_avg", "last10_avg", "Why Outside India Top-10", "best_pitch"
+            ]].rename(columns={
+                "striker_name": "Batter",
+                "pressure_balls": "Total Pressure Balls",
+                "pressure_sr": "Overall Pressure SR",
+                "overall_avg": "Overall Avg",
+                "last10_avg": "Last 10 Matches Avg",
+                "best_pitch": "Performed Better On",
+            })
+            html_table(
+                ovr_display,
+                formats={
+                    "Overall Pressure SR": "{:.1f}",
+                    "Overall Avg": "{:.1f}",
+                    "Last 10 Matches Avg": "{:.1f}",
+                },
+                num_cols=[
+                    "Total Pressure Balls", "Overall Pressure SR", "Overseas Pressure (balls)",
+                    "India Pressure (balls)", "Overall Avg", "Last 10 Matches Avg",
+                ],
+            )
+
+        st.markdown("")
+
+        # --------------------------------------------------------------------
+        # 4. The Clutch Escalator: Ordinary SR -> Pressure SR (Dumbbell Plot)
+        # --------------------------------------------------------------------
+        st.markdown("#### 4 · The clutch escalator: how much batters accelerate from ordinary balls to pressure balls")
+        top_lift = pr.sort_values("gap", ascending=True).tail(20).copy()
+        fig_dumb = go.Figure()
+        for _, r in top_lift.iterrows():
+            fig_dumb.add_trace(
+                go.Scatter(
+                    x=[r["ordinary_sr"], r["pressure_sr"]],
+                    y=[r["striker_name"], r["striker_name"]],
+                    mode="lines",
+                    line=dict(color="#94a3b8", width=2.5),
+                    showlegend=False,
+                    hoverinfo="skip",
+                )
+            )
+        fig_dumb.add_trace(
+            go.Scatter(
+                x=top_lift["ordinary_sr"],
+                y=top_lift["striker_name"],
+                mode="markers",
+                name="Ordinary SR (non-pressure)",
+                marker=dict(size=10, color="#64748b", line=dict(width=1.5, color="#ffffff")),
+                customdata=top_lift[["ordinary_balls", "ordinary_runs"]],
+                hovertemplate=(
+                    "<b>%{y}</b><br>"
+                    "Ordinary SR: <b>%{x:.1f}</b> (%{customdata[1]:,.0f} runs off %{customdata[0]:,.0f}b)<extra></extra>"
+                ),
+            )
+        )
+        fig_dumb.add_trace(
+            go.Scatter(
+                x=top_lift["pressure_sr"],
+                y=top_lift["striker_name"],
+                mode="markers+text",
+                name="Pressure SR (RRR ≥ 15)",
+                text=[f"+{g:.0f}" if g >= 0 else f"{g:.0f}" for g in top_lift["gap"]],
+                textposition="middle right",
+                textfont=dict(color=TEAL, size=11),
+                marker=dict(size=12, color=TEAL, line=dict(width=1.5, color="#ffffff")),
+                customdata=top_lift[["pressure_balls", "pressure_runs", "gap", "india_pressure_sr", "overseas_pressure_sr"]],
+                hovertemplate=(
+                    "<b>%{y}</b><br>"
+                    "Pressure SR: <b>%{x:.1f}</b> (%{customdata[1]:,.0f} runs off %{customdata[0]:,.0f}b)<br>"
+                    "Clutch SR Lift: <b>%{customdata[2]:+.1f} pts</b><br>"
+                    "India Pressure SR: <b>%{customdata[3]:.1f}</b> · Overseas Pressure SR: <b>%{customdata[4]:.1f}</b><extra></extra>"
+                ),
+            )
+        )
+        fig_dumb.update_xaxes(range=[60, float(top_lift["pressure_sr"].max()) + 35], title_text="Strike rate (runs per 100 balls)")
+        fig_dumb.update_layout(legend=dict(orientation="h", y=1.02, yanchor="bottom", x=0, xanchor="left"))
+        st.plotly_chart(
+            style(fig_dumb, "Top 20 clutch escalators: Ordinary SR → Pressure SR (label = +SR lift)", height=560),
+            width="stretch",
+            theme=None,
+        )
+
+        # --------------------------------------------------------------------
+        # 5. Complete Master Pressure Table (All Batters + Filter by Group)
+        # --------------------------------------------------------------------
+        st.markdown("#### 5 · Complete pressure batters table (India Top-10, Overseas performers & all qualified batters)")
+        f_col1, f_col2 = st.columns([1.2, 1])
+        with f_col1:
+            group_filter = st.radio(
+                "Filter table view",
+                options=[
+                    "All qualified batters",
+                    "Top 10 best fit in India",
+                    "Other high-SR batters (Overseas / Non-India)",
+                ],
+                horizontal=True,
+            )
+        with f_col2:
+            sort_choice = st.selectbox(
+                "Sort master table by",
+                options=[
+                    "India Fit Score (0–100)",
+                    "India Pressure SR",
+                    "Overall Pressure SR",
+                    "SR Gap (Pressure minus Ordinary)",
+                    "Total Pressure Balls",
+                ],
+                index=0,
+            )
+
+        sort_col_map = {
+            "India Fit Score (0–100)": "india_fit_score",
+            "India Pressure SR": "india_pressure_sr",
+            "Overall Pressure SR": "pressure_sr",
+            "SR Gap (Pressure minus Ordinary)": "gap",
+            "Total Pressure Balls": "pressure_balls",
+        }
+        pr_sorted = pr.copy()
+        if group_filter == "Top 10 best fit in India":
+            pr_sorted = pr_sorted[pr_sorted["striker_name"].isin(top10_names)].copy()
+        elif group_filter == "Other high-SR batters (Overseas / Non-India)":
+            pr_sorted = pr_sorted[pr_sorted["striker_name"].isin(set(overseas_stars["striker_name"]))].copy()
+
+        pr_sorted = pr_sorted.sort_values(sort_col_map[sort_choice], ascending=False, na_position="last")
+
+        rank_lookup = dict(zip(top10_india["striker_name"], top10_india["rank"]))
+        pr_sorted["Role / Fit Tag"] = [
+            f"<span class='pill ok'>#{rank_lookup[n]} India Top-10</span>"
+            if n in rank_lookup
+            else (
+                "<span class='pill overseas'>Overseas / Non-India Star</span>"
+                if n in set(overseas_stars["striker_name"])
+                else "<span class='pill warn'>India / Squad Depth</span>"
+            )
+            for n in pr_sorted["striker_name"]
+        ]
 
         pr_sorted["Indian Pressure (balls)"] = [
             f"{sr:.1f} ({int(b)}b)" if b > 0 and pd.notna(sr) else "–"
@@ -1450,11 +1908,11 @@ with tab_pressure:
             for sr, b in zip(pr_sorted.get("overseas_pressure_sr", []), pr_sorted.get("overseas_pressure_balls", []))
         ]
         pt_cols = [
-            "striker_name", "pressure_balls", "pressure_runs", "pressure_sr",
+            "striker_name", "Role / Fit Tag", "pressure_balls", "pressure_runs", "pressure_sr",
             "ordinary_sr", "gap",
             "overall_avg", "last10_avg", "last10_india_avg",
             "Indian Pressure (balls)", "Overseas Pressure (balls)",
-            "india_rating", "overseas_rating", "best_pitch",
+            "india_fit_score", "overseas_rating", "best_pitch",
         ]
         pt_cols = [c for c in pt_cols if c in pr_sorted.columns]
         pr_tbl = pr_sorted[pt_cols].rename(
@@ -1468,7 +1926,7 @@ with tab_pressure:
                 "overall_avg": "Overall Avg",
                 "last10_avg": "Last 10 Matches Avg",
                 "last10_india_avg": "Last 10 India Avg",
-                "india_rating": "India Rating (0–100)",
+                "india_fit_score": "India Fit Score (0–100)",
                 "overseas_rating": "Overseas Rating (0–100)",
                 "best_pitch": "Performed Better On",
             }
@@ -1483,15 +1941,16 @@ with tab_pressure:
                 "Overall Avg": "{:.1f}",
                 "Last 10 Matches Avg": "{:.1f}",
                 "Last 10 India Avg": "{:.1f}",
-                "India Rating (0–100)": "{:.0f}",
+                "India Fit Score (0–100)": "{:.1f}",
                 "Overseas Rating (0–100)": "{:.0f}",
             },
+            bar_cols={"India Fit Score (0–100)": 100.0},
             num_cols=[
                 c for c in [
                     "Pressure balls", "Pressure runs", "Pressure SR", "Ordinary SR",
                     "SR Gap", "Overall Avg", "Last 10 Matches Avg", "Last 10 India Avg",
                     "Indian Pressure (balls)", "Overseas Pressure (balls)",
-                    "India Rating (0–100)", "Overseas Rating (0–100)",
+                    "India Fit Score (0–100)", "Overseas Rating (0–100)",
                 ] if c in pr_tbl.columns
             ],
         )
