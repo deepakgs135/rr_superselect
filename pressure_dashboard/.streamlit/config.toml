@@ -1,0 +1,83 @@
+[theme]
+base = "light"
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "8px"
+buttonRadius = "8px"
+font = "sans-serif"
+headingFont = "sans-serif"
+codeFont = "monospace"
+baseFontSize = 14
+baseFontWeight = 400
+metricValueFontSize = "30px"
+headingFontSizes = ["30px", "24px", "19px", "17px", "15px", "13px"]
+headingFontWeights = [700, 700, 650, 600, 550, 500]
+linkUnderline = false
+paddingTop = "0.8rem"
+paddingBottom = "3rem"
+
+[theme.light]
+primaryColor = "#0F766E"
+backgroundColor = "#F8FAFC"
+secondaryBackgroundColor = "#FFFFFF"
+codeBackgroundColor = "#F1F5F9"
+textColor = "#0F172A"
+linkColor = "#0F766E"
+borderColor = "#D8E2EC"
+greenColor = "#15803D"
+redColor = "#D94F45"
+yellowColor = "#CA8A04"
+orangeColor = "#EA580C"
+blueColor = "#2563EB"
+violetColor = "#7C3AED"
+grayColor = "#64748B"
+chartCategoricalColors = ["#0F766E", "#F07854", "#4F7CAC", "#D4A72C", "#805AD5", "#5E9C76", "#64748B", "#C56A9A"]
+chartSequentialColors = ["#F0FDFA", "#CCFBF1", "#99F6E4", "#5EEAD4", "#2DD4BF", "#14B8A6", "#0D9488", "#0F766E", "#115E59", "#134E4A"]
+dataframeBorderColor = "#D8E2EC"
+dataframeHeaderBackgroundColor = "#E8F0F5"
+dataframeHeaderTextColor = "#0F172A"
+
+[theme.dark]
+primaryColor = "#2DD4BF"
+backgroundColor = "#0B1220"
+secondaryBackgroundColor = "#111C2E"
+codeBackgroundColor = "#172338"
+textColor = "#E5EDF5"
+linkColor = "#5EEAD4"
+borderColor = "#26364B"
+greenColor = "#34D399"
+redColor = "#FB7185"
+yellowColor = "#FBBF24"
+orangeColor = "#FB923C"
+blueColor = "#60A5FA"
+violetColor = "#A78BFA"
+grayColor = "#94A3B8"
+chartCategoricalColors = ["#2DD4BF", "#FB8B69", "#60A5FA", "#FBBF24", "#A78BFA", "#34D399", "#94A3B8", "#F472B6"]
+chartSequentialColors = ["#F0FDFA", "#CCFBF1", "#99F6E4", "#5EEAD4", "#2DD4BF", "#14B8A6", "#0D9488", "#0F766E", "#115E59", "#134E4A"]
+dataframeBorderColor = "#26364B"
+dataframeHeaderBackgroundColor = "#172338"
+dataframeHeaderTextColor = "#F8FAFC"
+
+[theme.sidebar]
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F1F5F9"
+paddingTop = "0.6rem"
+paddingBottom = "1.5rem"
+
+[theme.light.sidebar]
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F1F5F9"
+codeBackgroundColor = "#E2E8F0"
+textColor = "#0F172A"
+borderColor = "#D8E2EC"
+primaryColor = "#0F766E"
+linkColor = "#0F766E"
+
+[theme.dark.sidebar]
+backgroundColor = "#0F172A"
+secondaryBackgroundColor = "#172338"
+codeBackgroundColor = "#1E293B"
+textColor = "#E5EDF5"
+borderColor = "#26364B"
+primaryColor = "#2DD4BF"
+linkColor = "#5EEAD4"

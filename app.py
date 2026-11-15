@@ -13,6 +13,7 @@ Rules used throughout:
 - Tables are rendered as HTML, so the app does not need pyarrow.
 """
 from html import escape
+import importlib
 from pathlib import Path
 import sys
 
@@ -22,6 +23,9 @@ sys.modules["pyarrow"] = None
 
 import plotly.graph_objects as go
 import streamlit as st
+import pure_engine
+
+importlib.reload(pure_engine)
 from pure_engine import np, pd, px
 
 st.set_page_config(page_title="Batting insights", page_icon="🏏", layout="wide")
@@ -31,6 +35,8 @@ RAW_BASE = Path(__file__).resolve().parent / "Raw_Data"
 INNINGS_FILE = BASE / "player_batting_innings.csv"
 DISMISSAL_FILE = BASE / "batting_dismissal_types.csv"
 PRESSURE_FILE = BASE / "pressure_batter_summary_rrr15.csv"
+BOWLING_INNINGS_FILE = BASE / "player_bowling_innings.csv"
+BOWLING_WICKETS_FILE = BASE / "bowling_wicket_types.csv"
 
 TEAL, NAVY, AMBER, GREY, LIGHT = "#0f766e", "#0f172a", "#d97706", "#475569", "#0284c7"
 INK, MUTED_TEXT, SOFT_BG, CARD, BORDER = "#0f172a", "#334155", "#f1f5f9", "#ffffff", "#cbd5e1"
@@ -173,8 +179,26 @@ svg[data-testid="stTooltipIcon"] {
     border: 1px solid #0f766e;
     box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
 }
-.hero h1 {margin: 0; font-size: 1.95rem; color: #ffffff !important; letter-spacing: -0.01em;}
-.hero p {margin: .35rem 0 0 0; color: #ccfbf1 !important; font-size: 1.02rem; font-weight: 500;}
+.hero h1,
+.hero h1 *,
+[data-testid="stMarkdownContainer"] .hero h1,
+[data-testid="stMarkdownContainer"] .hero h1 * {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1.95rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: -0.01em !important;
+}
+.hero p,
+.hero p *,
+[data-testid="stMarkdownContainer"] .hero p,
+[data-testid="stMarkdownContainer"] .hero p * {
+    margin: .35rem 0 0 0 !important;
+    color: #ccfbf1 !important;
+    font-size: 1.02rem !important;
+    font-weight: 500 !important;
+}
 
 /* KPI Cards */
 .kpi {
@@ -193,7 +217,7 @@ svg[data-testid="stTooltipIcon"] {
     font-weight: 700;
 }
 .kpi .value {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
     font-weight: 800;
     color: #0f172a !important;
     line-height: 1.25;
@@ -219,16 +243,21 @@ svg[data-testid="stTooltipIcon"] {
     border-radius: 6px;
     margin: .3rem 0 .8rem 0;
 }
+.tbl-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+}
 .tbl {
     width: 100%;
     border-collapse: collapse;
-    font-size: .92rem;
-    margin-bottom: 1rem;
+    font-size: .9rem;
+    margin-bottom: 0;
     background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }
 .tbl th {
     text-align: left;
@@ -237,51 +266,77 @@ svg[data-testid="stTooltipIcon"] {
     padding: 10px 12px;
     font-weight: 700;
     border-bottom: 3px solid #0f766e;
+    white-space: nowrap;
+}
+.tbl th.num {
+    text-align: right;
 }
 .tbl td {
     padding: 9px 12px;
-    border-bottom: 1px solid #cbd5e1;
+    border-bottom: 1px solid #e2e8f0;
     color: #0f172a !important;
     font-weight: 500;
+    vertical-align: middle;
 }
+.tbl tr:last-child td {border-bottom: none;}
 .tbl tr:nth-child(even) td {background: #f8fafc;}
 .tbl tr:hover td {background: #f0fdfa;}
-.tbl td.num {text-align: right; font-variant-numeric: tabular-nums; font-weight: 600;}
+.tbl td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    white-space: nowrap;
+}
 .bar {height: 9px; border-radius: 4px; background: #0f766e; min-width: 2px;}
-.pill {display:inline-block; padding:3px 10px; border-radius:999px; font-size:.8rem; font-weight:700; white-space:nowrap;}
+.pill {display:inline-block; padding:3px 10px; border-radius:999px; font-size:.78rem; font-weight:700; white-space:nowrap;}
 .pill.ok {background:#a7f3d0; color:#064e3b !important; border: 1px solid #10b981;}
 .pill.overseas {background:#bae6fd; color:#0c4a6e !important; border: 1px solid #0284c7;}
 .pill.small {background:#fde68a; color:#78350f !important; border: 1px solid #f59e0b;}
+.pill.warn {background:#fee2e2; color:#991b1b !important; border: 1px solid #f87171;}
 
 /* Tabs */
-div[data-baseweb="tab-list"] {
-    gap: 6px;
+div[data-baseweb="tab-list"],
+div[role="tablist"] {
+    gap: 8px !important;
     border-bottom: 2px solid #cbd5e1 !important;
-    padding-bottom: 2px;
+    padding-bottom: 4px !important;
+    margin-bottom: 0.5rem !important;
 }
-button[data-baseweb="tab"] {
+button[data-baseweb="tab"],
+button[role="tab"] {
     background-color: #e2e8f0 !important;
     border-radius: 8px 8px 0 0 !important;
-    padding: 8px 16px !important;
+    padding: 8px 18px !important;
     border: 1px solid #cbd5e1 !important;
     border-bottom: none !important;
+    transition: all 0.15s ease !important;
 }
 button[data-baseweb="tab"],
 button[data-baseweb="tab"] p,
 button[data-baseweb="tab"] div,
-button[data-baseweb="tab"] span {
+button[data-baseweb="tab"] span,
+button[role="tab"],
+button[role="tab"] p,
+button[role="tab"] div,
+button[role="tab"] span {
     color: #1e293b !important;
     font-weight: 600 !important;
-    font-size: 0.95rem !important;
+    font-size: 0.94rem !important;
 }
-button[data-baseweb="tab"][aria-selected="true"] {
+button[data-baseweb="tab"][aria-selected="true"],
+button[role="tab"][aria-selected="true"] {
     background-color: #0f766e !important;
     border-color: #0f766e !important;
+    box-shadow: 0 2px 6px rgba(15, 118, 110, 0.22) !important;
 }
 button[data-baseweb="tab"][aria-selected="true"],
 button[data-baseweb="tab"][aria-selected="true"] p,
 button[data-baseweb="tab"][aria-selected="true"] div,
-button[data-baseweb="tab"][aria-selected="true"] span {
+button[data-baseweb="tab"][aria-selected="true"] span,
+button[role="tab"][aria-selected="true"],
+button[role="tab"][aria-selected="true"] p,
+button[role="tab"][aria-selected="true"] div,
+button[role="tab"][aria-selected="true"] span {
     color: #ffffff !important;
     font-weight: 700 !important;
 }
@@ -398,7 +453,11 @@ def html_table(df, formats=None, bar_cols=None, num_cols=None):
     formats = formats or {}
     bar_cols = bar_cols or {}
     num_cols = set(num_cols or [])
-    head = "".join(f"<th>{escape(str(c))}</th>" for c in df.columns)
+    th_cls_attr = " class='num'"
+    head = "".join(
+        f"<th{th_cls_attr if c in num_cols else ''}>{escape(str(c))}</th>"
+        for c in df.columns
+    )
     rows = []
     for _, r in df.iterrows():
         cells = []
@@ -410,18 +469,25 @@ def html_table(df, formats=None, bar_cols=None, num_cols=None):
             elif isinstance(v, str) and v.startswith("<"):
                 text = v
             else:
-                text = formats[c].format(v) if c in formats else str(v)
+                if c in formats:
+                    text = formats[c].format(v)
+                elif isinstance(v, int) and not isinstance(v, bool):
+                    text = f"{v:,}"
+                elif isinstance(v, float) and v.is_integer():
+                    text = f"{int(round(v)):,}"
+                else:
+                    text = str(v)
                 text = escape(text)
             if c in bar_cols and not is_missing and bar_cols[c]:
                 pct = max(0.0, min(100.0, 100 * float(r[c]) / bar_cols[c]))
-                text = ("<div style='display:flex;align-items:center;gap:8px'>"
-                        f"<span style='min-width:56px;text-align:right'>{text}</span>"
-                        f"<div class='bar' style='width:{pct:.0f}%'></div></div>")
+                text = ("<div style='display:flex;align-items:center;justify-content:flex-end;gap:8px'>"
+                        f"<span style='min-width:36px;text-align:right'>{text}</span>"
+                        f"<div class='bar' style='width:{pct:.0f}px;max-width:70px'></div></div>")
             cls = " class='num'" if c in num_cols else ""
             cells.append(f"<td{cls}>{text}</td>")
         rows.append("<tr>" + "".join(cells) + "</tr>")
     st.markdown(
-        f"<table class='tbl'><thead><tr>{head}</tr></thead><tbody>{''.join(rows)}</tbody></table>",
+        f"<div class='tbl-wrap'><table class='tbl'><thead><tr>{head}</tr></thead><tbody>{''.join(rows)}</tbody></table></div>",
         unsafe_allow_html=True,
     )
 
@@ -706,8 +772,32 @@ def player_table(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # ----------------------------------------------------------------------------
-# Load
+# Load & Department Switch (Bowling vs Batting)
 # ----------------------------------------------------------------------------
+with st.sidebar:
+    st.markdown("### Dashboard mode")
+    dashboard_mode = st.radio(
+        "Department",
+        options=["Bowling insights", "Batting insights"],
+        index=0,
+        help="Switch between the consolidated Bowling dashboard and Batting dashboard.",
+    )
+    st.markdown("---")
+
+if dashboard_mode == "Bowling insights":
+    import bowling_dashboard
+
+    importlib.reload(bowling_dashboard)
+    bowling_dashboard.render_bowling_dashboard(
+        bowling_file=BOWLING_INNINGS_FILE,
+        wicket_file=BOWLING_WICKETS_FILE,
+        style_fn=style,
+        kpi_fn=kpi,
+        fmt_fn=fmt,
+        html_table_fn=html_table,
+    )
+    st.stop()
+
 if not INNINGS_FILE.exists():
     st.error(f"Missing data file: {INNINGS_FILE}")
     st.stop()
@@ -719,13 +809,12 @@ dismissals_raw = load_dismissals(DISMISSAL_FILE)
 # Sidebar filters
 # ----------------------------------------------------------------------------
 with st.sidebar:
-    st.markdown("### Filters")
+    st.markdown("### Batting filters")
     formats = sorted(raw["match_format"].dropna().astype(str).unique())
     sel_formats = st.multiselect(
-        "Match format",
+        "Match format (T20 = IPL · T20I = Intl)",
         formats,
         default=formats,
-        format_func=lambda x: "T20 (IPL)" if x == "T20" else ("T20I (T20 Internationals)" if x == "T20I" else x),
     )
 
     years = sorted(raw["year"].dropna().astype(int).unique())

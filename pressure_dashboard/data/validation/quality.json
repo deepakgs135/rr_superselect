@@ -1,0 +1,122 @@
+{
+  "built_at_utc": "2026-11-15T03:33:00+00:00",
+  "source_files": {
+    "ball_by_ball.csv": {
+      "row_count": 200999,
+      "byte_size": 41071609,
+      "sha256": "a3926f49d2c684dca2a5d2de535a02c5ee46ea654ca1e79dd31c69e7544e9889"
+    },
+    "matches.csv": {
+      "row_count": 883,
+      "byte_size": 123864,
+      "sha256": "bb100ab84b8b9a15160c1f2315cf675210131a30e779ec5079fd5403dcf56eef"
+    },
+    "competitions.csv": {
+      "row_count": 141,
+      "byte_size": 7624,
+      "sha256": "507ceb7189f972d4e4f299ddcfc97f3c3247af1913f6291106f161fa8353fd9b"
+    },
+    "teams.csv": {
+      "row_count": 353,
+      "byte_size": 6922,
+      "sha256": "a65e5922a9b3bf49247b24fc9471782e700efb31f8dcc5042923238b87c50a5d"
+    },
+    "competition_team_player_mapping.csv": {
+      "row_count": 6413,
+      "byte_size": 462969,
+      "sha256": "1ded4e42a933618572d6e2c3a521c3257eb1844fab4456d567d77cbb2d3bbb12"
+    },
+    "playing_eleven.csv": {
+      "row_count": 28381,
+      "byte_size": 966287,
+      "sha256": "7517c73722a28d5d61c808ccf0cbed315a8780586d02e946eb9a7f5daf011c27"
+    },
+    "Cricket_Analytics_Matrices.xlsx": {
+      "row_count": null,
+      "byte_size": 2280957,
+      "sha256": "b9f7df616736d3a6f95f05ca147ac537b2e6ac5f578f06a560327b8c6ebd8fb6"
+    }
+  },
+  "scope": {
+    "formats": [
+      {
+        "format": "T20",
+        "matches": 401,
+        "seasons": 5
+      },
+      {
+        "format": "T20I",
+        "matches": 482,
+        "seasons": 8
+      }
+    ],
+    "matches": 883,
+    "delivery_rows": 200999,
+    "processed_delivery_rows": 200999,
+    "innings_summaries": 1724,
+    "second_innings": 845,
+    "extra_innings_delivery_rows_excluded_from_standard_views": 38
+  },
+  "definitions": {
+    "pressure": "Pre-ball state in innings 2 with RRR >= 15, <= 30 known legal balls remaining, and >= 3 wickets lost.",
+    "target": "matches.revised_target when present; otherwise first-innings raw run fields (runs + extras_2_runs) + 1.",
+    "raw_team_runs_proxy": "runs + extras_2_runs; this is a source-field proxy and does not consistently reconcile to result margins.",
+    "legal_ball_map": "None/byes/legbyes are known legal; wide/Overstep are known illegal; other/Penalty/blank/unmapped values have unknown legality.",
+    "unknown_state": "After an unknown-legality event, later chase legal-ball states are marked unknown because remaining balls cannot be reconstructed exactly.",
+    "regular_innings_scope": "Player, venue, and chase analytics use innings 1 and 2. Extra innings are retained in deliveries and excluded from standard T20 views.",
+    "bowler_credited_wickets": [
+      "bowled",
+      "caught",
+      "hit wicket",
+      "lbw",
+      "stump"
+    ],
+    "balls_faced": "Delivery rows excluding wides and rows with unknown legality; Overstep/no-ball events count as faced.",
+    "sample_adjustments": "Display-only shrinkage uses 100 prior balls for batting strike rate, 3 prior dismissals for batting average, and 60 prior legal balls for bowling rates."
+  },
+  "quality": {
+    "extras_type_counts": {
+      "None": 189167,
+      "wide": 7714,
+      "legbyes": 2748,
+      "byes": 529,
+      "Overstep": 576,
+      "other": 264,
+      "Penalty": 1
+    },
+    "unknown_legality_events": 265,
+    "source_run_margin_comparisons": 408,
+    "source_run_margin_matches": 21,
+    "source_run_margin_mismatches": 387,
+    "workbook_pressure_rows": 845,
+    "workbook_pressure_count_comparisons": 386,
+    "workbook_pressure_count_matches": 155,
+    "invalid_date_rows": 0,
+    "ambiguous_striker_ids_with_multiple_names": 0,
+    "ambiguous_source_batter_ids_with_multiple_names": 0,
+    "ambiguous_source_bowler_ids_with_multiple_names": 0,
+    "duplicate_match_ids": 0,
+    "revised_schedule_matches": 25,
+    "revised_target_matches": 23
+  },
+  "processing": {
+    "known_rrr_states": 90824,
+    "unknown_rrr_states": 4410,
+    "pressure_legal_deliveries": 5896,
+    "unknown_legality_events": 265,
+    "extra_innings_rows": 0,
+    "innings_summaries": 1724,
+    "delivery_rows_processed": 200999,
+    "matches_with_second_innings": 845
+  },
+  "independent_source_player_records": {
+    "batter_record_rows": 13729,
+    "bowler_record_rows": 10094,
+    "player_name_keys": 1535
+  },
+  "workbook_reference": {
+    "rows_loaded": 845,
+    "path": "D:\\RR\\cleaned_data\\Cricket_Analytics_Matrices.xlsx",
+    "exists": true
+  }
+}

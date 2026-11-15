@@ -518,6 +518,18 @@ class _GroupBy:
                     vals = [_to_float(r.get(src_col)) for r in grp]
                     vals = [v for v in vals if not math.isnan(v)]
                     row_dict[out_col] = (sum(vals) / len(vals)) if vals else NAN
+                elif func == "first":
+                    vals = [r.get(src_col) for r in grp if not_na(r.get(src_col))]
+                    row_dict[out_col] = vals[0] if vals else NAN
+                elif func == "last":
+                    vals = [r.get(src_col) for r in grp if not_na(r.get(src_col))]
+                    row_dict[out_col] = vals[-1] if vals else NAN
+                elif func == "min":
+                    vals = [r.get(src_col) for r in grp if not_na(r.get(src_col))]
+                    row_dict[out_col] = min(vals) if vals else NAN
+                elif func == "max":
+                    vals = [r.get(src_col) for r in grp if not_na(r.get(src_col))]
+                    row_dict[out_col] = max(vals) if vals else NAN
                 elif callable(func):
                     row_dict[out_col] = func(Series([r.get(src_col) for r in grp]))
             out_rows.append(row_dict)
@@ -541,7 +553,9 @@ class _IlocIndexer:
     def __init__(self, df: DataFrame):
         self._df = df
 
-    def __getitem__(self, idx: int) -> Row:
+    def __getitem__(self, idx: int | slice) -> Any:
+        if isinstance(idx, slice):
+            return DataFrame([dict(r) for r in self._df._rows[idx]], columns=list(self._df._cols))
         return Row(self._df._rows[idx])
 
 
@@ -985,6 +999,7 @@ class _PlotlyExpressNamespace:
         color: str | None = None,
         markers: bool = False,
         color_discrete_sequence: list[str] | None = None,
+        color_discrete_map: dict[str, str] | None = None,
         custom_data: list[str] | None = None,
         labels: dict[str, str] | None = None,
     ) -> go.Figure:
@@ -992,19 +1007,21 @@ class _PlotlyExpressNamespace:
         fig = go.Figure()
         mode = "lines+markers" if markers else "lines"
         seq = color_discrete_sequence or ["#0f766e", "#d97706", "#2563eb", "#7c3aed"]
+        cmap = color_discrete_map or {}
 
         if color and color in df.columns:
             cats = df[color].unique()
             for idx, cat in enumerate(cats):
                 sub = df[df[color] == cat]
                 cdata = _extract_customdata(sub, custom_data)
+                line_c = cmap.get(cat, cmap.get(str(cat), seq[idx % len(seq)]))
                 fig.add_trace(
                     go.Scatter(
                         name=str(cat),
                         x=sub[x].tolist(),
                         y=sub[y].tolist(),
                         mode=mode,
-                        line=dict(color=seq[idx % len(seq)], width=3),
+                        line=dict(color=line_c, width=3),
                         customdata=cdata,
                     )
                 )
@@ -1159,19 +1176,32 @@ px = _PlotlyExpressNamespace()
 
 # Allow Plotly validators (go.Bar, go.Scatter, fig.add_bar, etc.) to accept Series and DataFrame directly
 try:
-    from _plotly_utils.basevalidators import DataArrayValidator
-
-    _orig_validate_coerce = DataArrayValidator.validate_coerce
+    from _plotly_utils.basevalidators import (
+        DataArrayValidator,
+        copy_to_readonly_numpy_array,
+        is_homogeneous_array,
+        is_none_or_typed_array_spec,
+        is_simple_array,
+        to_scalar_or_list,
+    )
 
     def _patched_validate_coerce(self, v):
-        if isinstance(v, Series):
+        if hasattr(v, "_data") and not isinstance(v, (list, tuple)):
             v = [None if (isinstance(x, float) and math.isnan(x)) else x for x in v._data]
-        elif isinstance(v, DataFrame):
+        elif hasattr(v, "_rows") and hasattr(v, "_cols"):
             v = [
-                [None if (isinstance( r.get(c), float) and math.isnan(r.get(c))) else r.get(c) for c in v._cols]
+                [None if (isinstance(r.get(c), float) and math.isnan(r.get(c))) else r.get(c) for c in v._cols]
                 for r in v._rows
             ]
-        return _orig_validate_coerce(self, v)
+        if is_none_or_typed_array_spec(v):
+            pass
+        elif is_homogeneous_array(v):
+            v = copy_to_readonly_numpy_array(v)
+        elif is_simple_array(v):
+            v = to_scalar_or_list(v)
+        else:
+            self.raise_invalid_val(v)
+        return v
 
     DataArrayValidator.validate_coerce = _patched_validate_coerce
 except Exception:
