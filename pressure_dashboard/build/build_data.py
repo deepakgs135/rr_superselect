@@ -34,7 +34,14 @@ DB_PATH = DB_DIR / "analytics.sqlite3"
 QUALITY_PATH = QUALITY_DIR / "quality.json"
 
 sys.path.insert(0, str(APP_DIR))
-from lib.states import bowling_pressure_state, pressure_state
+from lib.states import (
+    batter_dismissal,
+    bowler_runs_charged,
+    bowling_pressure_state,
+    faced_ball,
+    pressure_state,
+    team_runs_proxy,
+)
 
 LEGAL_TYPES = {"none", "byes", "legbyes"}
 ILLEGAL_TYPES = {"wide", "overstep"}
@@ -314,6 +321,7 @@ def create_schema(conn: sqlite3.Connection) -> None:
             runs INTEGER,
             extras2_runs INTEGER,
             total_runs_proxy INTEGER,
+            bowler_runs_proxy INTEGER,
             extras_type TEXT,
             legal INTEGER,
             unknown_legality INTEGER,
@@ -589,10 +597,12 @@ def build_source_player_records(conn: sqlite3.Connection) -> dict[str, int]:
                 continue
             match_id = as_int(row.get("match_id"), -1)
             kind = normalized_extra(row.get("extras_type"))
-            legal, _ = classify_legality(kind)
-            faced = int(kind not in ({"wide"} | UNKNOWN_TYPES))
+            legal, unknown = classify_legality(kind)
+            faced = faced_ball(kind)
             runs = as_int(row.get("runs"))
-            runs_proxy = runs + as_int(row.get("extras_2_runs"))
+            runs_proxy = bowler_runs_charged(
+                runs, as_int(row.get("extras_2_runs")), row.get("extras_type")
+            )
             is_wicket = as_bool(row.get("is_wicket"))
             dismissal = normalized_extra(row.get("dismissal_type"))
             credited_wicket = int(is_wicket and dismissal in CREDITED_DISMISSALS)
@@ -606,13 +616,15 @@ def build_source_player_records(conn: sqlite3.Connection) -> dict[str, int]:
                     item["source_names"].add(source_name)
                     player_names.setdefault(("batter", striker_id), set()).add(source_name)
                 item["source_rows"] += 1
-                item["runs"] += runs
-                item["balls"] += faced
-                item["fours"] += as_bool(row.get("is_four"))
-                item["sixes"] += as_bool(row.get("is_six"))
-                item["dismissals"] += int(
-                    is_wicket and as_int(row.get("dismissed_player_id"), -1) == striker_id
-                )
+                if not unknown:
+                    item["runs"] += runs
+                    item["balls"] += faced
+                    item["fours"] += as_bool(row.get("is_four"))
+                    item["sixes"] += as_bool(row.get("is_six"))
+                    item["dismissals"] += int(
+                        batter_dismissal(is_wicket, row.get("dismissal_type"))
+                        and as_int(row.get("dismissed_player_id"), -1) == striker_id
+                    )
 
             bowler_id = as_int(row.get("bowler_id"), -1)
             if bowler_id >= 0:
@@ -623,10 +635,11 @@ def build_source_player_records(conn: sqlite3.Connection) -> dict[str, int]:
                     item["source_names"].add(source_name)
                     player_names.setdefault(("bowler", bowler_id), set()).add(source_name)
                 item["source_rows"] += 1
-                item["runs_proxy"] += runs_proxy
-                item["legal_balls"] += legal
-                item["wicket_events"] += is_wicket
-                item["credited_wickets"] += credited_wicket
+                if not unknown:
+                    item["runs_proxy"] += runs_proxy
+                    item["legal_balls"] += legal
+                    item["wicket_events"] += is_wicket
+                    item["credited_wickets"] += credited_wicket
 
     conn.executemany(
         """INSERT INTO source_batter_records VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
@@ -691,12 +704,12 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
     delivery_insert = """INSERT INTO deliveries(
         match_id, innings, seq, over_no, over_ball_num, innings_ball_num, batting_team_id,
         striker_id, striker_name, non_striker_id, non_striker_name, bowler_id, bowler_name,
-        runs, extras2_runs, total_runs_proxy, extras_type, legal, unknown_legality, faced_ball,
+        runs, extras2_runs, total_runs_proxy, bowler_runs_proxy, extras_type, legal, unknown_legality, faced_ball,
         is_four, is_six, is_wicket, dismissal_type, dismissed_player_id, credited_wicket,
         team_dot, batter_dot, pace_or_spin, bowl_speed, score_before, target, target_source,
         scheduled_balls, schedule_source, balls_remaining, wickets_lost, rrr, state_known,
         pressure, current_rpo, bowling_pressure
-    ) VALUES (""" + ",".join("?" for _ in range(42)) + ")"
+    ) VALUES (""" + ",".join("?" for _ in range(43)) + ")"
     chase_targets: dict[int, int | None] = {}
     chase_target_sources: dict[int, str] = {}
     first_totals: dict[int, int] = {}
@@ -717,6 +730,7 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
         meta = metadata.get(match_id)
         if not meta:
             return
+        pressure_context = meta.get("match_format") == "T20" and innings == 2
         batting_id = as_int(items[0]["batting_team_id"], -1)
         if innings == 1:
             meta["batting_first_team_id"] = batting_id if batting_id >= 0 else None
@@ -730,7 +744,7 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
                 target_source = "matches.revised_target"
             elif first_total is not None:
                 target = first_total + 1
-                target_source = "first-innings raw run fields + 1"
+                target_source = "first-innings count-based raw score + 1"
             else:
                 target = None
                 target_source = "Unknown"
@@ -744,8 +758,12 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
             target = None
             target_source = ""
 
-        schedule = meta["scheduled_balls"] if innings == 2 else None
-        schedule_source = meta["schedule_source"] if innings == 2 else ""
+        schedule = (120 if meta.get("match_format") == "T20" else meta["scheduled_balls"]) if innings == 2 else None
+        schedule_source = (
+            "fixed 120-ball T20 chase rule"
+            if innings == 2 and meta.get("match_format") == "T20"
+            else meta["schedule_source"] if innings == 2 else ""
+        )
         if innings == 1:
             schedule = overs_to_balls("")
 
@@ -774,25 +792,38 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
             legal, unknown = classify_legality(extra)
             unknown_legality += unknown
             counts["unknown_legality_events"] += unknown
-            faced = int(normalized_extra(extra) not in {"wide"} | UNKNOWN_TYPES)
+            faced = faced_ball(extra)
             is_wicket = int(item["is_wicket"])
+            is_batter_dismissal = batter_dismissal(bool(is_wicket), item["dismissal_type"])
             credited = int(
                 is_wicket
                 and (item["dismissal_type"] or "").strip().casefold() in CREDITED_DISMISSALS
             )
-            total_proxy = int(item["runs"] or 0) + int(item["extras2_runs"] or 0)
+            total_proxy = team_runs_proxy(
+                int(item["runs"] or 0), int(item["extras2_runs"] or 0), extra
+            )
+            bowler_proxy = bowler_runs_charged(
+                int(item["runs"] or 0), int(item["extras2_runs"] or 0), item["extras_type"]
+            )
             batter_runs = int(item["runs"] or 0)
             score_before = score
             remaining: int | None = None
             rrr: float | None = None
             known = 0
+            if unknown:
+                # The row itself and all following chase states are unverifiable.
+                state_certain = False
             if innings == 2 and target is not None and schedule and state_certain:
                 remaining = max(int(schedule) - legal_elapsed, 0)
                 if remaining > 0:
-                    rrr = max(int(target) - score_before, 0) * 6.0 / remaining
+                    runs_needed = int(target) - score_before
+                    rrr = runs_needed * 6.0 / remaining
                     known = 1
                 else:
+                    runs_needed = int(target) - score_before
                     state_certain = False
+            else:
+                runs_needed = int(target) - score_before if innings == 2 and target is not None else None
             current_rpo = (
                 score_before * 6.0 / (int(schedule) - int(remaining))
                 if known == 1
@@ -801,9 +832,17 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
                 and int(schedule) > int(remaining)
                 else None
             )
-            pressure = pressure_state(rrr, remaining, wickets_lost, bool(known))
-            bowling_pressure = bowling_pressure_state(
-                current_rpo, rrr, remaining, wickets_lost, bool(known)
+            pressure = (
+                pressure_state(rrr, remaining, wickets_lost, bool(known), runs_needed)
+                if pressure_context
+                else 0
+            )
+            bowling_pressure = (
+                bowling_pressure_state(
+                    current_rpo, rrr, remaining, wickets_lost, bool(known), runs_needed
+                )
+                if pressure_context
+                else 0
             )
             if innings == 2:
                 if known:
@@ -824,7 +863,7 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
             team_dot = int(legal and total_proxy == 0)
             batter_dot = int(faced and batter_runs == 0)
             known_legal += legal
-            wicket_events += is_wicket
+            wicket_events += is_batter_dismissal
             credited_wickets += credited
             fours += int(item["is_four"])
             sixes += int(item["is_six"])
@@ -848,6 +887,7 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
                     batter_runs,
                     int(item["extras2_runs"] or 0),
                     total_proxy,
+                    bowler_proxy,
                     extra,
                     legal,
                     unknown,
@@ -879,7 +919,7 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
 
             # The state is pre-ball. Apply the event only after saving it.
             score += total_proxy
-            wickets_lost += is_wicket
+            wickets_lost += is_batter_dismissal
             if legal:
                 legal_elapsed += 1
             if unknown:
@@ -1116,15 +1156,17 @@ def validate_database(
             "extra_innings_delivery_rows_excluded_from_standard_views": extra_innings_rows,
         },
         "definitions": {
-            "pressure": "Pre-ball state in innings 2 with RRR >= 15, <= 30 known legal balls remaining, and >= 3 wickets lost.",
-            "target": "matches.revised_target when present; otherwise first-innings raw run fields (runs + extras_2_runs) + 1.",
-            "raw_team_runs_proxy": "runs + extras_2_runs; this is a source-field proxy and does not consistently reconcile to result margins.",
+            "pressure": "T20 second-innings pre-ball state with 1-30 balls remaining, at least 3 wickets down, required rate >= 15, and positive runs needed.",
+            "bowling_pressure": "T20 second-innings pre-ball state with 1-30 balls remaining, 2 or fewer wickets down, current rate >= 11, required rate >= 9, and positive runs needed.",
+            "target": "matches.revised_target when present; otherwise the first-innings sum of runs plus one each for wide, Overstep/no-ball, bye, and leg-bye rows, then +1.",
+            "raw_team_runs_proxy": "runs plus one per wide, Overstep/no-ball, bye, and leg-bye row. Byes and leg-byes are imputed as one run per row because this export records no run amount for those types. extras_2_runs is not used by this specified formula.",
+            "bowler_runs_proxy": "runs plus one per wide or Overstep/no-ball row; byes and leg-byes are not charged. extras_2_runs is not used by this specified formula.",
             "legal_ball_map": "None/byes/legbyes are known legal; wide/Overstep are known illegal; other/Penalty/blank/unmapped values have unknown legality.",
-            "unknown_state": "After an unknown-legality event, later chase legal-ball states are marked unknown because remaining balls cannot be reconstructed exactly.",
+            "unknown_state": "Unknown-legality events are excluded from ball counts; the event row and all later chase states in that innings are marked unknown.",
             "regular_innings_scope": "Player, venue, and chase analytics use innings 1 and 2. Extra innings are retained in deliveries and excluded from standard T20 views.",
             "bowler_credited_wickets": sorted(CREDITED_DISMISSALS),
             "balls_faced": "Delivery rows excluding wides and rows with unknown legality; Overstep/no-ball events count as faced.",
-            "sample_adjustments": "Display-only shrinkage uses 100 prior balls for batting strike rate, 3 prior dismissals for batting average, and 60 prior legal balls for bowling rates.",
+            "sample_adjustments": "Composite-score shrinkage uses 60 prior balls for batting strike rate, 3 prior dismissals for batting average, and 60 prior legal balls for bowling economy and wicket rate. Raw figures remain displayed alongside adjusted figures.",
         },
         "quality": {
             "extras_type_counts": dict(extras_counts),
@@ -1145,6 +1187,9 @@ def validate_database(
             ).fetchone()[0],
             "revised_target_matches": conn.execute(
                 "SELECT COUNT(*) FROM matches WHERE revised_target IS NOT NULL"
+            ).fetchone()[0],
+            "proxy_target_chases": conn.execute(
+                "SELECT COUNT(*) FROM innings_summary WHERE innings=2 AND target_source='first-innings raw-analysis score proxy + 1'"
             ).fetchone()[0],
         },
         "processing": processing,

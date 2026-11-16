@@ -1,0 +1,9 @@
+﻿check,raw,processed,status
+Raw delivery row count equals database,200999,200999,PASS
+Raw runs column sum equals database runs sum,269550,269550,PASS
+Known legal-ball count equals database legal count,192444,192444,PASS
+Independent pressure flags equal database flags,45385,45385,PASS
+State table totals equal independent raw recount,4,4,PASS
+Random player-state aggregates match raw recomputation,10,10,PASS
+Source run-margin reconciliation,182,43,SOURCE LIMITATION
+Unknown or multi-name IDs excluded,0,959,PASS

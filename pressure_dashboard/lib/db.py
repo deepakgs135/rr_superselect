@@ -26,9 +26,19 @@ def _ensure_bowling_columns() -> None:
         if "bowling_pressure" not in cols:
             conn.execute("ALTER TABLE deliveries ADD COLUMN bowling_pressure INTEGER DEFAULT 0")
             changed = True
+        if "bowler_runs_proxy" not in cols:
+            conn.execute("ALTER TABLE deliveries ADD COLUMN bowler_runs_proxy INTEGER")
+            changed = True
         if changed:
             conn.executescript(
                 """
+                UPDATE deliveries
+                SET bowler_runs_proxy = COALESCE(runs, 0) +
+                    CASE WHEN lower(COALESCE(extras_type, '')) IN ('wide', 'overstep')
+                         THEN COALESCE(extras2_runs, 0) + 1
+                         WHEN lower(COALESCE(extras_type, '')) IN ('byes', 'legbyes', 'other', 'penalty')
+                         THEN 0
+                         ELSE COALESCE(extras2_runs, 0) END;
                 UPDATE deliveries
                 SET current_rpo = CASE
                     WHEN state_known = 1 AND scheduled_balls IS NOT NULL AND balls_remaining IS NOT NULL AND scheduled_balls > balls_remaining
@@ -37,10 +47,28 @@ def _ensure_bowling_columns() -> None:
                 END;
                 UPDATE deliveries
                 SET bowling_pressure = CASE
-                    WHEN state_known = 1 AND wickets_lost <= 2 AND (
-                        (balls_remaining > 0 AND balls_remaining <= 30 AND rrr >= 9.0)
-                        OR (balls_remaining <= 108 AND current_rpo > 11.0)
-                    )
+                    WHEN state_known = 1
+                         AND innings = 2
+                         AND wickets_lost <= 2
+                         AND balls_remaining > 0 AND balls_remaining <= 30
+                         AND target > score_before
+                         AND current_rpo >= 11.0
+                         AND rrr >= 9.0
+                         AND EXISTS (
+                             SELECT 1 FROM matches m WHERE m.match_id=deliveries.match_id
+                             AND m.match_format='T20'
+                         )
+                    THEN 1 ELSE 0
+                END;
+                UPDATE deliveries
+                SET pressure = CASE
+                    WHEN state_known = 1 AND innings = 2
+                         AND balls_remaining > 0 AND balls_remaining <= 30
+                         AND rrr >= 15.0 AND wickets_lost >= 3
+                         AND EXISTS (
+                             SELECT 1 FROM matches m WHERE m.match_id=deliveries.match_id
+                             AND m.match_format='T20'
+                         )
                     THEN 1 ELSE 0
                 END;
                 DROP VIEW IF EXISTS chase_states;

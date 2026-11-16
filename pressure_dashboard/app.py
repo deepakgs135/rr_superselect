@@ -1,9 +1,18 @@
 from __future__ import annotations
 
+import importlib
+
 import streamlit as st
 
 from lib.db import database_ready
-from lib.queries import filter_options
+import lib.death_study as death_study
+import lib.queries as queries
+
+# Streamlit reruns this script but can keep imported modules in sys.modules.
+# Reload shared data modules so page imports pick up updated fields and helpers.
+death_study = importlib.reload(death_study)
+queries = importlib.reload(queries)
+filter_options = queries.filter_options
 
 st.set_page_config(
     page_title="Pressure Analytics",
@@ -84,12 +93,12 @@ with st.sidebar:
     )
     st.divider()
     st.caption(
-        "**Batting pressure:** pre-ball chase state with RRR ≥ 15, 30 or fewer known legal balls left, "
-        "and at least 3 wickets lost."
+        "**Batting pressure:** T20 chase; 1–30 legal balls remain, RRR ≥15, "
+        "and at least 3 wickets down."
     )
     st.caption(
-        "**Bowling pressure:** exactly 2 wickets lost in the final 30 known-legal balls, with current scoring rate ≥ 11 RPO "
-        "and required rate ≥ 9 RPO. Compare economy and dot share for containment, and credited wickets for quick-wicket threat."
+        "**Bowling pressure:** T20 chase; 2 or fewer wickets down in the final 30 known-legal balls, "
+        "current rate ≥11 RPO, and required rate ≥9 RPO. Economy and dot share measure containment; credited wickets show wicket threat."
     )
     st.caption("Venue labels use the supplied venue ID and country; no ground-name file was provided.")
     st.caption("All analytics run locally from the processed database.")
@@ -119,7 +128,7 @@ pages = {
     "Audit": [
         st.Page("app_pages/8_Reconciliation.py", title="Reconciliation", icon=":material/difference:"),
         st.Page("app_pages/9_Data_Quality.py", title="Data quality", icon=":material/fact_check:"),
-        st.Page("app_pages/10_Leaderboard_Audit.py", title="Leaderboard audit", icon=":material/verified:")
+        st.Page("app_pages/10_Leaderboard_Audit.py", title="Pressure data audit", icon=":material/verified:")
     ],
 }
 

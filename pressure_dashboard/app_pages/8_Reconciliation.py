@@ -5,7 +5,7 @@ import streamlit as st
 
 from lib.db import quality_report
 from lib.queries import reconciliation
-from lib.ui import ORDINARY, PRESSURE, chart, csv_download, markdown_table, page_header
+from lib.ui import ORDINARY, PRESSURE, SLATE, chart, csv_download, markdown_table, page_header
 
 filters = st.session_state.get("dashboard_filters", {})
 page_header(
@@ -64,7 +64,7 @@ if numeric_rows:
                 x=[0, maximum],
                 y=[0, maximum],
                 mode="lines",
-                line=dict(color="#94A3B8", dash="dash"),
+                line=dict(color=SLATE, dash="dash"),
                 name="Equal count",
                 hoverinfo="skip",
             )
@@ -75,10 +75,9 @@ if numeric_rows:
 summary = quality_report()
 definition = summary.get("definitions", {})
 st.warning(
-    "The app counts known-legal batting-pressure balls and stops reconstructing later RRR states after an "
-    "unknown-legality event. The workbook stores a delivery-count value without carrying the same state-confidence "
-    "flags, so equal numbers are useful checks while differences should be reviewed as a definition/reconstruction "
-    "difference rather than a source-file corruption signal.",
+    "The workbook's severe-pressure count uses its older RRR/wicket/final-30-ball definition. The app now uses the "
+    "confirmed all-venue T20 chase rules, plus revised targets, count-based extras imputation, and unknown-state "
+    "exclusion. These counts are therefore not a same-definition pass/fail check.",
     title="Read the comparison with the metric definitions",
     icon=":material/info:",
 )
@@ -119,10 +118,11 @@ with right:
     with st.container(border=True):
         st.markdown("**Current state rules**")
         st.markdown(
-            "- Pre-ball RRR uses remaining runs × 6 ÷ known legal balls remaining.\n"
-            "- Pressure requires RRR ≥ 15, ≤ 30 legal balls remaining, and ≥ 3 wickets lost.\n"
-            "- Targets use revised_target when supplied; otherwise first-innings raw fields + 1.\n"
-            "- After an unknown-legality event, later legal-ball states are marked unknown."
+            "- Pressure views use T20 second innings across venues.\n"
+            "- Batting requires 1–30 legal balls left, RRR ≥15, and ≥3 wickets down.\n"
+            "- Bowling requires 2 or fewer wickets down, ≤30 legal balls left, current rate ≥11, and required rate ≥9.\n"
+            "- Targets use revised_target when supplied; otherwise the first-innings raw-analysis team-score proxy + 1.\n"
+            "- A positive run target is required. After an unknown-legality event, later chase states remain unknown."
         )
         st.caption(
             "RRR bands: Low < 8 · Medium 8–12 · High > 12–15 · Extreme > 15. "
@@ -135,6 +135,14 @@ display = [
     for row in rows
     if row.get("pressure_count_status") == "Different"
 ]
+display.sort(
+    key=lambda row: (
+        abs(int(row.get("app_pressure_legal_balls") or 0) - int(row.get("workbook_pressure_count") or 0)),
+        str(row.get("match_date") or ""),
+        int(row.get("match_id") or 0),
+    ),
+    reverse=True,
+)
 markdown_table(
     display[:50],
     [
@@ -154,5 +162,5 @@ markdown_table(
     empty_message="No pressure-count differences in the selected cohort.",
 )
 if len(display) > 50:
-    st.caption(f"Showing the 50 largest recent rows of {len(display):,} differences.")
+    st.caption(f"Showing the 50 largest absolute count differences of {len(display):,} rows; ties show the most recent date and match ID first.")
 csv_download(rows, "Download reconciliation rows", "pressure_reconciliation.csv", "reconciliation_csv")

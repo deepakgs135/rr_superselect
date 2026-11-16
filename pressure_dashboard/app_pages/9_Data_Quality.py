@@ -44,7 +44,10 @@ cards[4].metric(
 
 st.error(
     f"Raw source run fields matched only {run_matches:,} of {run_total:,} match-result run margins. "
-    f"The dashboard therefore labels runs, targets derived from first innings, and economy as raw-field proxies.",
+    f"Only {int(quality.get('revised_target_matches') or 0):,} matches provide revised targets; "
+    f"{int(quality.get('proxy_target_chases') or 0):,} chases use a first-innings score proxy. "
+    "The raw extras fields do not contain enough information to recover every official total, so RRR and pressure "
+    "states based on proxy targets must be read as estimates.",
     title="Score totals are not official-score reconciliations",
     icon=":material/report:",
 )

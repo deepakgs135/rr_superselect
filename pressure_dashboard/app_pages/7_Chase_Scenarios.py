@@ -70,7 +70,8 @@ for index, band in enumerate(rrr_bands):
             rate = value.get("win_rate")
             z_row.append(float(rate) if n >= 20 and rate is not None else -100.0)
             text_row.append(f"{rate:.0f}% · {n}" if n >= 20 and rate is not None else (f"n={n}" if n else ""))
-            custom_row.append([n, wins, rate])
+            detail = f"Wins {wins}; win rate {float(rate):.1f}%" if n >= 20 and rate is not None else "Count only"
+            custom_row.append([n, wins if n >= 20 else None, rate if n >= 20 else None, detail])
         z.append(z_row)
         text.append(text_row)
         custom.append(custom_row)
@@ -90,8 +91,8 @@ for index, band in enumerate(rrr_bands):
             hovertemplate=(
                 "RRR band "
                 + band
-                + "<br>Wickets down %{y}<br>Balls remaining %{x}<br>Win rate %{customdata[2]:.1f}%"
-                + "<br>Chase matches %{customdata[0]}<br>Wins %{customdata[1]}<extra></extra>"
+                + "<br>Wickets down %{y}<br>Balls remaining %{x}<br>Decided chases %{customdata[0]}"
+                + "<br>%{customdata[3]}<extra></extra>"
             ),
             xgap=2,
             ygap=2,

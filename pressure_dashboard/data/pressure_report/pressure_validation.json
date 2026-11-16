@@ -1,0 +1,1301 @@
+{
+  "generated_at_utc": "2026-11-16T03:01:15+00:00",
+  "method": "Separate raw-CSV recount; does not import the dashboard pressure-state functions.",
+  "random_seed": 20261115,
+  "random_player_rows_requested": 10,
+  "random_player_rows_checked": 10,
+  "raw_totals": {
+    "delivery_rows": 200999,
+    "runs": 269550,
+    "legal_balls": 192444,
+    "unknown_legality_rows": 265
+  },
+  "database_totals": {
+    "delivery_rows": 200999,
+    "runs": 269550,
+    "known_legal_balls": 192444
+  },
+  "pressure_delivery_recount": [
+    {
+      "state": "Batting pressure",
+      "delivery_rows": 3229,
+      "matches": 175,
+      "decided_chases": 174,
+      "legal_balls": 2996,
+      "players": 232
+    },
+    {
+      "state": "Ordinary batting chase",
+      "delivery_rows": 39894,
+      "matches": 393,
+      "decided_chases": 390,
+      "legal_balls": 38297,
+      "players": 364
+    },
+    {
+      "state": "Bowling pressure",
+      "delivery_rows": 38,
+      "matches": 3,
+      "decided_chases": 3,
+      "legal_balls": 34,
+      "players": 5
+    },
+    {
+      "state": "Ordinary bowling chase",
+      "delivery_rows": 43085,
+      "matches": 393,
+      "decided_chases": 390,
+      "legal_balls": 41259,
+      "players": 311
+    }
+  ],
+  "state_count_mismatches": [],
+  "pressure_flag_rows_checked": 45385,
+  "pressure_flag_mismatches": 0,
+  "flag_mismatch_examples": [],
+  "random_player_row_checks": [
+    {
+      "player_id": 6281,
+      "role": "Batter",
+      "state": "Ordinary batting chase",
+      "status": "PASS",
+      "mismatches": {}
+    },
+    {
+      "player_id": 250,
+      "role": "Batter",
+      "state": "Ordinary batting chase",
+      "status": "PASS",
+      "mismatches": {}
+    },
+    {
+      "player_id": 25139,
+      "role": "Batter",
+      "state": "Batting pressure",
+      "status": "PASS",
+      "mismatches": {}
+    },
+    {
+      "player_id": 3298,
+      "role": "Batter",
+      "state": "Batting pressure",
+      "status": "PASS",
+      "mismatches": {}
+    },
+    {
+      "player_id": 6726,
+      "role": "Batter",
+      "state": "Ordinary batting chase",
+      "status": "PASS",
+      "mismatches": {}
+    },
+    {
+      "player_id": 3697,
+      "role": "Bowler",
+      "state": "Ordinary bowling chase",
+      "status": "PASS",
+      "mismatches": {}
+    },
+    {
+      "player_id": 19969,
+      "role": "Bowler",
+      "state": "Ordinary bowling chase",
+      "status": "PASS",
+      "mismatches": {}
+    },
+    {
+      "player_id": 4117,
+      "role": "Bowler",
+      "state": "Ordinary bowling chase",
+      "status": "PASS",
+      "mismatches": {}
+    },
+    {
+      "player_id": 2399,
+      "role": "Bowler",
+      "state": "Ordinary bowling chase",
+      "status": "PASS",
+      "mismatches": {}
+    },
+    {
+      "player_id": 1071,
+      "role": "Bowler",
+      "state": "Ordinary bowling chase",
+      "status": "PASS",
+      "mismatches": {}
+    }
+  ],
+  "source_run_margin_reconciliation": {
+    "checked_rows": 182,
+    "mismatched_rows": 139,
+    "unreproducible_rows": [
+      {
+        "match_id": 14098,
+        "reported_run_margin": 61,
+        "computed_margin": 65,
+        "first_innings_count_formula": 210,
+        "second_innings_count_formula": 145,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14102,
+        "reported_run_margin": 23,
+        "computed_margin": 21,
+        "first_innings_count_formula": 190,
+        "second_innings_count_formula": 169,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14103,
+        "reported_run_margin": 14,
+        "computed_margin": 18,
+        "first_innings_count_formula": 171,
+        "second_innings_count_formula": 153,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14105,
+        "reported_run_margin": 12,
+        "computed_margin": 13,
+        "first_innings_count_formula": 167,
+        "second_innings_count_formula": 154,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14112,
+        "reported_run_margin": 44,
+        "computed_margin": 38,
+        "first_innings_count_formula": 208,
+        "second_innings_count_formula": 170,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14115,
+        "reported_run_margin": 23,
+        "computed_margin": 21,
+        "first_innings_count_formula": 213,
+        "second_innings_count_formula": 192,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14116,
+        "reported_run_margin": 12,
+        "computed_margin": 8,
+        "first_innings_count_formula": 194,
+        "second_innings_count_formula": 186,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14117,
+        "reported_run_margin": 37,
+        "computed_margin": 36,
+        "first_innings_count_formula": 191,
+        "second_innings_count_formula": 155,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14119,
+        "reported_run_margin": 18,
+        "computed_margin": 24,
+        "first_innings_count_formula": 198,
+        "second_innings_count_formula": 174,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14120,
+        "reported_run_margin": 16,
+        "computed_margin": 14,
+        "first_innings_count_formula": 187,
+        "second_innings_count_formula": 173,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14123,
+        "reported_run_margin": 7,
+        "computed_margin": 3,
+        "first_innings_count_formula": 213,
+        "second_innings_count_formula": 210,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14124,
+        "reported_run_margin": 18,
+        "computed_margin": 21,
+        "first_innings_count_formula": 180,
+        "second_innings_count_formula": 159,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14127,
+        "reported_run_margin": 15,
+        "computed_margin": 21,
+        "first_innings_count_formula": 222,
+        "second_innings_count_formula": 201,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14128,
+        "reported_run_margin": 8,
+        "computed_margin": 9,
+        "first_innings_count_formula": 156,
+        "second_innings_count_formula": 147,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14131,
+        "reported_run_margin": 11,
+        "computed_margin": 14,
+        "first_innings_count_formula": 185,
+        "second_innings_count_formula": 171,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14135,
+        "reported_run_margin": 20,
+        "computed_margin": 17,
+        "first_innings_count_formula": 147,
+        "second_innings_count_formula": 130,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14139,
+        "reported_run_margin": 6,
+        "computed_margin": 2,
+        "first_innings_count_formula": 191,
+        "second_innings_count_formula": 189,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14140,
+        "reported_run_margin": 13,
+        "computed_margin": 12,
+        "first_innings_count_formula": 201,
+        "second_innings_count_formula": 189,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14145,
+        "reported_run_margin": 5,
+        "computed_margin": 4,
+        "first_innings_count_formula": 176,
+        "second_innings_count_formula": 172,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14148,
+        "reported_run_margin": 67,
+        "computed_margin": 66,
+        "first_innings_count_formula": 191,
+        "second_innings_count_formula": 125,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14149,
+        "reported_run_margin": 91,
+        "computed_margin": 90,
+        "first_innings_count_formula": 207,
+        "second_innings_count_formula": 117,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14150,
+        "reported_run_margin": 52,
+        "computed_margin": 51,
+        "first_innings_count_formula": 161,
+        "second_innings_count_formula": 110,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14157,
+        "reported_run_margin": 24,
+        "computed_margin": 28,
+        "first_innings_count_formula": 178,
+        "second_innings_count_formula": 150,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 14158,
+        "reported_run_margin": 17,
+        "computed_margin": 14,
+        "first_innings_count_formula": 156,
+        "second_innings_count_formula": 142,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 15188,
+        "reported_run_margin": 14,
+        "computed_margin": 17,
+        "first_innings_count_formula": 202,
+        "second_innings_count_formula": 185,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20182,
+        "reported_run_margin": 7,
+        "computed_margin": 44,
+        "first_innings_count_formula": 190,
+        "second_innings_count_formula": 146,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20183,
+        "reported_run_margin": 50,
+        "computed_margin": 55,
+        "first_innings_count_formula": 193,
+        "second_innings_count_formula": 138,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20184,
+        "reported_run_margin": 72,
+        "computed_margin": 70,
+        "first_innings_count_formula": 200,
+        "second_innings_count_formula": 130,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20186,
+        "reported_run_margin": 12,
+        "computed_margin": 6,
+        "first_innings_count_formula": 210,
+        "second_innings_count_formula": 204,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20189,
+        "reported_run_margin": 81,
+        "computed_margin": 73,
+        "first_innings_count_formula": 193,
+        "second_innings_count_formula": 120,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20197,
+        "reported_run_margin": 3,
+        "computed_margin": 0,
+        "first_innings_count_formula": 171,
+        "second_innings_count_formula": 171,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20199,
+        "reported_run_margin": 23,
+        "computed_margin": 20,
+        "first_innings_count_formula": 224,
+        "second_innings_count_formula": 204,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20200,
+        "reported_run_margin": 23,
+        "computed_margin": 21,
+        "first_innings_count_formula": 172,
+        "second_innings_count_formula": 151,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20204,
+        "reported_run_margin": 8,
+        "computed_margin": 9,
+        "first_innings_count_formula": 224,
+        "second_innings_count_formula": 215,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20205,
+        "reported_run_margin": 14,
+        "computed_margin": 19,
+        "first_innings_count_formula": 192,
+        "second_innings_count_formula": 173,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20206,
+        "reported_run_margin": 10,
+        "computed_margin": 14,
+        "first_innings_count_formula": 154,
+        "second_innings_count_formula": 140,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20207,
+        "reported_run_margin": 24,
+        "computed_margin": 20,
+        "first_innings_count_formula": 169,
+        "second_innings_count_formula": 149,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20212,
+        "reported_run_margin": 7,
+        "computed_margin": 3,
+        "first_innings_count_formula": 184,
+        "second_innings_count_formula": 181,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20213,
+        "reported_run_margin": 49,
+        "computed_margin": 48,
+        "first_innings_count_formula": 234,
+        "second_innings_count_formula": 186,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20214,
+        "reported_run_margin": 7,
+        "computed_margin": 6,
+        "first_innings_count_formula": 143,
+        "second_innings_count_formula": 137,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20215,
+        "reported_run_margin": 55,
+        "computed_margin": 58,
+        "first_innings_count_formula": 207,
+        "second_innings_count_formula": 149,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20216,
+        "reported_run_margin": 21,
+        "computed_margin": 22,
+        "first_innings_count_formula": 200,
+        "second_innings_count_formula": 178,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20217,
+        "reported_run_margin": 32,
+        "computed_margin": 29,
+        "first_innings_count_formula": 199,
+        "second_innings_count_formula": 170,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20218,
+        "reported_run_margin": 56,
+        "computed_margin": 53,
+        "first_innings_count_formula": 253,
+        "second_innings_count_formula": 200,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20220,
+        "reported_run_margin": 9,
+        "computed_margin": 8,
+        "first_innings_count_formula": 196,
+        "second_innings_count_formula": 188,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20223,
+        "reported_run_margin": 18,
+        "computed_margin": 19,
+        "first_innings_count_formula": 126,
+        "second_innings_count_formula": 107,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20224,
+        "reported_run_margin": 5,
+        "computed_margin": 6,
+        "first_innings_count_formula": 130,
+        "second_innings_count_formula": 124,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20227,
+        "reported_run_margin": 5,
+        "computed_margin": 6,
+        "first_innings_count_formula": 171,
+        "second_innings_count_formula": 165,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20231,
+        "reported_run_margin": 56,
+        "computed_margin": 55,
+        "first_innings_count_formula": 226,
+        "second_innings_count_formula": 171,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20235,
+        "reported_run_margin": 27,
+        "computed_margin": 30,
+        "first_innings_count_formula": 167,
+        "second_innings_count_formula": 137,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20237,
+        "reported_run_margin": 27,
+        "computed_margin": 28,
+        "first_innings_count_formula": 218,
+        "second_innings_count_formula": 190,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20239,
+        "reported_run_margin": 31,
+        "computed_margin": 27,
+        "first_innings_count_formula": 163,
+        "second_innings_count_formula": 136,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20240,
+        "reported_run_margin": 112,
+        "computed_margin": 111,
+        "first_innings_count_formula": 170,
+        "second_innings_count_formula": 59,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20242,
+        "reported_run_margin": 34,
+        "computed_margin": 33,
+        "first_innings_count_formula": 184,
+        "second_innings_count_formula": 151,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20243,
+        "reported_run_margin": 5,
+        "computed_margin": 10,
+        "first_innings_count_formula": 177,
+        "second_innings_count_formula": 167,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20244,
+        "reported_run_margin": 15,
+        "computed_margin": 17,
+        "first_innings_count_formula": 213,
+        "second_innings_count_formula": 196,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 20248,
+        "reported_run_margin": 1,
+        "computed_margin": -2,
+        "first_innings_count_formula": 172,
+        "second_innings_count_formula": 174,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 21583,
+        "reported_run_margin": 15,
+        "computed_margin": 14,
+        "first_innings_count_formula": 170,
+        "second_innings_count_formula": 156,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 21584,
+        "reported_run_margin": 81,
+        "computed_margin": 79,
+        "first_innings_count_formula": 176,
+        "second_innings_count_formula": 97,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 21585,
+        "reported_run_margin": 62,
+        "computed_margin": 60,
+        "first_innings_count_formula": 231,
+        "second_innings_count_formula": 171,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 30058,
+        "reported_run_margin": 4,
+        "computed_margin": 8,
+        "first_innings_count_formula": 208,
+        "second_innings_count_formula": 200,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 30059,
+        "reported_run_margin": 20,
+        "computed_margin": 28,
+        "first_innings_count_formula": 193,
+        "second_innings_count_formula": 165,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 30060,
+        "reported_run_margin": 6,
+        "computed_margin": 1,
+        "first_innings_count_formula": 163,
+        "second_innings_count_formula": 162,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 30062,
+        "reported_run_margin": 63,
+        "computed_margin": 64,
+        "first_innings_count_formula": 206,
+        "second_innings_count_formula": 142,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 30063,
+        "reported_run_margin": 31,
+        "computed_margin": 27,
+        "first_innings_count_formula": 269,
+        "second_innings_count_formula": 242,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 30068,
+        "reported_run_margin": 20,
+        "computed_margin": 19,
+        "first_innings_count_formula": 190,
+        "second_innings_count_formula": 171,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 30071,
+        "reported_run_margin": 106,
+        "computed_margin": 107,
+        "first_innings_count_formula": 266,
+        "second_innings_count_formula": 159,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 30075,
+        "reported_run_margin": 29,
+        "computed_margin": 23,
+        "first_innings_count_formula": 228,
+        "second_innings_count_formula": 205,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 30076,
+        "reported_run_margin": 33,
+        "computed_margin": 32,
+        "first_innings_count_formula": 160,
+        "second_innings_count_formula": 128,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31247,
+        "reported_run_margin": 20,
+        "computed_margin": 21,
+        "first_innings_count_formula": 206,
+        "second_innings_count_formula": 185,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31248,
+        "reported_run_margin": 25,
+        "computed_margin": 24,
+        "first_innings_count_formula": 286,
+        "second_innings_count_formula": 262,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31251,
+        "reported_run_margin": 9,
+        "computed_margin": 10,
+        "first_innings_count_formula": 189,
+        "second_innings_count_formula": 179,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31254,
+        "reported_run_margin": 1,
+        "computed_margin": -4,
+        "first_innings_count_formula": 217,
+        "second_innings_count_formula": 221,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31258,
+        "reported_run_margin": 4,
+        "computed_margin": 8,
+        "first_innings_count_formula": 224,
+        "second_innings_count_formula": 216,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31261,
+        "reported_run_margin": 10,
+        "computed_margin": 15,
+        "first_innings_count_formula": 257,
+        "second_innings_count_formula": 242,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31264,
+        "reported_run_margin": 78,
+        "computed_margin": 79,
+        "first_innings_count_formula": 212,
+        "second_innings_count_formula": 133,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31268,
+        "reported_run_margin": 1,
+        "computed_margin": 2,
+        "first_innings_count_formula": 201,
+        "second_innings_count_formula": 199,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31269,
+        "reported_run_margin": 24,
+        "computed_margin": 26,
+        "first_innings_count_formula": 168,
+        "second_innings_count_formula": 142,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31271,
+        "reported_run_margin": 28,
+        "computed_margin": 31,
+        "first_innings_count_formula": 167,
+        "second_innings_count_formula": 136,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31272,
+        "reported_run_margin": 98,
+        "computed_margin": 94,
+        "first_innings_count_formula": 231,
+        "second_innings_count_formula": 137,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31274,
+        "reported_run_margin": 20,
+        "computed_margin": 23,
+        "first_innings_count_formula": 221,
+        "second_innings_count_formula": 198,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31276,
+        "reported_run_margin": 60,
+        "computed_margin": 61,
+        "first_innings_count_formula": 241,
+        "second_innings_count_formula": 180,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31278,
+        "reported_run_margin": 18,
+        "computed_margin": 22,
+        "first_innings_count_formula": 157,
+        "second_innings_count_formula": 135,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31285,
+        "reported_run_margin": 18,
+        "computed_margin": 19,
+        "first_innings_count_formula": 213,
+        "second_innings_count_formula": 194,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 31286,
+        "reported_run_margin": 27,
+        "computed_margin": 36,
+        "first_innings_count_formula": 218,
+        "second_innings_count_formula": 182,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 37086,
+        "reported_run_margin": 11,
+        "computed_margin": 12,
+        "first_innings_count_formula": 164,
+        "second_innings_count_formula": 152,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 37088,
+        "reported_run_margin": 7,
+        "computed_margin": 12,
+        "first_innings_count_formula": 183,
+        "second_innings_count_formula": 171,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 37089,
+        "reported_run_margin": 42,
+        "computed_margin": 35,
+        "first_innings_count_formula": 171,
+        "second_innings_count_formula": 136,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 37091,
+        "reported_run_margin": 74,
+        "computed_margin": 71,
+        "first_innings_count_formula": 181,
+        "second_innings_count_formula": 110,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 37094,
+        "reported_run_margin": 19,
+        "computed_margin": 20,
+        "first_innings_count_formula": 161,
+        "second_innings_count_formula": 141,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 37098,
+        "reported_run_margin": 20,
+        "computed_margin": 21,
+        "first_innings_count_formula": 206,
+        "second_innings_count_formula": 185,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40695,
+        "reported_run_margin": 44,
+        "computed_margin": 42,
+        "first_innings_count_formula": 281,
+        "second_innings_count_formula": 239,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40698,
+        "reported_run_margin": 11,
+        "computed_margin": 8,
+        "first_innings_count_formula": 240,
+        "second_innings_count_formula": 232,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40702,
+        "reported_run_margin": 36,
+        "computed_margin": 32,
+        "first_innings_count_formula": 192,
+        "second_innings_count_formula": 160,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40704,
+        "reported_run_margin": 6,
+        "computed_margin": 5,
+        "first_innings_count_formula": 181,
+        "second_innings_count_formula": 176,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40708,
+        "reported_run_margin": 80,
+        "computed_margin": 78,
+        "first_innings_count_formula": 197,
+        "second_innings_count_formula": 119,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40709,
+        "reported_run_margin": 12,
+        "computed_margin": 15,
+        "first_innings_count_formula": 203,
+        "second_innings_count_formula": 188,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40710,
+        "reported_run_margin": 25,
+        "computed_margin": 30,
+        "first_innings_count_formula": 181,
+        "second_innings_count_formula": 151,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40711,
+        "reported_run_margin": 50,
+        "computed_margin": 49,
+        "first_innings_count_formula": 200,
+        "second_innings_count_formula": 151,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40712,
+        "reported_run_margin": 4,
+        "computed_margin": 7,
+        "first_innings_count_formula": 237,
+        "second_innings_count_formula": 230,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40716,
+        "reported_run_margin": 58,
+        "computed_margin": 56,
+        "first_innings_count_formula": 215,
+        "second_innings_count_formula": 159,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40722,
+        "reported_run_margin": 12,
+        "computed_margin": 16,
+        "first_innings_count_formula": 204,
+        "second_innings_count_formula": 188,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40724,
+        "reported_run_margin": 16,
+        "computed_margin": 19,
+        "first_innings_count_formula": 111,
+        "second_innings_count_formula": 92,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40732,
+        "reported_run_margin": 39,
+        "computed_margin": 40,
+        "first_innings_count_formula": 198,
+        "second_innings_count_formula": 158,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40735,
+        "reported_run_margin": 11,
+        "computed_margin": 8,
+        "first_innings_count_formula": 201,
+        "second_innings_count_formula": 193,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40741,
+        "reported_run_margin": 14,
+        "computed_margin": 17,
+        "first_innings_count_formula": 204,
+        "second_innings_count_formula": 187,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40743,
+        "reported_run_margin": 100,
+        "computed_margin": 109,
+        "first_innings_count_formula": 217,
+        "second_innings_count_formula": 108,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40745,
+        "reported_run_margin": 2,
+        "computed_margin": 3,
+        "first_innings_count_formula": 213,
+        "second_innings_count_formula": 210,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40747,
+        "reported_run_margin": 37,
+        "computed_margin": 39,
+        "first_innings_count_formula": 236,
+        "second_innings_count_formula": 197,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40753,
+        "reported_run_margin": 110,
+        "computed_margin": 102,
+        "first_innings_count_formula": 270,
+        "second_innings_count_formula": 168,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40757,
+        "reported_run_margin": 42,
+        "computed_margin": 49,
+        "first_innings_count_formula": 231,
+        "second_innings_count_formula": 182,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40758,
+        "reported_run_margin": 33,
+        "computed_margin": 32,
+        "first_innings_count_formula": 234,
+        "second_innings_count_formula": 202,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40759,
+        "reported_run_margin": 59,
+        "computed_margin": 60,
+        "first_innings_count_formula": 180,
+        "second_innings_count_formula": 120,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40760,
+        "reported_run_margin": 10,
+        "computed_margin": 11,
+        "first_innings_count_formula": 216,
+        "second_innings_count_formula": 205,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40762,
+        "reported_run_margin": 83,
+        "computed_margin": 84,
+        "first_innings_count_formula": 227,
+        "second_innings_count_formula": 143,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40765,
+        "reported_run_margin": 20,
+        "computed_margin": 16,
+        "first_innings_count_formula": 224,
+        "second_innings_count_formula": 208,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 40767,
+        "reported_run_margin": 6,
+        "computed_margin": 9,
+        "first_innings_count_formula": 190,
+        "second_innings_count_formula": 181,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 48015,
+        "reported_run_margin": 40,
+        "computed_margin": 39,
+        "first_innings_count_formula": 218,
+        "second_innings_count_formula": 179,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 48016,
+        "reported_run_margin": 148,
+        "computed_margin": 153,
+        "first_innings_count_formula": 297,
+        "second_innings_count_formula": 144,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 48026,
+        "reported_run_margin": 6,
+        "computed_margin": 8,
+        "first_innings_count_formula": 159,
+        "second_innings_count_formula": 151,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 48028,
+        "reported_run_margin": 5,
+        "computed_margin": 13,
+        "first_innings_count_formula": 153,
+        "second_innings_count_formula": 140,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50130,
+        "reported_run_margin": 65,
+        "computed_margin": 63,
+        "first_innings_count_formula": 223,
+        "second_innings_count_formula": 160,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50137,
+        "reported_run_margin": 27,
+        "computed_margin": 30,
+        "first_innings_count_formula": 150,
+        "second_innings_count_formula": 120,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50142,
+        "reported_run_margin": 23,
+        "computed_margin": 28,
+        "first_innings_count_formula": 212,
+        "second_innings_count_formula": 184,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50144,
+        "reported_run_margin": 18,
+        "computed_margin": 17,
+        "first_innings_count_formula": 239,
+        "second_innings_count_formula": 222,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50343,
+        "reported_run_margin": 32,
+        "computed_margin": 30,
+        "first_innings_count_formula": 190,
+        "second_innings_count_formula": 160,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50348,
+        "reported_run_margin": 10,
+        "computed_margin": 13,
+        "first_innings_count_formula": 191,
+        "second_innings_count_formula": 178,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50350,
+        "reported_run_margin": 54,
+        "computed_margin": 55,
+        "first_innings_count_formula": 254,
+        "second_innings_count_formula": 199,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50354,
+        "reported_run_margin": 103,
+        "computed_margin": 104,
+        "first_innings_count_formula": 207,
+        "second_innings_count_formula": 103,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50370,
+        "reported_run_margin": 33,
+        "computed_margin": 34,
+        "first_innings_count_formula": 235,
+        "second_innings_count_formula": 201,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50371,
+        "reported_run_margin": 9,
+        "computed_margin": 4,
+        "first_innings_count_formula": 206,
+        "second_innings_count_formula": 202,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50373,
+        "reported_run_margin": 77,
+        "computed_margin": 73,
+        "first_innings_count_formula": 225,
+        "second_innings_count_formula": 152,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50381,
+        "reported_run_margin": 29,
+        "computed_margin": 35,
+        "first_innings_count_formula": 246,
+        "second_innings_count_formula": 211,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50382,
+        "reported_run_margin": 23,
+        "computed_margin": 26,
+        "first_innings_count_formula": 222,
+        "second_innings_count_formula": 196,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50387,
+        "reported_run_margin": 89,
+        "computed_margin": 84,
+        "first_innings_count_formula": 224,
+        "second_innings_count_formula": 140,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50388,
+        "reported_run_margin": 55,
+        "computed_margin": 56,
+        "first_innings_count_formula": 254,
+        "second_innings_count_formula": 198,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50390,
+        "reported_run_margin": 30,
+        "computed_margin": 28,
+        "first_innings_count_formula": 202,
+        "second_innings_count_formula": 174,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50942,
+        "reported_run_margin": 92,
+        "computed_margin": 91,
+        "first_innings_count_formula": 253,
+        "second_innings_count_formula": 162,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      },
+      {
+        "match_id": 50943,
+        "reported_run_margin": 47,
+        "computed_margin": 50,
+        "first_innings_count_formula": 241,
+        "second_innings_count_formula": 191,
+        "status": "Not reproducible from the supplied count-based extras formula"
+      }
+    ]
+  },
+  "excluded_player_ids": {
+    "count": 0,
+    "ids": []
+  },
+  "validation_log": [
+    {
+      "check": "Raw delivery row count equals database",
+      "raw": 200999,
+      "processed": 200999,
+      "status": "PASS"
+    },
+    {
+      "check": "Raw runs column sum equals database runs sum",
+      "raw": 269550,
+      "processed": 269550,
+      "status": "PASS"
+    },
+    {
+      "check": "Known legal-ball count equals database legal count",
+      "raw": 192444,
+      "processed": 192444,
+      "status": "PASS"
+    },
+    {
+      "check": "Independent pressure flags equal database flags",
+      "raw": 45385,
+      "processed": 45385,
+      "status": "PASS"
+    },
+    {
+      "check": "State table totals equal independent raw recount",
+      "raw": 4,
+      "processed": 4,
+      "status": "PASS"
+    },
+    {
+      "check": "Random player-state aggregates match raw recomputation",
+      "raw": 10,
+      "processed": 10,
+      "status": "PASS"
+    },
+    {
+      "check": "Source run-margin reconciliation",
+      "raw": 182,
+      "processed": 43,
+      "status": "SOURCE LIMITATION"
+    },
+    {
+      "check": "Unknown or multi-name IDs excluded",
+      "raw": 0,
+      "processed": 959,
+      "status": "PASS"
+    }
+  ],
+  "overall_status": "PASS WITH SOURCE LIMITATIONS"
+}

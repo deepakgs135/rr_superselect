@@ -55,7 +55,9 @@ def build_innings_scorecard(
 
         bowler_id = remember_player(event.get("bowler_id"), event.get("bowler_name"))
         bowling[bowler_id]["legal_balls"] += int(event.get("legal") or 0)
-        bowling[bowler_id]["runs_proxy"] += team_runs
+        bowling[bowler_id]["runs_proxy"] += int(
+            event.get("bowler_runs_proxy") if event.get("bowler_runs_proxy") is not None else team_runs
+        )
         bowling[bowler_id]["credited_wickets"] += int(event.get("credited_wicket") or 0)
         bowling[bowler_id]["dot_balls"] += int(event.get("team_dot") or 0)
 
@@ -145,7 +147,7 @@ def build_innings_scorecard(
                 "source_name": names.get(player_id),
                 "overs": f"{values['legal_balls'] // 6}.{values['legal_balls'] % 6}",
                 "legal_balls": values["legal_balls"],
-                "team_runs_proxy": values["runs_proxy"],
+                "runs_charged_proxy": values["runs_proxy"],
                 "credited_wickets": values["credited_wickets"],
                 "economy_proxy": economy_rate(values["runs_proxy"], values["legal_balls"]),
                 "dot_balls": values["dot_balls"],

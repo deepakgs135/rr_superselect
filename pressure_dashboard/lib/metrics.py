@@ -11,6 +11,8 @@ def strike_rate(runs: float, balls_faced: float) -> float | None:
 
 
 def batting_average(runs: float, dismissals: float) -> float | None:
+    if dismissals < 3:
+        return None
     value = safe_div(runs, dismissals)
     return round(value, 2) if value is not None else None
 

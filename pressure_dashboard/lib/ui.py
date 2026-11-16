@@ -12,12 +12,12 @@ from .metrics import fmt, pct
 
 from html import escape
 
-PRESSURE = "#F07854"
-ORDINARY = "#0F766E"
-BLUE = "#4F7CAC"
-GOLD = "#D4A72C"
-PURPLE = "#805AD5"
-SLATE = "#64748B"
+PRESSURE = "#E76F51"
+ORDINARY = "#0D9488"
+BLUE = "#5387C5"
+GOLD = "#C98B12"
+PURPLE = "#7C5CE0"
+SLATE = "#718096"
 
 UI_CSS = """
 <style>
@@ -25,8 +25,8 @@ UI_CSS = """
     padding: 1.25rem 1.6rem;
     border-radius: 14px;
     margin-bottom: 1.1rem;
-    background: linear-gradient(135deg, #0f172a 0%, #115e59 100%);
-    border: 1px solid #0f766e;
+    background: linear-gradient(135deg, #111827 0%, #134E4A 100%);
+    border: 1px solid #0D9488;
     box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
 }
 .pd-hero h1, .pd-hero h1 * {
@@ -43,7 +43,8 @@ UI_CSS = """
     font-weight: 500 !important;
 }
 [data-testid="stMetric"] {
-    background: #ffffff;
+    background: var(--secondary-background-color);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 6px 8px;
 }
@@ -51,8 +52,8 @@ UI_CSS = """
     width: 100%;
     overflow-x: auto;
     border-radius: 10px;
-    border: 1px solid #cbd5e1;
-    background: #ffffff;
+    border: 1px solid var(--border-color);
+    background: var(--secondary-background-color);
     margin-bottom: 0.85rem;
     box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }
@@ -60,15 +61,15 @@ UI_CSS = """
     width: 100%;
     border-collapse: collapse;
     font-size: 0.88rem;
-    background: #ffffff;
+    background: var(--secondary-background-color);
 }
 .pd-tbl th {
     text-align: left;
-    background: #0f172a;
+    background: #111827;
     color: #ffffff !important;
     padding: 9px 12px;
     font-weight: 700;
-    border-bottom: 3px solid #0f766e;
+    border-bottom: 3px solid #0D9488;
     white-space: nowrap;
 }
 .pd-tbl th.num, .pd-tbl td.num {
@@ -78,12 +79,16 @@ UI_CSS = """
 }
 .pd-tbl td {
     padding: 8px 12px;
-    border-bottom: 1px solid #e2e8f0;
-    color: #0f172a !important;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color) !important;
     font-weight: 500;
 }
-.pd-tbl tr:nth-child(even) td {background: #f8fafc;}
-.pd-tbl tr:hover td {background: #f0fdfa;}
+.pd-tbl tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--secondary-background-color) 92%, var(--primary-color));
+}
+.pd-tbl tr:hover td {
+    background: color-mix(in srgb, var(--secondary-background-color) 84%, var(--primary-color));
+}
 </style>
 """
 
@@ -129,6 +134,7 @@ def markdown_table(
     columns: list[tuple[str, str] | tuple[str, str, Callable[[Any], str]]],
     *,
     empty_message: str = "No records match these filters.",
+    max_height: int | None = None,
 ) -> None:
     if not rows:
         st.info(empty_message)
@@ -156,8 +162,9 @@ def markdown_table(
             cls = " class='num'" if (is_num or key in num_keys) else ""
             tds.append(f"<td{cls}>{cell_html}</td>")
         body_rows.append("<tr>" + "".join(tds) + "</tr>")
+    wrap_style = f"max-height:{int(max_height)}px; overflow:auto;" if max_height else ""
     st.markdown(
-        f"<div class='pd-tbl-wrap'><table class='pd-tbl'><thead><tr>{head}</tr></thead>"
+        f"<div class='pd-tbl-wrap' style='{wrap_style}'><table class='pd-tbl'><thead><tr>{head}</tr></thead>"
         f"<tbody>{''.join(body_rows)}</tbody></table></div>",
         unsafe_allow_html=True,
     )

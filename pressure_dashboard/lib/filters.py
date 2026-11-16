@@ -39,7 +39,12 @@ def delivery_filter(
     pressure_column: str = "pressure",
 ) -> tuple[str, list[Any]]:
     where, params = match_filter(filters, match_alias)
-    clauses = [where]
+    clauses = [
+        where,
+        f"{delivery_alias}.innings IN (1,2)",
+        f"{delivery_alias}.unknown_legality=0",
+        f"({delivery_alias}.innings=1 OR {delivery_alias}.state_known=1)",
+    ]
     if apply_pressure_toggle and filters.get("pressure_only"):
         if pressure_column not in {"pressure", "bowling_pressure"}:
             raise ValueError("Unsupported pressure flag")

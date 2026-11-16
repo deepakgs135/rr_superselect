@@ -33,9 +33,11 @@ the offline build after changing a source CSV or the workbook.
 9. Data quality
 10. Leaderboard audit
 
-The sidebar applies format, season-range, and venue-country filters throughout.
-Trend charts group matches by calendar year from the match date, so split
-competition season labels such as `2022/23` do not appear as separate years.
+Most pages apply the sidebar's format, season-range, and venue-country filters.
+The dedicated pressure report uses all-venue T20 data, while the Indian-venue
+death-over study is shown separately. Trend charts group matches by calendar
+year from the match date, so split competition season labels such as `2022/23`
+do not appear as separate years.
 The minimum sample default is 30 balls. Pressure-only narrows batter profiles to
 batting-pressure deliveries and bowler profiles to bowling-pressure deliveries.
 Overview, match-list, and venue chase cohorts use batting pressure. The
@@ -44,22 +46,39 @@ states.
 
 ## Metric conventions
 
-- Batting pressure uses the pre-ball state in innings 2: required run rate at
-  least 15, no more than 30 known legal balls remaining, and at least three
-  wickets lost.
-- Bowling pressure uses the pre-ball chase state: exactly two wickets lost, no
-  more than 30 known legal balls remaining, current scoring rate at least 11
-  runs per over, and required run rate at least 9. Current scoring rate is
-  calculated from the raw-field score proxy and known legal balls faced.
-- A target uses matches.revised_target when present; otherwise it is first
-  innings runs + extras_2_runs plus one.
-- runs + extras_2_runs is shown as a raw-field proxy. It does not consistently
-  reconcile with the match-result run margin, so those values are not presented
-  as official scores.
-- None, byes, and legbyes are treated as legal. wide and Overstep are treated
-  as illegal. other, Penalty, blank, and any unrecognized labels have unknown
-  legality. After such an event, later chase states are marked unknown rather
-  than assuming the event used no legal ball.
+- Pressure analysis uses T20 second innings across venues. A delivery's state is
+  calculated before the ball and requires positive runs remaining. Batting
+  pressure is the final 30 legal balls, at least 3 wickets down, and required
+  run rate of at least 15. Bowling pressure is the final 30 legal balls, 2 or
+  fewer wickets down, current rate of at least 11, and required rate of at
+  least 9.
+- Player rankings require 30 state balls, a T20 appearance in 2026 at any
+  venue, and 10 known recent T20 chase innings. Bowling rankings also require
+  at least 3 credited wickets. A state needs 20 decided chases and a ranking
+  needs 10 eligible players; otherwise the dashboard shows counts or an
+  unranked review list.
+- Pressure-versus-ordinary comparisons require at least 30 balls in each state
+  and the same 2026 activity and latest-10-innings gates. Match-level
+  observations remain descriptive and are not player rankings.
+- Batting composite weights are 50% adjusted strike rate, 30% adjusted average,
+  and 20% boundary share. Bowling weights are 40% adjusted economy, 40%
+  adjusted credited-wicket rate, and 20% dot share. Adjusted values use priors
+  of 60 balls for strike rate/economy/wicket rate and 3 dismissals for average.
+  Raw values and sample counts remain visible; batting average is not reported
+  below 3 dismissals.
+- A target uses `matches.revised_target` when present; otherwise it is the
+  first-innings total plus one. Per the requested raw-data rule, each wide,
+  no-ball, bye, or leg-bye row adds one team run. Bye/leg-bye amounts are
+  imputed because the export does not supply them. Bowler runs add one per
+  wide/no-ball and exclude byes/leg-byes.
+- None, byes, and legbyes are legal; wide and Overstep are illegal. `other`,
+  `Penalty`, blank, and unrecognized extras types have unknown legality. The
+  unknown row and all later chase states are excluded. Only innings 1 and 2
+  are used. Retire-outs, retired hurt, and obstruction cases do not count as
+  batter dismissals. Unknown or multi-name player IDs are excluded.
+- The count-based score formula does not reproduce every result margin in the
+  source. Those exceptions are logged; figures are not adjusted to force a
+  match.
 - The source contains venue IDs and countries but no venue-name lookup. The UI
   does not invent ground names.
 - Match analytics includes cumulative raw score proxy by over for both innings,

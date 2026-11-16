@@ -8,7 +8,7 @@ import streamlit as st
 from lib.metrics import economy_rate, strike_rate, wicket_rate
 from lib.queries import chase_events, match_deliveries, match_innings, match_list
 from lib.scorecards import build_innings_scorecard
-from lib.ui import BLUE, GOLD, ORDINARY, PRESSURE, chart, csv_download, fmt_or_na, markdown_table, page_header, pct
+from lib.ui import BLUE, GOLD, ORDINARY, PRESSURE, SLATE, chart, csv_download, fmt_or_na, markdown_table, page_header, pct
 
 filters = st.session_state.get("dashboard_filters", {})
 page_header(
@@ -124,7 +124,7 @@ else:
         f"Schedule: {chase.get('scheduled_balls') or 'Unknown'} balls "
         f"({chase.get('schedule_source') or 'Unknown'}) · "
         f"{int(chase.get('unknown_legality_events') or 0)} unknown-legality events. "
-        "Scores use the raw runs + extras_2_runs proxy."
+        "Scores use the established raw-analysis team-score proxy."
     )
 
     over_rows: dict[int, dict[int, dict[str, int]]] = defaultdict(
@@ -265,14 +265,14 @@ else:
         fmt_or_na(max(pressure_peak_rrr_values), 2) if pressure_peak_rrr_values else "N/A",
     )
     st.caption(
-        "Batting pressure is measured before the ball: required run rate ≥ 15, "
-        "30 or fewer known legal balls remaining, and at least 3 wickets lost."
+        "Batting pressure is measured before the ball in T20 chases at any venue: 1–30 legal balls remaining, "
+        "required run rate ≥15, at least 3 wickets down, and runs still needed."
     )
 
     bowling_pressure_rows = [row for row in chase_log if row.get("bowling_pressure")]
     bowling_pressure_legal = sum(int(row.get("legal") or 0) for row in bowling_pressure_rows)
     bowling_pressure_runs = sum(
-        int(row.get("total_runs_proxy") or 0) for row in bowling_pressure_rows
+        int(row.get("bowler_runs_proxy") or 0) for row in bowling_pressure_rows
     )
     bowling_pressure_wickets = sum(
         int(row.get("credited_wicket") or 0) for row in bowling_pressure_rows
@@ -283,22 +283,28 @@ else:
         if row.get("current_rpo") is not None
     ]
     st.subheader("Bowling-pressure status")
-    if bowling_pressure_legal:
+    pressure_context = chase.get("match_format") == "T20"
+    if not pressure_context:
+        st.info(
+            "This match is outside the pressure study cohort. Pressure is evaluated only for T20 chases.",
+            title="Pressure rules not applied to this match",
+        )
+    elif bowling_pressure_legal:
         st.success(
-            f"Reached in {bowling_pressure_legal} legal ball(s): exactly 2 wickets down, "
-            "30 or fewer legal balls left, current scoring rate ≥11 RPO, and required rate ≥9 RPO.",
+            f"Reached in {bowling_pressure_legal} legal ball(s): 2 or fewer wickets down, "
+            "30 or fewer legal balls left, current scoring rate ≥11 RPO, required rate ≥9 RPO, and runs still needed.",
             title="Bowling pressure reached",
         )
     else:
         st.info(
-            "This chase did not reach the defined bowling-pressure state: exactly 2 wickets down, "
-            "30 or fewer legal balls left, current scoring rate ≥11 RPO, and required rate ≥9 RPO.",
+            "This chase did not reach the defined bowling-pressure state: 2 or fewer wickets down, "
+            "30 or fewer legal balls left, current scoring rate ≥11 RPO, required rate ≥9 RPO, and runs still needed.",
             title="Bowling pressure not reached",
         )
     bowling_pressure_metrics = st.columns(4, border=True)
     bowling_pressure_metrics[0].metric("Qualifying legal balls", f"{bowling_pressure_legal:,}")
     bowling_pressure_metrics[1].metric(
-        "Runs conceded / over (proxy)",
+        "Bowler-charged economy proxy",
         fmt_or_na(economy_rate(bowling_pressure_runs, bowling_pressure_legal)),
     )
     bowling_pressure_metrics[2].metric("Credited wickets", f"{bowling_pressure_wickets:,}")
@@ -312,6 +318,7 @@ else:
             f"{max(bowling_pressure_current_rates):.2f} RPO. Economy and rate values use the supplied raw score fields."
         )
     st.caption(
+        "These are match-level observations with the qualifying-ball sample shown above, not a ranked player comparison. "
         "Bowling plan signal: use the containment table to identify low-economy, dot-ball options and the quick-wicket "
         "table to find bowlers with credited dismissals in this exact type of chase. These are historical dataset rates, "
         "so compare the qualifying-ball counts before ranking players."
@@ -319,8 +326,10 @@ else:
 
     st.subheader("Innings scorecards")
     st.caption(
-        "Batter runs and balls come from the raw delivery rows. Team totals and bowling run totals use "
-        "the supplied runs + extras_2_runs proxy. Fielder names are not present in the source."
+        "Batter runs and balls come from the raw delivery rows. Team totals use the established raw-analysis proxy "
+        "(runs + extras_2_runs, plus one for extra-type rows and five for penalties). Bowling economy adds one run "
+        "for each wide/no-ball; the source omits many extra-run amounts. "
+        "Fielder names are not present in the source."
     )
     scorecards = [
         (
@@ -383,7 +392,7 @@ else:
                     ("bowler", "Bowler"),
                     ("overs", "O"),
                     ("legal_balls", "Legal balls"),
-                    ("team_runs_proxy", "Team runs proxy"),
+                    ("runs_charged_proxy", "Runs charged to bowler*"),
                     ("credited_wickets", "Wkts"),
                     ("economy_proxy", "Eco. proxy"),
                     ("dot_balls", "Dots"),
@@ -542,7 +551,7 @@ else:
                 y=[0, maximum],
                 mode="lines",
                 name="Target line",
-                line=dict(color="#94A3B8", dash="dash"),
+                line=dict(color=SLATE, dash="dash"),
                 hoverinfo="skip",
             )
         )

@@ -14,6 +14,7 @@ from .player_names import (
     display_player_aggregate_rows,
     player_display_name,
 )
+from .death_study import bowling_pressure_summary, india_death_bowler_study
 
 
 def filter_options() -> dict[str, Any]:
@@ -50,7 +51,9 @@ def overview(filters: dict[str, Any]) -> dict[str, Any]:
                SUM(CASE WHEN s.pressure_legal_balls > 0 THEN 1 ELSE 0 END) AS pressure_chases,
                SUM(CASE WHEN s.pressure_legal_balls > 0 AND s.chase_success=1 THEN 1 ELSE 0 END) AS pressure_chase_wins,
                SUM(CASE WHEN s.pressure_legal_balls > 0 AND s.chase_success IS NOT NULL THEN 1 ELSE 0 END) AS decided_pressure_chases,
+               COUNT(DISTINCT CASE WHEN m.match_format='T20' THEN m.match_id END) AS t20_matches,
                SUM(s.known_legal_balls) AS chase_legal_balls,
+               SUM(CASE WHEN m.match_format='T20' THEN s.known_legal_balls ELSE 0 END) AS pressure_cohort_chase_legal_balls,
                SUM(s.pressure_legal_balls) AS pressure_legal_balls,
                SUM(s.pressure_raw_runs_proxy) AS pressure_raw_runs_proxy,
                SUM(s.pressure_wicket_events) AS pressure_wicket_events,
@@ -73,6 +76,8 @@ def overview_by_year(filters: dict[str, Any]) -> list[dict[str, Any]]:
                SUM(CASE WHEN s.pressure_legal_balls > 0 THEN 1 ELSE 0 END) AS pressure_chases,
                SUM(s.pressure_legal_balls) AS pressure_legal_balls,
                SUM(s.known_legal_balls) AS chase_legal_balls,
+               SUM(CASE WHEN m.match_format='T20' THEN s.known_legal_balls ELSE 0 END) AS pressure_cohort_chase_legal_balls,
+               COUNT(DISTINCT CASE WHEN m.match_format='T20' THEN m.match_id END) AS t20_matches,
                SUM(CASE WHEN s.pressure_legal_balls > 0 AND s.chase_success=1 THEN 1 ELSE 0 END) AS pressure_wins,
                SUM(CASE WHEN s.pressure_legal_balls > 0 AND s.chase_success IS NOT NULL THEN 1 ELSE 0 END) AS decided_pressure_chases
         FROM innings_summary s JOIN matches m ON m.match_id=s.match_id
@@ -90,7 +95,12 @@ def state_comparison(
     venue_id: str | None = None,
 ) -> list[dict[str, Any]]:
     where, params = match_filter(filters, "m")
-    pressure_field = "cs.pressure" if role == "batter" else "cs.bowling_pressure"
+    pressure_field = (
+        "CASE WHEN cs.pressure=1 THEN 1 ELSE 0 END"
+        if role == "batter"
+        else "CASE WHEN cs.bowling_pressure=1 THEN 1 ELSE 0 END"
+    )
+    where += " AND m.match_format='T20'"
     if venue_id is not None:
         where += " AND m.venue_id = ?"
         params.append(venue_id)
@@ -106,11 +116,18 @@ def state_comparison(
                    SUM(cs.is_four) AS fours,
                    SUM(cs.is_six) AS sixes,
                    SUM(cs.batter_dot) AS dots,
-                   SUM(CASE WHEN cs.is_wicket=1 AND cs.dismissed_player_id=cs.striker_id THEN 1 ELSE 0 END) AS dismissals,
+                   SUM(CASE WHEN cs.is_wicket=1 AND cs.dismissed_player_id=cs.striker_id
+                                  AND lower(trim(coalesce(cs.dismissal_type,''))) NOT IN
+                                      ('retire out','retired out','retire hurt','retired hurt','obstracting the field','obstructing the field')
+                            THEN 1 ELSE 0 END) AS dismissals,
                    COUNT(DISTINCT cs.match_id) AS matches
             FROM chase_states cs JOIN matches m ON m.match_id=cs.match_id
-            WHERE {where} AND cs.state_known=1 AND cs.striker_id>=0
-            GROUP BY cs.striker_id, cs.pressure
+            WHERE {where} AND cs.state_known=1 AND cs.unknown_legality=0 AND cs.innings=2
+              AND cs.balls_remaining>0 AND cs.target-cs.score_before>0 AND cs.striker_id>0
+              AND lower(trim(coalesce(cs.striker_name,''))) NOT IN ('','unknown','unknown player','unknown batter','unknown bowler')
+              AND (SELECT COUNT(DISTINCT n.source_name) FROM source_player_names n
+                   WHERE n.role='batter' AND n.player_id=cs.striker_id)=1
+            GROUP BY cs.striker_id, {pressure_field}
             HAVING SUM(cs.faced_ball)>0
             ORDER BY player
             """,
@@ -121,17 +138,21 @@ def state_comparison(
         f"""
         SELECT cs.bowler_id AS player_id, MAX(cs.bowler_name) AS player,
                {pressure_field} AS pressure,
-               SUM(cs.total_runs_proxy) AS runs_proxy,
+               SUM(cs.bowler_runs_proxy) AS runs_proxy,
                SUM(cs.legal) AS legal_balls,
                SUM(cs.unknown_legality) AS unknown_legality,
                SUM(cs.credited_wicket) AS credited_wickets,
-               SUM(CASE WHEN cs.legal=1 AND cs.team_dot=1 THEN 1 ELSE 0 END) AS dots,
+               SUM(CASE WHEN cs.legal=1 AND cs.bowler_runs_proxy=0 THEN 1 ELSE 0 END) AS dots,
                SUM(cs.is_four + cs.is_six) AS boundary_events,
                SUM(CASE WHEN lower(cs.extras_type)='wide' THEN 1 ELSE 0 END) AS wides,
                SUM(CASE WHEN lower(cs.extras_type)='overstep' THEN 1 ELSE 0 END) AS no_balls,
                COUNT(DISTINCT cs.match_id) AS matches
         FROM chase_states cs JOIN matches m ON m.match_id=cs.match_id
-        WHERE {where} AND cs.state_known=1 AND cs.bowler_id>=0
+        WHERE {where} AND cs.state_known=1 AND cs.unknown_legality=0 AND cs.innings=2
+          AND cs.balls_remaining>0 AND cs.target-cs.score_before>0 AND cs.bowler_id>0
+          AND lower(trim(coalesce(cs.bowler_name,''))) NOT IN ('','unknown','unknown player','unknown batter','unknown bowler')
+          AND (SELECT COUNT(DISTINCT n.source_name) FROM source_player_names n
+               WHERE n.role='bowler' AND n.player_id=cs.bowler_id)=1
         GROUP BY cs.bowler_id, {pressure_field}
         HAVING SUM(cs.legal)>0
         ORDER BY player
@@ -151,7 +172,7 @@ def match_filter_params(filters: dict[str, Any]) -> list[Any]:
 
 def batter_stats(filters: dict[str, Any], venue_id: str | None = None) -> list[dict[str, Any]]:
     where, params = delivery_filter(filters, "d", "m")
-    clauses = [where, "d.innings IN (1,2)", "d.striker_id>=0"]
+    clauses = [where, "d.innings IN (1,2)", "d.striker_id>0"]
     if venue_id is not None:
         clauses.append("m.venue_id=?")
         params.append(venue_id)
@@ -162,7 +183,10 @@ def batter_stats(filters: dict[str, Any], venue_id: str | None = None) -> list[d
                COUNT(DISTINCT CAST(d.match_id AS TEXT) || ':' || CAST(d.innings AS TEXT)) AS innings,
                SUM(d.runs) AS runs,
                SUM(d.faced_ball) AS balls,
-               SUM(CASE WHEN d.is_wicket=1 AND d.dismissed_player_id=d.striker_id THEN 1 ELSE 0 END) AS dismissals,
+               SUM(CASE WHEN d.is_wicket=1 AND d.dismissed_player_id=d.striker_id
+                              AND lower(trim(coalesce(d.dismissal_type,''))) NOT IN
+                                  ('retire out','retired out','retire hurt','retired hurt','obstracting the field','obstructing the field')
+                        THEN 1 ELSE 0 END) AS dismissals,
                SUM(d.is_four) AS fours,
                SUM(d.is_six) AS sixes,
                SUM(d.batter_dot) AS dots,
@@ -174,7 +198,8 @@ def batter_stats(filters: dict[str, Any], venue_id: str | None = None) -> list[d
                SUM(CASE WHEN d.over_no BETWEEN 16 AND 20 THEN d.faced_ball ELSE 0 END) AS death_balls,
                SUM(CASE WHEN d.pressure=1 THEN d.runs ELSE 0 END) AS pressure_runs,
                SUM(CASE WHEN d.pressure=1 THEN d.faced_ball ELSE 0 END) AS pressure_balls,
-               SUM(CASE WHEN d.pressure=1 THEN d.is_wicket ELSE 0 END) AS pressure_wicket_events
+               SUM(CASE WHEN d.pressure=1 AND d.is_wicket=1 AND d.dismissed_player_id=d.striker_id THEN 1 ELSE 0 END) AS pressure_dismissals,
+               COUNT(DISTINCT CASE WHEN d.pressure=1 THEN d.match_id END) AS pressure_matches
         FROM deliveries d JOIN matches m ON m.match_id=d.match_id
         WHERE {' AND '.join(f'({c})' for c in clauses)}
         GROUP BY d.striker_id
@@ -242,7 +267,7 @@ def bowler_stats(filters: dict[str, Any], venue_id: str | None = None) -> list[d
     where, params = delivery_filter(
         filters, "d", "m", pressure_column="bowling_pressure"
     )
-    clauses = [where, "d.innings IN (1,2)", "d.bowler_id>=0"]
+    clauses = [where, "d.innings IN (1,2)", "d.bowler_id>0"]
     if venue_id is not None:
         clauses.append("m.venue_id=?")
         params.append(venue_id)
@@ -254,29 +279,26 @@ def bowler_stats(filters: dict[str, Any], venue_id: str | None = None) -> list[d
                COUNT(*) AS event_rows,
                SUM(d.legal) AS legal_balls,
                SUM(d.unknown_legality) AS unknown_legality,
-               SUM(d.total_runs_proxy) AS runs_proxy,
+               SUM(d.bowler_runs_proxy) AS runs_proxy,
                SUM(d.is_wicket) AS wicket_events,
                SUM(d.credited_wicket) AS credited_wickets,
-               SUM(d.team_dot) AS dots,
+               SUM(CASE WHEN d.legal=1 AND d.bowler_runs_proxy=0 THEN 1 ELSE 0 END) AS dots,
                SUM(d.is_four + d.is_six) AS boundary_events,
                SUM(CASE WHEN lower(d.extras_type)='wide' THEN 1 ELSE 0 END) AS wides,
                SUM(CASE WHEN lower(d.extras_type)='overstep' THEN 1 ELSE 0 END) AS no_balls,
                SUM(CASE WHEN d.pace_or_spin='Pace' THEN 1 ELSE 0 END) AS pace_events,
                SUM(CASE WHEN d.pace_or_spin='Spin' THEN 1 ELSE 0 END) AS spin_events,
-               SUM(CASE WHEN d.bowling_pressure=1 THEN d.total_runs_proxy ELSE 0 END) AS pressure_runs_proxy,
+               SUM(CASE WHEN d.bowling_pressure=1 THEN d.bowler_runs_proxy ELSE 0 END) AS pressure_runs_proxy,
                SUM(CASE WHEN d.bowling_pressure=1 THEN d.legal ELSE 0 END) AS pressure_legal_balls,
                SUM(CASE WHEN d.bowling_pressure=1 THEN d.credited_wicket ELSE 0 END) AS pressure_credited_wickets,
-               SUM(CASE WHEN d.bowling_pressure=1 AND d.legal=1 AND d.team_dot=1 THEN 1 ELSE 0 END) AS pressure_dots,
-               COUNT(DISTINCT CASE WHEN lower(m.venue_country)='india' THEN CAST(d.match_id AS TEXT) || ':' || CAST(d.innings AS TEXT) END) AS india_innings,
-               SUM(CASE WHEN lower(m.venue_country)='india' THEN d.legal ELSE 0 END) AS india_legal_balls,
-               SUM(CASE WHEN lower(m.venue_country)='india' THEN d.total_runs_proxy ELSE 0 END) AS india_runs_proxy,
-               SUM(CASE WHEN lower(m.venue_country)='india' THEN d.credited_wicket ELSE 0 END) AS india_credited_wickets,
-               SUM(CASE WHEN lower(m.venue_country)='india' AND d.bowling_pressure=1 THEN d.legal ELSE 0 END) AS india_pressure_legal_balls,
-               SUM(CASE WHEN lower(m.venue_country)='india' AND d.bowling_pressure=1 THEN d.total_runs_proxy ELSE 0 END) AS india_pressure_runs_proxy,
-               SUM(CASE WHEN lower(m.venue_country)='india' AND d.bowling_pressure=1 THEN d.credited_wicket ELSE 0 END) AS india_pressure_credited_wickets,
-               SUM(CASE WHEN lower(m.venue_country)='india' AND d.bowling_pressure=1 AND d.legal=1 AND d.team_dot=1 THEN 1 ELSE 0 END) AS india_pressure_dots,
-               SUM(CASE WHEN d.bowling_pressure=0 AND d.state_known=1 AND d.innings=2 THEN d.total_runs_proxy ELSE 0 END) AS ordinary_chase_runs_proxy,
-               SUM(CASE WHEN d.bowling_pressure=0 AND d.state_known=1 AND d.innings=2 THEN d.legal ELSE 0 END) AS ordinary_chase_legal_balls
+               SUM(CASE WHEN d.bowling_pressure=1 AND d.legal=1 AND d.bowler_runs_proxy=0 THEN 1 ELSE 0 END) AS pressure_dots,
+               COUNT(DISTINCT CASE WHEN d.bowling_pressure=1 THEN d.match_id END) AS pressure_matches,
+               SUM(CASE WHEN d.bowling_pressure=0 AND d.state_known=1 AND d.innings=2
+                          AND d.balls_remaining>0 AND d.target-d.score_before>0
+                        THEN d.bowler_runs_proxy ELSE 0 END) AS ordinary_chase_runs_proxy,
+               SUM(CASE WHEN d.bowling_pressure=0 AND d.state_known=1 AND d.innings=2
+                          AND d.balls_remaining>0 AND d.target-d.score_before>0
+                        THEN d.legal ELSE 0 END) AS ordinary_chase_legal_balls
         FROM deliveries d JOIN matches m ON m.match_id=d.match_id
         WHERE {' AND '.join(f'({c})' for c in clauses)}
         GROUP BY d.bowler_id
@@ -393,7 +415,8 @@ def chase_events(match_id: int) -> list[dict[str, Any]]:
                   score_before, target,
                   CASE WHEN target IS NULL THEN NULL ELSE MAX(target-score_before, 0) END AS runs_required,
                   balls_remaining, wickets_lost, rrr, current_rpo,
-                  state_known, pressure, bowling_pressure, runs, extras2_runs, total_runs_proxy, extras_type,
+                  state_known, pressure, bowling_pressure, runs, extras2_runs,
+                  total_runs_proxy, bowler_runs_proxy, extras_type,
                   legal, unknown_legality, is_wicket, credited_wicket, dismissal_type, match_id
            FROM chase_states WHERE match_id=? ORDER BY seq""",
         (match_id,),
@@ -421,16 +444,24 @@ def venue_state_aggregates(filters: dict[str, Any]) -> list[dict[str, Any]]:
     return query(
         f"""
         SELECT m.venue_id, m.venue_country, m.match_format,
+               COUNT(DISTINCT CASE WHEN cs.pressure=1 THEN cs.match_id END) AS batting_pressure_matches,
+               COUNT(DISTINCT CASE WHEN cs.pressure=1 AND m.chase_success IS NOT NULL THEN cs.match_id END) AS batting_pressure_decided_chases,
+               COUNT(DISTINCT CASE WHEN cs.pressure=1 AND m.chase_success=1 THEN cs.match_id END) AS batting_pressure_wins,
+               COUNT(DISTINCT CASE WHEN cs.pressure=0 AND m.chase_success IS NOT NULL THEN cs.match_id END) AS batting_ordinary_decided_chases,
                SUM(CASE WHEN cs.pressure=1 THEN cs.runs ELSE 0 END) AS batter_pressure_runs,
                SUM(CASE WHEN cs.pressure=1 THEN cs.faced_ball ELSE 0 END) AS batter_pressure_balls,
                SUM(CASE WHEN cs.pressure=0 THEN cs.runs ELSE 0 END) AS batter_ordinary_runs,
                SUM(CASE WHEN cs.pressure=0 THEN cs.faced_ball ELSE 0 END) AS batter_ordinary_balls,
-               SUM(CASE WHEN cs.bowling_pressure=1 THEN cs.total_runs_proxy ELSE 0 END) AS bowling_pressure_runs_proxy,
+               COUNT(DISTINCT CASE WHEN cs.bowling_pressure=1 THEN cs.match_id END) AS bowling_pressure_matches,
+               COUNT(DISTINCT CASE WHEN cs.bowling_pressure=1 AND m.chase_success IS NOT NULL THEN cs.match_id END) AS bowling_pressure_decided_chases,
+               COUNT(DISTINCT CASE WHEN cs.bowling_pressure=0 AND m.chase_success IS NOT NULL THEN cs.match_id END) AS bowling_ordinary_decided_chases,
+               SUM(CASE WHEN cs.bowling_pressure=1 THEN cs.bowler_runs_proxy ELSE 0 END) AS bowling_pressure_runs_proxy,
                SUM(CASE WHEN cs.bowling_pressure=1 THEN cs.legal ELSE 0 END) AS bowling_pressure_legal_balls,
                SUM(CASE WHEN cs.bowling_pressure=1 THEN cs.credited_wicket ELSE 0 END) AS bowling_pressure_credited_wickets,
                SUM(CASE WHEN cs.bowling_pressure=1 THEN cs.team_dot ELSE 0 END) AS bowling_pressure_dots
         FROM chase_states cs JOIN matches m ON m.match_id=cs.match_id
-        WHERE {where} AND cs.state_known=1
+        WHERE {where} AND m.match_format='T20' AND cs.state_known=1
+          AND cs.unknown_legality=0 AND cs.balls_remaining>0 AND cs.target>cs.score_before
         GROUP BY m.venue_id, m.venue_country, m.match_format
         """,
         tuple(params),
@@ -466,8 +497,10 @@ def scenario_cells(filters: dict[str, Any]) -> list[dict[str, Any]]:
         )
         SELECT rrr_band, balls_band, wickets_lost,
                COUNT(*) AS chase_matches,
-               SUM(chase_success) AS chase_wins,
-               ROUND(100.0 * SUM(chase_success) / NULLIF(COUNT(*),0), 2) AS win_rate
+               CASE WHEN COUNT(*) >= 20 THEN SUM(chase_success) ELSE NULL END AS chase_wins,
+               CASE WHEN COUNT(*) >= 20
+                    THEN ROUND(100.0 * SUM(chase_success) / NULLIF(COUNT(*),0), 2)
+                    ELSE NULL END AS win_rate
         FROM cell_matches
         GROUP BY rrr_band, balls_band, wickets_lost
         """,
