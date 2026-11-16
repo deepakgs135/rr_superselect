@@ -1,0 +1,11 @@
+﻿rank,player,player_id,raw_entry_overs,reference_entry_overs,raw_innings,reference_innings,raw_median_entry_over,reference_median_entry_over,raw_came_before_anchor,reference_came_before_anchor,identity_status,matches_reference,status
+1,David Miller,1077,"4, 7, 8","4, 7, 8",3,3,7,7,1 of 3,1 of 3,PASS,True,MATCH
+2,Tim David,6396,"8, 11, 13, 15, 15, 19","8, 11, 13, 15",6,4,14.0,12,0 of 6,0 of 4,PASS,False,DIFFERS
+3,Namboori Tilak Varma,7897,"3, 3, 5, 5, 9, 10","3, 3, 5, 5, 9, 10",6,6,5.0,5,2 of 6,2 of 6,PASS,True,MATCH
+4,Marcus Stoinis,2639,"1, 2, 4, 5, 6, 8","1, 2, 4, 5, 6, 8",6,6,4.5,4.5,3 of 6,3 of 6,PASS,True,MATCH
+5,Hardik Pandya,3330,"2, 3, 7, 7, 11, 12, 13","2, 3, 7, 7, 11, 12, 13",7,7,7,7,2 of 7,2 of 7,PASS,True,MATCH
+6,Sherfane Rutherford,6725,"4, 6, 13","4, 6, 13",3,3,6,6,0 of 3,0 of 3,PASS,True,MATCH
+7,Rajat Patidar,5039,"2, 4, 6","2, 4, 6",3,3,4,4,2 of 3,2 of 3,PASS,True,MATCH
+8,Shivam Dube,4755,"7, 8, 9, 9, 10, 13","7, 8, 9, 9, 10, 13",6,6,9.0,9,0 of 6,0 of 6,PASS,True,MATCH
+9,Daryl Mitchell,4106,"1, 2, 3, 14","1, 2, 3, 14",4,4,2.5,2.5,3 of 4,3 of 4,PASS,True,MATCH
+10,Nicholas Pooran,3125,"3, 4, 8, 11, 12","3, 4, 8, 11, 12",5,5,8,8,1 of 5,1 of 5,PASS,True,MATCH

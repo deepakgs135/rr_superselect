@@ -1,5 +1,5 @@
 {
-  "built_at_utc": "2026-11-16T02:43:37+00:00",
+  "built_at_utc": "2026-11-16T06:21:42+00:00",
   "source_files": {
     "ball_by_ball.csv": {
       "row_count": 200999,
@@ -105,9 +105,25 @@
   "processing": {
     "known_rrr_states": 90720,
     "unknown_rrr_states": 4514,
+    "pressure_delivery_states_checked": 45385,
+    "batting_pressure_flag_deliveries": 3229,
+    "bowling_pressure_flag_deliveries": 38,
     "pressure_legal_deliveries": 2996,
     "unknown_legality_events": 265,
     "extra_innings_rows": 0,
+    "pressure_flag_build_check": {
+      "database": {
+        "pressure_delivery_states_checked": 45385,
+        "batting_pressure_flag_deliveries": 3229,
+        "bowling_pressure_flag_deliveries": 38
+      },
+      "in_memory": {
+        "pressure_delivery_states_checked": 45385,
+        "batting_pressure_flag_deliveries": 3229,
+        "bowling_pressure_flag_deliveries": 38
+      },
+      "matches": true
+    },
     "innings_summaries": 1724,
     "delivery_rows_processed": 200999,
     "matches_with_second_innings": 845

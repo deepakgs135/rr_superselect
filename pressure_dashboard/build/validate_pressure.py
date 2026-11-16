@@ -138,7 +138,28 @@ def player_aggregates_from_raw(
             bat_pressure = bool(active_chase and remaining is not None and remaining <= 30 and wickets >= 3 and rrr is not None and rrr >= 15)
             bowl_pressure = bool(active_chase and remaining is not None and remaining <= 30 and wickets <= 2 and rrr is not None and rrr >= 9 and crr is not None and crr >= 11)
             key = (match_id, 2, seq)
-            expected_states[key] = {"state_known": int(row_known), "pressure": int(bat_pressure), "bowling_pressure": int(bowl_pressure)}
+            row_state = (
+                "Unknown"
+                if not row_known
+                else "Batting pressure"
+                if bat_pressure
+                else "Bowling pressure"
+                if bowl_pressure
+                else "Ordinary chase"
+                if needed is not None and needed > 0
+                else "Target reached"
+            )
+            expected_states[key] = {
+                "state": row_state,
+                "state_known": int(row_known),
+                "pressure": int(bat_pressure),
+                "bowling_pressure": int(bowl_pressure),
+                "balls_remaining": remaining if row_known else None,
+                "wickets_down": wickets if row_known else None,
+                "target": target if row_known else None,
+                "score_before": score if row_known else None,
+                "runs_needed": needed if row_known else None,
+            }
             if active_chase:
                 bat_state = "Batting pressure" if bat_pressure else "Ordinary batting chase"
                 bowl_state = "Bowling pressure" if bowl_pressure else "Ordinary bowling chase"
@@ -410,18 +431,20 @@ def compare_sample(
     recent: dict[tuple[str, int], dict[str, Any]],
     active: dict[str, set[int]],
     state_counts: list[dict[str, Any]],
+    *,
+    sample_size: int | None = 10,
 ) -> list[dict[str, Any]]:
     randomizer = random.Random(SAMPLE_SEED)
-    sampled: list[tuple[int, str, str]] = []
-    for role in ("Batter", "Bowler"):
-        candidates = sorted(key for key in raw if key[1] == role)
-        sampled.extend(randomizer.sample(candidates, min(5, len(candidates))))
-
     report_rows: dict[tuple[int, str, str], dict[str, Any]] = {}
     for role, table_name in (("Batter", "batter_table"), ("Bowler", "bowler_table")):
         for row in report.get(table_name, []):
             key = (int(row["player_id"]), role, str(row["state"]))
             report_rows[key] = row
+    output_keys = sorted(report_rows)
+    if sample_size is None:
+        sampled = output_keys
+    else:
+        sampled = randomizer.sample(output_keys, min(sample_size, len(output_keys)))
 
     totals: dict[tuple[str, str], dict[str, int]] = defaultdict(lambda: defaultdict(int))
     for key, item in raw.items():
@@ -519,6 +542,15 @@ def compare_sample(
     db_fields = ("deliveries", "runs", "balls", "dismissals", "fours", "sixes", "dots", "legal_balls", "credited_wickets", "boundaries", "matches", "innings")
     for key in sampled:
         role, player_id, state = key[1], key[0], key[2]
+        if key not in raw:
+            checks.append({
+                "player_id": player_id,
+                "role": role,
+                "state": state,
+                "status": "FAIL",
+                "mismatches": {"raw_row": {"raw_recomputed": "missing", "report": "present"}},
+            })
+            continue
         raw_row = raw[key]
         db_row = db.get(key, {})
         report_row = report_rows.get(key)
@@ -592,6 +624,155 @@ def compare_sample(
     return checks
 
 
+def delivery_state_difference(expected: dict[str, Any], actual: dict[str, Any] | None) -> dict[str, Any] | None:
+    if actual is None:
+        return {"fields_differing": ["state"], "raw_recount": expected, "processed": None}
+
+    differences: list[str] = []
+    actual_state = (
+        "Unknown"
+        if not actual["state_known"]
+        else "Batting pressure"
+        if actual["pressure"]
+        else "Bowling pressure"
+        if actual["bowling_pressure"]
+        else "Ordinary chase"
+        if actual["runs_needed"] is not None and actual["runs_needed"] > 0
+        else "Target reached"
+    )
+    if (
+        actual_state != expected["state"]
+        or actual["state_known"] != expected["state_known"]
+        or actual["pressure"] != expected["pressure"]
+        or actual["bowling_pressure"] != expected["bowling_pressure"]
+    ):
+        differences.append("state")
+
+    if expected["state_known"] and actual["state_known"]:
+        for field, label in (
+            ("balls_remaining", "balls remaining"),
+            ("wickets_down", "wickets"),
+            ("target", "target"),
+            ("runs_needed", "runs needed"),
+        ):
+            if expected[field] != actual[field]:
+                differences.append(label)
+    if not differences:
+        return None
+    return {
+        "fields_differing": list(dict.fromkeys(differences)),
+        "raw_recount": expected,
+        "processed": actual,
+    }
+
+
+def reconcile_top10_batters(
+    raw: dict[tuple[int, str, str], dict[str, int]],
+    report: dict[str, Any],
+) -> list[dict[str, Any]]:
+    rows = [
+        row for row in report.get("batter_table", [])
+        if row.get("state") == "Batting pressure" and row.get("rank") not in (None, "")
+    ]
+    rows.sort(key=lambda row: int(row["rank"]))
+    output = []
+    for row in rows[:10]:
+        player_id = int(row["player_id"])
+        raw_row = raw.get((player_id, "Batter", "Batting pressure"))
+        raw_balls = int(raw_row.get("balls", 0)) if raw_row else None
+        raw_runs = int(raw_row.get("runs", 0)) if raw_row else None
+        raw_dismissals = int(raw_row.get("dismissals", 0)) if raw_row else None
+        report_balls = int(row.get("sample_balls") or 0)
+        report_runs = int(row.get("runs") or 0)
+        report_dismissals = int(row.get("dismissals") or 0)
+        matches = raw_row is not None and (
+            raw_balls == report_balls
+            and raw_runs == report_runs
+            and raw_dismissals == report_dismissals
+        )
+        output.append({
+            "rank": row.get("rank"),
+            "player_id": player_id,
+            "player": row.get("player"),
+            "raw_balls": raw_balls,
+            "leaderboard_balls": report_balls,
+            "raw_runs": raw_runs,
+            "leaderboard_runs": report_runs,
+            "raw_dismissals": raw_dismissals,
+            "leaderboard_dismissals": report_dismissals,
+            "status": "PASS" if matches else "FAIL",
+        })
+    return output
+
+
+def report_row_keys(report: dict[str, Any]) -> tuple[list[tuple[int, str, str]], list[tuple[int, str, str]]]:
+    keys: list[tuple[int, str, str]] = []
+    duplicates: list[tuple[int, str, str]] = []
+    seen: set[tuple[int, str, str]] = set()
+    for role, table_name in (("Batter", "batter_table"), ("Bowler", "bowler_table")):
+        for row in report.get(table_name, []):
+            key = (int(row["player_id"]), role, str(row["state"]))
+            if key in seen:
+                duplicates.append(key)
+            seen.add(key)
+            keys.append(key)
+    return keys, duplicates
+
+
+def audit_duplicate_stat_vectors(
+    raw: dict[tuple[int, str, str], dict[str, int]],
+    report: dict[str, Any],
+) -> list[dict[str, Any]]:
+    signatures: dict[tuple[Any, ...], list[tuple[tuple[int, str, str], dict[str, Any]]]] = defaultdict(list)
+    fields_by_role = {
+        "Batter": ("deliveries", "runs", "sample_balls", "dismissals", "fours", "sixes", "boundary_events", "dots", "matches", "innings"),
+        "Bowler": ("deliveries", "runs", "sample_balls", "credited_wickets", "dots", "boundaries_conceded", "matches", "innings"),
+    }
+    for role, table_name in (("Batter", "batter_table"), ("Bowler", "bowler_table")):
+        fields = fields_by_role[role]
+        for row in report.get(table_name, []):
+            player_id = int(row["player_id"])
+            state = str(row["state"])
+            signature = (role, state, *(row.get(field) for field in fields))
+            signatures[signature].append(((player_id, role, state), row))
+
+    duplicate_rows = []
+    for signature, entries in signatures.items():
+        player_ids = sorted({key[0] for key, _ in entries})
+        if len(player_ids) < 2:
+            continue
+        role, state = signature[:2]
+        fields = fields_by_role[role]
+        raw_matches = True
+        for key, report_row in entries:
+            raw_row = raw.get(key)
+            if raw_row is None:
+                raw_matches = False
+                continue
+            for field in fields:
+                if field == "sample_balls":
+                    raw_value = raw_row.get("balls" if role == "Batter" else "legal_balls", 0)
+                elif field == "boundary_events" and role == "Batter":
+                    raw_value = int(raw_row.get("fours", 0)) + int(raw_row.get("sixes", 0))
+                elif field == "boundaries_conceded" and role == "Bowler":
+                    raw_value = raw_row.get("boundaries", 0)
+                else:
+                    raw_value = raw_row.get(field, 0)
+                if not close(report_row.get(field), raw_value):
+                    raw_matches = False
+        duplicate_rows.append({
+            "role": role,
+            "state": state,
+            "player_count": len(player_ids),
+            "player_ids": ",".join(str(player_id) for player_id in player_ids),
+            "players": " | ".join(str(row.get("player") or "") for _, row in entries),
+            "raw_stat_vector": json.dumps(dict(zip(fields, signature[2:])), ensure_ascii=False, sort_keys=True),
+            "raw_values_match_for_each_id": raw_matches,
+            "status": "PASS" if raw_matches else "FAIL",
+        })
+    return duplicate_rows
+
+
 def main() -> None:
     matches, groups, names, raw_totals = load_raw()
     invalid_ids = {
@@ -606,20 +787,44 @@ def main() -> None:
     raw_aggregates, expected_states, state_row_counts = player_aggregates_from_raw(matches, groups, valid_ids)
     raw_recent, raw_active = recent_form_from_raw(matches, groups, valid_ids)
     report = json.loads(REPORT_PATH.read_text(encoding="utf-8")) if REPORT_PATH.exists() else {}
+    raw_recount_path = OUTPUT_DIR / "pressure_raw_recount.json"
+    standalone_recount = json.loads(raw_recount_path.read_text(encoding="utf-8")) if raw_recount_path.exists() else {}
     conn = sqlite3.connect(str(DB_PATH))
     db_totals = conn.execute("SELECT COUNT(*), COALESCE(SUM(runs),0), COALESCE(SUM(legal),0) FROM deliveries").fetchone()
     raw_total_runs = conn.execute("SELECT COALESCE(SUM(runs),0) FROM deliveries").fetchone()[0]
     db_states = {
-        (int(row[0]), int(row[1]), int(row[2])): {"state_known": int(row[3] or 0), "pressure": int(row[4] or 0), "bowling_pressure": int(row[5] or 0)}
-        for row in conn.execute("SELECT match_id,innings,seq,state_known,pressure,bowling_pressure FROM deliveries WHERE innings=2")
+        (int(row[0]), int(row[1]), int(row[2])): {
+            "state_known": int(row[3] or 0),
+            "pressure": int(row[4] or 0),
+            "bowling_pressure": int(row[5] or 0),
+            "balls_remaining": int(row[6]) if row[6] is not None else None,
+            "wickets_down": int(row[7]) if row[7] is not None else None,
+            "target": int(row[8]) if row[8] is not None else None,
+            "score_before": int(row[9]) if row[9] is not None else None,
+            "runs_needed": int(row[8]) - int(row[9]) if row[8] is not None and row[9] is not None else None,
+        }
+        for row in conn.execute(
+            """SELECT d.match_id,d.innings,d.seq,d.state_known,d.pressure,d.bowling_pressure,
+                      d.balls_remaining,d.wickets_lost,d.target,d.score_before
+               FROM deliveries d JOIN matches m ON m.match_id=d.match_id
+               WHERE d.innings=2 AND m.match_format='T20'"""
+        )
     }
     flag_mismatches = []
     for key, expected in expected_states.items():
         actual = db_states.get(key)
-        if actual != expected:
-            flag_mismatches.append({"match_id": key[0], "innings": key[1], "seq": key[2], "expected": expected, "database": actual})
+        difference = delivery_state_difference(expected, actual)
+        if difference:
+            flag_mismatches.append({"match_id": key[0], "innings": key[1], "seq": key[2], **difference})
     db_player_rows = db_aggregates(conn)
-    random_rows = compare_sample(raw_aggregates, db_player_rows, report, raw_recent, raw_active, state_row_counts)
+    random_rows = compare_sample(
+        raw_aggregates, db_player_rows, report, raw_recent, raw_active, state_row_counts,
+        sample_size=10,
+    )
+    all_player_checks = compare_sample(
+        raw_aggregates, db_player_rows, report, raw_recent, raw_active, state_row_counts,
+        sample_size=None,
+    )
     conn.close()
 
     report_state_map = {str(row.get("state")): row for row in report.get("state_table", [])}
@@ -633,6 +838,137 @@ def main() -> None:
         }
         if differences:
             state_count_mismatches.append({"state": expected["state"], "mismatches": differences})
+
+    raw_flag_counts = {
+        "batting_pressure": sum(int(row["pressure"]) for row in expected_states.values()),
+        "bowling_pressure": sum(int(row["bowling_pressure"]) for row in expected_states.values()),
+    }
+    raw_flag_counts["both_pressure_flags"] = raw_flag_counts["batting_pressure"] + raw_flag_counts["bowling_pressure"]
+    database_flag_counts = {
+        "batting_pressure": sum(row["pressure"] for row in db_states.values()),
+        "bowling_pressure": sum(row["bowling_pressure"] for row in db_states.values()),
+    }
+    database_flag_counts["both_pressure_flags"] = database_flag_counts["batting_pressure"] + database_flag_counts["bowling_pressure"]
+    raw_delivery_state_count_match = len(expected_states) == len(db_states)
+
+    report_keys, duplicate_report_keys = report_row_keys(report)
+    report_key_set = set(report_keys)
+    raw_key_set = set(raw_aggregates)
+    missing_report_keys = sorted(raw_key_set - report_key_set)
+    extra_report_keys = sorted(report_key_set - raw_key_set)
+    all_player_failures = [row for row in all_player_checks if row["status"] != "PASS"]
+    top10_rows = reconcile_top10_batters(raw_aggregates, report)
+    duplicate_stat_rows = audit_duplicate_stat_vectors(raw_aggregates, report)
+    duplicate_stat_path = OUTPUT_DIR / "pressure_duplicate_player_stats_audit.csv"
+    duplicate_stat_fields = list(duplicate_stat_rows[0]) if duplicate_stat_rows else [
+        "role", "state", "player_count", "player_ids", "players", "raw_stat_vector",
+        "raw_values_match_for_each_id", "status",
+    ]
+    with duplicate_stat_path.open("w", newline="", encoding="utf-8-sig") as file:
+        writer = csv.DictWriter(file, fieldnames=duplicate_stat_fields)
+        writer.writeheader()
+        writer.writerows(duplicate_stat_rows)
+    duplicate_stats_match_raw = all(row["status"] == "PASS" for row in duplicate_stat_rows)
+    top10_path = OUTPUT_DIR / "pressure_top10_batter_reconciliation.csv"
+    top10_fields = list(top10_rows[0]) if top10_rows else [
+        "rank", "player_id", "player", "raw_balls", "leaderboard_balls", "raw_runs",
+        "leaderboard_runs", "raw_dismissals", "leaderboard_dismissals", "status",
+    ]
+    with top10_path.open("w", newline="", encoding="utf-8-sig") as file:
+        writer = csv.DictWriter(file, fieldnames=top10_fields)
+        writer.writeheader()
+        writer.writerows(top10_rows)
+
+    # Reconcile the user's supplied batter values as a separate reference check.
+    supplied_top10 = {
+        "Rinku Singh": (94, 239, 1),
+        "Tristan Stubbs": (50, 123, 3),
+        "Rashid Khan": (65, 149, 5),
+        "David Miller": (58, 140, 3),
+        "Ashutosh Sharma": (33, 76, 2),
+        "Sherfane Rutherford": (52, 106, 4),
+        "Naman Dhir": (40, 80, 2),
+        "Dhruv Jurel": (50, 89, 3),
+        "Rahul Tewatia": (76, 145, 9),
+        "Ramandeep Singh": (38, 74, 3),
+    }
+    raw_batting_rows = {
+        int(row["player_id"]): row
+        for row in report.get("batter_table", [])
+        if row.get("state") == "Batting pressure"
+    }
+    source_names_to_ids = {
+        name: next((player_id for player_id, variants in names.items() if name in variants), None)
+        for name in supplied_top10
+    }
+    supplied_reference_rows = []
+    for name, (expected_balls, expected_runs, expected_outs) in supplied_top10.items():
+        player_id = source_names_to_ids[name]
+        raw_row = raw_aggregates.get((player_id, "Batter", "Batting pressure")) if player_id is not None else None
+        computed_balls = int(raw_row.get("balls", 0)) if raw_row else None
+        computed_runs = int(raw_row.get("runs", 0)) if raw_row else None
+        computed_outs = int(raw_row.get("dismissals", 0)) if raw_row else None
+        matches_reference = (computed_balls, computed_runs, computed_outs) == (expected_balls, expected_runs, expected_outs)
+        supplied_reference_rows.append({
+            "player_id": player_id,
+            "player": name,
+            "reference_balls": expected_balls,
+            "raw_balls": computed_balls,
+            "reference_runs": expected_runs,
+            "raw_runs": computed_runs,
+            "reference_dismissals": expected_outs,
+            "raw_dismissals": computed_outs,
+            "status": "PASS" if matches_reference else "REFERENCE MISMATCH",
+        })
+    supplied_reference_path = OUTPUT_DIR / "pressure_supplied_batter_reference_reconciliation.csv"
+    with supplied_reference_path.open("w", newline="", encoding="utf-8-sig") as file:
+        writer = csv.DictWriter(file, fieldnames=list(supplied_reference_rows[0]) if supplied_reference_rows else ["player", "status"])
+        writer.writeheader()
+        writer.writerows(supplied_reference_rows)
+
+    # The 45,385 value is the number of T20 chase rows checked, never a flag count.
+    try:
+        tristan_id = next(player_id for player_id, variants in names.items() if "Tristan Stubbs" in variants)
+    except StopIteration:
+        tristan_id = None
+    tristan_keys = []
+    if tristan_id is not None:
+        for key in sorted(expected_states):
+            source_row = groups.get((key[0], key[1]), [])[key[2] - 1]
+            if as_int(source_row.get("striker_id"), -1) == tristan_id or as_int(source_row.get("dismissed_player_id"), -1) == tristan_id:
+                tristan_keys.append(key)
+    tristan_differences = [
+        {"match_id": key[0], "innings": key[1], "seq": key[2], **delivery_state_difference(expected_states[key], db_states.get(key))}
+        for key in tristan_keys
+        if delivery_state_difference(expected_states[key], db_states.get(key))
+    ]
+    tristan_diff_report = {
+        "player": "Tristan Stubbs",
+        "player_id": tristan_id,
+        "delivery_rows_checked": len(tristan_keys),
+        "difference_count": len(tristan_differences),
+        "first_delivery_difference": tristan_differences[0] if tristan_differences else None,
+        "conclusion": "No delivery-level difference found for this player." if not tristan_differences else "Inspect the first delivery difference and its named fields.",
+    }
+    (OUTPUT_DIR / "pressure_tristan_first_diff.json").write_text(
+        json.dumps(tristan_diff_report, indent=2), encoding="utf-8"
+    )
+    flag_diff_path = OUTPUT_DIR / "pressure_flag_diff.csv"
+    diff_rows = [
+        {
+            "match_id": row["match_id"],
+            "innings": row["innings"],
+            "seq": row["seq"],
+            "fields_differing": "; ".join(row["fields_differing"]),
+            "raw_recount": json.dumps(row["raw_recount"], sort_keys=True),
+            "processed": json.dumps(row["processed"], sort_keys=True),
+        }
+        for row in flag_mismatches
+    ]
+    with flag_diff_path.open("w", newline="", encoding="utf-8-sig") as file:
+        writer = csv.DictWriter(file, fieldnames=["match_id", "innings", "seq", "fields_differing", "raw_recount", "processed"])
+        writer.writeheader()
+        writer.writerows(diff_rows)
 
     margin_checks = []
     margin_rows_checked = 0
@@ -654,45 +990,135 @@ def main() -> None:
     row_count_match = int(db_totals[0]) == raw_totals["delivery_rows"]
     run_total_match = int(db_totals[1]) == raw_totals["runs"] == int(raw_total_runs)
     legal_total_match = int(db_totals[2]) == raw_totals["legal_balls"]
-    flag_match = not flag_mismatches
-    sample_match = len(random_rows) >= 10 and all(row["status"] == "PASS" for row in random_rows)
-    log = [
-        {"check": "Raw delivery row count equals database", "raw": raw_totals["delivery_rows"], "processed": int(db_totals[0]), "status": "PASS" if row_count_match else "FAIL"},
-        {"check": "Raw runs column sum equals database runs sum", "raw": raw_totals["runs"], "processed": int(db_totals[1]), "status": "PASS" if run_total_match else "FAIL"},
-        {"check": "Known legal-ball count equals database legal count", "raw": raw_totals["legal_balls"], "processed": int(db_totals[2]), "status": "PASS" if legal_total_match else "FAIL"},
-        {"check": "Independent pressure flags equal database flags", "raw": len(expected_states), "processed": len(expected_states)-len(flag_mismatches), "status": "PASS" if flag_match else "FAIL"},
-        {"check": "State table totals equal independent raw recount", "raw": len(state_row_counts), "processed": len(state_row_counts)-len(state_count_mismatches), "status": "PASS" if not state_count_mismatches else "FAIL"},
-        {"check": "Random player-state aggregates match raw recomputation", "raw": len(random_rows), "processed": sum(row["status"] == "PASS" for row in random_rows), "status": "PASS" if sample_match else "FAIL"},
-        {"check": "Source run-margin reconciliation", "raw": margin_rows_checked, "processed": margin_rows_checked-len(margin_checks), "status": "SOURCE LIMITATION" if margin_checks else "PASS"},
-        {"check": "Unknown or multi-name IDs excluded", "raw": len(invalid_ids), "processed": len(valid_ids), "status": "PASS"},
+    flag_match = not flag_mismatches and raw_delivery_state_count_match and raw_flag_counts == database_flag_counts
+    sample_match = len(random_rows) == 10 and all(row["status"] == "PASS" for row in random_rows)
+    all_player_rows_match = (
+        not duplicate_report_keys
+        and not missing_report_keys
+        and not extra_report_keys
+        and len(all_player_checks) == len(report_keys)
+        and not all_player_failures
+    )
+    top10_match = len(top10_rows) == 10 and all(row["status"] == "PASS" for row in top10_rows)
+    id_audit = report.get("player_id_audit", {})
+    report_excluded = set(
+        report.get("excluded_player_ids", {}).get("multiple_source_names", [])
+        + report.get("excluded_player_ids", {}).get("unknown_or_blank_name", [])
+    )
+    id_exclusions_match = report_excluded == invalid_ids and int(id_audit.get("excluded_unknown_or_multi_name_ids", -1)) == len(invalid_ids)
+    distinct_id_match = int(id_audit.get("distinct_source_player_ids", -1)) == len(names)
+    valid_id_match = int(id_audit.get("eligible_source_player_ids", -1)) == len(valid_ids)
+    id_check = id_exclusions_match and distinct_id_match and valid_id_match
+    standalone_counts = standalone_recount.get("pressure_flags", {})
+    standalone_state_rows = [
+        {field: row.get(field) for field in ("state", "delivery_rows", "matches", "decided_chases", "legal_balls", "players")}
+        for row in standalone_recount.get("state_table", [])
     ]
+    user_flag_reference = {"batting_pressure": 6699, "bowling_pressure": 38, "both_pressure_flags": 6737}
+    supplied_flag_reference_match = user_flag_reference == raw_flag_counts
+    reference_state_rows = [
+        {field: row.get(field) for field in ("state", "delivery_rows", "matches", "decided_chases", "legal_balls", "players")}
+        for row in state_row_counts
+    ]
+    computed_state_rows = [
+        {field: report_state_map.get(row["state"], {}).get(field) for field in ("state", "delivery_rows", "matches", "decided_chases", "legal_balls", "players")}
+        for row in state_row_counts
+    ]
+    standalone_match = (
+        int(standalone_counts.get("batting_pressure", -1)) == raw_flag_counts["batting_pressure"]
+        and int(standalone_counts.get("bowling_pressure", -1)) == raw_flag_counts["bowling_pressure"]
+        and int(standalone_counts.get("both_pressure_flags", -1)) == raw_flag_counts["both_pressure_flags"]
+        and standalone_state_rows == reference_state_rows
+    )
+    raw_state_json = json.dumps(reference_state_rows, sort_keys=True)
+    computed_state_json = json.dumps(computed_state_rows, sort_keys=True)
+    duplicate_key_count = len(duplicate_report_keys)
+    random_pass_count = sum(row["status"] == "PASS" for row in random_rows)
+    top10_pass_count = sum(row["status"] == "PASS" for row in top10_rows)
+    all_player_pass_count = len(all_player_checks) - len(all_player_failures)
+    log = [
+        {"check": "Raw delivery row count", "reference": raw_totals["delivery_rows"], "computed": int(db_totals[0]), "status": "PASS" if row_count_match else "FAIL"},
+        {"check": "Raw runs column sum", "reference": raw_totals["runs"], "computed": int(db_totals[1]), "status": "PASS" if run_total_match else "FAIL"},
+        {"check": "Known legal-ball count", "reference": raw_totals["legal_balls"], "computed": int(db_totals[2]), "status": "PASS" if legal_total_match else "FAIL"},
+        {"check": "Batting-pressure delivery flags", "reference": raw_flag_counts["batting_pressure"], "computed": database_flag_counts["batting_pressure"], "status": "PASS" if database_flag_counts["batting_pressure"] == raw_flag_counts["batting_pressure"] else "FAIL"},
+        {"check": "Bowling-pressure delivery flags", "reference": raw_flag_counts["bowling_pressure"], "computed": database_flag_counts["bowling_pressure"], "status": "PASS" if database_flag_counts["bowling_pressure"] == raw_flag_counts["bowling_pressure"] else "FAIL"},
+        {"check": "Combined distinct pressure flags", "reference": raw_flag_counts["both_pressure_flags"], "computed": database_flag_counts["both_pressure_flags"], "status": "PASS" if database_flag_counts["both_pressure_flags"] == raw_flag_counts["both_pressure_flags"] else "FAIL"},
+        {"check": "T20 second-innings delivery states checked", "reference": len(expected_states), "computed": len(db_states), "status": "PASS" if raw_delivery_state_count_match else "FAIL"},
+        {"check": "Delivery-by-delivery state differences", "reference": 0, "computed": len(flag_mismatches), "status": "PASS" if not flag_mismatches else "FAIL"},
+        {"check": "Standalone raw-only recount agrees with validator recount", "reference": {"pressure_flags": raw_flag_counts, "state_table": reference_state_rows}, "computed": {"pressure_flags": standalone_counts, "state_table": standalone_state_rows}, "status": "PASS" if standalone_match else "FAIL"},
+        {"check": "State table totals (state, delivery rows, matches, decided chases, legal balls, players)", "reference": raw_state_json, "computed": computed_state_json, "status": "PASS" if not state_count_mismatches else "FAIL"},
+        {"check": "Leaderboard raw figures, derived metrics, recent form and ranks", "reference": len(raw_aggregates), "computed": f"{all_player_pass_count} of {len(all_player_checks)} rows match", "status": "PASS" if all_player_rows_match else "FAIL"},
+        {"check": "Top 10 batting-pressure leaders match raw balls, runs and dismissals", "reference": 10, "computed": f"{top10_pass_count} of {len(top10_rows)} match", "status": "PASS" if top10_match else "FAIL"},
+        {"check": "Random 10 leaderboard output rows recomputed from raw", "reference": 10, "computed": f"{random_pass_count} of {len(random_rows)} match", "status": "PASS" if sample_match else "FAIL"},
+        {"check": "Leaderboard player_id/state keys have no duplicates", "reference": 0, "computed": duplicate_key_count, "status": "PASS" if duplicate_key_count == 0 else "FAIL"},
+        {"check": "Repeated stat vectors equal each player's raw figures", "reference": "0 unexplained duplicate vectors", "computed": f"{len(duplicate_stat_rows)} duplicate vectors; {sum(row['status'] != 'PASS' for row in duplicate_stat_rows)} unexplained", "status": "PASS" if duplicate_stats_match_raw else "FAIL"},
+        {"check": "Unknown or multi-name player IDs excluded", "reference": f"{len(invalid_ids)} excluded of {len(names)} source IDs", "computed": f"{int(id_audit.get('excluded_unknown_or_multi_name_ids', -1))} excluded of {int(id_audit.get('distinct_source_player_ids', -1))} source IDs", "status": "PASS" if id_check else "FAIL"},
+        {"check": "Distinct eligible source player IDs (959 is not an exclusion count)", "reference": len(valid_ids), "computed": int(id_audit.get("eligible_source_player_ids", -1)), "status": "PASS" if valid_id_match else "FAIL"},
+        {"check": "Supplied 6,737 pressure-flag reference reproduced", "reference": user_flag_reference, "computed": raw_flag_counts, "status": "PASS" if supplied_flag_reference_match else "REFERENCE MISMATCH"},
+        {"check": "Supplied ten-batter raw figures reproduced", "reference": "10 supplied player rows", "computed": f"{sum(row['status'] == 'PASS' for row in supplied_reference_rows)} match; {sum(row['status'] != 'PASS' for row in supplied_reference_rows)} differ", "status": "PASS" if all(row["status"] == "PASS" for row in supplied_reference_rows) else "REFERENCE MISMATCH"},
+        {"check": "Source run-margin reconciliation under count-based extras rule", "reference": margin_rows_checked, "computed": f"{margin_rows_checked-len(margin_checks)} reproduced; {len(margin_checks)} source margins differ", "status": "SOURCE LIMITATION" if margin_checks else "PASS"},
+    ]
+    core_checks = [
+        row for row in log
+        if row["check"] not in {
+            "Supplied 6,737 pressure-flag reference reproduced",
+            "Supplied ten-batter raw figures reproduced",
+            "Source run-margin reconciliation under count-based extras rule",
+        }
+    ]
+    core_pass = all(row["status"] == "PASS" for row in core_checks)
     validation = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "method": "Separate raw-CSV recount; does not import the dashboard pressure-state functions.",
+        "method": "Raw CSV recomputation, cross-checked against a separate standard-library-only raw recount script; no dashboard state functions are imported.",
         "random_seed": SAMPLE_SEED,
         "random_player_rows_requested": 10,
         "random_player_rows_checked": len(random_rows),
         "raw_totals": raw_totals,
         "database_totals": {"delivery_rows": int(db_totals[0]), "runs": int(db_totals[1]), "known_legal_balls": int(db_totals[2])},
+        "raw_pressure_flag_totals": raw_flag_counts,
+        "database_pressure_flag_totals": database_flag_counts,
+        "supplied_pressure_flag_reference": user_flag_reference,
+        "pressure_delivery_rows_checked": len(expected_states),
         "pressure_delivery_recount": state_row_counts,
         "state_count_mismatches": state_count_mismatches,
-        "pressure_flag_rows_checked": len(expected_states),
         "pressure_flag_mismatches": len(flag_mismatches),
         "flag_mismatch_examples": flag_mismatches[:100],
+        "tristan_first_delivery_diff": tristan_diff_report,
+        "top10_batter_raw_reconciliation": top10_rows,
+        "duplicate_player_stat_vectors": duplicate_stat_rows,
+        "supplied_batter_reference_reconciliation": supplied_reference_rows,
+        "all_leaderboard_rows_checked": len(all_player_checks),
+        "all_leaderboard_row_failures": all_player_failures,
+        "leaderboard_key_audit": {
+            "raw_player_state_keys": len(raw_key_set),
+            "leaderboard_player_state_keys": len(report_key_set),
+            "duplicate_keys": duplicate_report_keys,
+            "missing_rows": missing_report_keys,
+            "extra_rows": extra_report_keys,
+        },
         "random_player_row_checks": random_rows,
         "source_run_margin_reconciliation": {"checked_rows": margin_rows_checked, "mismatched_rows": len(margin_checks), "unreproducible_rows": margin_checks},
-        "excluded_player_ids": {"count": len(invalid_ids), "ids": sorted(invalid_ids)},
+        "excluded_player_ids": {
+            "count": len(invalid_ids),
+            "ids": sorted(invalid_ids),
+            "distinct_source_player_ids": len(names),
+            "eligible_player_ids": len(valid_ids),
+            "reported_exclusion_count": id_audit.get("excluded_unknown_or_multi_name_ids"),
+        },
+        "standalone_raw_recount": standalone_recount,
         "validation_log": log,
         "overall_status": (
             "FAIL"
-            if not (row_count_match and run_total_match and legal_total_match and flag_match and not state_count_mismatches and sample_match)
-            else "PASS WITH SOURCE LIMITATIONS" if margin_checks else "PASS"
+            if not core_pass
+            else "PASS WITH REFERENCE DISAGREEMENT AND SOURCE LIMITATIONS"
+            if margin_checks or not supplied_flag_reference_match or any(row["status"] != "PASS" for row in supplied_reference_rows)
+            else "PASS"
         ),
     }
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     VALIDATION_PATH.write_text(json.dumps(validation, indent=2), encoding="utf-8")
     with VALIDATION_CSV.open("w", newline="", encoding="utf-8-sig") as file:
-        writer = csv.DictWriter(file, fieldnames=["check", "raw", "processed", "status"])
+        writer = csv.DictWriter(file, fieldnames=["check", "reference", "computed", "status"])
         writer.writeheader()
         writer.writerows(log)
     exception_rows = [
@@ -714,7 +1140,21 @@ def main() -> None:
         report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
         report["validation"] = validation
         REPORT_PATH.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(json.dumps({"overall_status": validation["overall_status"], "checks": log, "random_rows": len(random_rows), "state_flag_mismatches": len(flag_mismatches), "run_margin_mismatches": len(margin_checks), "output": str(VALIDATION_PATH)}, indent=2))
+    print(json.dumps({
+        "overall_status": validation["overall_status"],
+        "raw_pressure_flags": raw_flag_counts,
+        "database_pressure_flags": database_flag_counts,
+        "pressure_delivery_rows_checked": len(expected_states),
+        "state_flag_mismatches": len(flag_mismatches),
+        "tristan_first_delivery_diff": tristan_diff_report,
+        "top10_batter_passes": f"{top10_pass_count}/{len(top10_rows)}",
+        "random_output_rows_passes": f"{random_pass_count}/{len(random_rows)}",
+        "leaderboard_row_failures": len(all_player_failures),
+        "leaderboard_duplicate_keys": duplicate_key_count,
+        "leaderboard_duplicate_stat_vectors": len(duplicate_stat_rows),
+        "validation_log": str(VALIDATION_CSV),
+        "output": str(VALIDATION_PATH),
+    }, indent=2))
 
 
 if __name__ == "__main__":

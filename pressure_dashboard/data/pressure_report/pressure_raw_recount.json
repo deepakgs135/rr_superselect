@@ -1,0 +1,77 @@
+{
+  "generated_at_utc": "2026-11-16T05:10:28+00:00",
+  "method": "Raw CSV only; standard library only; no imports from dashboard/build state code or processed database.",
+  "sources": {
+    "ball_by_ball.csv": "D:\\RR\\Raw_Data\\ball_by_ball.csv",
+    "matches.csv": "D:\\RR\\Raw_Data\\matches.csv",
+    "competitions.csv": "D:\\RR\\Raw_Data\\competitions.csv"
+  },
+  "rules": {
+    "scope": "T20 second innings only; first two innings only; 120 scheduled balls.",
+    "batting_pressure": "1-30 legal balls remaining; at least 3 wickets down before the ball; required rate >= 15; positive runs needed.",
+    "bowling_pressure": "1-30 legal balls remaining; 2 or fewer wickets down before the ball; required rate >= 9; current rate >= 11; positive runs needed.",
+    "legality": "none/byes/legbyes legal; wide/Overstep illegal; other/Penalty/blank/unrecognized unknown; unknown row and all later states excluded.",
+    "target": "matches.revised_target when nonblank; otherwise first innings runs plus one per wide, Overstep, bye, and leg-bye, then plus one.",
+    "imputation": "One team run per wide, Overstep, bye, and leg-bye row; raw runs column is retained for batter runs.",
+    "wickets": "Pre-delivery count of is_wicket rows, excluding retire-outs, retired hurt, and obstruction labels.",
+    "batter_dismissals": "is_wicket rows assigned to dismissed_player_id; the same exclusions apply.",
+    "player_key": "Unique source player_id; IDs with unknown/blank names or multiple source names are excluded from player figures."
+  },
+  "raw_totals": {
+    "delivery_rows": 200999,
+    "runs_column_sum": 269550,
+    "known_legal_balls": 192444,
+    "unknown_legality_rows": 265
+  },
+  "cohort": {
+    "t20_matches": 401,
+    "t20_second_innings": 393,
+    "delivery_state_rows_checked": 45385,
+    "known_positive_runs_needed_chase_rows": 43123
+  },
+  "pressure_flags": {
+    "batting_pressure": 3229,
+    "bowling_pressure": 38,
+    "both_pressure_flags": 3267
+  },
+  "state_table": [
+    {
+      "state": "Batting pressure",
+      "delivery_rows": 3229,
+      "matches": 175,
+      "decided_chases": 174,
+      "legal_balls": 2996,
+      "players": 232
+    },
+    {
+      "state": "Ordinary batting chase",
+      "delivery_rows": 39894,
+      "matches": 393,
+      "decided_chases": 390,
+      "legal_balls": 38297,
+      "players": 364
+    },
+    {
+      "state": "Bowling pressure",
+      "delivery_rows": 38,
+      "matches": 3,
+      "decided_chases": 3,
+      "legal_balls": 34,
+      "players": 5
+    },
+    {
+      "state": "Ordinary bowling chase",
+      "delivery_rows": 43085,
+      "matches": 393,
+      "decided_chases": 390,
+      "legal_balls": 41259,
+      "players": 311
+    }
+  ],
+  "player_id_audit": {
+    "distinct_source_player_ids": 959,
+    "excluded_unknown_or_multi_name_ids": 0,
+    "eligible_source_player_ids": 959,
+    "excluded_ids": []
+  }
+}

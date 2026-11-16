@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-16T03:01:11+00:00",
+  "generated_at_utc": "2026-11-16T05:18:38+00:00",
   "source_files": {
     "ball_by_ball.csv": "D:\\RR\\Raw_Data\\ball_by_ball.csv",
     "matches.csv": "D:\\RR\\Raw_Data\\matches.csv",
@@ -50,6 +50,12 @@
       "batter": 0,
       "bowler": 0
     }
+  },
+  "player_id_audit": {
+    "distinct_source_player_ids": 959,
+    "excluded_unknown_or_multi_name_ids": 0,
+    "eligible_source_player_ids": 959,
+    "leaderboard_key": "player_id + state; display names are never used to join player figures"
   },
   "cohort_counts": {
     "t20_matches": 401,
@@ -57966,8 +57972,8 @@
     "Bowling pressure": "Bowling pressure: count only; 3 decided chases, 20 required."
   },
   "validation": {
-    "generated_at_utc": "2026-11-16T03:01:15+00:00",
-    "method": "Separate raw-CSV recount; does not import the dashboard pressure-state functions.",
+    "generated_at_utc": "2026-11-16T05:26:53+00:00",
+    "method": "Raw CSV recomputation, cross-checked against a separate standard-library-only raw recount script; no dashboard state functions are imported.",
     "random_seed": 20261115,
     "random_player_rows_requested": 10,
     "random_player_rows_checked": 10,
@@ -57982,6 +57988,22 @@
       "runs": 269550,
       "known_legal_balls": 192444
     },
+    "raw_pressure_flag_totals": {
+      "batting_pressure": 3229,
+      "bowling_pressure": 38,
+      "both_pressure_flags": 3267
+    },
+    "database_pressure_flag_totals": {
+      "batting_pressure": 3229,
+      "bowling_pressure": 38,
+      "both_pressure_flags": 3267
+    },
+    "supplied_pressure_flag_reference": {
+      "batting_pressure": 6699,
+      "bowling_pressure": 38,
+      "both_pressure_flags": 6737
+    },
+    "pressure_delivery_rows_checked": 45385,
     "pressure_delivery_recount": [
       {
         "state": "Batting pressure",
@@ -58017,21 +58039,554 @@
       }
     ],
     "state_count_mismatches": [],
-    "pressure_flag_rows_checked": 45385,
     "pressure_flag_mismatches": 0,
     "flag_mismatch_examples": [],
+    "tristan_first_delivery_diff": {
+      "player": "Tristan Stubbs",
+      "player_id": 20702,
+      "delivery_rows_checked": 383,
+      "difference_count": 0,
+      "first_delivery_difference": null,
+      "conclusion": "No delivery-level difference found for this player."
+    },
+    "top10_batter_raw_reconciliation": [
+      {
+        "rank": 1,
+        "player_id": 4708,
+        "player": "Rinku Singh",
+        "raw_balls": 94,
+        "leaderboard_balls": 94,
+        "raw_runs": 239,
+        "leaderboard_runs": 239,
+        "raw_dismissals": 1,
+        "leaderboard_dismissals": 1,
+        "status": "PASS"
+      },
+      {
+        "rank": 2,
+        "player_id": 20702,
+        "player": "Tristan Stubbs",
+        "raw_balls": 41,
+        "leaderboard_balls": 41,
+        "raw_runs": 101,
+        "leaderboard_runs": 101,
+        "raw_dismissals": 2,
+        "leaderboard_dismissals": 2,
+        "status": "PASS"
+      },
+      {
+        "rank": 3,
+        "player_id": 4722,
+        "player": "Rashid Khan",
+        "raw_balls": 51,
+        "leaderboard_balls": 51,
+        "raw_runs": 112,
+        "leaderboard_runs": 112,
+        "raw_dismissals": 3,
+        "leaderboard_dismissals": 3,
+        "status": "PASS"
+      },
+      {
+        "rank": 4,
+        "player_id": 1077,
+        "player": "David Miller",
+        "raw_balls": 32,
+        "leaderboard_balls": 32,
+        "raw_runs": 78,
+        "leaderboard_runs": 78,
+        "raw_dismissals": 2,
+        "leaderboard_dismissals": 2,
+        "status": "PASS"
+      },
+      {
+        "rank": 5,
+        "player_id": 8101,
+        "player": "Ashutosh Sharma",
+        "raw_balls": 34,
+        "leaderboard_balls": 34,
+        "raw_runs": 80,
+        "leaderboard_runs": 80,
+        "raw_dismissals": 2,
+        "leaderboard_dismissals": 2,
+        "status": "PASS"
+      },
+      {
+        "rank": 6,
+        "player_id": 6725,
+        "player": "Sherfane Rutherford",
+        "raw_balls": 34,
+        "leaderboard_balls": 34,
+        "raw_runs": 80,
+        "leaderboard_runs": 80,
+        "raw_dismissals": 2,
+        "leaderboard_dismissals": 2,
+        "status": "PASS"
+      },
+      {
+        "rank": 7,
+        "player_id": 37052,
+        "player": "Naman Dhir",
+        "raw_balls": 40,
+        "leaderboard_balls": 40,
+        "raw_runs": 80,
+        "leaderboard_runs": 80,
+        "raw_dismissals": 2,
+        "leaderboard_dismissals": 2,
+        "status": "PASS"
+      },
+      {
+        "rank": 8,
+        "player_id": 7260,
+        "player": "Dhruv Jurel",
+        "raw_balls": 46,
+        "leaderboard_balls": 46,
+        "raw_runs": 87,
+        "leaderboard_runs": 87,
+        "raw_dismissals": 2,
+        "leaderboard_dismissals": 2,
+        "status": "PASS"
+      },
+      {
+        "rank": 9,
+        "player_id": 3926,
+        "player": "Rahul Tewatia",
+        "raw_balls": 76,
+        "leaderboard_balls": 76,
+        "raw_runs": 145,
+        "leaderboard_runs": 145,
+        "raw_dismissals": 9,
+        "leaderboard_dismissals": 9,
+        "status": "PASS"
+      },
+      {
+        "rank": 10,
+        "player_id": 20006,
+        "player": "Ramandeep Singh",
+        "raw_balls": 38,
+        "leaderboard_balls": 38,
+        "raw_runs": 74,
+        "leaderboard_runs": 74,
+        "raw_dismissals": 3,
+        "leaderboard_dismissals": 3,
+        "status": "PASS"
+      }
+    ],
+    "duplicate_player_stat_vectors": [
+      {
+        "role": "Batter",
+        "state": "Ordinary batting chase",
+        "player_count": 10,
+        "player_ids": "161,278,4816,6354,26834,27380,27504,27962,35102,48953",
+        "players": "Raj Bawa | Khaleel Ahmed | Dwayne Bravo | Tim Southee | Saurav Chauhan | Dushan Hemantha | Harshit Kaushik | Zikria Islam | Danish Malewar | Spencer Johnson",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 1, \"dismissals\": 1, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 0, \"sample_balls\": 1, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Ordinary batting chase",
+        "player_count": 3,
+        "player_ids": "3550,4373,56685",
+        "players": "Mustafizur Rahman | Sharafuddin Ashraf | Abdullah Ahmadzai",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 2, \"dismissals\": 0, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 1, \"sample_balls\": 2, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "4373,27464",
+        "players": "Mustafizur Rahman | Aayan Afzal Khan",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 3, \"dismissals\": 0, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 2, \"sample_balls\": 3, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Ordinary batting chase",
+        "player_count": 6,
+        "player_ids": "786,2411,4489,4716,6464,6806",
+        "players": "Prasidh Krishna | Arshdeep Singh | Sandeep Sharma | Chris Jordan | Mayank Dagar | Tushar Deshpande",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 1, \"dismissals\": 0, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 0, \"sample_balls\": 1, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Ordinary batting chase",
+        "player_count": 3,
+        "player_ids": "5041,6256,58134",
+        "players": "Varun Chakravarthy | Mukesh Kumar | Digvesh Rathi",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 1, \"dismissals\": 0, \"dots\": 0, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 1, \"sample_balls\": 1, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 7,
+        "player_ids": "161,278,6697,6784,20802,21196,67036",
+        "players": "Dwayne Bravo | Tim Southee | Abdul Basith | Shams Mulani | Mohammad Waheed | Hassan Mohammad | Brijesh Sharma",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 1, \"dismissals\": 0, \"dots\": 0, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 1, \"sample_balls\": 1, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "535,6628",
+        "players": "Ambati Rayudu | Gerald Coetzee",
+        "raw_stat_vector": "{\"boundary_events\": 1, \"deliveries\": 3, \"dismissals\": 1, \"dots\": 2, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 6, \"sample_balls\": 3, \"sixes\": 1}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "5750,7533",
+        "players": "Simarjeet Singh | Ehsan Khan",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 3, \"dismissals\": 1, \"dots\": 1, \"fours\": 0, \"innings\": 2, \"matches\": 2, \"runs\": 2, \"sample_balls\": 3, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Ordinary batting chase",
+        "player_count": 2,
+        "player_ids": "1389,47694",
+        "players": "Sean Abbott | Omid Rahman",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 2, \"dismissals\": 0, \"dots\": 2, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 0, \"sample_balls\": 2, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "1389,1924",
+        "players": "Sean Abbott | Sam Billings",
+        "raw_stat_vector": "{\"boundary_events\": 1, \"deliveries\": 3, \"dismissals\": 1, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 7, \"sample_balls\": 3, \"sixes\": 1}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "1045,1440",
+        "players": "Rahul Tripathi | David Wiese",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 2, \"dismissals\": 1, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 1, \"sample_balls\": 2, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 9,
+        "player_ids": "142,829,1813,4816,4904,8251,8266,34546,45966",
+        "players": "Khaleel Ahmed | Shikhar Dhawan | Sumit Kumar 1 | Kumar Kushagra | Deepak Chahar | Mitchell Starc | Kamindu Mendis | Aryan Bisht | Prashant Veer",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 1, \"dismissals\": 1, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 0, \"sample_balls\": 1, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Ordinary batting chase",
+        "player_count": 3,
+        "player_ids": "1944,2985,7966",
+        "players": "Mark Wood | Keshav Maharaj | Farmanullah Safi",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 2, \"dismissals\": 1, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 1, \"sample_balls\": 2, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 4,
+        "player_ids": "3645,4229,4692,6526",
+        "players": "Sarfaraz Khan | Lockie Ferguson | George Linde | Himmat Singh",
+        "raw_stat_vector": "{\"boundary_events\": 1, \"deliveries\": 1, \"dismissals\": 0, \"dots\": 0, \"fours\": 1, \"innings\": 1, \"matches\": 1, \"runs\": 4, \"sample_balls\": 1, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 3,
+        "player_ids": "1701,8177,8723",
+        "players": "Swapnil Singh | Akash Madhwal | Mohammed Faraazuddin",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 4, \"dismissals\": 0, \"dots\": 2, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 2, \"sample_balls\": 4, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Ordinary batting chase",
+        "player_count": 4,
+        "player_ids": "3651,6591,7904,19754",
+        "players": "KM Asif | Ricky Bhui | Raja Khan | Mohammad Chowdhury",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 2, \"dismissals\": 1, \"dots\": 2, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 0, \"sample_balls\": 2, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "3697,6772",
+        "players": "Chetan Sakariya | Kyle Jamieson",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 2, \"dismissals\": 0, \"dots\": 2, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 0, \"sample_balls\": 2, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Ordinary batting chase",
+        "player_count": 2,
+        "player_ids": "4486,7052",
+        "players": "BR Sharath | Dunith Wellalage",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 5, \"dismissals\": 1, \"dots\": 3, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 2, \"sample_balls\": 5, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "7937,39657",
+        "players": "Wasim Ali | Eshan Malinga",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 7, \"dismissals\": 1, \"dots\": 3, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 4, \"sample_balls\": 7, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "28018,47694",
+        "players": "Omid Rahman | Ashok Sharma",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 1, \"dismissals\": 0, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 0, \"sample_balls\": 1, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "43917,47370",
+        "players": "Aniket Verma | Krish Bhagat",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 7, \"dismissals\": 1, \"dots\": 5, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 3, \"sample_balls\": 7, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Batting pressure",
+        "player_count": 2,
+        "player_ids": "4265,39637",
+        "players": "Garuka Sanketh | T Natarajan",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 2, \"dismissals\": 0, \"dots\": 1, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 1, \"sample_balls\": 2, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Batter",
+        "state": "Ordinary batting chase",
+        "player_count": 2,
+        "player_ids": "27960,28018",
+        "players": "Ashok Sharma | Mayank Yadav",
+        "raw_stat_vector": "{\"boundary_events\": 0, \"deliveries\": 4, \"dismissals\": 0, \"dots\": 2, \"fours\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 1, \"sample_balls\": 3, \"sixes\": 0}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Bowler",
+        "state": "Ordinary bowling chase",
+        "player_count": 2,
+        "player_ids": "1028,19969",
+        "players": "Varun Aaron | Mubasir Khan",
+        "raw_stat_vector": "{\"boundaries_conceded\": 1, \"credited_wickets\": 0, \"deliveries\": 6, \"dots\": 2, \"innings\": 1, \"matches\": 1, \"runs\": 7, \"sample_balls\": 6}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Bowler",
+        "state": "Ordinary bowling chase",
+        "player_count": 2,
+        "player_ids": "2214,4904",
+        "players": "Gulbadin Naib | Kamindu Mendis",
+        "raw_stat_vector": "{\"boundaries_conceded\": 2, \"credited_wickets\": 0, \"deliveries\": 6, \"dots\": 1, \"innings\": 1, \"matches\": 1, \"runs\": 12, \"sample_balls\": 6}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      },
+      {
+        "role": "Bowler",
+        "state": "Ordinary bowling chase",
+        "player_count": 2,
+        "player_ids": "4117,6466",
+        "players": "Atharwa Taide | Ishan Kishan",
+        "raw_stat_vector": "{\"boundaries_conceded\": 1, \"credited_wickets\": 0, \"deliveries\": 1, \"dots\": 0, \"innings\": 1, \"matches\": 1, \"runs\": 4, \"sample_balls\": 1}",
+        "raw_values_match_for_each_id": true,
+        "status": "PASS"
+      }
+    ],
+    "supplied_batter_reference_reconciliation": [
+      {
+        "player_id": 4708,
+        "player": "Rinku Singh",
+        "reference_balls": 94,
+        "raw_balls": 94,
+        "reference_runs": 239,
+        "raw_runs": 239,
+        "reference_dismissals": 1,
+        "raw_dismissals": 1,
+        "status": "PASS"
+      },
+      {
+        "player_id": 20702,
+        "player": "Tristan Stubbs",
+        "reference_balls": 50,
+        "raw_balls": 41,
+        "reference_runs": 123,
+        "raw_runs": 101,
+        "reference_dismissals": 3,
+        "raw_dismissals": 2,
+        "status": "REFERENCE MISMATCH"
+      },
+      {
+        "player_id": 4722,
+        "player": "Rashid Khan",
+        "reference_balls": 65,
+        "raw_balls": 51,
+        "reference_runs": 149,
+        "raw_runs": 112,
+        "reference_dismissals": 5,
+        "raw_dismissals": 3,
+        "status": "REFERENCE MISMATCH"
+      },
+      {
+        "player_id": 1077,
+        "player": "David Miller",
+        "reference_balls": 58,
+        "raw_balls": 32,
+        "reference_runs": 140,
+        "raw_runs": 78,
+        "reference_dismissals": 3,
+        "raw_dismissals": 2,
+        "status": "REFERENCE MISMATCH"
+      },
+      {
+        "player_id": 8101,
+        "player": "Ashutosh Sharma",
+        "reference_balls": 33,
+        "raw_balls": 34,
+        "reference_runs": 76,
+        "raw_runs": 80,
+        "reference_dismissals": 2,
+        "raw_dismissals": 2,
+        "status": "REFERENCE MISMATCH"
+      },
+      {
+        "player_id": 6725,
+        "player": "Sherfane Rutherford",
+        "reference_balls": 52,
+        "raw_balls": 34,
+        "reference_runs": 106,
+        "raw_runs": 80,
+        "reference_dismissals": 4,
+        "raw_dismissals": 2,
+        "status": "REFERENCE MISMATCH"
+      },
+      {
+        "player_id": 37052,
+        "player": "Naman Dhir",
+        "reference_balls": 40,
+        "raw_balls": 40,
+        "reference_runs": 80,
+        "raw_runs": 80,
+        "reference_dismissals": 2,
+        "raw_dismissals": 2,
+        "status": "PASS"
+      },
+      {
+        "player_id": 7260,
+        "player": "Dhruv Jurel",
+        "reference_balls": 50,
+        "raw_balls": 46,
+        "reference_runs": 89,
+        "raw_runs": 87,
+        "reference_dismissals": 3,
+        "raw_dismissals": 2,
+        "status": "REFERENCE MISMATCH"
+      },
+      {
+        "player_id": 3926,
+        "player": "Rahul Tewatia",
+        "reference_balls": 76,
+        "raw_balls": 76,
+        "reference_runs": 145,
+        "raw_runs": 145,
+        "reference_dismissals": 9,
+        "raw_dismissals": 9,
+        "status": "PASS"
+      },
+      {
+        "player_id": 20006,
+        "player": "Ramandeep Singh",
+        "reference_balls": 38,
+        "raw_balls": 38,
+        "reference_runs": 74,
+        "raw_runs": 74,
+        "reference_dismissals": 3,
+        "raw_dismissals": 3,
+        "status": "PASS"
+      }
+    ],
+    "all_leaderboard_rows_checked": 912,
+    "all_leaderboard_row_failures": [],
+    "leaderboard_key_audit": {
+      "raw_player_state_keys": 912,
+      "leaderboard_player_state_keys": 912,
+      "duplicate_keys": [],
+      "missing_rows": [],
+      "extra_rows": []
+    },
     "random_player_row_checks": [
       {
-        "player_id": 6281,
+        "player_id": 3967,
         "role": "Batter",
         "state": "Ordinary batting chase",
         "status": "PASS",
         "mismatches": {}
       },
       {
-        "player_id": 250,
+        "player_id": 167,
         "role": "Batter",
         "state": "Ordinary batting chase",
+        "status": "PASS",
+        "mismatches": {}
+      },
+      {
+        "player_id": 6464,
+        "role": "Bowler",
+        "state": "Ordinary bowling chase",
+        "status": "PASS",
+        "mismatches": {}
+      },
+      {
+        "player_id": 22920,
+        "role": "Bowler",
+        "state": "Ordinary bowling chase",
+        "status": "PASS",
+        "mismatches": {}
+      },
+      {
+        "player_id": 27504,
+        "role": "Bowler",
+        "state": "Ordinary bowling chase",
         "status": "PASS",
         "mismatches": {}
       },
@@ -58043,49 +58598,28 @@
         "mismatches": {}
       },
       {
-        "player_id": 3298,
-        "role": "Batter",
-        "state": "Batting pressure",
+        "player_id": 8746,
+        "role": "Bowler",
+        "state": "Ordinary bowling chase",
         "status": "PASS",
         "mismatches": {}
       },
       {
-        "player_id": 6726,
+        "player_id": 39444,
         "role": "Batter",
         "state": "Ordinary batting chase",
         "status": "PASS",
         "mismatches": {}
       },
       {
-        "player_id": 3697,
-        "role": "Bowler",
-        "state": "Ordinary bowling chase",
+        "player_id": 7937,
+        "role": "Batter",
+        "state": "Ordinary batting chase",
         "status": "PASS",
         "mismatches": {}
       },
       {
-        "player_id": 19969,
-        "role": "Bowler",
-        "state": "Ordinary bowling chase",
-        "status": "PASS",
-        "mismatches": {}
-      },
-      {
-        "player_id": 4117,
-        "role": "Bowler",
-        "state": "Ordinary bowling chase",
-        "status": "PASS",
-        "mismatches": {}
-      },
-      {
-        "player_id": 2399,
-        "role": "Bowler",
-        "state": "Ordinary bowling chase",
-        "status": "PASS",
-        "mismatches": {}
-      },
-      {
-        "player_id": 1071,
+        "player_id": 2382,
         "role": "Bowler",
         "state": "Ordinary bowling chase",
         "status": "PASS",
@@ -59212,58 +59746,298 @@
     },
     "excluded_player_ids": {
       "count": 0,
-      "ids": []
+      "ids": [],
+      "distinct_source_player_ids": 959,
+      "eligible_player_ids": 959,
+      "reported_exclusion_count": 0
+    },
+    "standalone_raw_recount": {
+      "generated_at_utc": "2026-11-16T05:10:28+00:00",
+      "method": "Raw CSV only; standard library only; no imports from dashboard/build state code or processed database.",
+      "sources": {
+        "ball_by_ball.csv": "D:\\RR\\Raw_Data\\ball_by_ball.csv",
+        "matches.csv": "D:\\RR\\Raw_Data\\matches.csv",
+        "competitions.csv": "D:\\RR\\Raw_Data\\competitions.csv"
+      },
+      "rules": {
+        "scope": "T20 second innings only; first two innings only; 120 scheduled balls.",
+        "batting_pressure": "1-30 legal balls remaining; at least 3 wickets down before the ball; required rate >= 15; positive runs needed.",
+        "bowling_pressure": "1-30 legal balls remaining; 2 or fewer wickets down before the ball; required rate >= 9; current rate >= 11; positive runs needed.",
+        "legality": "none/byes/legbyes legal; wide/Overstep illegal; other/Penalty/blank/unrecognized unknown; unknown row and all later states excluded.",
+        "target": "matches.revised_target when nonblank; otherwise first innings runs plus one per wide, Overstep, bye, and leg-bye, then plus one.",
+        "imputation": "One team run per wide, Overstep, bye, and leg-bye row; raw runs column is retained for batter runs.",
+        "wickets": "Pre-delivery count of is_wicket rows, excluding retire-outs, retired hurt, and obstruction labels.",
+        "batter_dismissals": "is_wicket rows assigned to dismissed_player_id; the same exclusions apply.",
+        "player_key": "Unique source player_id; IDs with unknown/blank names or multiple source names are excluded from player figures."
+      },
+      "raw_totals": {
+        "delivery_rows": 200999,
+        "runs_column_sum": 269550,
+        "known_legal_balls": 192444,
+        "unknown_legality_rows": 265
+      },
+      "cohort": {
+        "t20_matches": 401,
+        "t20_second_innings": 393,
+        "delivery_state_rows_checked": 45385,
+        "known_positive_runs_needed_chase_rows": 43123
+      },
+      "pressure_flags": {
+        "batting_pressure": 3229,
+        "bowling_pressure": 38,
+        "both_pressure_flags": 3267
+      },
+      "state_table": [
+        {
+          "state": "Batting pressure",
+          "delivery_rows": 3229,
+          "matches": 175,
+          "decided_chases": 174,
+          "legal_balls": 2996,
+          "players": 232
+        },
+        {
+          "state": "Ordinary batting chase",
+          "delivery_rows": 39894,
+          "matches": 393,
+          "decided_chases": 390,
+          "legal_balls": 38297,
+          "players": 364
+        },
+        {
+          "state": "Bowling pressure",
+          "delivery_rows": 38,
+          "matches": 3,
+          "decided_chases": 3,
+          "legal_balls": 34,
+          "players": 5
+        },
+        {
+          "state": "Ordinary bowling chase",
+          "delivery_rows": 43085,
+          "matches": 393,
+          "decided_chases": 390,
+          "legal_balls": 41259,
+          "players": 311
+        }
+      ],
+      "player_id_audit": {
+        "distinct_source_player_ids": 959,
+        "excluded_unknown_or_multi_name_ids": 0,
+        "eligible_source_player_ids": 959,
+        "excluded_ids": []
+      }
     },
     "validation_log": [
       {
-        "check": "Raw delivery row count equals database",
-        "raw": 200999,
-        "processed": 200999,
+        "check": "Raw delivery row count",
+        "reference": 200999,
+        "computed": 200999,
         "status": "PASS"
       },
       {
-        "check": "Raw runs column sum equals database runs sum",
-        "raw": 269550,
-        "processed": 269550,
+        "check": "Raw runs column sum",
+        "reference": 269550,
+        "computed": 269550,
         "status": "PASS"
       },
       {
-        "check": "Known legal-ball count equals database legal count",
-        "raw": 192444,
-        "processed": 192444,
+        "check": "Known legal-ball count",
+        "reference": 192444,
+        "computed": 192444,
         "status": "PASS"
       },
       {
-        "check": "Independent pressure flags equal database flags",
-        "raw": 45385,
-        "processed": 45385,
+        "check": "Batting-pressure delivery flags",
+        "reference": 3229,
+        "computed": 3229,
         "status": "PASS"
       },
       {
-        "check": "State table totals equal independent raw recount",
-        "raw": 4,
-        "processed": 4,
+        "check": "Bowling-pressure delivery flags",
+        "reference": 38,
+        "computed": 38,
         "status": "PASS"
       },
       {
-        "check": "Random player-state aggregates match raw recomputation",
-        "raw": 10,
-        "processed": 10,
+        "check": "Combined distinct pressure flags",
+        "reference": 3267,
+        "computed": 3267,
         "status": "PASS"
       },
       {
-        "check": "Source run-margin reconciliation",
-        "raw": 182,
-        "processed": 43,
+        "check": "T20 second-innings delivery states checked",
+        "reference": 45385,
+        "computed": 45385,
+        "status": "PASS"
+      },
+      {
+        "check": "Delivery-by-delivery state differences",
+        "reference": 0,
+        "computed": 0,
+        "status": "PASS"
+      },
+      {
+        "check": "Standalone raw-only recount agrees with validator recount",
+        "reference": {
+          "pressure_flags": {
+            "batting_pressure": 3229,
+            "bowling_pressure": 38,
+            "both_pressure_flags": 3267
+          },
+          "state_table": [
+            {
+              "state": "Batting pressure",
+              "delivery_rows": 3229,
+              "matches": 175,
+              "decided_chases": 174,
+              "legal_balls": 2996,
+              "players": 232
+            },
+            {
+              "state": "Ordinary batting chase",
+              "delivery_rows": 39894,
+              "matches": 393,
+              "decided_chases": 390,
+              "legal_balls": 38297,
+              "players": 364
+            },
+            {
+              "state": "Bowling pressure",
+              "delivery_rows": 38,
+              "matches": 3,
+              "decided_chases": 3,
+              "legal_balls": 34,
+              "players": 5
+            },
+            {
+              "state": "Ordinary bowling chase",
+              "delivery_rows": 43085,
+              "matches": 393,
+              "decided_chases": 390,
+              "legal_balls": 41259,
+              "players": 311
+            }
+          ]
+        },
+        "computed": {
+          "pressure_flags": {
+            "batting_pressure": 3229,
+            "bowling_pressure": 38,
+            "both_pressure_flags": 3267
+          },
+          "state_table": [
+            {
+              "state": "Batting pressure",
+              "delivery_rows": 3229,
+              "matches": 175,
+              "decided_chases": 174,
+              "legal_balls": 2996,
+              "players": 232
+            },
+            {
+              "state": "Ordinary batting chase",
+              "delivery_rows": 39894,
+              "matches": 393,
+              "decided_chases": 390,
+              "legal_balls": 38297,
+              "players": 364
+            },
+            {
+              "state": "Bowling pressure",
+              "delivery_rows": 38,
+              "matches": 3,
+              "decided_chases": 3,
+              "legal_balls": 34,
+              "players": 5
+            },
+            {
+              "state": "Ordinary bowling chase",
+              "delivery_rows": 43085,
+              "matches": 393,
+              "decided_chases": 390,
+              "legal_balls": 41259,
+              "players": 311
+            }
+          ]
+        },
+        "status": "PASS"
+      },
+      {
+        "check": "State table totals (state, delivery rows, matches, decided chases, legal balls, players)",
+        "reference": "[{\"decided_chases\": 174, \"delivery_rows\": 3229, \"legal_balls\": 2996, \"matches\": 175, \"players\": 232, \"state\": \"Batting pressure\"}, {\"decided_chases\": 390, \"delivery_rows\": 39894, \"legal_balls\": 38297, \"matches\": 393, \"players\": 364, \"state\": \"Ordinary batting chase\"}, {\"decided_chases\": 3, \"delivery_rows\": 38, \"legal_balls\": 34, \"matches\": 3, \"players\": 5, \"state\": \"Bowling pressure\"}, {\"decided_chases\": 390, \"delivery_rows\": 43085, \"legal_balls\": 41259, \"matches\": 393, \"players\": 311, \"state\": \"Ordinary bowling chase\"}]",
+        "computed": "[{\"decided_chases\": 174, \"delivery_rows\": 3229, \"legal_balls\": 2996, \"matches\": 175, \"players\": 232, \"state\": \"Batting pressure\"}, {\"decided_chases\": 390, \"delivery_rows\": 39894, \"legal_balls\": 38297, \"matches\": 393, \"players\": 364, \"state\": \"Ordinary batting chase\"}, {\"decided_chases\": 3, \"delivery_rows\": 38, \"legal_balls\": 34, \"matches\": 3, \"players\": 5, \"state\": \"Bowling pressure\"}, {\"decided_chases\": 390, \"delivery_rows\": 43085, \"legal_balls\": 41259, \"matches\": 393, \"players\": 311, \"state\": \"Ordinary bowling chase\"}]",
+        "status": "PASS"
+      },
+      {
+        "check": "Leaderboard raw figures, derived metrics, recent form and ranks",
+        "reference": 912,
+        "computed": "912 of 912 rows match",
+        "status": "PASS"
+      },
+      {
+        "check": "Top 10 batting-pressure leaders match raw balls, runs and dismissals",
+        "reference": 10,
+        "computed": "10 of 10 match",
+        "status": "PASS"
+      },
+      {
+        "check": "Random 10 leaderboard output rows recomputed from raw",
+        "reference": 10,
+        "computed": "10 of 10 match",
+        "status": "PASS"
+      },
+      {
+        "check": "Leaderboard player_id/state keys have no duplicates",
+        "reference": 0,
+        "computed": 0,
+        "status": "PASS"
+      },
+      {
+        "check": "Repeated stat vectors equal each player's raw figures",
+        "reference": "0 unexplained duplicate vectors",
+        "computed": "26 duplicate vectors; 0 unexplained",
+        "status": "PASS"
+      },
+      {
+        "check": "Unknown or multi-name player IDs excluded",
+        "reference": "0 excluded of 959 source IDs",
+        "computed": "0 excluded of 959 source IDs",
+        "status": "PASS"
+      },
+      {
+        "check": "Distinct eligible source player IDs (959 is not an exclusion count)",
+        "reference": 959,
+        "computed": 959,
+        "status": "PASS"
+      },
+      {
+        "check": "Supplied 6,737 pressure-flag reference reproduced",
+        "reference": {
+          "batting_pressure": 6699,
+          "bowling_pressure": 38,
+          "both_pressure_flags": 6737
+        },
+        "computed": {
+          "batting_pressure": 3229,
+          "bowling_pressure": 38,
+          "both_pressure_flags": 3267
+        },
+        "status": "REFERENCE MISMATCH"
+      },
+      {
+        "check": "Supplied ten-batter raw figures reproduced",
+        "reference": "10 supplied player rows",
+        "computed": "4 match; 6 differ",
+        "status": "REFERENCE MISMATCH"
+      },
+      {
+        "check": "Source run-margin reconciliation under count-based extras rule",
+        "reference": 182,
+        "computed": "43 reproduced; 139 source margins differ",
         "status": "SOURCE LIMITATION"
-      },
-      {
-        "check": "Unknown or multi-name IDs excluded",
-        "raw": 0,
-        "processed": 959,
-        "status": "PASS"
       }
     ],
-    "overall_status": "PASS WITH SOURCE LIMITATIONS"
+    "overall_status": "PASS WITH REFERENCE DISAGREEMENT AND SOURCE LIMITATIONS"
   }
 }

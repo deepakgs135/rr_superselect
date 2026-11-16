@@ -3,7 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from lib.pressure_reports import pressure_report
-from lib.ui import csv_download, metric_row, page_header
+from lib.ui import csv_download, markdown_table, metric_row, page_header
 
 report = pressure_report()
 page_header(
@@ -20,6 +20,16 @@ if not report:
 validation = report.get("validation", {})
 raw = validation.get("raw_totals", report.get("raw_totals", {}))
 processed = validation.get("database_totals", {})
+
+
+def audit_table(rows, columns, *, max_height=520):
+    markdown_table(
+        rows,
+        [(key, label) for key, label in columns],
+        max_height=max_height,
+    )
+
+
 metric_row(
     [
         ("Independent validation", validation.get("overall_status", "Not run"), f"Core raw-data checks plus {int(validation.get('source_run_margin_reconciliation', {}).get('mismatched_rows') or 0):,} unreproduced source run margins."),
@@ -32,7 +42,7 @@ metric_row(
 
 st.subheader("Validation log")
 log_rows = validation.get("validation_log", [])
-st.dataframe(log_rows, hide_index=True, width="stretch")
+audit_table(log_rows, [("check", "Check"), ("reference", "Reference"), ("computed", "Computed"), ("status", "Status")], max_height=None)
 csv_download(log_rows, "Download validation log", "pressure_validation_log.csv", "pressure_audit_log_download")
 
 st.subheader("Random player-row recomputation")
@@ -44,7 +54,11 @@ sample_rows = [
     {"player_id": row.get("player_id"), "role": row.get("role"), "state": row.get("state"), "status": row.get("status"), "mismatches": row.get("mismatches") or "None"}
     for row in validation.get("random_player_row_checks", [])
 ]
-st.dataframe(sample_rows, hide_index=True, width="stretch")
+audit_table(
+    sample_rows,
+    [("player_id", "Player ID"), ("role", "Role"), ("state", "State"), ("status", "Status"), ("mismatches", "Mismatches")],
+    max_height=None,
+)
 
 st.subheader("Unreconciled source values")
 margin = validation.get("source_run_margin_reconciliation", {})
@@ -54,7 +68,11 @@ if unreproducible:
         f"The count-based score formula does not reproduce {len(unreproducible):,} run-margin results recorded in matches.csv. "
         "No figures were adjusted to force agreement. These rows are listed below."
     )
-    st.dataframe(unreproducible[:100], hide_index=True, width="stretch")
+    audit_table(
+        unreproducible[:100],
+        [("match_id", "Match ID"), ("reported_run_margin", "Source margin"), ("computed_margin", "Computed margin"),
+         ("first_innings_count_formula", "First innings proxy"), ("second_innings_count_formula", "Second innings proxy"), ("status", "Status")],
+    )
     csv_download(unreproducible, "Download run-margin exceptions", "pressure_reproduction_exceptions.csv", "pressure_margin_exception_download")
 else:
     st.success("The count-based score formula reproduced every supplied run-margin result in this check.")
@@ -62,7 +80,10 @@ else:
 flag_examples = validation.get("flag_mismatch_examples", [])
 if flag_examples:
     st.error("Independent pressure flags differ from the processed database. Inspect these delivery rows before relying on player rankings.")
-    st.dataframe(flag_examples, hide_index=True, width="stretch")
+    audit_table(
+        flag_examples,
+        [("match_id", "Match ID"), ("innings", "Innings"), ("seq", "Delivery"), ("expected", "Expected"), ("database", "Database")],
+    )
 
 st.subheader("Excluded player mappings")
 excluded = report.get("excluded_player_ids", {})

@@ -413,6 +413,8 @@ def calculate_report() -> dict[str, Any]:
 
     batter_rows = _enrich_player_rows(batter_stats, recent_batter, role="batter", active_ids=active_batter_ids)
     bowler_rows = _enrich_player_rows(bowler_stats, recent_bowler, role="bowler", active_ids=active_bowler_ids)
+    _assert_unique_player_state_rows(batter_rows, "batter")
+    _assert_unique_player_state_rows(bowler_rows, "bowler")
     decided_by_state = {row["state"]: int(row.get("decided_chases") or 0) for row in state_rows}
     _score_state_rows(batter_rows, role="batter", active_ids=active_batter_ids, decided_by_state=decided_by_state)
     _score_state_rows(bowler_rows, role="bowler", active_ids=active_bowler_ids, decided_by_state=decided_by_state)
@@ -451,6 +453,12 @@ def calculate_report() -> dict[str, Any]:
             "multiple_source_names": sorted(player_id for player_id, names in player_names.items() if len(names) > 1),
             "unknown_or_blank_name": sorted(bad_name_ids - {player_id for player_id, names in player_names.items() if len(names) > 1}),
             "excluded_role_rows_in_pressure_or_ordinary_states": role_rows_excluded_unknown_name,
+        },
+        "player_id_audit": {
+            "distinct_source_player_ids": len(player_names),
+            "excluded_unknown_or_multi_name_ids": len(bad_name_ids),
+            "eligible_source_player_ids": len(canonical_names),
+            "leaderboard_key": "player_id + state; display names are never used to join player figures",
         },
         "cohort_counts": {
             "t20_matches": sum(1 for row in matches.values() if row.get("match_format") == "T20"),
@@ -598,6 +606,19 @@ def _enrich_player_rows(
         row["_state_names"] = state_names
         result.append(row)
     return result
+
+
+def _assert_unique_player_state_rows(rows: list[dict[str, Any]], role: str) -> None:
+    """Fail the report build if a future join duplicates a player's state row."""
+    seen: set[tuple[int, str]] = set()
+    duplicates: list[tuple[int, str]] = []
+    for row in rows:
+        key = (int(row["player_id"]), str(row["state"]))
+        if key in seen:
+            duplicates.append(key)
+        seen.add(key)
+    if duplicates:
+        raise ValueError(f"Duplicate {role} leaderboard rows for player_id/state keys: {duplicates[:10]}")
 
 
 def _score_state_rows(

@@ -3,7 +3,8 @@
 Run once from this folder with:
     python build/build_data.py
 
-The dashboard reads only the processed SQLite file and validation JSON.
+The dashboard reads the processed SQLite file, validation JSON, and raw-derived
+player reports. This build refreshes the clutch-batting report as well.
 """
 
 from __future__ import annotations
@@ -34,6 +35,8 @@ DB_PATH = DB_DIR / "analytics.sqlite3"
 QUALITY_PATH = QUALITY_DIR / "quality.json"
 
 sys.path.insert(0, str(APP_DIR))
+sys.path.insert(0, str(APP_DIR / "build"))
+from clutch_batting import build_clutch_report
 from lib.states import (
     batter_dismissal,
     bowler_runs_charged,
@@ -716,6 +719,9 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
     counts = {
         "known_rrr_states": 0,
         "unknown_rrr_states": 0,
+        "pressure_delivery_states_checked": 0,
+        "batting_pressure_flag_deliveries": 0,
+        "bowling_pressure_flag_deliveries": 0,
         "pressure_legal_deliveries": 0,
         "unknown_legality_events": 0,
         "extra_innings_rows": 0,
@@ -850,6 +856,10 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
                     rrr_values.append((seq, int(item["over_no"]), float(rrr or 0.0)))
                 else:
                     counts["unknown_rrr_states"] += 1
+                if pressure_context:
+                    counts["pressure_delivery_states_checked"] += 1
+                    counts["batting_pressure_flag_deliveries"] += pressure
+                    counts["bowling_pressure_flag_deliveries"] += bowling_pressure
                 pressure_rows += pressure
                 pressure_legal += int(pressure and legal)
                 if pressure:
@@ -983,6 +993,34 @@ def process_innings(conn: sqlite3.Connection, metadata: dict[int, dict[str, Any]
             current_key = key
         group.append(row)
     flush(group, current_key)
+
+    built_pressure_totals = conn.execute(
+        """SELECT COUNT(*), COALESCE(SUM(d.pressure), 0), COALESCE(SUM(d.bowling_pressure), 0)
+        FROM deliveries d JOIN matches m ON m.match_id=d.match_id
+        WHERE d.innings=2 AND m.match_format='T20'"""
+    ).fetchone()
+    built_check = {
+        "pressure_delivery_states_checked": int(built_pressure_totals[0]),
+        "batting_pressure_flag_deliveries": int(built_pressure_totals[1]),
+        "bowling_pressure_flag_deliveries": int(built_pressure_totals[2]),
+    }
+    expected_check = {
+        key: counts[key]
+        for key in (
+            "pressure_delivery_states_checked",
+            "batting_pressure_flag_deliveries",
+            "bowling_pressure_flag_deliveries",
+        )
+    }
+    counts["pressure_flag_build_check"] = {
+        "database": built_check,
+        "in_memory": expected_check,
+        "matches": built_check == expected_check,
+    }
+    if built_check != expected_check:
+        raise RuntimeError(
+            "Pressure flag build invariant failed: processed delivery totals do not match the state-builder totals."
+        )
 
     conn.executemany(
         """UPDATE matches SET batting_first_team_id = ?, chasing_team_id = ?, chase_success = ?
@@ -1223,9 +1261,11 @@ def main() -> None:
     )
     conn.close()
     QUALITY_PATH.write_text(json.dumps(quality, indent=2), encoding="utf-8")
+    clutch_report = build_clutch_report()
     print(f"Built {DB_PATH}")
     print(json.dumps(quality["scope"], indent=2))
     print(json.dumps(quality["quality"], indent=2))
+    print(json.dumps({"clutch_batting": clutch_report["cohort"], "reference_audit": clutch_report["reference_audit"]}, indent=2))
 
 
 if __name__ == "__main__":

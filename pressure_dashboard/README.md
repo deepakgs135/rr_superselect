@@ -17,8 +17,10 @@ The app uses the workspace layout:
 - Processed data: pressure_dashboard\data\processed\analytics.sqlite3
 - Validation report: pressure_dashboard\data\validation\quality.json
 
-The app reads only the processed SQLite database and validation report. Re-run
-the offline build after changing a source CSV or the workbook.
+The app reads the processed SQLite database, validation report, and raw-derived
+player reports in `data\pressure_report`. The offline build refreshes the clutch
+batting report; run `python build\pressure_report.py` to refresh the existing
+pressure-state player report after changing the raw CSVs.
 
 ## Dashboard pages
 

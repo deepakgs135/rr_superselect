@@ -1,9 +1,21 @@
-﻿check,raw,processed,status
-Raw delivery row count equals database,200999,200999,PASS
-Raw runs column sum equals database runs sum,269550,269550,PASS
-Known legal-ball count equals database legal count,192444,192444,PASS
-Independent pressure flags equal database flags,45385,45385,PASS
-State table totals equal independent raw recount,4,4,PASS
-Random player-state aggregates match raw recomputation,10,10,PASS
-Source run-margin reconciliation,182,43,SOURCE LIMITATION
-Unknown or multi-name IDs excluded,0,959,PASS
+﻿check,reference,computed,status
+Raw delivery row count,200999,200999,PASS
+Raw runs column sum,269550,269550,PASS
+Known legal-ball count,192444,192444,PASS
+Batting-pressure delivery flags,3229,3229,PASS
+Bowling-pressure delivery flags,38,38,PASS
+Combined distinct pressure flags,3267,3267,PASS
+T20 second-innings delivery states checked,45385,45385,PASS
+Delivery-by-delivery state differences,0,0,PASS
+Standalone raw-only recount agrees with validator recount,"{'pressure_flags': {'batting_pressure': 3229, 'bowling_pressure': 38, 'both_pressure_flags': 3267}, 'state_table': [{'state': 'Batting pressure', 'delivery_rows': 3229, 'matches': 175, 'decided_chases': 174, 'legal_balls': 2996, 'players': 232}, {'state': 'Ordinary batting chase', 'delivery_rows': 39894, 'matches': 393, 'decided_chases': 390, 'legal_balls': 38297, 'players': 364}, {'state': 'Bowling pressure', 'delivery_rows': 38, 'matches': 3, 'decided_chases': 3, 'legal_balls': 34, 'players': 5}, {'state': 'Ordinary bowling chase', 'delivery_rows': 43085, 'matches': 393, 'decided_chases': 390, 'legal_balls': 41259, 'players': 311}]}","{'pressure_flags': {'batting_pressure': 3229, 'bowling_pressure': 38, 'both_pressure_flags': 3267}, 'state_table': [{'state': 'Batting pressure', 'delivery_rows': 3229, 'matches': 175, 'decided_chases': 174, 'legal_balls': 2996, 'players': 232}, {'state': 'Ordinary batting chase', 'delivery_rows': 39894, 'matches': 393, 'decided_chases': 390, 'legal_balls': 38297, 'players': 364}, {'state': 'Bowling pressure', 'delivery_rows': 38, 'matches': 3, 'decided_chases': 3, 'legal_balls': 34, 'players': 5}, {'state': 'Ordinary bowling chase', 'delivery_rows': 43085, 'matches': 393, 'decided_chases': 390, 'legal_balls': 41259, 'players': 311}]}",PASS
+"State table totals (state, delivery rows, matches, decided chases, legal balls, players)","[{""decided_chases"": 174, ""delivery_rows"": 3229, ""legal_balls"": 2996, ""matches"": 175, ""players"": 232, ""state"": ""Batting pressure""}, {""decided_chases"": 390, ""delivery_rows"": 39894, ""legal_balls"": 38297, ""matches"": 393, ""players"": 364, ""state"": ""Ordinary batting chase""}, {""decided_chases"": 3, ""delivery_rows"": 38, ""legal_balls"": 34, ""matches"": 3, ""players"": 5, ""state"": ""Bowling pressure""}, {""decided_chases"": 390, ""delivery_rows"": 43085, ""legal_balls"": 41259, ""matches"": 393, ""players"": 311, ""state"": ""Ordinary bowling chase""}]","[{""decided_chases"": 174, ""delivery_rows"": 3229, ""legal_balls"": 2996, ""matches"": 175, ""players"": 232, ""state"": ""Batting pressure""}, {""decided_chases"": 390, ""delivery_rows"": 39894, ""legal_balls"": 38297, ""matches"": 393, ""players"": 364, ""state"": ""Ordinary batting chase""}, {""decided_chases"": 3, ""delivery_rows"": 38, ""legal_balls"": 34, ""matches"": 3, ""players"": 5, ""state"": ""Bowling pressure""}, {""decided_chases"": 390, ""delivery_rows"": 43085, ""legal_balls"": 41259, ""matches"": 393, ""players"": 311, ""state"": ""Ordinary bowling chase""}]",PASS
+"Leaderboard raw figures, derived metrics, recent form and ranks",912,912 of 912 rows match,PASS
+"Top 10 batting-pressure leaders match raw balls, runs and dismissals",10,10 of 10 match,PASS
+Random 10 leaderboard output rows recomputed from raw,10,10 of 10 match,PASS
+Leaderboard player_id/state keys have no duplicates,0,0,PASS
+Repeated stat vectors equal each player's raw figures,0 unexplained duplicate vectors,26 duplicate vectors; 0 unexplained,PASS
+Unknown or multi-name player IDs excluded,0 excluded of 959 source IDs,0 excluded of 959 source IDs,PASS
+Distinct eligible source player IDs (959 is not an exclusion count),959,959,PASS
+"Supplied 6,737 pressure-flag reference reproduced","{'batting_pressure': 6699, 'bowling_pressure': 38, 'both_pressure_flags': 6737}","{'batting_pressure': 3229, 'bowling_pressure': 38, 'both_pressure_flags': 3267}",REFERENCE MISMATCH
+Supplied ten-batter raw figures reproduced,10 supplied player rows,4 match; 6 differ,REFERENCE MISMATCH
+Source run-margin reconciliation under count-based extras rule,182,43 reproduced; 139 source margins differ,SOURCE LIMITATION

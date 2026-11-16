@@ -1,0 +1,597 @@
+﻿player_id,player,source_player,role,state,matches,innings,deliveries,runs,balls,dismissals,fours,sixes,dots
+167,Ajinkya Rahane,Ajinkya Rahane,Batter,Ordinary batting chase,27,27,526,698,508,26,62,27,174
+7544,Venkatesh Iyer,Venkatesh Iyer,Batter,Ordinary batting chase,23,23,436,616,422,19,59,29,158
+4246,Nitish Rana,Nitish Rana,Batter,Ordinary batting chase,28,28,492,663,472,25,70,30,190
+3647,Shreyas Iyer,Shreyas Iyer,Batter,Ordinary batting chase,29,29,697,1101,667,17,91,61,187
+1924,Sam Billings,Sam Billings,Batter,Ordinary batting chase,6,6,94,114,91,4,6,7,36
+344,Sheldon Jackson,Sheldon Jackson,Batter,Ordinary batting chase,2,2,11,11,11,1,0,0,2
+5928,Prithvi Shaw,Prithvi Shaw,Batter,Ordinary batting chase,17,17,211,305,206,16,45,8,85
+3700,Tim Seifert,Tim Seifert,Batter,Ordinary batting chase,3,3,22,24,20,3,4,0,11
+1039,Mandeep Singh,Mandeep Singh,Batter,Ordinary batting chase,3,3,23,20,22,3,4,0,14
+4703,Rishabh Pant,Rishabh Pant,Batter,Ordinary batting chase,21,21,398,550,388,16,57,21,136
+6671,Lalit Yadav,Lalit Yadav,Batter,Ordinary batting chase,9,9,137,140,131,6,12,3,52
+4986,Rovman Powell,Rovman Powell,Batter,Ordinary batting chase,16,16,170,228,165,9,20,12,64
+2847,Shardul Thakur,Shardul Thakur,Batter,Ordinary batting chase,10,10,61,65,57,5,5,2,22
+2876,Axar Patel,Axar Patel,Batter,Ordinary batting chase,27,27,312,449,291,16,40,21,87
+992,Mayank Agarwal,Mayank Agarwal,Batter,Ordinary batting chase,12,12,241,309,234,11,34,8,86
+142,Shikhar Dhawan,Shikhar Dhawan,Batter,Ordinary batting chase,12,12,255,304,246,10,35,8,101
+2003,Bhanuka Rajapaksa,Bhanuka Rajapaksa,Batter,Ordinary batting chase,4,4,66,96,62,4,9,5,24
+4391,Liam Livingstone,Liam Livingstone,Batter,Ordinary batting chase,15,15,171,287,165,8,14,24,48
+26834,Raj Bawa,Raj Bawa,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+3782,M Shahrukh Khan,M Shahrukh Khan,Batter,Ordinary batting chase,13,13,131,195,122,8,12,14,39
+4840,Odean Smith,Odean Smith,Batter,Ordinary batting chase,1,1,9,25,8,0,1,3,1
+6288,Shubman Gill,Shubman Gill,Batter,Ordinary batting chase,42,42,1127,1578,1096,37,158,56,364
+2877,Vijay Shankar,Vijay Shankar,Batter,Ordinary batting chase,16,16,262,336,247,13,31,12,82
+796,Matthew Wade,Matthew Wade,Batter,Ordinary batting chase,6,6,103,103,97,6,13,1,46
+3330,Hardik Pandya,Hardik Pandya,Batter,Ordinary batting chase,29,29,356,512,347,20,57,20,120
+1077,David Miller,David Miller,Batter,Ordinary batting chase,28,28,434,596,415,14,50,25,120
+3926,Rahul Tewatia,Rahul Tewatia,Batter,Ordinary batting chase,28,28,263,324,251,8,34,8,83
+4494,Abhinav Manohar,Abhinav Manohar,Batter,Ordinary batting chase,6,6,62,56,58,5,5,1,22
+1568,Kane Williamson,Kane Williamson,Batter,Ordinary batting chase,12,12,224,203,220,11,14,8,107
+6281,Abhishek Sharma,Abhishek Sharma,Batter,Ordinary batting chase,36,36,681,1147,648,33,117,65,218
+1440,Rahul Tripathi,Rahul Tripathi,Batter,Ordinary batting chase,23,23,378,535,368,19,50,25,131
+3125,Nicholas Pooran,Nicholas Pooran,Batter,Ordinary batting chase,33,33,481,733,453,19,41,59,166
+3605,Aiden Markram,Aiden Markram,Batter,Ordinary batting chase,28,28,515,675,508,20,64,22,167
+7446,Abdul Samad,Abdul Samad,Batter,Ordinary batting chase,16,16,123,168,118,7,10,11,42
+6726,Romario Shepherd,Romario Shepherd,Batter,Ordinary batting chase,6,6,57,65,54,1,4,4,26
+3605,Aiden Markram,Aiden Markram,Batter,Batting pressure,3,3,14,29,14,1,1,3,3
+6726,Romario Shepherd,Romario Shepherd,Batter,Batting pressure,5,5,12,10,10,4,0,1,5
+4823,Washington Sundar,Washington Sundar,Batter,Batting pressure,7,7,29,57,27,4,6,3,6
+360,Bhuvneshwar Kumar,Bhuvneshwar Kumar,Batter,Batting pressure,10,10,46,46,41,5,6,1,19
+88,Faf du Plessis,Faf du Plessis,Batter,Ordinary batting chase,24,24,459,702,452,23,73,34,167
+6467,Anuj Rawat,Anuj Rawat,Batter,Ordinary batting chase,9,9,149,140,145,8,9,6,70
+47,Virat Kohli,Virat Kohli,Batter,Ordinary batting chase,34,34,942,1396,911,23,147,47,261
+6725,Sherfane Rutherford,Sherfane Rutherford,Batter,Ordinary batting chase,14,14,245,313,229,9,21,19,84
+1219,David Willey,David Willey,Batter,Ordinary batting chase,3,3,42,29,40,2,4,0,25
+7472,Shahbaz Ahmed,Shahbaz Ahmed,Batter,Ordinary batting chase,11,11,177,186,171,8,9,9,69
+143,Dinesh Karthik,Dinesh Karthik,Batter,Ordinary batting chase,16,16,163,239,153,7,28,7,41
+4900,Wanindu Hasaranga,Wanindu Hasaranga,Batter,Ordinary batting chase,5,5,27,27,24,4,3,0,10
+2261,Harshal Patel,Harshal Patel,Batter,Ordinary batting chase,8,8,33,34,33,2,3,2,18
+953,Lokesh Rahul,Lokesh Rahul,Batter,Ordinary batting chase,33,33,828,1116,809,30,97,46,271
+2101,Quinton de Kock,Quinton de Kock,Batter,Ordinary batting chase,19,19,387,493,370,16,44,20,126
+198,Manish Pandey,Manish Pandey,Batter,Ordinary batting chase,11,11,181,196,176,10,19,5,72
+2573,Evin Lewis,Evin Lewis,Batter,Ordinary batting chase,2,2,38,60,36,1,6,3,12
+3648,Deepak Hooda,Deepak Hooda,Batter,Ordinary batting chase,19,19,243,280,235,17,20,11,84
+6460,Ayush Badoni,Ayush Badoni,Batter,Ordinary batting chase,26,26,349,424,329,19,34,15,110
+6460,Ayush Badoni,Ayush Badoni,Batter,Batting pressure,5,5,34,66,33,4,2,6,10
+1318,Andre Russell,Andre Russell,Batter,Ordinary batting chase,17,17,180,296,175,10,16,28,76
+4117,Ishan Kishan,Ishan Kishan,Batter,Ordinary batting chase,37,37,752,1063,732,34,115,48,287
+126,Rohit Sharma,Rohit Sharma,Batter,Ordinary batting chase,40,40,773,1044,741,34,90,64,317
+4817,Anmolpreet Singh,Anmolpreet Singh,Batter,Ordinary batting chase,4,4,34,43,34,4,6,1,16
+7897,Namboori Tilak Varma,Namboori Tilak Varma,Batter,Ordinary batting chase,36,36,713,981,682,23,83,45,216
+494,Kieron Pollard,Kieron Pollard,Batter,Ordinary batting chase,6,6,64,45,60,2,1,1,28
+6396,Tim David,Tim David,Batter,Ordinary batting chase,25,25,227,365,212,10,25,25,63
+6518,Daniel Sams,Daniel Sams,Batter,Ordinary batting chase,5,5,12,8,11,3,0,1,8
+5034,Murugan Ashwin,Murugan Ashwin,Batter,Ordinary batting chase,3,3,8,2,8,1,0,0,6
+5034,Murugan Ashwin,Murugan Ashwin,Batter,Batting pressure,3,3,6,10,6,1,1,1,4
+494,Kieron Pollard,Kieron Pollard,Batter,Batting pressure,4,4,36,52,32,3,3,4,11
+3644,Kuldeep Yadav,Kuldeep Yadav,Batter,Ordinary batting chase,9,9,43,25,41,3,1,0,20
+4816,Khaleel Ahmed,Khaleel Ahmed,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+4373,Mustafizur Rahman,Mustafizur Rahman,Batter,Ordinary batting chase,1,1,2,1,2,0,0,0,1
+3644,Kuldeep Yadav,Kuldeep Yadav,Batter,Batting pressure,14,14,60,55,58,5,4,2,27
+4373,Mustafizur Rahman,Mustafizur Rahman,Batter,Batting pressure,1,1,3,2,3,0,0,0,1
+169,Robin Uthappa,Robin Uthappa,Batter,Ordinary batting chase,4,4,45,45,45,4,4,2,23
+6059,Ruturaj Gaikwad,Ruturaj Gaikwad,Batter,Ordinary batting chase,27,27,524,645,504,23,63,19,184
+535,Ambati Rayudu,Ambati Rayudu,Batter,Ordinary batting chase,10,10,153,196,148,8,16,12,63
+1596,Moeen Ali,Moeen Ali,Batter,Ordinary batting chase,8,8,124,141,118,7,9,8,50
+152,Ravindra Jadeja,Ravindra Jadeja,Batter,Ordinary batting chase,21,21,277,337,264,8,26,7,71
+4755,Shivam Dube,Shivam Dube,Batter,Ordinary batting chase,25,25,434,571,411,15,36,36,151
+8,Mahendra Singh Dhoni,Mahendra Singh Dhoni,Batter,Ordinary batting chase,13,13,92,83,88,1,4,2,28
+161,Dwayne Bravo,Dwayne Bravo,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+8,Mahendra Singh Dhoni,Mahendra Singh Dhoni,Batter,Batting pressure,12,12,124,230,113,6,16,20,34
+2334,Dwaine Pretorius,Dwaine Pretorius,Batter,Batting pressure,4,4,16,31,16,3,3,2,5
+786,Chris Jordan,Chris Jordan,Batter,Batting pressure,2,2,10,7,9,2,0,0,4
+7250,Mukesh Choudhary,Mukesh Choudhary,Batter,Batting pressure,1,1,2,2,2,0,0,0,0
+4823,Washington Sundar,Washington Sundar,Batter,Ordinary batting chase,15,15,192,278,186,10,32,8,57
+25048,Umran Malik,Umran Malik,Batter,Batting pressure,3,3,7,4,7,1,0,0,4
+1758,Patrick Cummins,Patrick Cummins,Batter,Ordinary batting chase,7,7,57,113,55,4,8,10,18
+23450,Sai Sudharsan,Sai Sudharsan,Batter,Ordinary batting chase,31,31,845,1194,818,26,128,37,252
+1077,David Miller,David Miller,Batter,Batting pressure,8,8,34,78,32,2,5,8,10
+3330,Hardik Pandya,Hardik Pandya,Batter,Batting pressure,5,5,26,29,26,3,1,1,9
+3926,Rahul Tewatia,Rahul Tewatia,Batter,Batting pressure,14,14,82,145,76,9,11,13,30
+838,Glenn Maxwell,Glenn Maxwell,Batter,Ordinary batting chase,13,13,142,244,135,10,21,16,42
+1318,Andre Russell,Andre Russell,Batter,Batting pressure,5,5,35,49,33,5,4,3,14
+1758,Patrick Cummins,Patrick Cummins,Batter,Batting pressure,4,4,13,19,13,2,1,1,4
+781,Sunil Narine,Sunil Narine,Batter,Batting pressure,3,3,12,26,11,2,1,3,3
+403,Umesh Yadav,Umesh Yadav,Batter,Batting pressure,7,7,29,22,27,3,0,1,13
+7327,Rasikh Salam,Rasikh Salam,Batter,Batting pressure,3,3,11,10,11,2,1,0,7
+6256,Varun Chakravarthy,Varun Chakravarthy,Batter,Batting pressure,4,4,10,6,10,2,1,0,7
+914,Krishnappa Gowtham,Krishnappa Gowtham,Batter,Ordinary batting chase,4,4,28,41,24,3,1,3,5
+2633,Jason Holder,Jason Holder,Batter,Ordinary batting chase,6,6,37,27,37,5,2,1,24
+4219,Krunal Pandya,Krunal Pandya,Batter,Ordinary batting chase,19,19,319,411,304,14,36,18,118
+2639,Marcus Stoinis,Marcus Stoinis,Batter,Ordinary batting chase,27,27,358,474,337,14,43,22,120
+2399,Dushmantha Chameera,Dushmantha Chameera,Batter,Batting pressure,5,5,23,27,19,2,3,1,8
+2639,Marcus Stoinis,Marcus Stoinis,Batter,Batting pressure,7,7,45,81,42,5,5,7,13
+3653,Avesh Khan,Avesh Khan,Batter,Batting pressure,5,5,18,34,18,1,4,2,7
+8085,Suyash Prabhudessai,Suyash Prabhudessai,Batter,Ordinary batting chase,5,5,56,71,54,4,9,1,22
+25213,Dewald Brevis,Dewald Brevis,Batter,Ordinary batting chase,11,11,192,259,186,11,19,18,82
+1699,Suryakumar Yadav,Suryakumar Yadav,Batter,Ordinary batting chase,31,31,667,1105,651,23,121,49,200
+1071,Jaydev Unadkat,Jaydev Unadkat,Batter,Ordinary batting chase,2,2,12,15,12,1,1,0,2
+1071,Jaydev Unadkat,Jaydev Unadkat,Batter,Batting pressure,4,4,20,29,19,3,3,2,10
+2933,Jasprit Bumrah,Jasprit Bumrah,Batter,Batting pressure,6,6,12,3,10,3,0,0,7
+2304,Tymal Mills,Tymal Mills,Batter,Batting pressure,2,2,3,0,3,1,0,0,3
+813,Jos Buttler,Jos Buttler,Batter,Ordinary batting chase,35,35,758,1141,736,28,121,49,260
+6314,Devdutt Padikkal,Devdutt Padikkal,Batter,Ordinary batting chase,25,25,452,599,439,22,57,27,162
+305,Ravichandran Ashwin,Ravichandran Ashwin,Batter,Ordinary batting chase,12,12,87,102,86,9,6,5,34
+2258,Sanju Samson,Sanju Samson,Batter,Ordinary batting chase,32,32,614,916,598,27,80,53,207
+2930,Rassie van der Dussen,Rassie van der Dussen,Batter,Ordinary batting chase,1,1,11,6,10,1,0,0,5
+3297,Shimron Hetmyer,Shimron Hetmyer,Batter,Ordinary batting chase,27,27,304,444,288,17,31,26,95
+6423,Riyan Parag,Riyan Parag,Batter,Ordinary batting chase,30,30,464,659,441,24,49,42,166
+3323,Jimmy Neesham,Jimmy Neesham,Batter,Ordinary batting chase,1,1,11,10,11,0,0,0,2
+4489,Prasidh Krishna,Prasidh Krishna,Batter,Ordinary batting chase,1,1,1,0,1,0,0,0,1
+4489,Prasidh Krishna,Prasidh Krishna,Batter,Batting pressure,2,2,13,10,13,0,1,0,6
+3323,Jimmy Neesham,Jimmy Neesham,Batter,Batting pressure,1,1,4,7,4,1,1,0,1
+1612,Yuzvendra Chahal,Yuzvendra Chahal,Batter,Batting pressure,1,1,8,5,8,1,0,0,4
+7545,Kuldeep Sen,Kuldeep Sen,Batter,Batting pressure,1,1,3,0,3,0,0,0,3
+1699,Suryakumar Yadav,Suryakumar Yadav,Batter,Batting pressure,2,2,4,2,4,2,0,0,2
+3272,Fabian Allen,Fabian Allen,Batter,Batting pressure,1,1,7,8,7,1,1,0,3
+220,David Warner,David Warner,Batter,Ordinary batting chase,22,22,456,647,435,16,84,22,170
+818,Mitchell Marsh,Mitchell Marsh,Batter,Ordinary batting chase,23,23,428,602,418,23,54,34,161
+2876,Axar Patel,Axar Patel,Batter,Batting pressure,8,8,66,96,60,4,6,5,15
+2847,Shardul Thakur,Shardul Thakur,Batter,Batting pressure,6,6,30,41,30,5,4,2,12
+109,Wriddhiman Saha,Wriddhiman Saha,Batter,Ordinary batting chase,20,20,382,479,372,18,60,10,137
+4722,Rashid Khan,Rashid Khan,Batter,Ordinary batting chase,15,15,112,166,108,7,13,9,41
+4722,Rashid Khan,Rashid Khan,Batter,Batting pressure,11,11,57,112,51,3,5,12,16
+3275,Alzarri Joseph,Alzarri Joseph,Batter,Ordinary batting chase,2,2,4,3,4,1,0,0,1
+250,Aaron Finch,Aaron Finch,Batter,Ordinary batting chase,3,3,57,76,49,3,10,2,18
+781,Sunil Narine,Sunil Narine,Batter,Ordinary batting chase,20,20,181,296,168,18,29,23,82
+6286,Shivam Mavi,Shivam Mavi,Batter,Ordinary batting chase,3,3,8,3,7,2,0,0,4
+403,Umesh Yadav,Umesh Yadav,Batter,Ordinary batting chase,4,4,26,36,25,2,2,3,11
+6256,Varun Chakravarthy,Varun Chakravarthy,Batter,Ordinary batting chase,1,1,1,1,1,0,0,0,0
+2633,Jason Holder,Jason Holder,Batter,Batting pressure,3,3,13,17,11,2,0,2,4
+7503,Ravi Bishnoi,Ravi Bishnoi,Batter,Batting pressure,7,7,25,19,25,4,1,2,19
+3645,Sarfaraz Khan,Sarfaraz Khan,Batter,Ordinary batting chase,5,5,72,93,69,4,12,2,27
+4101,Mitchell Santner,Mitchell Santner,Batter,Ordinary batting chase,2,2,27,20,24,2,3,0,15
+2334,Dwaine Pretorius,Dwaine Pretorius,Batter,Ordinary batting chase,2,2,11,13,11,0,0,1,4
+161,Dwayne Bravo,Dwayne Bravo,Batter,Batting pressure,1,1,1,1,1,0,0,0,0
+4708,Rinku Singh,Rinku Singh,Batter,Ordinary batting chase,24,24,323,394,309,10,32,15,106
+278,Tim Southee,Tim Southee,Batter,Batting pressure,1,1,1,1,1,0,0,0,0
+7897,Namboori Tilak Varma,Namboori Tilak Varma,Batter,Batting pressure,5,5,22,31,20,3,1,2,5
+6518,Daniel Sams,Daniel Sams,Batter,Batting pressure,1,1,8,3,7,1,0,0,4
+152,Ravindra Jadeja,Ravindra Jadeja,Batter,Batting pressure,10,10,71,116,68,3,8,7,14
+535,Ambati Rayudu,Ambati Rayudu,Batter,Batting pressure,1,1,3,6,3,1,0,1,2
+5039,Rajat Patidar,Rajat Patidar,Batter,Ordinary batting chase,20,20,273,403,258,18,25,29,90
+5944,Mohammed Siraj,Mohammed Siraj,Batter,Ordinary batting chase,2,2,14,10,14,0,2,0,10
+5944,Mohammed Siraj,Mohammed Siraj,Batter,Batting pressure,6,6,35,24,32,4,1,2,23
+830,Josh Hazlewood,Josh Hazlewood,Batter,Batting pressure,2,2,6,7,6,0,1,0,2
+2261,Harshal Patel,Harshal Patel,Batter,Batting pressure,4,4,23,20,20,4,2,1,11
+1205,Jonny Bairstow,Jonny Bairstow,Batter,Ordinary batting chase,13,13,238,359,234,12,44,15,90
+3916,Jitesh Sharma,Jitesh Sharma,Batter,Ordinary batting chase,26,26,244,338,237,20,28,18,87
+1617,Rishi Dhawan,Rishi Dhawan,Batter,Ordinary batting chase,2,2,26,10,25,1,1,0,18
+3628,Kagiso Rabada,Kagiso Rabada,Batter,Ordinary batting chase,7,7,48,54,43,4,5,3,19
+6161,Rahul Chahar,Rahul Chahar,Batter,Ordinary batting chase,3,3,19,19,19,0,1,1,10
+6161,Rahul Chahar,Rahul Chahar,Batter,Batting pressure,4,4,26,31,24,2,5,1,13
+1617,Rishi Dhawan,Rishi Dhawan,Batter,Batting pressure,1,1,10,15,10,0,2,1,6
+6464,Arshdeep Singh,Arshdeep Singh,Batter,Batting pressure,4,4,14,7,12,2,1,0,8
+2756,Shashank Singh,Shashank Singh,Batter,Ordinary batting chase,22,22,261,415,250,10,31,26,72
+3125,Nicholas Pooran,Nicholas Pooran,Batter,Batting pressure,4,4,48,83,44,2,7,6,14
+2756,Shashank Singh,Shashank Singh,Batter,Batting pressure,8,8,93,142,88,4,11,8,26
+3451,Baba Indrajith,Baba Indrajith,Batter,Ordinary batting chase,2,2,23,15,22,2,2,0,14
+1941,Devon Conway,Devon Conway,Batter,Ordinary batting chase,10,10,287,355,278,8,40,7,97
+7533,Simarjeet Singh,Simarjeet Singh,Batter,Batting pressure,2,2,3,2,3,1,0,0,1
+19316,Maheesh Theekshana,Maheesh Theekshana,Batter,Batting pressure,2,2,17,12,17,1,0,1,10
+1389,Sean Abbott,Sean Abbott,Batter,Ordinary batting chase,1,1,2,0,2,0,0,0,2
+1389,Sean Abbott,Sean Abbott,Batter,Batting pressure,1,1,3,7,3,1,0,1,1
+3469,Shreyas Gopal,Shreyas Gopal,Batter,Batting pressure,1,1,7,9,7,0,2,0,4
+8530,Kartik Tyagi,Kartik Tyagi,Batter,Batting pressure,3,3,7,7,7,3,1,0,4
+6819,Yashasvi Jaiswal,Yashasvi Jaiswal,Batter,Ordinary batting chase,36,36,848,1282,819,32,150,53,297
+6284,Anukul Roy,Anukul Roy,Batter,Ordinary batting chase,6,6,32,39,31,3,2,2,13
+278,Tim Southee,Tim Southee,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+29888,Harshit Rana,Harshit Rana,Batter,Ordinary batting chase,4,4,16,29,16,2,2,2,6
+2852,Jagadeesha Suchith,Jagadeesha Suchith,Batter,Ordinary batting chase,1,1,7,2,7,1,0,0,5
+1440,Rahul Tripathi,Rahul Tripathi,Batter,Batting pressure,1,1,2,1,2,1,0,0,1
+7240,FazalHaq Farooqi,FazalHaq Farooqi,Batter,Batting pressure,3,3,15,5,15,0,0,0,10
+2860,KS Bharat,KS Bharat,Batter,Ordinary batting chase,2,2,7,8,7,2,2,0,5
+8040,Ripal Patel,Ripal Patel,Batter,Ordinary batting chase,2,2,9,9,9,1,0,1,5
+7270,Anrich Nortje,Anrich Nortje,Batter,Batting pressure,5,5,31,28,29,2,4,0,14
+4816,Khaleel Ahmed,Khaleel Ahmed,Batter,Batting pressure,1,1,1,0,1,1,0,0,1
+20006,Ramandeep Singh,Ramandeep Singh,Batter,Ordinary batting chase,11,11,85,105,84,7,7,4,24
+7574,Kumar Kartikeya Singh,Kumar Kartikeya Singh,Batter,Ordinary batting chase,2,2,7,3,7,1,0,0,5
+7574,Kumar Kartikeya Singh,Kumar Kartikeya Singh,Batter,Batting pressure,2,2,10,8,9,2,1,0,4
+5940,Riley Meredith,Riley Meredith,Batter,Batting pressure,2,2,3,0,3,0,0,0,3
+20023,Karan Sharma,Karan Sharma,Batter,Ordinary batting chase,1,1,4,4,4,1,1,0,3
+6669,Mohsin Khan,Mohsin Khan,Batter,Ordinary batting chase,1,1,3,1,3,1,0,0,2
+3653,Avesh Khan,Avesh Khan,Batter,Ordinary batting chase,2,2,5,12,5,1,0,2,3
+20702,Tristan Stubbs,Tristan Stubbs,Batter,Ordinary batting chase,22,22,330,439,321,10,28,18,82
+27959,Hrithik Shokeen,Hrithik Shokeen,Batter,Ordinary batting chase,1,1,23,18,23,1,2,0,13
+4821,Mahipal Lomror,Mahipal Lomror,Batter,Ordinary batting chase,7,7,59,96,56,5,6,8,20
+7472,Shahbaz Ahmed,Shahbaz Ahmed,Batter,Batting pressure,3,3,27,39,25,2,1,3,9
+4900,Wanindu Hasaranga,Wanindu Hasaranga,Batter,Batting pressure,4,4,8,4,7,3,0,0,3
+7808,Marco Jansen,Marco Jansen,Batter,Batting pressure,4,4,12,6,11,2,0,0,5
+3648,Deepak Hooda,Deepak Hooda,Batter,Batting pressure,2,2,8,9,7,2,1,0,2
+6669,Mohsin Khan,Mohsin Khan,Batter,Batting pressure,3,3,20,9,17,2,1,0,12
+7325,Harpreet Brar,Harpreet Brar,Batter,Ordinary batting chase,6,6,35,32,32,3,3,1,17
+6464,Arshdeep Singh,Arshdeep Singh,Batter,Ordinary batting chase,1,1,1,0,1,0,0,0,1
+7498,Abhijeet Tomar,Abhijeet Tomar,Batter,Ordinary batting chase,1,1,8,4,8,1,1,0,7
+1924,Sam Billings,Sam Billings,Batter,Batting pressure,1,1,3,7,3,1,0,1,1
+4708,Rinku Singh,Rinku Singh,Batter,Batting pressure,7,7,104,239,94,1,20,21,26
+305,Ravichandran Ashwin,Ravichandran Ashwin,Batter,Batting pressure,5,5,10,18,10,2,3,0,2
+6423,Riyan Parag,Riyan Parag,Batter,Batting pressure,2,2,7,12,6,0,1,1,2
+2884,Manan Vohra,Manan Vohra,Batter,Ordinary batting chase,1,1,12,19,11,1,1,2,5
+2573,Evin Lewis,Evin Lewis,Batter,Batting pressure,1,1,8,2,6,0,0,0,4
+953,Lokesh Rahul,Lokesh Rahul,Batter,Batting pressure,2,2,7,2,4,1,0,0,2
+4219,Krunal Pandya,Krunal Pandya,Batter,Batting pressure,3,3,8,3,7,2,0,0,4
+6674,Rahmanullah Gurbaz,Rahmanullah Gurbaz,Batter,Ordinary batting chase,10,10,123,127,115,9,12,7,65
+6280,Harry Brook,Harry Brook,Batter,Ordinary batting chase,5,5,60,42,60,5,6,0,39
+4853,Glenn Phillips,Glenn Phillips,Batter,Ordinary batting chase,5,5,37,40,35,4,3,1,11
+479,Adil Rashid,Adil Rashid,Batter,Ordinary batting chase,1,1,6,7,5,0,0,1,3
+2416,Kyle Mayers,Kyle Mayers,Batter,Ordinary batting chase,8,8,129,158,119,8,22,5,62
+914,Krishnappa Gowtham,Krishnappa Gowtham,Batter,Batting pressure,1,1,8,1,4,0,0,0,3
+2985,Mark Wood,Mark Wood,Batter,Batting pressure,1,1,3,10,3,0,1,1,1
+7260,Dhruv Jurel,Dhruv Jurel,Batter,Batting pressure,5,5,48,87,46,2,9,5,13
+3297,Shimron Hetmyer,Shimron Hetmyer,Batter,Batting pressure,3,3,40,72,37,3,3,6,9
+7260,Dhruv Jurel,Dhruv Jurel,Batter,Ordinary batting chase,27,27,384,568,373,17,41,33,116
+6512,Michael Bracewell,Michael Bracewell,Batter,Ordinary batting chase,1,1,18,19,18,1,1,1,7
+395,Karn Sharma,Karn Sharma,Batter,Ordinary batting chase,2,2,8,9,7,1,0,1,3
+7473,Akash Deep,Akash Deep,Batter,Ordinary batting chase,1,1,2,5,2,0,1,0,0
+1219,David Willey,David Willey,Batter,Batting pressure,2,2,20,20,20,0,2,0,8
+7473,Akash Deep,Akash Deep,Batter,Batting pressure,1,1,6,12,6,1,1,1,2
+772,Rilee Rossouw,Rilee Rossouw,Batter,Ordinary batting chase,11,11,170,242,162,10,26,11,64
+220,David Warner,David Warner,Batter,Batting pressure,2,2,17,25,16,1,3,0,4
+4986,Rovman Powell,Rovman Powell,Batter,Batting pressure,6,6,40,54,38,5,4,3,14
+19714,Abishek Porel,Abishek Porel,Batter,Batting pressure,1,1,4,1,4,0,0,0,3
+5608,Narayan Jagadeesan,Narayan Jagadeesan,Batter,Ordinary batting chase,3,3,32,43,32,3,6,1,14
+2985,Mark Wood,Mark Wood,Batter,Ordinary batting chase,1,1,2,1,2,1,0,0,1
+7503,Ravi Bishnoi,Ravi Bishnoi,Batter,Ordinary batting chase,5,5,20,13,20,2,0,0,8
+5939,Cameron Green,Cameron Green,Batter,Ordinary batting chase,19,19,246,350,239,14,26,19,81
+4246,Nitish Rana,Nitish Rana,Batter,Batting pressure,1,1,8,7,6,1,0,1,4
+26909,Yash Dhull,Yash Dhull,Batter,Ordinary batting chase,2,2,19,14,19,2,1,0,8
+19714,Abishek Porel,Abishek Porel,Batter,Ordinary batting chase,16,16,229,305,222,15,34,7,70
+20894,Aman Khan,Aman Khan,Batter,Ordinary batting chase,4,4,33,27,31,2,1,2,17
+20894,Aman Khan,Aman Khan,Batter,Batting pressure,3,3,14,16,11,2,2,0,3
+6466,Atharwa Taide,Atharwa Taide,Batter,Ordinary batting chase,6,6,116,151,109,5,17,4,38
+3727,Matthew Short,Matthew Short,Batter,Ordinary batting chase,4,4,67,91,66,3,10,3,26
+7216,Prabhsimran Singh,Prabhsimran Singh,Batter,Ordinary batting chase,32,32,577,896,561,30,95,45,202
+1040,Harpreet Bhatia,Harpreet Bhatia,Batter,Ordinary batting chase,3,3,46,48,46,3,6,1,23
+2984,Sikandar Raza,Sikandar Raza,Batter,Ordinary batting chase,5,5,109,142,104,4,11,6,40
+4409,Sam Curran,Sam Curran,Batter,Ordinary batting chase,15,15,244,283,234,11,21,8,77
+7059,Nehal Wadhera,Nehal Wadhera,Batter,Ordinary batting chase,25,25,361,440,339,16,33,23,129
+2320,Trent Boult,Trent Boult,Batter,Ordinary batting chase,4,4,6,2,6,2,0,0,4
+295,Wayne Parnell,Wayne Parnell,Batter,Ordinary batting chase,1,1,3,1,3,0,0,0,2
+8085,Suyash Prabhudessai,Suyash Prabhudessai,Batter,Batting pressure,1,1,11,18,9,1,0,2,3
+295,Wayne Parnell,Wayne Parnell,Batter,Batting pressure,1,1,3,1,2,1,0,0,1
+4260,Heinrich Klaasen,Heinrich Klaasen,Batter,Ordinary batting chase,19,19,365,563,351,13,46,29,93
+7808,Marco Jansen,Marco Jansen,Batter,Ordinary batting chase,6,6,32,30,29,4,3,1,14
+7446,Abdul Samad,Abdul Samad,Batter,Batting pressure,5,5,19,22,18,4,2,1,7
+360,Bhuvneshwar Kumar,Bhuvneshwar Kumar,Batter,Ordinary batting chase,5,5,33,29,32,0,4,0,16
+6683,Mayank Markande,Mayank Markande,Batter,Batting pressure,3,3,14,21,13,0,2,1,4
+6314,Devdutt Padikkal,Devdutt Padikkal,Batter,Batting pressure,1,1,10,15,10,1,3,0,4
+5553,Phil Salt,Phil Salt,Batter,Ordinary batting chase,17,17,358,604,350,14,74,29,129
+7059,Nehal Wadhera,Nehal Wadhera,Batter,Batting pressure,4,4,14,17,13,3,1,1,4
+3298,Jofra Archer,Jofra Archer,Batter,Batting pressure,6,6,20,18,19,4,1,0,6
+20802,Abdul Basith,Abdul Basith,Batter,Batting pressure,1,1,1,1,1,0,0,0,0
+1187,Jason Roy,Jason Roy,Batter,Ordinary batting chase,4,4,96,156,93,4,21,6,33
+1045,David Wiese,David Wiese,Batter,Batting pressure,1,1,2,1,2,1,0,0,1
+23,Piyush Chawla,Piyush Chawla,Batter,Ordinary batting chase,3,3,8,9,8,1,1,0,3
+23,Piyush Chawla,Piyush Chawla,Batter,Batting pressure,4,4,14,20,14,4,1,2,8
+7060,Arjun Tendulkar,Arjun Tendulkar,Batter,Batting pressure,1,1,9,13,9,1,0,1,2
+2054,Jason Behrendorff,Jason Behrendorff,Batter,Batting pressure,2,2,9,6,9,0,0,0,3
+143,Dinesh Karthik,Dinesh Karthik,Batter,Batting pressure,5,5,29,70,24,2,2,8,4
+4487,Vyshak Kumar,Vyshak Kumar,Batter,Batting pressure,2,2,11,14,10,0,0,1,2
+4755,Shivam Dube,Shivam Dube,Batter,Batting pressure,3,3,29,39,27,3,3,2,7
+4391,Liam Livingstone,Liam Livingstone,Batter,Batting pressure,2,2,18,27,17,1,2,2,6
+3916,Jitesh Sharma,Jitesh Sharma,Batter,Batting pressure,2,2,9,19,8,0,0,2,2
+4409,Sam Curran,Sam Curran,Batter,Batting pressure,3,3,7,13,7,2,2,0,2
+6487,Priyam Garg,Priyam Garg,Batter,Ordinary batting chase,1,1,9,12,9,1,1,0,1
+3645,Sarfaraz Khan,Sarfaraz Khan,Batter,Batting pressure,1,1,1,4,1,0,1,0,0
+8040,Ripal Patel,Ripal Patel,Batter,Batting pressure,2,2,18,18,18,1,1,0,4
+2984,Sikandar Raza,Sikandar Raza,Batter,Batting pressure,1,1,4,7,4,0,0,0,1
+158,Amit Mishra,Amit Mishra,Batter,Ordinary batting chase,1,1,21,11,21,0,1,0,13
+5809,Naveen ul Haq,Naveen ul Haq,Batter,Ordinary batting chase,2,2,9,2,8,0,0,0,6
+2101,Quinton de Kock,Quinton de Kock,Batter,Batting pressure,1,1,4,9,4,1,0,1,1
+1701,Swapnil Singh,Swapnil Singh,Batter,Batting pressure,1,1,4,2,4,0,0,0,2
+4853,Glenn Phillips,Glenn Phillips,Batter,Batting pressure,1,1,5,21,5,0,0,3,0
+6671,Lalit Yadav,Lalit Yadav,Batter,Batting pressure,3,3,23,21,21,3,3,0,11
+7967,Noor Ahmad,Noor Ahmad,Batter,Ordinary batting chase,3,3,10,4,10,3,0,0,7
+3275,Alzarri Joseph,Alzarri Joseph,Batter,Batting pressure,1,1,9,4,9,0,1,0,8
+5029,Prerak Mankad,Prerak Mankad,Batter,Ordinary batting chase,2,2,53,67,51,1,7,2,18
+2790,Praveen Dubey,Praveen Dubey,Batter,Ordinary batting chase,1,1,20,16,20,1,2,0,10
+5041,Mukesh Kumar,Mukesh Kumar,Batter,Batting pressure,3,3,17,8,15,1,0,0,7
+2531,Joe Root,Joe Root,Batter,Ordinary batting chase,1,1,15,10,15,1,1,0,8
+2636,Adam Zampa,Adam Zampa,Batter,Ordinary batting chase,1,1,6,2,6,1,0,0,4
+2411,Sandeep Sharma,Sandeep Sharma,Batter,Ordinary batting chase,1,1,1,0,1,0,0,0,1
+6591,KM Asif,KM Asif,Batter,Ordinary batting chase,1,1,2,0,2,1,0,0,2
+7304,Sanvir Singh,Sanvir Singh,Batter,Ordinary batting chase,2,2,10,13,10,1,1,1,5
+4260,Heinrich Klaasen,Heinrich Klaasen,Batter,Batting pressure,3,3,24,52,23,3,1,6,6
+4211,Vishnu Vinod,Vishnu Vinod,Batter,Ordinary batting chase,2,2,12,7,11,2,0,0,5
+5939,Cameron Green,Cameron Green,Batter,Batting pressure,1,1,1,0,0,0,0,0,0
+6396,Tim David,Tim David,Batter,Batting pressure,5,5,28,55,25,4,2,6,7
+3782,M Shahrukh Khan,M Shahrukh Khan,Batter,Batting pressure,5,5,19,38,19,3,0,4,5
+6772,Chetan Sakariya,Chetan Sakariya,Batter,Batting pressure,1,1,2,0,2,0,0,0,2
+8746,Vaibhav Arora,Vaibhav Arora,Batter,Batting pressure,2,2,2,1,2,1,0,0,1
+2436,Dasun Shanaka,Dasun Shanaka,Batter,Ordinary batting chase,3,3,24,25,24,2,2,1,12
+6489,Darshan Nalkande,Darshan Nalkande,Batter,Ordinary batting chase,2,2,12,12,12,2,0,1,5
+7967,Noor Ahmad,Noor Ahmad,Batter,Batting pressure,4,4,18,19,17,2,2,1,9
+1566,Mohammed Shami,Mohammed Shami,Batter,Batting pressure,3,3,16,12,12,1,2,0,6
+5809,Naveen ul Haq,Naveen ul Haq,Batter,Batting pressure,2,2,6,3,6,0,0,0,4
+786,Chris Jordan,Chris Jordan,Batter,Ordinary batting chase,1,1,1,0,1,0,0,0,1
+4854,Rachin Ravindra,Rachin Ravindra,Batter,Ordinary batting chase,12,12,222,305,215,10,29,10,67
+4106,Daryl Mitchell,Daryl Mitchell,Batter,Ordinary batting chase,6,6,119,170,116,6,13,8,35
+37052,Naman Dhir,Naman Dhir,Batter,Ordinary batting chase,16,16,154,236,151,12,23,14,61
+6628,Gerald Coetzee,Gerald Coetzee,Batter,Ordinary batting chase,4,4,18,20,18,3,2,1,9
+2933,Jasprit Bumrah,Jasprit Bumrah,Batter,Ordinary batting chase,2,2,3,6,3,0,1,0,0
+6697,Shams Mulani,Shams Mulani,Batter,Batting pressure,1,1,1,1,1,0,0,0,0
+6676,Azmatullah Omarzai,Azmatullah Omarzai,Batter,Ordinary batting chase,3,3,21,21,20,2,0,1,6
+6676,Azmatullah Omarzai,Azmatullah Omarzai,Batter,Batting pressure,3,3,14,19,14,3,2,1,6
+6354,Spencer Johnson,Spencer Johnson,Batter,Batting pressure,2,2,6,5,6,0,1,0,4
+3651,Ricky Bhui,Ricky Bhui,Batter,Ordinary batting chase,1,1,2,0,2,1,0,0,2
+20702,Tristan Stubbs,Tristan Stubbs,Batter,Batting pressure,5,5,42,101,41,2,7,8,6
+142,Shikhar Dhawan,Shikhar Dhawan,Batter,Batting pressure,1,1,1,0,1,1,0,0,1
+8238,Sameer Rizvi,Sameer Rizvi,Batter,Ordinary batting chase,11,11,177,273,168,6,23,17,59
+25139,Shubham Dubey,Shubham Dubey,Batter,Ordinary batting chase,10,10,74,111,71,5,10,7,27
+4821,Mahipal Lomror,Mahipal Lomror,Batter,Batting pressure,1,1,5,17,5,1,1,2,1
+4716,Mayank Dagar,Mayank Dagar,Batter,Ordinary batting chase,1,1,1,0,1,0,0,0,1
+4716,Mayank Dagar,Mayank Dagar,Batter,Batting pressure,1,1,0,0,0,1,0,0,0
+2315,Reece Topley,Reece Topley,Batter,Batting pressure,1,1,6,3,6,0,0,0,3
+8266,Sumit Kumar 1,Sumit Kumar 1,Batter,Ordinary batting chase,2,2,15,16,14,0,2,1,9
+7327,Rasikh Salam,Rasikh Salam,Batter,Ordinary batting chase,3,3,15,11,14,1,1,0,6
+8266,Sumit Kumar 1,Sumit Kumar 1,Batter,Batting pressure,1,1,1,0,1,1,0,0,1
+28,Ishant Sharma,Ishant Sharma,Batter,Batting pressure,2,2,8,1,7,0,0,0,6
+8101,Ashutosh Sharma,Ashutosh Sharma,Batter,Ordinary batting chase,13,13,162,276,158,8,20,19,46
+2367,Travis Head,Travis Head,Batter,Ordinary batting chase,14,14,198,348,189,13,37,23,75
+8221,Nitish Reddy,Nitish Reddy,Batter,Ordinary batting chase,12,12,156,224,150,8,16,11,47
+4703,Rishabh Pant,Rishabh Pant,Batter,Batting pressure,2,2,16,26,15,2,3,1,4
+8251,Kumar Kushagra,Kumar Kushagra,Batter,Batting pressure,1,1,1,0,1,1,0,0,1
+4505,Jhye Richardson,Jhye Richardson,Batter,Batting pressure,1,1,2,2,2,1,0,0,1
+4486,BR Sharath,BR Sharath,Batter,Ordinary batting chase,1,1,5,2,5,1,0,0,3
+8101,Ashutosh Sharma,Ashutosh Sharma,Batter,Batting pressure,6,6,40,80,34,2,7,6,9
+7341,Jake McGurk,Jake McGurk,Batter,Ordinary batting chase,8,8,118,207,112,8,16,18,50
+4369,Shai Hope,Shai Hope,Batter,Ordinary batting chase,3,3,44,59,43,2,6,2,17
+6486,Tanush Kotian,Tanush Kotian,Batter,Ordinary batting chase,1,1,32,24,31,1,3,0,17
+1944,Keshav Maharaj,Keshav Maharaj,Batter,Ordinary batting chase,1,1,2,1,2,1,0,0,1
+26906,Angkrish Raghuvanshi,Angkrish Raghuvanshi,Batter,Ordinary batting chase,10,10,198,234,190,9,24,7,69
+126,Rohit Sharma,Rohit Sharma,Batter,Batting pressure,1,1,17,28,14,0,3,1,2
+1107,Mohammad Nabi,Mohammad Nabi,Batter,Batting pressure,2,2,11,11,11,1,0,1,5
+6272,William Jacks,William Jacks,Batter,Ordinary batting chase,12,12,156,229,154,7,16,15,55
+27962,Saurav Chauhan,Saurav Chauhan,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+6467,Anuj Rawat,Anuj Rawat,Batter,Batting pressure,1,1,11,20,10,0,4,0,2
+3628,Kagiso Rabada,Kagiso Rabada,Batter,Batting pressure,4,4,18,19,16,2,0,2,7
+395,Karn Sharma,Karn Sharma,Batter,Batting pressure,1,1,2,12,2,0,0,2,0
+5577,Sai Kishore,Sai Kishore,Batter,Batting pressure,3,3,10,5,10,2,0,0,5
+3660,Luke Wood,Luke Wood,Batter,Batting pressure,1,1,3,9,3,0,0,1,0
+42845,Arshin Kulkarni,Arshin Kulkarni,Batter,Ordinary batting chase,2,2,8,9,8,2,2,0,5
+2373,Ashton Turner,Ashton Turner,Batter,Ordinary batting chase,2,2,20,21,18,2,0,2,7
+6628,Gerald Coetzee,Gerald Coetzee,Batter,Batting pressure,1,1,3,6,3,1,0,1,2
+1701,Swapnil Singh,Swapnil Singh,Batter,Ordinary batting chase,1,1,9,15,9,0,2,1,5
+7325,Harpreet Brar,Harpreet Brar,Batter,Batting pressure,2,2,14,21,14,0,3,0,2
+8580,Yudhvir Singh,Yudhvir Singh,Batter,Ordinary batting chase,2,2,9,15,9,1,1,1,3
+8580,Yudhvir Singh,Yudhvir Singh,Batter,Batting pressure,1,1,5,6,5,1,0,1,4
+8182,Donovan Ferreira,Donovan Ferreira,Batter,Ordinary batting chase,5,5,85,135,83,3,15,6,31
+2320,Trent Boult,Trent Boult,Batter,Batting pressure,3,3,8,3,7,0,0,0,4
+4101,Mitchell Santner,Mitchell Santner,Batter,Batting pressure,5,5,24,36,23,2,2,3,9
+27964,Anshul Kamboj,Anshul Kamboj,Batter,Ordinary batting chase,3,3,11,25,11,1,2,2,2
+8251,Kumar Kushagra,Kumar Kushagra,Batter,Ordinary batting chase,2,2,17,20,17,2,3,0,8
+5041,Mukesh Kumar,Mukesh Kumar,Batter,Ordinary batting chase,1,1,1,1,1,0,0,0,0
+20005,Arshad Khan,Arshad Khan,Batter,Ordinary batting chase,4,4,38,57,35,0,4,4,13
+20005,Arshad Khan,Arshad Khan,Batter,Batting pressure,4,4,25,32,22,2,0,4,11
+37052,Naman Dhir,Naman Dhir,Batter,Batting pressure,4,4,43,80,40,2,7,5,9
+4117,Ishan Kishan,Ishan Kishan,Batter,Batting pressure,1,1,7,7,6,1,1,0,2
+3967,Tom Kohler,Tom Kohler,Batter,Ordinary batting chase,2,2,31,30,31,2,5,0,17
+27259,Jishan Alam,Jishan Alam,Batter,Ordinary batting chase,5,5,65,64,61,5,7,1,31
+7901,Parvez Emon,Parvez Emon,Batter,Ordinary batting chase,2,2,37,52,36,2,3,4,16
+4780,Mohammad Saif Hassan,Mohammad Saif Hassan,Batter,Ordinary batting chase,2,2,26,34,26,1,1,3,12
+6651,Towhid Hridoy,Towhid Hridoy,Batter,Ordinary batting chase,2,2,38,41,35,2,2,1,10
+7908,Mohammad Akbar Ali,Mohammad Akbar Ali,Batter,Ordinary batting chase,5,5,84,122,82,4,6,10,30
+7903,Shamim Hossain,Shamim Hossain,Batter,Ordinary batting chase,2,2,20,23,20,1,0,1,3
+25341,Mahfuzur Rabby,Mahfuzur Rabby,Batter,Ordinary batting chase,3,3,30,17,29,2,0,0,14
+2001,Yashodha Lanka,Yashodha Lanka,Batter,Ordinary batting chase,2,2,22,26,22,1,3,0,9
+19309,Lahiru Udara,Lahiru Udara,Batter,Ordinary batting chase,2,2,30,49,28,2,3,4,11
+6473,Nuwanidu Fernando,Nuwanidu Fernando,Batter,Ordinary batting chase,4,4,79,112,74,3,11,4,21
+7704,Pavan Rathnayake,Pavan Rathnayake,Batter,Ordinary batting chase,1,1,21,12,21,1,0,0,10
+7155,Sahan Arachchige,Sahan Arachchige,Batter,Ordinary batting chase,4,4,51,49,49,2,3,1,18
+8388,Ahan Wickramasinghe,Ahan Wickramasinghe,Batter,Ordinary batting chase,2,2,64,83,64,1,7,1,19
+38050,Isitha Wijesundera,Isitha Wijesundera,Batter,Ordinary batting chase,1,1,6,5,6,1,1,0,4
+3673,Ramesh Mendis,Ramesh Mendis,Batter,Ordinary batting chase,2,2,5,2,5,2,0,0,3
+6179,Nipun Ransika,Nipun Ransika,Batter,Ordinary batting chase,1,1,3,0,3,0,0,0,3
+6179,Nipun Ransika,Nipun Ransika,Batter,Batting pressure,1,1,4,6,3,1,0,1,2
+27504,Dushan Hemantha,Dushan Hemantha,Batter,Batting pressure,1,1,1,6,1,0,0,1,0
+27504,Dushan Hemantha,Dushan Hemantha,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+41110,Mayank Kumar,Mayank Kumar,Batter,Ordinary batting chase,3,3,36,34,33,3,1,3,18
+28788,Tanish Suri,Tanish Suri,Batter,Ordinary batting chase,2,2,41,48,41,2,5,2,20
+27391,Vishnu Sukumaran,Vishnu Sukumaran,Batter,Ordinary batting chase,1,1,17,15,17,1,2,0,8
+26646,Rahul Chopra,Rahul Chopra,Batter,Ordinary batting chase,2,2,21,20,20,2,3,0,9
+36153,Syed Haider,Syed Haider,Batter,Ordinary batting chase,2,2,44,56,44,1,3,3,14
+39444,Basil Hameed,Basil Hameed,Batter,Ordinary batting chase,2,2,22,23,22,2,1,1,7
+27465,Nilansh Keswani,Nilansh Keswani,Batter,Ordinary batting chase,1,1,17,19,17,1,2,0,7
+8727,Sanchit Sharma,Sanchit Sharma,Batter,Ordinary batting chase,2,2,2,0,2,1,0,0,2
+8741,Mohammad Haris,Mohammad Haris,Batter,Ordinary batting chase,1,1,2,6,2,1,0,1,1
+6440,Omair Yousuf,Omair Yousuf,Batter,Ordinary batting chase,1,1,8,2,7,1,0,0,5
+27517,Yasir Khan,Yasir Khan,Batter,Ordinary batting chase,2,2,23,35,23,1,3,2,9
+7692,Qasim Akram,Qasim Akram,Batter,Ordinary batting chase,1,1,14,22,14,0,4,0,6
+19012,Zeeshan Ali,Zeeshan Ali,Batter,Ordinary batting chase,3,3,37,40,37,3,5,1,20
+3802,Anshuman Rath,Anshuman Rath,Batter,Ordinary batting chase,3,3,47,33,47,3,1,1,23
+3382,Nizakat Khan,Nizakat Khan,Batter,Ordinary batting chase,3,3,64,73,64,3,4,3,22
+3373,Aizaz Khan,Aizaz Khan,Batter,Ordinary batting chase,2,2,10,10,10,2,1,0,4
+21388,Martin Coetzee,Martin Coetzee,Batter,Ordinary batting chase,1,1,12,15,12,1,1,1,5
+3377,Babar Hayat,Babar Hayat,Batter,Ordinary batting chase,3,3,95,98,93,2,3,5,33
+2972,Yasim Murtaza,Yasim Murtaza,Batter,Ordinary batting chase,3,3,20,18,20,1,0,1,8
+3377,Babar Hayat,Babar Hayat,Batter,Batting pressure,1,1,11,9,11,1,0,0,2
+2972,Yasim Murtaza,Yasim Murtaza,Batter,Batting pressure,1,1,15,27,15,1,0,3,3
+7945,Nasrulla Rana,Nasrulla Rana,Batter,Batting pressure,1,1,3,1,3,0,0,0,2
+5750,Ehsan Khan,Ehsan Khan,Batter,Batting pressure,2,2,3,2,3,1,0,0,1
+17937,Zubaid Akbari,Zubaid Akbari,Batter,Ordinary batting chase,3,3,13,21,13,3,3,1,7
+8647,Sediqullah Atal,Sediqullah Atal,Batter,Ordinary batting chase,4,4,153,215,149,2,14,12,52
+6433,Darwish Rasooli,Darwish Rasooli,Batter,Ordinary batting chase,3,3,47,61,46,3,5,3,17
+5808,Karim Janat,Karim Janat,Batter,Ordinary batting chase,2,2,40,42,40,2,0,3,17
+3543,Shahidullah Kamal,Shahidullah Kamal,Batter,Ordinary batting chase,1,1,23,19,22,1,1,0,9
+8652,Mohammad Ishaq,Mohammad Ishaq,Batter,Ordinary batting chase,3,3,24,30,24,2,2,1,9
+3550,Sharafuddin Ashraf,Sharafuddin Ashraf,Batter,Ordinary batting chase,1,1,2,1,2,0,0,0,1
+3858,Jatinder Singh,Jatinder Singh,Batter,Ordinary batting chase,1,1,31,24,29,1,2,1,18
+3871,Aamir Kaleem,Aamir Kaleem,Batter,Ordinary batting chase,1,1,18,11,18,1,2,0,13
+27059,Karan Sonavale,Karan Sonavale,Batter,Ordinary batting chase,3,3,28,45,27,3,4,3,10
+7937,Wasim Ali,Wasim Ali,Batter,Ordinary batting chase,3,3,64,59,59,1,5,1,22
+27137,Hammad Mirza,Hammad Mirza,Batter,Ordinary batting chase,3,3,59,72,57,1,6,3,20
+7937,Wasim Ali,Wasim Ali,Batter,Batting pressure,1,1,7,4,7,1,0,0,3
+27137,Hammad Mirza,Hammad Mirza,Batter,Batting pressure,1,1,5,4,5,1,0,0,1
+4450,Mehran Khan,Mehran Khan,Batter,Batting pressure,1,1,3,3,3,1,0,0,1
+4974,Mohammad Nadeem,Mohammad Nadeem,Batter,Batting pressure,1,1,8,5,8,1,0,0,3
+3876,Sufyan Mehmood,Sufyan Mehmood,Batter,Batting pressure,1,1,4,8,4,0,0,1,1
+25231,Samay Shrivastava,Samay Shrivastava,Batter,Batting pressure,2,2,4,3,4,0,0,0,1
+6645,Mohammad Sheikh,Mohammad Sheikh,Batter,Ordinary batting chase,1,1,16,8,15,1,0,0,7
+3285,Abu Haider,Abu Haider,Batter,Ordinary batting chase,1,1,16,27,16,0,0,3,5
+7906,Rakibul Hasan,Rakibul Hasan,Batter,Ordinary batting chase,2,2,26,24,25,2,3,1,15
+19535,Rejaur Rahman Raja,Rejaur Rahman Raja,Batter,Ordinary batting chase,1,1,2,2,2,0,0,0,0
+3285,Abu Haider,Abu Haider,Batter,Batting pressure,1,1,10,11,9,0,1,0,3
+19535,Rejaur Rahman Raja,Rejaur Rahman Raja,Batter,Batting pressure,1,1,4,3,4,0,0,0,1
+27469,Aryansh Sharma,Aryansh Sharma,Batter,Ordinary batting chase,1,1,13,8,13,1,1,0,9
+27466,Dhruv Parashar,Dhruv Parashar,Batter,Ordinary batting chase,1,1,6,1,6,1,0,0,5
+27373,Muhammad Farooq,Muhammad Farooq,Batter,Ordinary batting chase,1,1,9,2,9,0,0,0,7
+19754,Raja Khan,Raja Khan,Batter,Ordinary batting chase,1,1,2,0,2,1,0,0,2
+47694,Omid Rahman,Omid Rahman,Batter,Ordinary batting chase,1,1,2,0,2,0,0,0,2
+27373,Muhammad Farooq,Muhammad Farooq,Batter,Batting pressure,1,1,9,1,8,1,0,0,7
+47694,Omid Rahman,Omid Rahman,Batter,Batting pressure,1,1,1,0,1,0,0,0,1
+26830,Nishant Kumar Sindhu,Nishant Kumar Sindhu,Batter,Ordinary batting chase,4,4,25,27,24,3,1,1,7
+20006,Ramandeep Singh,Ramandeep Singh,Batter,Batting pressure,3,3,42,74,38,3,11,2,10
+26830,Nishant Kumar Sindhu,Nishant Kumar Sindhu,Batter,Batting pressure,1,1,7,17,7,1,3,0,0
+27964,Anshul Kamboj,Anshul Kamboj,Batter,Batting pressure,2,2,16,21,15,0,1,1,2
+25139,Shubham Dubey,Shubham Dubey,Batter,Batting pressure,4,4,25,63,25,0,2,6,2
+46066,Vipraj Nigam,Vipraj Nigam,Batter,Ordinary batting chase,4,4,33,68,30,3,9,3,4
+829,Mitchell Starc,Mitchell Starc,Batter,Ordinary batting chase,2,2,7,3,6,1,0,0,3
+2878,Mohit Sharma,Mohit Sharma,Batter,Ordinary batting chase,2,2,3,1,3,1,0,0,2
+6725,Sherfane Rutherford,Sherfane Rutherford,Batter,Batting pressure,3,3,40,80,34,2,3,9,11
+4007,Ryan Rickelton,Ryan Rickelton,Batter,Ordinary batting chase,13,13,226,389,222,10,35,29,89
+31529,Robin Minz,Robin Minz,Batter,Ordinary batting chase,1,1,6,3,6,1,0,0,4
+2382,Jamie Overton,Jamie Overton,Batter,Batting pressure,2,2,9,21,9,1,2,1,1
+25669,Priyansh Arya,Priyansh Arya,Batter,Ordinary batting chase,17,17,214,369,201,17,40,23,75
+4904,Kamindu Mendis,Kamindu Mendis,Batter,Ordinary batting chase,3,3,66,91,63,1,7,2,17
+47370,Aniket Verma,Aniket Verma,Batter,Ordinary batting chase,4,4,33,31,28,2,2,2,14
+2877,Vijay Shankar,Vijay Shankar,Batter,Batting pressure,2,2,19,25,17,0,1,1,1
+7625,Suryansh Shedge,Suryansh Shedge,Batter,Batting pressure,1,1,4,2,4,1,0,0,2
+4692,Lockie Ferguson,Lockie Ferguson,Batter,Batting pressure,1,1,1,4,1,0,1,0,0
+29888,Harshit Rana,Harshit Rana,Batter,Batting pressure,3,3,24,21,23,1,2,1,13
+1813,Deepak Chahar,Deepak Chahar,Batter,Batting pressure,1,1,1,0,1,1,0,0,1
+1941,Devon Conway,Devon Conway,Batter,Batting pressure,1,1,6,9,6,0,0,0,0
+3298,Jofra Archer,Jofra Archer,Batter,Ordinary batting chase,5,5,35,37,35,2,3,2,18
+6806,Tushar Deshpande,Tushar Deshpande,Batter,Batting pressure,4,4,18,30,18,3,0,3,6
+2411,Sandeep Sharma,Sandeep Sharma,Batter,Batting pressure,1,1,6,6,5,0,0,0,0
+930,Karun Nair,Karun Nair,Batter,Ordinary batting chase,5,5,99,168,94,5,22,8,34
+26913,Shaik Rasheed,Shaik Rasheed,Batter,Ordinary batting chase,2,2,32,41,30,2,7,1,15
+8746,Vaibhav Arora,Vaibhav Arora,Batter,Ordinary batting chase,2,2,9,1,9,1,0,0,8
+4736,Josh Inglis,Josh Inglis,Batter,Ordinary batting chase,6,6,147,206,141,5,21,10,57
+50284,Vaibhav Sooryavanshi,Vaibhav Sooryavanshi,Batter,Ordinary batting chase,15,15,276,604,264,15,47,58,97
+1596,Moeen Ali,Moeen Ali,Batter,Batting pressure,1,1,2,0,2,1,0,0,2
+26906,Angkrish Raghuvanshi,Angkrish Raghuvanshi,Batter,Batting pressure,1,1,13,27,13,0,3,1,2
+58246,Prince Yadav,Prince Yadav,Batter,Batting pressure,2,2,11,5,10,0,0,0,5
+58134,Digvesh Rathi,Digvesh Rathi,Batter,Batting pressure,2,2,5,2,4,1,0,0,2
+23311,Jacob Bethell,Jacob Bethell,Batter,Ordinary batting chase,6,6,75,92,71,6,10,4,30
+46066,Vipraj Nigam,Vipraj Nigam,Batter,Batting pressure,2,2,19,35,19,1,4,2,8
+829,Mitchell Starc,Mitchell Starc,Batter,Batting pressure,1,1,1,0,1,1,0,0,1
+7625,Suryansh Shedge,Suryansh Shedge,Batter,Ordinary batting chase,3,3,34,45,31,1,3,2,8
+19316,Maheesh Theekshana,Maheesh Theekshana,Batter,Ordinary batting chase,1,1,9,2,9,1,0,0,7
+8177,Akash Madhwal,Akash Madhwal,Batter,Ordinary batting chase,1,1,5,2,5,0,0,0,3
+8177,Akash Madhwal,Akash Madhwal,Batter,Batting pressure,1,1,4,2,4,0,0,0,2
+47370,Aniket Verma,Aniket Verma,Batter,Batting pressure,1,1,7,3,7,1,0,0,5
+8221,Nitish Reddy,Nitish Reddy,Batter,Batting pressure,1,1,11,21,10,0,1,2,2
+4904,Kamindu Mendis,Kamindu Mendis,Batter,Batting pressure,1,1,1,0,1,1,0,0,1
+48504,Ayush Mhatre,Ayush Mhatre,Batter,Ordinary batting chase,4,4,69,125,66,4,14,6,19
+35071,Kunal Rathore,Kunal Rathore,Batter,Ordinary batting chase,1,1,5,0,5,1,0,0,5
+6457,Urvil Patel,Urvil Patel,Batter,Ordinary batting chase,5,5,59,137,57,5,5,16,18
+198,Manish Pandey,Manish Pandey,Batter,Batting pressure,1,1,8,21,7,1,0,3,2
+26663,Kwena Maphaka,Kwena Maphaka,Batter,Batting pressure,1,1,3,8,2,0,2,0,0
+3672,Kusal Mendis,Kusal Mendis,Batter,Ordinary batting chase,1,1,11,20,10,1,1,2,4
+3697,Kyle Jamieson,Kyle Jamieson,Batter,Batting pressure,1,1,2,0,2,0,0,0,2
+35133,Sufyan Yousuf,Sufyan Yousuf,Batter,Ordinary batting chase,2,2,8,5,7,2,0,0,3
+8726,Alishan Sharafu,Alishan Sharafu,Batter,Ordinary batting chase,1,1,5,3,5,1,0,0,2
+49265,Ahmed Tariq,Ahmed Tariq,Batter,Ordinary batting chase,1,1,3,0,2,1,0,0,2
+49268,Sohaib Khan,Sohaib Khan,Batter,Ordinary batting chase,1,1,36,55,34,0,2,6,15
+27380,Harshit Kaushik,Harshit Kaushik,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+8729,Haider Shah,Haider Shah,Batter,Ordinary batting chase,1,1,16,20,16,1,1,1,6
+29558,Muhammad Arfan,Muhammad Arfan,Batter,Ordinary batting chase,1,1,12,9,10,0,1,0,4
+29558,Muhammad Arfan,Muhammad Arfan,Batter,Batting pressure,1,1,17,17,16,1,2,0,7
+49268,Sohaib Khan,Sohaib Khan,Batter,Batting pressure,1,1,7,8,7,1,1,0,2
+27464,Aayan Afzal Khan,Aayan Afzal Khan,Batter,Batting pressure,1,1,3,2,3,0,0,0,1
+8723,Mohammed Faraazuddin,Mohammed Faraazuddin,Batter,Batting pressure,1,1,4,2,4,0,0,0,2
+16284,Habibur Rahman Sohan,Habibur Rahman Sohan,Batter,Ordinary batting chase,4,4,85,163,79,3,12,16,33
+60689,Zawad Abrar,Zawad Abrar,Batter,Ordinary batting chase,3,3,56,51,49,2,5,2,24
+7981,Imran Mir,Imran Mir,Batter,Ordinary batting chase,1,1,21,34,21,1,2,3,9
+7966,Farmanullah Safi,Farmanullah Safi,Batter,Ordinary batting chase,1,1,2,1,2,1,0,0,1
+17911,Nangeyalia Kharote,Nangeyalia Kharote,Batter,Ordinary batting chase,1,1,21,15,20,1,1,0,9
+6436,Qais Ahmad,Qais Ahmad,Batter,Ordinary batting chase,1,1,17,16,13,0,0,1,3
+56685,Abdullah Ahmadzai,Abdullah Ahmadzai,Batter,Ordinary batting chase,1,1,2,1,2,0,0,0,1
+35120,Narayan Saishiv,Narayan Saishiv,Batter,Ordinary batting chase,1,1,33,31,31,1,1,2,14
+34546,Aryan Bisht,Aryan Bisht,Batter,Ordinary batting chase,1,1,30,30,29,0,2,1,12
+35102,Zikria Islam,Zikria Islam,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+3876,Sufyan Mehmood,Sufyan Mehmood,Batter,Ordinary batting chase,1,1,6,4,6,1,0,0,2
+34546,Aryan Bisht,Aryan Bisht,Batter,Batting pressure,1,1,1,0,1,1,0,0,1
+26843,Maaz Sadaqat,Maaz Sadaqat,Batter,Ordinary batting chase,2,2,67,116,62,0,11,7,19
+33675,Mohammad Naeem,Mohammad Naeem,Batter,Ordinary batting chase,2,2,16,20,15,2,1,2,8
+46996,Mohammad Faiq,Mohammad Faiq,Batter,Ordinary batting chase,1,1,15,16,14,0,1,1,7
+6483,Nishan Madushka,Nishan Madushka,Batter,Ordinary batting chase,2,2,33,41,32,2,5,1,11
+39638,Vishen Halambage,Vishen Halambage,Batter,Ordinary batting chase,2,2,31,33,30,2,3,3,21
+6172,Lasith Croospulle,Lasith Croospulle,Batter,Ordinary batting chase,2,2,22,40,19,2,3,4,8
+6644,Mahidul Ankon,Mahidul Ankon,Batter,Ordinary batting chase,3,3,46,35,45,2,4,0,25
+26848,Ghazi Ghouri,Ghazi Ghouri,Batter,Ordinary batting chase,1,1,11,12,11,0,2,0,5
+25138,Harsh Dubey,Harsh Dubey,Batter,Ordinary batting chase,1,1,47,53,44,0,7,1,18
+37311,Shiv Mathur,Shiv Mathur,Batter,Ordinary batting chase,1,1,19,23,19,0,2,1,8
+3383,Kinchit Shah,Kinchit Shah,Batter,Ordinary batting chase,1,1,4,2,4,0,0,0,2
+37311,Shiv Mathur,Shiv Mathur,Batter,Batting pressure,1,1,3,1,3,1,0,0,2
+3383,Kinchit Shah,Kinchit Shah,Batter,Batting pressure,1,1,7,5,7,1,1,0,5
+21196,Mohammad Waheed,Mohammad Waheed,Batter,Batting pressure,1,1,1,1,1,0,0,0,0
+6784,Hassan Mohammad,Hassan Mohammad,Batter,Batting pressure,1,1,1,1,1,0,0,0,0
+5839,Yasir Ali Chowdhury,Yasir Ali Chowdhury,Batter,Ordinary batting chase,2,2,23,26,22,1,2,0,3
+26854,SM Meherob Hasan,SM Meherob Hasan,Batter,Ordinary batting chase,2,2,33,29,32,1,1,1,12
+5839,Yasir Ali Chowdhury,Yasir Ali Chowdhury,Batter,Batting pressure,1,1,5,2,5,1,0,0,3
+26854,SM Meherob Hasan,SM Meherob Hasan,Batter,Batting pressure,1,1,5,6,3,0,0,1,2
+25138,Harsh Dubey,Harsh Dubey,Batter,Batting pressure,1,1,1,3,1,0,0,0,0
+7052,Dunith Wellalage,Dunith Wellalage,Batter,Ordinary batting chase,1,1,5,2,5,1,0,0,3
+33114,Milan Rathnayake,Milan Rathnayake,Batter,Ordinary batting chase,1,1,23,20,22,0,2,0,8
+6932,Pramod Madushan,Pramod Madushan,Batter,Ordinary batting chase,1,1,11,7,10,1,1,0,7
+26530,Treveen Mathew,Treveen Mathew,Batter,Ordinary batting chase,1,1,11,3,10,0,0,0,7
+26530,Treveen Mathew,Treveen Mathew,Batter,Batting pressure,1,1,3,1,2,0,0,0,1
+33114,Milan Rathnayake,Milan Rathnayake,Batter,Batting pressure,1,1,12,20,10,1,3,1,5
+39637,Garuka Sanketh,Garuka Sanketh,Batter,Batting pressure,1,1,2,1,2,0,0,0,1
+7904,Mohammad Chowdhury,Mohammad Chowdhury,Batter,Ordinary batting chase,1,1,2,0,2,1,0,0,2
+48616,Abdul Saqlain,Abdul Saqlain,Batter,Ordinary batting chase,1,1,14,16,12,0,0,2,6
+24767,Ripon Mondol,Ripon Mondol,Batter,Ordinary batting chase,1,1,9,11,9,0,0,1,4
+8654,Cooper Connolly,Cooper Connolly,Batter,Ordinary batting chase,8,8,146,218,141,6,21,12,52
+5738,Xavier Bartlett,Xavier Bartlett,Batter,Ordinary batting chase,1,1,5,11,5,0,0,1,0
+6931,Pathum Nissanka,Pathum Nissanka,Batter,Ordinary batting chase,7,7,128,198,124,7,23,8,45
+4847,Finn Allen,Finn Allen,Batter,Ordinary batting chase,6,6,90,186,88,5,17,15,30
+8530,Kartik Tyagi,Kartik Tyagi,Batter,Ordinary batting chase,1,1,5,5,5,1,1,0,3
+28018,Ashok Sharma,Ashok Sharma,Batter,Batting pressure,1,1,1,0,1,0,0,0,1
+45749,Mukul Choudhary,Mukul Choudhary,Batter,Ordinary batting chase,5,5,23,25,23,2,2,1,10
+46137,Kartik Sharma,Kartik Sharma,Batter,Ordinary batting chase,5,5,110,140,109,3,12,6,41
+45966,Prashant Veer,Prashant Veer,Batter,Ordinary batting chase,2,2,41,60,40,0,6,3,13
+2382,Jamie Overton,Jamie Overton,Batter,Ordinary batting chase,1,1,11,27,11,0,2,2,0
+45966,Prashant Veer,Prashant Veer,Batter,Batting pressure,1,1,1,0,1,1,0,0,1
+3174,Matt Henry,Matt Henry,Batter,Batting pressure,1,1,3,2,3,1,0,0,1
+1813,Deepak Chahar,Deepak Chahar,Batter,Ordinary batting chase,1,1,5,6,5,0,1,0,2
+8141,Auqib Nabi,Auqib Nabi,Batter,Ordinary batting chase,1,1,2,4,2,1,1,0,1
+4641,Lungi Ngidi,Lungi Ngidi,Batter,Batting pressure,2,2,6,3,6,2,0,0,4
+4265,T Natarajan,T Natarajan,Batter,Batting pressure,1,1,2,1,2,0,0,0,1
+43798,Lhuan Pretorius,Lhuan Pretorius,Batter,Ordinary batting chase,2,2,8,7,8,2,0,0,3
+7312,Nandre Burger,Nandre Burger,Batter,Batting pressure,1,1,5,3,5,0,0,0,2
+6284,Anukul Roy,Anukul Roy,Batter,Batting pressure,2,2,8,8,7,1,1,0,2
+45749,Mukul Choudhary,Mukul Choudhary,Batter,Batting pressure,1,1,5,9,5,0,0,1,1
+28018,Ashok Sharma,Ashok Sharma,Batter,Ordinary batting chase,1,1,4,1,3,0,0,0,2
+8238,Sameer Rizvi,Sameer Rizvi,Batter,Batting pressure,1,1,10,10,10,1,0,0,2
+6526,Himmat Singh,Himmat Singh,Batter,Ordinary batting chase,2,2,21,24,20,1,0,2,6
+1566,Mohammed Shami,Mohammed Shami,Batter,Ordinary batting chase,2,2,5,6,5,1,0,1,4
+27960,Mayank Yadav,Mayank Yadav,Batter,Ordinary batting chase,1,1,4,1,3,0,0,0,2
+58134,Digvesh Rathi,Digvesh Rathi,Batter,Ordinary batting chase,1,1,1,1,1,0,0,0,0
+27960,Mayank Yadav,Mayank Yadav,Batter,Batting pressure,1,1,2,4,2,1,1,0,1
+48953,Danish Malewar,Danish Malewar,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+43917,Krish Bhagat,Krish Bhagat,Batter,Ordinary batting chase,1,1,8,4,8,0,0,0,4
+43917,Krish Bhagat,Krish Bhagat,Batter,Batting pressure,1,1,7,3,7,1,0,0,5
+8634,Ashwani Kumar,Ashwani Kumar,Batter,Batting pressure,1,1,6,1,6,0,0,0,5
+25679,Salil Arora,Salil Arora,Batter,Ordinary batting chase,5,5,58,99,52,2,7,7,13
+4229,George Linde,George Linde,Batter,Ordinary batting chase,1,1,3,4,3,1,1,0,2
+4229,George Linde,George Linde,Batter,Batting pressure,1,1,1,4,1,0,1,0,0
+6526,Himmat Singh,Himmat Singh,Batter,Batting pressure,1,1,1,4,1,0,1,0,0
+6806,Tushar Deshpande,Tushar Deshpande,Batter,Ordinary batting chase,1,1,1,0,1,0,0,0,1
+2436,Dasun Shanaka,Dasun Shanaka,Batter,Batting pressure,1,1,7,8,6,1,1,0,2
+67036,Brijesh Sharma,Brijesh Sharma,Batter,Batting pressure,1,1,1,1,1,0,0,0,0
+48575,Sahil Parakh,Sahil Parakh,Batter,Ordinary batting chase,2,2,14,22,14,2,2,1,5
+56830,Madhav Tiwari,Madhav Tiwari,Batter,Ordinary batting chase,1,1,8,18,8,0,2,1,1
+33067,Ravichandran Smaran,Ravichandran Smaran,Batter,Ordinary batting chase,3,3,21,15,21,2,2,0,12
+56817,Shivang Kumar,Shivang Kumar,Batter,Ordinary batting chase,2,2,18,12,17,1,0,0,7
+25132,Praful Hinge,Praful Hinge,Batter,Ordinary batting chase,1,1,8,3,8,1,0,0,6
+39657,Eshan Malinga,Eshan Malinga,Batter,Ordinary batting chase,2,2,4,1,4,0,0,0,3
+23450,Sai Sudharsan,Sai Sudharsan,Batter,Batting pressure,1,1,3,8,3,0,0,1,0
+58135,Tejasvi Dahiya,Tejasvi Dahiya,Batter,Ordinary batting chase,2,2,15,12,15,2,2,0,9
+7250,Mukesh Choudhary,Mukesh Choudhary,Batter,Ordinary batting chase,1,1,2,2,2,0,0,0,1
+6354,Spencer Johnson,Spencer Johnson,Batter,Ordinary batting chase,1,1,1,0,1,1,0,0,1
+28021,Saurabh Dubey,Saurabh Dubey,Batter,Batting pressure,1,1,2,4,2,0,1,0,1
+56817,Shivang Kumar,Shivang Kumar,Batter,Batting pressure,1,1,11,18,10,0,3,0,2
+39657,Eshan Malinga,Eshan Malinga,Batter,Batting pressure,1,1,7,4,7,1,0,0,3
+35318,Sakib Hussain,Sakib Hussain,Batter,Batting pressure,1,1,5,5,5,0,1,0,3
