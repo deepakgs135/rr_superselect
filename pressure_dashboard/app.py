@@ -367,72 +367,82 @@ def render_pressure(report: dict[str, Any], clutch: dict[str, Any]) -> None:
     clutch_cohort = clutch.get("cohort", {}) if clutch else {}
     audit = clutch.get("entry_timing_audit", {}) if clutch else {}
     entry_rows = audit.get("summary", [])
+    top_twenty = clutch.get("computed_top_twenty", []) if clutch else []
 
-    metrics = st.columns(4, border=True)
-    metrics[0].metric("Indian clutch anchor chases", f"{_int(clutch_cohort.get('anchor_chases')):,}")
-    metrics[1].metric("Batting-pressure deliveries", f"{_int(batting_state.get('delivery_rows')):,}")
-    metrics[2].metric("Bowling-pressure legal balls", f"{_int(bowling_state.get('legal_balls')):,}")
-    metrics[3].metric("Entry audit match rate", f"{_int(audit.get('reference_rows_matching'))}/{_int(audit.get('reference_rows_compared'))}")
-
-    st.info(
-        "The pressure tab combines two distinct raw-data views: the Indian clutch window (40 T20 anchor chases "
-        "for the player result) and the all-venue T20 chase pressure states. Counts are kept separate so their "
-        "different conditions are not blended."
+    st.subheader("Indian clutch-window batting")
+    st.caption(
+        clutch.get("definition", {}).get("scenario", "Raw ball-by-ball data joined to match and competition records.")
+        + " Composite: 50% adjusted strike rate, 30% adjusted average, 20% boundary share. The score is relative to this cohort."
+    )
+    metrics = st.columns(3)
+    metrics[0].metric("Qualifying chases", f"{_int(clutch_cohort.get('anchor_chases')):,}")
+    metrics[1].metric("Players eligible for ranking", f"{_int(clutch_cohort.get('players_remaining_after_user_exclusions')):,}")
+    metrics[2].metric(
+        "Entry figures reproduced",
+        f"{_int(audit.get('reference_rows_matching'))}/{_int(audit.get('reference_rows_compared'))}",
     )
 
-    with st.container(border=True):
-        st.markdown("**Latest Indian clutch-window result · top 20**")
-        st.caption(
-            clutch.get("definition", {}).get("scenario", "Raw ball-by-ball data joined to match and competition records.")
-            + " Ranking uses the raw-data composite: 50% adjusted strike-rate percentile, 30% adjusted-average percentile, and 20% boundary-share percentile. The score is relative to this cohort; displayed figures are recomputed from the raw source."
-        )
-        top_twenty = clutch.get("computed_top_twenty", [])
-        if top_twenty:
-            score_rows = top_twenty[:10]
-            _ranked_bar(score_rows, "player", "composite_score", "Top 10 composite scores", "Relative score", "Top ten Indian clutch-window composite scores")
-            csv_download(top_twenty, "Download clutch-window top 20", "indian_clutch_window_top_20.csv", "clutch_top20_csv")
-            markdown_table(
-                top_twenty,
-                [
-                    ("rank", "Rank"), ("player", "Batter"), ("player_id", "Player ID"),
-                    ("innings", "Innings"), ("balls", "Balls"), ("runs", "Runs"),
-                    ("strike_rate", "Raw SR", lambda value: _fmt(value, 1)),
-                    ("average", "Raw average", lambda value: "Not reported" if value is None or value == "Not reported" else _fmt(value, 1)),
-                    ("adjusted_strike_rate", "Adjusted SR", lambda value: _fmt(value, 1)),
-                    ("adjusted_average", "Adjusted average", lambda value: "Not reported" if value is None or value == "Not reported" else _fmt(value, 1)),
-                    ("boundary_share", "Boundaries / 100 balls", lambda value: _fmt(value, 1)),
-                    ("dots", "Dot balls"), ("composite_score", "Relative score", lambda value: _fmt(value, 2)),
-                    ("ranking_eligible", "Eligible"),
-                ],
-                max_height=600,
+    if top_twenty:
+        chart_col, key_col = st.columns([1.3, 1])
+        with chart_col:
+            top_ten = top_twenty[:10]
+            _ranked_bar(
+                top_ten,
+                "player",
+                "strike_rate",
+                "Raw strike rate · ranked top 10",
+                "Strike rate",
+                "Raw strike rate for the top ten players in the Indian clutch-window ranking",
             )
-        else:
-            st.warning("The raw clutch-window top-20 result is missing from the current report.")
+        with key_col:
+            st.markdown("**How to read this list**")
+            st.caption("Rank uses the weighted composite shown below, not strike rate alone.")
+            st.markdown(
+                "**50%** adjusted strike rate  \n"
+                "**30%** adjusted average  \n"
+                "**20%** boundary share"
+            )
+            st.caption("Displayed runs, balls, strike rate, average, boundaries, and dots are raw player figures.")
+            csv_download(top_twenty, "Download top 20", "indian_clutch_window_top_20.csv", "clutch_top20_csv")
+        st.markdown("**Top 20 · raw figures and composite score**")
+        markdown_table(
+            top_twenty,
+            [
+                ("rank", "Rank"), ("player", "Batter"), ("innings", "Innings"),
+                ("balls", "Balls"), ("runs", "Runs"),
+                ("strike_rate", "Raw SR", lambda value: _fmt(value, 1)),
+                ("average", "Raw average", lambda value: "Not reported" if value is None or value == "Not reported" else _fmt(value, 1)),
+                ("boundary_share", "Boundaries / 100", lambda value: _fmt(value, 1)),
+                ("dots", "Dot balls"), ("composite_score", "Relative score", lambda value: _fmt(value, 1)),
+            ],
+            max_height=560,
+        )
+    else:
+        st.warning("The raw clutch-window top-20 result is missing from the current report.")
 
-    entry_audit_col, entry_notes_col = st.columns([1.25, 1])
-    with entry_audit_col:
-        with st.container(border=True):
-            st.markdown("**Raw entry timing audit · requested top 10**")
-            if entry_rows:
-                audit_chart_rows = [
-                    {**row, "label": f"{row.get('rank')}. {row.get('player')}"}
-                    for row in entry_rows
-                ]
+    with st.expander("Raw entry timing audit · supplied top 10", expanded=False):
+        st.caption(
+            f"Raw source scope: {_int(audit.get('anchor_chases'))} India-venue chases "
+            f"({_int(audit.get('format_anchor_chases', {}).get('T20'))} T20 and "
+            f"{_int(audit.get('format_anchor_chases', {}).get('T20I'))} T20I)."
+        )
+        if entry_rows:
+            audit_chart_rows = [
+                {**row, "label": f"{row.get('rank')}. {row.get('player')}"}
+                for row in entry_rows
+            ]
+            audit_cols = st.columns([1.25, 1])
+            with audit_cols[0]:
                 fig = go.Figure(
                     go.Bar(
                         x=[row.get("raw_median_entry_over") for row in audit_chart_rows],
                         y=[row["label"] for row in audit_chart_rows],
                         orientation="h",
-                        marker=dict(
-                            color=[PALETTE[1] if row.get("status") == "DIFFERS" else PALETTE[2] for row in audit_chart_rows],
-                            line=dict(color="#FFFFFF", width=1),
-                        ),
+                        marker_color=[PALETTE[1] if row.get("status") == "DIFFERS" else PALETTE[2] for row in audit_chart_rows],
                         text=[_fmt(row.get("raw_median_entry_over"), 1) for row in audit_chart_rows],
                         textposition="outside",
                         cliponaxis=False,
-                        customdata=[[row.get("raw_entry_overs"), row.get("raw_came_before_anchor"), row.get("status")] for row in audit_chart_rows],
-                        hovertemplate=("%{y}<br>Raw entry overs: %{customdata[0]}<br>Median: %{x:.1f}"
-                                       "<br>Before anchor: %{customdata[1]}<br>Reference: %{customdata[2]}<extra></extra>"),
+                        hovertemplate="%{y}<br>Raw median entry over: %{x:.1f}<extra></extra>",
                     )
                 )
                 fig.update_layout(
@@ -440,133 +450,102 @@ def render_pressure(report: dict[str, Any], clutch: dict[str, Any]) -> None:
                     yaxis=dict(categoryorder="array", categoryarray=[row["label"] for row in audit_chart_rows][::-1]),
                     showlegend=False,
                 )
-                chart(fig, "Raw median entry over for the requested clutch-window batter list; coral marks a mismatch against the supplied row", height=440)
-                markdown_table(
-                    entry_rows,
-                    [
-                        ("rank", "Rank"), ("player", "Batter"), ("raw_entry_overs", "Raw entry overs"),
-                        ("raw_median_entry_over", "Raw median"), ("raw_came_before_anchor", "Before anchor"),
-                        ("status", "Reference check"),
-                    ],
-                    max_height=420,
+                chart(fig, "Raw median entry over for the supplied ten-player clutch list; highlighted bar marks a mismatch", height=400)
+            with audit_cols[1]:
+                st.metric(
+                    "Rows matching supplied figures",
+                    f"{_int(audit.get('reference_rows_matching'))}/{_int(audit.get('reference_rows_compared'))}",
                 )
-            else:
-                st.warning("The entry-timing raw audit is missing from the current report.")
-    with entry_notes_col:
-        with st.container(border=True):
-            st.markdown("**Cohort and raw-source checks**")
-            st.metric(
-                "Entry timing scope",
-                f"{_int(audit.get('anchor_chases'))} chases",
-                f"{_int(audit.get('format_anchor_chases', {}).get('T20'))} T20 · {_int(audit.get('format_anchor_chases', {}).get('T20I'))} T20I",
+                for row in entry_rows:
+                    if not row.get("matches_reference"):
+                        st.warning(
+                            f"{row.get('player')}: raw data has {row.get('raw_innings')} innings "
+                            f"({row.get('raw_entry_overs')}; median {row.get('raw_median_entry_over')}); "
+                            f"the supplied row has {row.get('reference_innings')} innings."
+                        )
+            markdown_table(
+                entry_rows,
+                [("rank", "Rank"), ("player", "Batter"), ("raw_entry_overs", "Raw entry overs"),
+                 ("raw_median_entry_over", "Median"), ("raw_came_before_anchor", "Before anchor"),
+                 ("status", "Check")],
+                max_height=420,
             )
-            st.caption("Entry timing is independently rebuilt from ball-by-ball, match, and competition source files.")
-            mismatches = [row for row in entry_rows if not row.get("matches_reference")]
-            for row in mismatches:
-                st.warning(
-                    f"{row.get('player')}: raw entries {row.get('raw_entry_overs')} "
-                    f"({row.get('raw_innings')} innings; median {row.get('raw_median_entry_over')}) "
-                    f"do not match the supplied row {row.get('reference_entry_overs')} "
-                    f"({row.get('reference_innings')} innings; median {row.get('reference_median_entry_over')})."
-                )
+        else:
+            st.warning("The entry-timing raw audit is missing from the current report.")
 
-    with st.container(border=True):
-        st.markdown("**Pressure-state coverage · all-venue T20 chases**")
+    with st.expander("All-venue T20 pressure-state detail", expanded=False):
+        st.caption(
+            "Separate from the Indian clutch-window ranking. Batting: second innings, 1–30 legal balls left, "
+            "3+ wickets down, RRR ≥15. Bowling: second innings, 1–30 legal balls left, 2 or fewer wickets down, "
+            "current rate ≥11, RRR ≥9."
+        )
         if state_rows:
+            state_cols = st.columns(2)
             names = [row.get("state", "") for row in state_rows]
             counts = [_int(row.get("delivery_rows")) for row in state_rows]
-            fig = go.Figure(
-                go.Bar(
-                    x=names,
-                    y=counts,
-                    marker_color=[PALETTE[i % len(PALETTE)] for i in range(len(names))],
-                    text=[f"{count:,}" for count in counts],
-                    textposition="outside",
-                    cliponaxis=False,
-                    customdata=[[
-                        _int(row.get("matches")),
-                        _int(row.get("decided_chases")),
-                        _int(row.get("legal_balls")),
-                        _int(row.get("players")),
-                    ] for row in state_rows],
-                    hovertemplate=("%{x}<br>Delivery rows %{y:,}<br>Matches %{customdata[0]}"
-                                   "<br>Decided chases %{customdata[1]}<br>Legal balls %{customdata[2]}"
-                                   "<br>Players %{customdata[3]}<extra></extra>"),
-                )
-            )
+            fig = go.Figure(go.Bar(
+                x=names,
+                y=counts,
+                marker_color=[PALETTE[i % len(PALETTE)] for i in range(len(names))],
+                text=[f"{count:,}" for count in counts],
+                textposition="outside",
+                cliponaxis=False,
+                hovertemplate="%{x}<br>Delivery rows %{y:,}<extra></extra>",
+            ))
             fig.update_layout(xaxis_title="State", yaxis_title="Delivery rows", showlegend=False)
-            chart(fig, "Delivery counts for the four raw pressure and ordinary chase states", height=390)
-            markdown_table(
-                state_rows,
-                [("state", "State"), ("delivery_rows", "Delivery rows"), ("matches", "Matches"),
-                 ("decided_chases", "Decided chases"), ("legal_balls", "Legal balls"),
-                 ("players", "Players"), ("reporting_status", "Reporting status")],
+            with state_cols[0]:
+                chart(fig, "Delivery counts for raw T20 pressure and ordinary chase states", height=360)
+            with state_cols[1]:
+                markdown_table(
+                    state_rows,
+                    [("state", "State"), ("delivery_rows", "Deliveries"), ("matches", "Matches"),
+                     ("decided_chases", "Decided chases"), ("legal_balls", "Legal balls"),
+                     ("players", "Players"), ("reporting_status", "Status")],
+                )
+
+        pressure_validation = report.get("validation", {})
+        raw_counts = pressure_validation.get("raw_pressure_flag_totals", {})
+        supplied = pressure_validation.get("supplied_pressure_flag_reference", {})
+        if raw_counts and supplied and raw_counts != supplied:
+            st.warning(
+                f"Raw pressure recount: {_int(raw_counts.get('batting_pressure')):,} batting + "
+                f"{_int(raw_counts.get('bowling_pressure')):,} bowling = "
+                f"{_int(raw_counts.get('both_pressure_flags')):,} flags. Supplied reference: "
+                f"{_int(supplied.get('both_pressure_flags')):,}; this difference is not reconciled."
             )
 
-        st.caption(
-            "Batting pressure: T20 second innings, 1–30 legal balls left, at least 3 wickets down, RRR ≥15. "
-            "Bowling pressure: T20 second innings, 1–30 legal balls left, 2 or fewer wickets down, current rate ≥11, RRR ≥9."
-        )
+        pressure_batters = [
+            row for row in report.get("batter_table", [])
+            if row.get("state") == "Batting pressure" and row.get("ranking_eligible")
+        ]
+        pressure_batters.sort(key=lambda row: (row.get("rank") is None, row.get("rank") or 9999))
+        bowling_rows = [row for row in report.get("bowler_table", []) if row.get("state") == "Bowling pressure"]
 
-    pressure_validation = report.get("validation", {})
-    raw_counts = pressure_validation.get("raw_pressure_flag_totals", {})
-    supplied = pressure_validation.get("supplied_pressure_flag_reference", {})
-    if raw_counts and supplied and raw_counts != supplied:
-        st.warning(
-            f"Pressure-count reference remains unreconciled: raw recount is "
-            f"{_int(raw_counts.get('batting_pressure')):,} batting + {_int(raw_counts.get('bowling_pressure')):,} bowling "
-            f"= {_int(raw_counts.get('both_pressure_flags')):,} flags; the supplied reference is "
-            f"{_int(supplied.get('both_pressure_flags')):,}. This dashboard shows the raw recount and labels the difference."
-        )
-
-    pressure_batters = [
-        row for row in report.get("batter_table", [])
-        if row.get("state") == "Batting pressure" and row.get("ranking_eligible")
-    ]
-    pressure_batters.sort(key=lambda row: (row.get("rank") is None, row.get("rank") or 9999))
-    bowling_rows = [
-        row for row in report.get("bowler_table", [])
-        if row.get("state") == "Bowling pressure"
-    ]
-
-    with st.container(border=True):
-        st.markdown("**Separate T20 batting-pressure player figures**")
-        st.caption("All-venue T20 chase state; composite weights: adjusted strike rate 50%, adjusted average 30%, boundary share 20%.")
+        st.markdown("**Batting-pressure leaders · separate all-venue T20 cohort**")
         if pressure_batters:
-            pressure_top = pressure_batters[:10]
             markdown_table(
-                pressure_top,
-                [("rank", "Rank"), ("player", "Batter"), ("player_id", "Player ID"),
-                 ("innings", "Innings"), ("sample_balls", "Balls"), ("runs", "Runs"),
+                pressure_batters[:10],
+                [("rank", "Rank"), ("player", "Batter"), ("innings", "Innings"),
+                 ("sample_balls", "Balls"), ("runs", "Runs"),
                  ("strike_rate", "Raw SR", lambda value: _fmt(value, 1)),
                  ("adjusted_strike_rate", "Adjusted SR", lambda value: _fmt(value, 1)),
                  ("dismissals", "Dismissals"),
                  ("average", "Raw average", lambda value: "Not reported" if value is None or value == "Not reported" else _fmt(value, 1)),
-                 ("boundary_share", "Boundary share", lambda value: _fmt(value, 1)),
-                 ("recent_innings", "Recent innings"), ("composite_score", "Relative score", lambda value: _fmt(value, 1))],
+                 ("composite_score", "Score", lambda value: _fmt(value, 1))],
             )
-        else:
-            st.info("No batting-pressure player rows are eligible for display.")
 
-    with st.container(border=True):
-        st.markdown("**Bowling-pressure observations · exploratory sample**")
+        st.markdown("**Bowling-pressure observations · count only**")
         st.caption(
-            f"{_int(bowling_state.get('legal_balls'))} qualifying legal balls across "
-            f"{_int(bowling_state.get('matches'))} matches and {_int(bowling_state.get('decided_chases'))} decided chases. "
-            "The cohort is below the 20-decided-chase reporting minimum, so these are observations, not a ranking."
+            f"{_int(bowling_state.get('legal_balls'))} legal balls in {_int(bowling_state.get('matches'))} matches; "
+            f"{_int(bowling_state.get('decided_chases'))} decided chases. Fewer than 20 chases, so no ranking is published."
         )
         if bowling_rows:
             markdown_table(
                 bowling_rows,
-                [("player", "Bowler"), ("player_id", "Player ID"), ("matches", "Matches"),
-                 ("sample_balls", "Legal balls"), ("runs", "Bowler runs"),
-                 ("economy", "Economy", lambda value: _fmt(value, 2)),
-                 ("credited_wickets", "Credited wickets"), ("dots", "Dot balls"),
-                 ("dot_share", "Dot %", lambda value: _fmt(value, 1)),
-                 ("ranking_status", "Status")],
+                [("player", "Bowler"), ("matches", "Matches"), ("sample_balls", "Legal balls"),
+                 ("runs", "Runs"), ("economy", "Economy", lambda value: _fmt(value, 2)),
+                 ("credited_wickets", "Credited wickets"), ("dots", "Dots")],
             )
-        else:
-            st.info("No bowling-pressure observations matched the confirmed state conditions.")
 
 
 if not database_ready():
@@ -581,12 +560,12 @@ pressure_data = pressure_reports.pressure_report()
 clutch_data = pressure_reports.clutch_batting_report()
 
 page_header(
-    "Cricket analytics",
-    "Batting, bowling, and pressure performance from the available raw-data reports.",
+    "Cricket performance",
+    "Player records, bowling control, and the latest pressure read — all in one place.",
 )
 
 batting_tab, bowling_tab, pressure_tab = st.tabs(
-    ["Batting stats", "Bowling stats", "Pressure stats"],
+    ["🏏 Batting stats", "🎯 Bowling stats", "⚡ Pressure stats"],
     on_change="rerun",
     key="main_dashboard_tabs",
 )

@@ -237,14 +237,16 @@ def markdown_table(
 
 
 def chart(fig: Any, alt: str, *, height: int = 360) -> None:
+    has_legend = fig.layout.showlegend is not False and any(getattr(trace, "name", None) for trace in fig.data)
+    top_margin = 62 if has_legend else (48 if fig.layout.title.text else 24)
     fig.update_layout(
         height=height,
-        margin=dict(l=28, r=34, t=48 if fig.layout.title.text else 24, b=30),
+        margin=dict(l=28, r=44, t=top_margin, b=30),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         font=dict(family="sans-serif", size=12, color="#26364A"),
         title_font=dict(size=15, color="#26364A"),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        legend=dict(orientation="h", yanchor="bottom", y=1.04, xanchor="right", x=1, font=dict(size=11)),
     )
     fig.update_xaxes(showgrid=False, zeroline=False, linecolor="#DCE4F0", tickfont=dict(color="#53657A"), automargin=True)
     fig.update_yaxes(zeroline=False, gridcolor="#E8EDF5", tickfont=dict(color="#53657A"), automargin=True)
