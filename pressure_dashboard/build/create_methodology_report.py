@@ -355,6 +355,9 @@ r.font.name = "Arial"
 r.font.size = Pt(12)
 r.font.color.rgb = RGBColor(78, 96, 119)
 para("This report explains how the dashboard reconstructs pressure from raw ball-by-ball records and selects the featured batter and bowler lists. The featured lists use different samples: clutch batting uses Indian-venue IPL T20 chases, while death-over bowling uses Indian-venue T20 and T20I innings. The exact bowling-pressure state is too small to rank and is reported as a count only.")
+doc.add_heading("Problem statement", level=1)
+para("Modern T20 scoring creates pressure for both roles. For batting, the decision question is: after about five overs, with two or three wickets down and a required rate of at least 15 runs per over, which batters can stabilize, keep scoring, and turn the chase around? For bowling, the question is: in the last five overs, with no more than two wickets down, current rate at least 11 and required rate at least 9, which bowlers can take wickets while keeping runs down? The rankings use raw ball-by-ball performance evidence; match victory and reputation are not scoring inputs.")
+para("The exact match states are sparse in this extract. The report therefore labels the wider batting anchor and death-over role samples used for reliable comparisons, and does not claim that they exactly reproduce every target situation.", "Report Caption")
 doc.add_heading("Current evidence at a glance", level=1)
 add_table(doc, ["Selection", "Current sample", "How to read the result"], [
     ["Clutch batting", "40 qualifying IPL T20 chase anchors; 16 phase-eligible batters", "Ten shown. The first seven keep the approved order; the last three are phase-score selections."],
@@ -562,16 +565,18 @@ with tempfile.TemporaryDirectory(prefix="cricket_methodology_") as tmp:
         bullet(text)
     doc.add_page_break()
     doc.add_heading("Overall analysis flow and reproduction", level=1)
-    para("Overall view: raw CSVs are joined by match_id and comp_id; delivery legality and innings states are reconstructed; role-specific samples and player figures are aggregated; eligibility gates and weighted scores produce the two featured lists; independent raw-only validators recalculate the results before the dashboard reads the JSON/CSV outputs.")
+    para("Overall view: raw CSVs are joined by match_id and comp_id; delivery legality and innings states are reconstructed; role-specific pressure and ordinary samples are aggregated; eligibility gates and weighted scores produce the featured player lists; independent validators recalculate results and compare them with published outputs before the dashboard reads the JSON/CSV files.")
     logic_rows = [
         ["python build/clutch_batting.py", "Reads raw matches and ball-by-ball rows; finds qualifying Indian IPL chase anchors; builds batter pressure, entry-timing, phase and recent-form figures; applies gates and the weighted phase score. Writes the clutch report JSON and audit/ranking CSVs."],
         ["python build/death_bowling.py", "Reads raw Indian T20/T20I innings 1-2; keeps death overs 16-20; reconstructs legal balls, bowler runs and credited wickets; takes each eligible bowler’s latest 10 innings; applies gates and weighted component percentiles. Writes the bowling report JSON and ranking CSV."],
+        ["python build/pressure_report.py", "Builds the broad all-venue T20 chase states, including batting pressure, bowling pressure and ordinary chase rows; calculates player-state figures and eligible comparisons. Writes the state report and pressure CSVs."],
         ["python build/validate_clutch_batting.py", "Independently rebuilds the clutch anchors, batter totals, recent form, phase measures, eligibility, scores and order from the raw CSVs; compares them with the report and writes clutch_batting_validation.json."],
         ["python build/validate_death_bowling.py", "Independently rebuilds latest-ten death-over samples, rates, wickets, eligibility, adjusted metrics and ranking from the raw CSVs; compares them with the report and writes death_bowling_validation.json."],
+        ["python build/validate_pressure.py", "Recounts broad pressure states and player rows from raw CSVs; compares state flags and totals with the report and processed database; checks all leaderboard rows, a random ten, top-ten batter figures, and source exceptions. Writes pressure_validation.json and audit CSVs."],
     ]
     add_table(doc, ["Run in this order", "Logic and result"], logic_rows,
-              [2.55, 4.05], size=7.7)
-    para("Run all four commands from the pressure_dashboard project folder, with the three source files in Raw_Data/. Run both builders before their matching validators. The generated snapshots are under data/pressure_report/.", "Report Caption")
+              [2.55, 4.05], size=7.4)
+    para("Run all three builders first, then their matching validators, from the pressure_dashboard folder. Keep the raw CSVs in Raw_Data/; validate_pressure.py also needs the dashboard’s processed database. Report snapshots are under data/pressure_report/.", "Report Caption")
     doc.core_properties.title = "Cricket Pressure Analytics Methodology and Evidence"
     doc.core_properties.subject = "Raw-data pressure definitions, scoring, evidence, and validation"
     doc.core_properties.author = ""
