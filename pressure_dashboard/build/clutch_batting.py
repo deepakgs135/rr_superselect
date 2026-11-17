@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -22,6 +22,29 @@ DISMISSAL_EXCLUSIONS = {
     "obstracting the field", "obstructing the field",
 }
 UNKNOWN_NAMES = {"", "unknown", "unknown player", "unknown batter", "unknown bowler"}
+MIN_PRESSURE_BALLS = 30
+MIN_PRESSURE_INNINGS_FOR_RANKING = 3
+MIN_RECENT_CHASE_INNINGS = 10
+PHASE_MIN_BALLS = 30
+PHASE_PRIOR_BALLS = 60
+PHASE_AVERAGE_PRIOR_DISMISSALS = 3
+APPROVED_TOP_SEVEN = [
+    (7897, "Namboori Tilak Varma"),
+    (3330, "Hardik Pandya"),
+    (3125, "Nicholas Pooran"),
+    (2639, "Marcus Stoinis"),
+    (4708, "Rinku Singh"),
+    (5039, "Rajat Patidar"),
+    (6396, "Tim David"),
+]
+PHASE_WEIGHTS = {
+    "death_phase_adjusted_strike_rate": 0.25,
+    "middle_phase_adjusted_strike_rate": 0.15,
+    "phase_sr_acceleration": 0.20,
+    "phase_total_runs": 0.15,
+    "phase_boundary_rate_acceleration": 0.15,
+    "phase_average_adjusted": 0.10,
+}
 USER_EXCLUDED_PLAYERS = {
     4722: "Rashid Khan",
     7260: "Dhruv Jurel",
@@ -272,6 +295,207 @@ def build_raw_entry_timing_audit(
     }
 
 
+def build_phase_batting_ranking(
+    player_rows: list[dict[str, Any]],
+    matches: dict[int, dict[str, Any]],
+    innings: dict[tuple[int, int], list[dict[str, Any]]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    """Score the clutch-qualified candidate pool from raw Indian T20 phase data."""
+    rows_by_id = {int(row["player_id"]): row for row in player_rows}
+    candidate_ids = set(rows_by_id)
+    phase_stats: dict[int, dict[str, dict[str, Any]]] = defaultdict(lambda: {
+        phase: {"balls": 0, "runs": 0, "fours": 0, "sixes": 0, "dismissals": 0, "innings": set()}
+        for phase in ("middle", "death")
+    })
+
+    for (match_id, innings_no), deliveries in innings.items():
+        match = matches.get(match_id, {})
+        if (
+            match.get("format") != "T20"
+            or normalized(match.get("venue_country")) != "india"
+            or innings_no not in (1, 2)
+        ):
+            continue
+        for delivery in deliveries:
+            kind = normalized(delivery.get("extras_type"))
+            if not is_known_type(kind):
+                break
+            over = integer(delivery.get("overid"), 0)
+            if 7 <= over <= 15:
+                phase = "middle"
+            elif 16 <= over <= 20:
+                phase = "death"
+            else:
+                continue
+
+            striker_id = integer(delivery.get("striker_id"), -1)
+            if striker_id in candidate_ids and kind != "wide":
+                stats = phase_stats[striker_id][phase]
+                stats["balls"] += 1
+                stats["runs"] += integer(delivery.get("runs"))
+                stats["fours"] += int(truth(delivery.get("is_four")))
+                stats["sixes"] += int(truth(delivery.get("is_six")))
+                stats["innings"].add((match_id, innings_no))
+
+            dismissed_id = integer(delivery.get("dismissed_player_id"), -1)
+            if dismissed_id in candidate_ids and batter_dismissal(delivery):
+                phase_stats[dismissed_id][phase]["dismissals"] += 1
+
+    for player_id, row in rows_by_id.items():
+        middle = phase_stats[player_id]["middle"]
+        death = phase_stats[player_id]["death"]
+        middle_balls, death_balls = int(middle["balls"]), int(death["balls"])
+        middle_runs, death_runs = int(middle["runs"]), int(death["runs"])
+        middle_boundaries = int(middle["fours"] + middle["sixes"])
+        death_boundaries = int(death["fours"] + death["sixes"])
+        middle_dismissals, death_dismissals = int(middle["dismissals"]), int(death["dismissals"])
+        total_runs = middle_runs + death_runs
+        total_dismissals = middle_dismissals + death_dismissals
+        middle_boundary_rate = middle_boundaries * 100 / middle_balls if middle_balls else None
+        death_boundary_rate = death_boundaries * 100 / death_balls if death_balls else None
+        row.update({
+            "middle_phase_innings": len(middle["innings"]),
+            "middle_phase_balls": middle_balls,
+            "middle_phase_runs": middle_runs,
+            "middle_phase_fours": int(middle["fours"]),
+            "middle_phase_sixes": int(middle["sixes"]),
+            "middle_phase_dismissals": middle_dismissals,
+            "middle_phase_strike_rate": round(middle_runs * 100 / middle_balls, 2) if middle_balls else None,
+            "middle_phase_boundary_rate": round(middle_boundary_rate, 2) if middle_boundary_rate is not None else None,
+            "death_phase_innings": len(death["innings"]),
+            "death_phase_balls": death_balls,
+            "death_phase_runs": death_runs,
+            "death_phase_fours": int(death["fours"]),
+            "death_phase_sixes": int(death["sixes"]),
+            "death_phase_dismissals": death_dismissals,
+            "death_phase_strike_rate": round(death_runs * 100 / death_balls, 2) if death_balls else None,
+            "death_phase_boundary_rate": round(death_boundary_rate, 2) if death_boundary_rate is not None else None,
+            "phase_total_runs": total_runs,
+            "phase_total_dismissals": total_dismissals,
+            "phase_average_raw": round(total_runs / total_dismissals, 2) if total_dismissals >= 3 else "Not reported",
+            "phase_boundary_rate_acceleration": round(death_boundary_rate - middle_boundary_rate, 2)
+            if middle_boundary_rate is not None and death_boundary_rate is not None else None,
+            "phase_sample_status": "Eligible phase sample"
+            if middle_balls >= PHASE_MIN_BALLS and death_balls >= PHASE_MIN_BALLS
+            else "Review sample: fewer than 30 balls in a phase",
+        })
+
+    eligible = [
+        row for row in player_rows
+        if row.get("ranking_eligible")
+        and int(row.get("middle_phase_balls", 0)) >= PHASE_MIN_BALLS
+        and int(row.get("death_phase_balls", 0)) >= PHASE_MIN_BALLS
+    ]
+    middle_ball_total = sum(int(row["middle_phase_balls"]) for row in eligible)
+    middle_run_total = sum(int(row["middle_phase_runs"]) for row in eligible)
+    death_ball_total = sum(int(row["death_phase_balls"]) for row in eligible)
+    death_run_total = sum(int(row["death_phase_runs"]) for row in eligible)
+    phase_run_total = sum(int(row["phase_total_runs"]) for row in eligible)
+    phase_dismissal_total = sum(int(row["phase_total_dismissals"]) for row in eligible)
+    middle_baseline_sr = middle_run_total * 100 / middle_ball_total if middle_ball_total else 0.0
+    death_baseline_sr = death_run_total * 100 / death_ball_total if death_ball_total else 0.0
+    average_baseline = phase_run_total / phase_dismissal_total if phase_dismissal_total else 0.0
+
+    for row in player_rows:
+        middle_balls = int(row["middle_phase_balls"])
+        death_balls = int(row["death_phase_balls"])
+        middle_runs = int(row["middle_phase_runs"])
+        death_runs = int(row["death_phase_runs"])
+        phase_runs = int(row["phase_total_runs"])
+        phase_dismissals = int(row["phase_total_dismissals"])
+        row["middle_phase_adjusted_strike_rate"] = round(
+            (middle_runs + PHASE_PRIOR_BALLS * middle_baseline_sr / 100)
+            * 100 / (middle_balls + PHASE_PRIOR_BALLS), 4
+        ) if middle_balls else round(middle_baseline_sr, 4)
+        row["death_phase_adjusted_strike_rate"] = round(
+            (death_runs + PHASE_PRIOR_BALLS * death_baseline_sr / 100)
+            * 100 / (death_balls + PHASE_PRIOR_BALLS), 4
+        ) if death_balls else round(death_baseline_sr, 4)
+        row["phase_sr_acceleration"] = round(
+            row["death_phase_adjusted_strike_rate"] - row["middle_phase_adjusted_strike_rate"], 4
+        )
+        row["phase_average_adjusted"] = round(
+            (phase_runs + PHASE_AVERAGE_PRIOR_DISMISSALS * average_baseline)
+            / (phase_dismissals + PHASE_AVERAGE_PRIOR_DISMISSALS), 4
+        )
+        row["phase_weighted_score"] = None
+        row["phase_weighted_rank"] = None
+        row["phase_comparison_rank"] = None
+        for metric in PHASE_WEIGHTS:
+            row[f"{metric}_percentile"] = None
+            row[f"{metric}_points"] = None
+
+    def set_percentile(field: str) -> None:
+        ordered = sorted(eligible, key=lambda row: (-float(row[field]), row["player"], row["player_id"]))
+        index = 0
+        while index < len(ordered):
+            end = index + 1
+            while end < len(ordered) and float(ordered[end][field]) == float(ordered[index][field]):
+                end += 1
+            average_rank = ((index + 1) + end) / 2
+            percentile_score = 100.0 if len(ordered) == 1 else 100.0 * (len(ordered) - average_rank) / (len(ordered) - 1)
+            for tied in ordered[index:end]:
+                tied[f"_{field}_percentile"] = percentile_score
+            index = end
+
+    for field in PHASE_WEIGHTS:
+        if eligible:
+            set_percentile(field)
+    eligible.sort(key=lambda row: (
+        -sum(float(row.get(f"_{field}_percentile", 0.0)) * weight for field, weight in PHASE_WEIGHTS.items()),
+        -int(row["death_phase_balls"]), -int(row["phase_total_runs"]), row["player"], row["player_id"],
+    ))
+    cohort_can_publish_ranks = len(eligible) >= 10
+    for rank, row in enumerate(eligible, start=1):
+        row["phase_weighted_rank"] = rank if cohort_can_publish_ranks else None
+        row["phase_weighted_score"] = round(sum(
+            float(row[f"_{field}_percentile"]) * weight
+            for field, weight in PHASE_WEIGHTS.items()
+        ), 4)
+        for field, weight in PHASE_WEIGHTS.items():
+            row[f"{field}_percentile"] = round(float(row[f"_{field}_percentile"]), 4)
+            row[f"{field}_points"] = round(float(row[f"{field}_percentile"]) * weight, 4)
+            row.pop(f"_{field}_percentile", None)
+
+    eligible_ids = {int(row["player_id"]) for row in eligible}
+    approved_ids = {player_id for player_id, _ in APPROVED_TOP_SEVEN}
+    final_rows: list[dict[str, Any]] = []
+    alternatives = [row for row in eligible if int(row["player_id"]) not in approved_ids]
+    alternatives.sort(key=lambda row: (
+        -float(row["phase_weighted_score"]), -int(row["death_phase_balls"]),
+        -int(row["phase_total_runs"]), row["player"], row["player_id"],
+    ))
+    if cohort_can_publish_ranks:
+        for rank, (player_id, expected_name) in enumerate(APPROVED_TOP_SEVEN, start=1):
+            player = rows_by_id.get(player_id)
+            if player and player_id in eligible_ids and normalized(player.get("player")) == normalized(expected_name):
+                selection = dict(player)
+                selection["final_rank"] = rank
+                selection["selection_reason"] = "Approved top seven retained"
+                final_rows.append(selection)
+        for offset, row in enumerate(alternatives[:max(0, 10 - len(final_rows))], start=len(final_rows) + 1):
+            selection = dict(row)
+            selection["final_rank"] = offset
+            selection["selection_reason"] = "Selected from remaining clutch-qualified batters by the phase-weighted score"
+            final_rows.append(selection)
+
+    phase_rankings = [dict(row) for row in eligible]
+    summary = {
+        "phase_eligible_players": len(eligible),
+        "phase_candidates_available_for_replacement": len(alternatives),
+        "final_top_ten_count": len(final_rows),
+        "middle_baseline_strike_rate": round(middle_baseline_sr, 4),
+        "death_baseline_strike_rate": round(death_baseline_sr, 4),
+        "average_baseline": round(average_baseline, 4),
+        "minimum_balls_per_phase": PHASE_MIN_BALLS,
+        "shrinkage_prior_balls": PHASE_PRIOR_BALLS,
+        "shrinkage_prior_dismissals": PHASE_AVERAGE_PRIOR_DISMISSALS,
+        "published_ranking": len(eligible) >= 10 and len(final_rows) == 10,
+        "ranking_status": "Ranked using the phase formula" if len(eligible) >= 10 else f"List without ranking: {len(eligible)} eligible phase samples; 10 are required.",
+    }
+    return phase_rankings, final_rows, summary
+
+
 def build_clutch_report() -> dict[str, Any]:
     competitions = {
         integer(row.get("comp_id"), -1): row for row in read_csv(RAW_DIR / "competitions.csv")
@@ -329,7 +553,7 @@ def build_clutch_report() -> dict[str, Any]:
     }
 
     active_2026_ids: set[int] = set()
-    recent_chase_matches: dict[int, set[int]] = defaultdict(set)
+    chase_form_by_player: dict[int, dict[int, dict[str, Any]]] = defaultdict(dict)
     for match_id, meta in matches.items():
         if meta.get("format") != "T20":
             continue
@@ -340,6 +564,11 @@ def build_clutch_report() -> dict[str, Any]:
                         player_id = integer(delivery.get(id_key), -1)
                         if player_id in valid_names:
                             active_2026_ids.add(player_id)
+
+        # The form cohort is Indian-venue T20 chases. The 2026 activity gate
+        # above deliberately remains all venues, as confirmed by the user.
+        if normalized(meta.get("venue_country")) != "india":
+            continue
 
         first_innings = innings.get((match_id, 1), [])
         chase = innings.get((match_id, 2), [])
@@ -356,15 +585,42 @@ def build_clutch_report() -> dict[str, Any]:
                 state_known = False
             remaining = 120 - legal_balls_before
             runs_needed = int(target) - runs_before
-            if state_known and remaining > 0 and runs_needed > 0:
-                striker_id = integer(delivery.get("striker_id"), -1)
-                if striker_id in valid_names:
-                    recent_chase_matches[striker_id].add(match_id)
-                dismissed_id = integer(delivery.get("dismissed_player_id"), -1)
-                if batter_dismissal(delivery) and dismissed_id in valid_names:
-                    recent_chase_matches[dismissed_id].add(match_id)
             if not state_known:
                 break
+            if remaining <= 0 or runs_needed <= 0:
+                break
+
+            striker_id = integer(delivery.get("striker_id"), -1)
+            if striker_id in valid_names:
+                form = chase_form_by_player[striker_id].setdefault(match_id, {
+                    "match_id": match_id,
+                    "match_date": text(meta.get("match_date")),
+                    "runs": 0,
+                    "balls": 0,
+                    "fours": 0,
+                    "sixes": 0,
+                    "dots": 0,
+                    "dismissals": 0,
+                })
+                if kind != "wide":
+                    form["balls"] += 1
+                    form["runs"] += integer(delivery.get("runs"))
+                    form["fours"] += int(truth(delivery.get("is_four")))
+                    form["sixes"] += int(truth(delivery.get("is_six")))
+                    form["dots"] += int(integer(delivery.get("runs")) == 0)
+            dismissed_id = integer(delivery.get("dismissed_player_id"), -1)
+            if batter_dismissal(delivery) and dismissed_id in valid_names:
+                form = chase_form_by_player[dismissed_id].setdefault(match_id, {
+                    "match_id": match_id,
+                    "match_date": text(meta.get("match_date")),
+                    "runs": 0,
+                    "balls": 0,
+                    "fours": 0,
+                    "sixes": 0,
+                    "dots": 0,
+                    "dismissals": 0,
+                })
+                form["dismissals"] += 1
             runs_before += team_run_value(delivery)
             legal_balls_before += int(kind in LEGAL_TYPES)
 
@@ -434,6 +690,26 @@ def build_clutch_report() -> dict[str, Any]:
     candidate_innings_audit: list[dict[str, Any]] = []
     for anchor in anchors:
         player_row_state: dict[int, dict[str, Any]] = {}
+        entry_by_player: dict[int, dict[str, Any]] = {}
+        for entry_index, delivery in enumerate(anchor["deliveries"]):
+            entry_kind = normalized(delivery.get("extras_type"))
+            if not is_known_type(entry_kind):
+                break
+            striker_id = integer(delivery.get("striker_id"), -1)
+            non_striker_id = integer(delivery.get("non_striker_id"), -1)
+            for batter_id in (striker_id, non_striker_id):
+                if batter_id in valid_names:
+                    entry_by_player.setdefault(
+                        batter_id,
+                        {
+                            "first_index": entry_index,
+                            "entry_over": integer(delivery.get("overid"), 0),
+                            "batting_order": None,
+                        },
+                    )
+            if striker_id in valid_names and entry_by_player[striker_id]["batting_order"] is None:
+                entry_by_player[striker_id]["batting_order"] = integer(delivery.get("batting_order"), 0)
+
         known_segment: list[tuple[dict[str, Any], int]] = []
         legal_before = int(anchor["legal_balls_bowled"])
         for delivery in anchor["deliveries"][anchor["anchor_delivery_index"]:]:
@@ -535,9 +811,24 @@ def build_clutch_report() -> dict[str, Any]:
                     "matches": set(),
                     "stay_eligible_innings": 0,
                     "stayed_to_16_innings": 0,
+                    "entry_overs": [],
+                    "batting_orders": [],
+                    "came_before_anchor_innings": 0,
+                    "entered_at_or_after_anchor_innings": 0,
                 })
                 batter_faced = kind != "wide"
                 if batter_faced:
+                    if not player_row_state[striker_id].get("entry_recorded", False):
+                        entry_info = entry_by_player.get(striker_id)
+                        if entry_info is not None:
+                            row["entry_overs"].append(entry_info["entry_over"])
+                            if entry_info["first_index"] < anchor["anchor_delivery_index"]:
+                                row["came_before_anchor_innings"] += 1
+                            else:
+                                row["entered_at_or_after_anchor_innings"] += 1
+                            if entry_info["batting_order"]:
+                                row["batting_orders"].append(entry_info["batting_order"])
+                        player_row_state[striker_id]["entry_recorded"] = True
                     row["innings_matches"].add(anchor["match_id"])
                     row["matches"].add(anchor["match_id"])
                     row["balls"] += 1
@@ -579,6 +870,10 @@ def build_clutch_report() -> dict[str, Any]:
                     "matches": set(),
                     "stay_eligible_innings": 0,
                     "stayed_to_16_innings": 0,
+                    "entry_overs": [],
+                    "batting_orders": [],
+                    "came_before_anchor_innings": 0,
+                    "entered_at_or_after_anchor_innings": 0,
                 })["dismissals"] += 1
                 if legal_before_delivery < 96:
                     player_row_state[dismissed_id]["dismissed_by_16"] = True
@@ -600,6 +895,10 @@ def build_clutch_report() -> dict[str, Any]:
                         "matches": set(),
                         "stay_eligible_innings": 0,
                         "stayed_to_16_innings": 0,
+                        "entry_overs": [],
+                        "batting_orders": [],
+                        "came_before_anchor_innings": 0,
+                        "entered_at_or_after_anchor_innings": 0,
                     })
                     target_row["stay_eligible_innings"] += 1
                     if not state["dismissed_by_16"]:
@@ -616,6 +915,28 @@ def build_clutch_report() -> dict[str, Any]:
     for stats in batter_stats.values():
         balls = int(stats["balls"])
         innings_count = len(stats["innings_matches"])
+        chase_innings = [
+            row for row in chase_form_by_player.get(int(stats["player_id"]), {}).values()
+            if int(row["balls"]) > 0
+        ]
+        chase_innings.sort(key=lambda row: (row["match_date"], row["match_id"]), reverse=True)
+        latest_ten_chases = chase_innings[:10]
+        recent_runs = sum(int(row["runs"]) for row in latest_ten_chases)
+        recent_balls = sum(int(row["balls"]) for row in latest_ten_chases)
+        recent_dismissals = sum(int(row["dismissals"]) for row in latest_ten_chases)
+        recent_boundary_runs = sum(int(row["fours"]) * 4 + int(row["sixes"]) * 6 for row in latest_ten_chases)
+        recent_boundaries = sum(int(row["fours"]) + int(row["sixes"]) for row in latest_ten_chases)
+        recent_dots = sum(int(row["dots"]) for row in latest_ten_chases)
+        ordered_entries = sorted(int(value) for value in stats["entry_overs"])
+        middle = len(ordered_entries) // 2
+        median_entry_over = (
+            ordered_entries[middle]
+            if len(ordered_entries) % 2
+            else (ordered_entries[middle - 1] + ordered_entries[middle]) / 2
+            if ordered_entries else None
+        )
+        order_counts = Counter(stats["batting_orders"])
+        typical_batting_order = order_counts.most_common(1)[0][0] if order_counts else None
         player_rows.append({
             "player_id": stats["player_id"],
             "player": stats["player"],
@@ -628,6 +949,7 @@ def build_clutch_report() -> dict[str, Any]:
             "fours": int(stats["fours"]),
             "sixes": int(stats["sixes"]),
             "boundaries": int(stats["fours"] + stats["sixes"]),
+            "boundary_runs": int(stats["fours"] * 4 + stats["sixes"] * 6),
             "boundaries_per_100": round((stats["fours"] + stats["sixes"]) * 100 / balls, 1) if balls else None,
             "dots": int(stats["dots"]),
             "dot_pct": round(stats["dots"] * 100 / balls, 1) if balls else None,
@@ -635,13 +957,32 @@ def build_clutch_report() -> dict[str, Any]:
             "stayed_to_16": f"{stats['stayed_to_16_innings']} of {stats['stay_eligible_innings']}",
             "stay_eligible_innings": int(stats["stay_eligible_innings"]),
             "stayed_to_16_innings": int(stats["stayed_to_16_innings"]),
+            "entry_overs": ", ".join(str(value) for value in ordered_entries),
+            "median_entry_over": median_entry_over,
+            "typical_batting_order": typical_batting_order,
+            "came_before_anchor": f"{stats['came_before_anchor_innings']} of {innings_count}",
+            "came_before_anchor_innings": int(stats["came_before_anchor_innings"]),
+            "entered_at_or_after_anchor_innings": int(stats["entered_at_or_after_anchor_innings"]),
+            "recent_chase_innings": len(chase_innings),
+            "recent_form_innings": len(latest_ten_chases),
+            "recent_form_window_start": latest_ten_chases[-1]["match_date"] if latest_ten_chases else None,
+            "recent_form_window_end": latest_ten_chases[0]["match_date"] if latest_ten_chases else None,
+            "recent_form_runs": recent_runs,
+            "recent_form_balls": recent_balls,
+            "recent_form_strike_rate": round(recent_runs * 100 / recent_balls, 1) if recent_balls else None,
+            "recent_form_dismissals": recent_dismissals,
+            "recent_form_average": round(recent_runs / recent_dismissals, 1) if recent_dismissals >= 3 else "Not reported",
+            "recent_form_boundary_runs": recent_boundary_runs,
+            "recent_form_boundary_share": round(recent_boundary_runs * 100 / recent_runs, 1) if recent_runs else 0.0,
+            "recent_form_boundaries_per_100": round(recent_boundaries * 100 / recent_balls, 1) if recent_balls else None,
+            "recent_form_dot_balls": recent_dots,
+            "recent_form_dot_pct": round(recent_dots * 100 / recent_balls, 1) if recent_balls else None,
             "sample_status": "Eligible sample" if balls >= 30 else "Review sample",
             "active_2026_all_venues": stats["player_id"] in active_2026_ids,
-            "recent_chase_innings": len(recent_chase_matches.get(stats["player_id"], set())),
             "selection_gate_status": (
                 "Not active in 2026" if stats["player_id"] not in active_2026_ids
-                else "Review recent sample" if len(recent_chase_matches.get(stats["player_id"], set())) < 10
-                else "10+ chase innings available"
+                else "Review Indian-venue chase sample" if len(chase_innings) < MIN_RECENT_CHASE_INNINGS
+                else "10+ Indian-venue chase innings available"
             ),
             "user_excluded": stats["player_id"] in USER_EXCLUDED_PLAYERS,
             "exclusion_reason": "Excluded by user review" if stats["player_id"] in USER_EXCLUDED_PLAYERS else "",
@@ -669,16 +1010,21 @@ def build_clutch_report() -> dict[str, Any]:
         )
         row["adjusted_average"] = round(adjusted_average, 4) if dismissals >= 3 else "Not reported"
         row["_composite_average"] = adjusted_average
-        row["boundary_share"] = round(row["boundaries"] * 100 / balls, 4) if balls else 0.0
+        row["boundary_share"] = round(row["boundary_runs"] * 100 / row["runs"], 4) if row["runs"] else 0.0
         row["base_eligible"] = bool(
-            balls >= 30 and row["active_2026_all_venues"] and row["recent_chase_innings"] >= 10
+            balls >= MIN_PRESSURE_BALLS
+            and row["active_2026_all_venues"]
+            and row["recent_chase_innings"] >= MIN_RECENT_CHASE_INNINGS
         )
-        row["ranking_eligible"] = row["base_eligible"] and not row["user_excluded"]
+        row["pressure_innings_gate"] = int(row["innings"]) >= MIN_PRESSURE_INNINGS_FOR_RANKING
+        row["ranking_eligible"] = row["base_eligible"] and row["pressure_innings_gate"] and not row["user_excluded"]
         row["rank"] = None
         row["composite_score"] = None
         row["ranking_status"] = (
             row["exclusion_reason"] if row["user_excluded"]
             else "Eligible for ranking" if row["ranking_eligible"]
+            else f"Review pressure sample: {row['innings']} qualifying innings; {MIN_PRESSURE_INNINGS_FOR_RANKING} required"
+            if row["base_eligible"] and not row["pressure_innings_gate"]
             else row["selection_gate_status"]
         )
 
@@ -725,6 +1071,7 @@ def build_clutch_report() -> dict[str, Any]:
             row["ranking_status"] = "Ranked"
         ranking_status = (
             f"Ranked {len(eligible_rows)} eligible batters by the confirmed composite after "
+            f"the {MIN_PRESSURE_INNINGS_FOR_RANKING}-pressure-innings reliability gate and "
             f"{len(USER_EXCLUDED_PLAYERS)} user-requested exclusions."
         )
     for row in player_rows:
@@ -738,6 +1085,10 @@ def build_clutch_report() -> dict[str, Any]:
             row["rank"] if row["rank"] is not None else 0,
             -row["runs"], -row["balls"], row["player"], row["player_id"],
         )
+    )
+
+    phase_candidate_rankings, final_batting_top_ten, phase_summary = build_phase_batting_ranking(
+        player_rows, matches, innings
     )
 
     by_name = {row["player"]: row for row in player_rows}
@@ -777,6 +1128,7 @@ def build_clutch_report() -> dict[str, Any]:
     report = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source_files": {name: str(RAW_DIR / name) for name in ("ball_by_ball.csv", "matches.csv", "competitions.csv")},
+        "source_counts": {"raw_delivery_rows": sum(len(rows) for rows in innings.values())},
         "definition": {
             "scenario": "T20 at Indian venues; second innings only; first known pre-delivery state per chase with 2-4 wickets down, 18-42 legal balls already bowled, required rate 12-20 RPO, and runs needed > 0.",
             "anchor": "The first delivery in each chase meeting every condition; measurements start on that delivery.",
@@ -787,10 +1139,17 @@ def build_clutch_report() -> dict[str, Any]:
             "dismissals": "is_wicket rows excluding retire-outs, retire-hurt rows, and obstruction labels.",
             "target": "revised_target when present; otherwise first-innings raw total plus one, counting one run for each wide, no-ball, bye, or leg-bye event.",
             "rank_order": "The displayed supplied list order is a user reference, not recalculated from raw data. The supplied table does not define a clutch-specific ranking formula.",
-            "composite_formula": "Raw-data rank: 50% adjusted strike-rate percentile + 30% adjusted-average percentile + 20% boundary-share percentile; adjusted SR uses a 60-ball cohort-baseline prior; adjusted average uses a 3-dismissal cohort-baseline prior. Raw figures remain displayed. Players need 30 balls, 2026 all-venue T20 activity, and at least 10 known chase innings; cohort needs 20 decided chases and 10 eligible players.",
+            "composite_formula": "Raw-data rank: 50% adjusted strike-rate percentile + 30% adjusted-average percentile + 20% boundary-run-share percentile; boundary-run-share is boundary runs divided by batter runs. Adjusted SR uses a 60-ball cohort-baseline prior; adjusted average uses a 3-dismissal cohort-baseline prior. Raw figures remain displayed.",
+            "phase_composite_formula": "Death-over strike rate 25%, middle-over strike rate 15%, adjusted death-minus-middle strike-rate acceleration 20%, raw runs across middle and death phases 15%, death-minus-middle boundary events per 100 batter balls 15%, and adjusted average across both phases 10%. Each component is converted to a tie-aware percentile within the eligible clutch-qualified phase cohort before weighting. Higher is better for every component.",
+            "phase_tie_breaker": "Equal composite scores are ordered by more death-phase balls, then more combined middle/death runs, then player name and source ID.",
+            "phase_scope": "Raw Indian-venue T20 innings 1 and 2 across the available source history; middle phase is overid 7-15 and death phase is overid 16-20. Unknown-legality rows and all later deliveries in that innings are excluded. Batter balls are non-wide known deliveries; batter runs use the raw runs field.",
+            "phase_sample_rule": f"Candidates need at least {PHASE_MIN_BALLS} batter balls in both middle and death phases. Raw strike rates and averages are displayed alongside adjusted values. Adjusted phase strike rates use a {PHASE_PRIOR_BALLS}-ball cohort-baseline prior; adjusted average uses {PHASE_AVERAGE_PRIOR_DISMISSALS} prior dismissals. Raw average is not reported below 3 dismissals.",
+            "final_batting_top_ten_logic": "The user's approved top seven are retained in the stated order. Positions 8-10 are filled by the highest phase-composite alternatives among the remaining clutch-qualified eligible players. The phase composite is computed for the full eligible clutch cohort, while the approved top-seven order is held fixed per user instruction.",
+            "reliability_gate": f"Ranked batters need at least {MIN_PRESSURE_BALLS} pressure balls and at least {MIN_PRESSURE_INNINGS_FOR_RANKING} qualifying clutch-window innings, plus the confirmed 2026 all-venue activity and 10-chase-innings gates. Players below these gates remain visible as review samples.",
+            "recent_form_window": "For each batter, latest 10 Indian-venue T20 second-innings batting innings are recomputed from raw deliveries and shown separately as form context. The composite remains based on the qualifying clutch-window innings; the recent-form figures are not mixed into the score because no extra form weight was specified.",
             "unweighted_diagnostics": "Dot percentage and survival through over 16 are shown as diagnostics but are not part of the confirmed composite score.",
             "manual_exclusions": "Rashid Khan (ID 4722), Dhruv Jurel (ID 7260), and Shashank Singh (ID 2756) are retained in the raw figures and excluded only from the final ranking at the user's request.",
-            "previous_selection_gates": "The previously confirmed 30-ball minimum, a 2026 T20 appearance at any venue, and at least 10 known second-innings chase appearances are shown separately as eligibility flags; they do not change raw figures displayed here.",
+            "previous_selection_gates": "The confirmed 30-ball minimum, a 2026 T20 appearance at any venue, and at least 10 known Indian-venue second-innings chase appearances apply. A 3-qualifying-pressure-innings reliability gate was added so a single strong pressure innings cannot be presented as a reliable top-ten record.",
         },
         "cohort": {
             "anchor_chases": match_count,
@@ -801,11 +1160,22 @@ def build_clutch_report() -> dict[str, Any]:
                 1 for row in player_rows
                 if row["base_eligible"]
             ),
+            "players_meeting_three_pressure_innings_gate": sum(
+                1 for row in player_rows
+                if row["base_eligible"] and row["pressure_innings_gate"]
+            ),
+            "players_held_for_pressure_sample": sum(
+                1 for row in player_rows
+                if row["base_eligible"] and not row["pressure_innings_gate"] and not row["user_excluded"]
+            ),
             "players_excluded_by_user": sum(1 for row in player_rows if row["user_excluded"]),
             "players_remaining_after_user_exclusions": sum(1 for row in player_rows if row["ranking_eligible"]),
             "invalid_or_multi_name_ids_excluded": len(invalid_ids),
+            "phase_eligible_players": phase_summary["phase_eligible_players"],
+            "phase_candidates_available_for_replacement": phase_summary["phase_candidates_available_for_replacement"],
         },
         "ranking_status": ranking_status,
+        "phase_ranking_summary": phase_summary,
         "reference_audit": {
             "rows_matching_all_figures": sum(bool(row["all_reference_figures_match"]) for row in audit_rows),
             "rows_compared": len(audit_rows),
@@ -819,6 +1189,8 @@ def build_clutch_report() -> dict[str, Any]:
         ],
         "computed_top_ten": [row for row in player_rows if row.get("rank") is not None][:10],
         "computed_top_twenty": [row for row in player_rows if row.get("rank") is not None][:20],
+        "phase_candidate_rankings": phase_candidate_rankings,
+        "final_batting_top_ten": final_batting_top_ten,
         "reference_audit_rows": audit_rows,
         "entry_timing_audit": entry_timing_audit,
         "candidate_innings_audit": candidate_innings_audit,
@@ -833,6 +1205,8 @@ def build_clutch_report() -> dict[str, Any]:
     write_csv(OUTPUT_DIR / "clutch_entry_timing_innings.csv", entry_timing_audit["innings"])
     write_csv(OUTPUT_DIR / "clutch_batter_figures.csv", player_rows)
     write_csv(OUTPUT_DIR / "clutch_candidate_innings_audit.csv", candidate_innings_audit)
+    write_csv(OUTPUT_DIR / "clutch_batting_phase_rankings.csv", phase_candidate_rankings)
+    write_csv(OUTPUT_DIR / "final_batting_top_ten.csv", final_batting_top_ten)
     return report
 
 
@@ -846,9 +1220,18 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
 
 def main() -> None:
     report = build_clutch_report()
+    from validate_clutch_batting import save_validation, validate_clutch_batting_report
+
+    validation = validate_clutch_batting_report(report)
+    report["validation"] = validation
+    (OUTPUT_DIR / "clutch_batting_report.json").write_text(
+        json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    save_validation(validation)
     print(json.dumps({
         "cohort": report["cohort"],
         "reference_audit": report["reference_audit"],
+        "validation": {"all_passed": validation["all_passed"], "checks_passed": validation["checks_passed"], "checks_total": validation["checks_total"]},
         "highest_runs_observations": report["player_rows"][:10],
         "outputs": [
             str(OUTPUT_DIR / "clutch_batting_report.json"),
@@ -858,6 +1241,8 @@ def main() -> None:
             str(OUTPUT_DIR / "clutch_batter_reference_audit.csv"),
             str(OUTPUT_DIR / "clutch_batter_figures.csv"),
             str(OUTPUT_DIR / "clutch_candidate_innings_audit.csv"),
+            str(OUTPUT_DIR / "clutch_batting_phase_rankings.csv"),
+            str(OUTPUT_DIR / "final_batting_top_ten.csv"),
         ],
     }, indent=2, ensure_ascii=False))
 

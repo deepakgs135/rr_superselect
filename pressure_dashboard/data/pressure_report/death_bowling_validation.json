@@ -1,0 +1,7498 @@
+{
+  "method": "Independent one-pass recount of raw ball_by_ball.csv joined directly to matches.csv and competitions.csv. This validator does not import the report builder or reuse its delivery-aggregation functions.",
+  "source_files": {
+    "ball_by_ball.csv": "D:\\RR\\Raw_Data\\ball_by_ball.csv",
+    "matches.csv": "D:\\RR\\Raw_Data\\matches.csv",
+    "competitions.csv": "D:\\RR\\Raw_Data\\competitions.csv"
+  },
+  "checks_passed": 1190,
+  "checks_total": 1190,
+  "all_passed": true,
+  "raw_totals": {
+    "raw_delivery_rows": 200999,
+    "raw_batter_runs_sum": 269550,
+    "raw_legal_balls_all_deliveries": 192444,
+    "raw_india_death_rows": 22686,
+    "usable_india_death_rows": 20018,
+    "unknown_legality_rows_in_cohort": 76,
+    "death_rows_after_unknown_state_excluded": 2592,
+    "excluded_unknown_or_multi_name_ids": 0
+  },
+  "eligible_players": 51,
+  "top_ten": [
+    {
+      "rank": 1,
+      "player": "Sunil Narine",
+      "player_id": 781,
+      "ranking_innings": 10,
+      "ranking_balls": 60,
+      "ranking_runs": 53,
+      "ranking_economy": 5.3,
+      "ranking_dot_balls": 30,
+      "ranking_dot_pct": 50.0,
+      "ranking_wickets": 8,
+      "ranking_wickets_per_100": 13.3333,
+      "ranking_boundary_events": 5,
+      "ranking_boundary_pct": 8.3333,
+      "ranking_singles_twos": 25,
+      "ranking_singles_twos_pct": 41.6667,
+      "composite_score": 97.4
+    },
+    {
+      "rank": 2,
+      "player": "Nandre Burger",
+      "player_id": 7312,
+      "ranking_innings": 10,
+      "ranking_balls": 57,
+      "ranking_runs": 72,
+      "ranking_economy": 7.5789,
+      "ranking_dot_balls": 25,
+      "ranking_dot_pct": 43.8596,
+      "ranking_wickets": 5,
+      "ranking_wickets_per_100": 8.7719,
+      "ranking_boundary_events": 9,
+      "ranking_boundary_pct": 15.7895,
+      "ranking_singles_twos": 23,
+      "ranking_singles_twos_pct": 40.3509,
+      "composite_score": 90.2
+    },
+    {
+      "rank": 3,
+      "player": "Noor Ahmad",
+      "player_id": 7967,
+      "ranking_innings": 10,
+      "ranking_balls": 72,
+      "ranking_runs": 97,
+      "ranking_economy": 8.0833,
+      "ranking_dot_balls": 29,
+      "ranking_dot_pct": 40.2778,
+      "ranking_wickets": 6,
+      "ranking_wickets_per_100": 8.3333,
+      "ranking_boundary_events": 11,
+      "ranking_boundary_pct": 15.2778,
+      "ranking_singles_twos": 31,
+      "ranking_singles_twos_pct": 43.0556,
+      "composite_score": 85.8
+    },
+    {
+      "rank": 4,
+      "player": "Anshul Kamboj",
+      "player_id": 27964,
+      "ranking_innings": 10,
+      "ranking_balls": 106,
+      "ranking_runs": 187,
+      "ranking_economy": 10.5849,
+      "ranking_dot_balls": 36,
+      "ranking_dot_pct": 33.9623,
+      "ranking_wickets": 12,
+      "ranking_wickets_per_100": 11.3208,
+      "ranking_boundary_events": 27,
+      "ranking_boundary_pct": 25.4717,
+      "ranking_singles_twos": 42,
+      "ranking_singles_twos_pct": 39.6226,
+      "composite_score": 77.8
+    },
+    {
+      "rank": 5,
+      "player": "Kagiso Rabada",
+      "player_id": 3628,
+      "ranking_innings": 10,
+      "ranking_balls": 66,
+      "ranking_runs": 99,
+      "ranking_economy": 9.0,
+      "ranking_dot_balls": 23,
+      "ranking_dot_pct": 34.8485,
+      "ranking_wickets": 5,
+      "ranking_wickets_per_100": 7.5758,
+      "ranking_boundary_events": 12,
+      "ranking_boundary_pct": 18.1818,
+      "ranking_singles_twos": 31,
+      "ranking_singles_twos_pct": 46.9697,
+      "composite_score": 76.3
+    },
+    {
+      "rank": 6,
+      "player": "Rasikh Salam",
+      "player_id": 7327,
+      "ranking_innings": 10,
+      "ranking_balls": 83,
+      "ranking_runs": 138,
+      "ranking_economy": 9.9759,
+      "ranking_dot_balls": 25,
+      "ranking_dot_pct": 30.1205,
+      "ranking_wickets": 10,
+      "ranking_wickets_per_100": 12.0482,
+      "ranking_boundary_events": 17,
+      "ranking_boundary_pct": 20.4819,
+      "ranking_singles_twos": 41,
+      "ranking_singles_twos_pct": 49.3976,
+      "composite_score": 73.1
+    },
+    {
+      "rank": 7,
+      "player": "Mayank Yadav",
+      "player_id": 27960,
+      "ranking_innings": 10,
+      "ranking_balls": 61,
+      "ranking_runs": 89,
+      "ranking_economy": 8.7541,
+      "ranking_dot_balls": 23,
+      "ranking_dot_pct": 37.7049,
+      "ranking_wickets": 3,
+      "ranking_wickets_per_100": 4.918,
+      "ranking_boundary_events": 12,
+      "ranking_boundary_pct": 19.6721,
+      "ranking_singles_twos": 26,
+      "ranking_singles_twos_pct": 42.623,
+      "composite_score": 72.4
+    },
+    {
+      "rank": 8,
+      "player": "Vaibhav Arora",
+      "player_id": 8746,
+      "ranking_innings": 10,
+      "ranking_balls": 84,
+      "ranking_runs": 132,
+      "ranking_economy": 9.4286,
+      "ranking_dot_balls": 25,
+      "ranking_dot_pct": 29.7619,
+      "ranking_wickets": 9,
+      "ranking_wickets_per_100": 10.7143,
+      "ranking_boundary_events": 16,
+      "ranking_boundary_pct": 19.0476,
+      "ranking_singles_twos": 43,
+      "ranking_singles_twos_pct": 51.1905,
+      "composite_score": 72.3
+    },
+    {
+      "rank": 9,
+      "player": "Kartik Tyagi",
+      "player_id": 8530,
+      "ranking_innings": 10,
+      "ranking_balls": 88,
+      "ranking_runs": 148,
+      "ranking_economy": 10.0909,
+      "ranking_dot_balls": 27,
+      "ranking_dot_pct": 30.6818,
+      "ranking_wickets": 8,
+      "ranking_wickets_per_100": 9.0909,
+      "ranking_boundary_events": 20,
+      "ranking_boundary_pct": 22.7273,
+      "ranking_singles_twos": 41,
+      "ranking_singles_twos_pct": 46.5909,
+      "composite_score": 71.4
+    },
+    {
+      "rank": 10,
+      "player": "Suyash Sharma",
+      "player_id": 36982,
+      "ranking_innings": 10,
+      "ranking_balls": 59,
+      "ranking_runs": 78,
+      "ranking_economy": 7.9322,
+      "ranking_dot_balls": 20,
+      "ranking_dot_pct": 33.8983,
+      "ranking_wickets": 3,
+      "ranking_wickets_per_100": 5.0847,
+      "ranking_boundary_events": 9,
+      "ranking_boundary_pct": 15.2542,
+      "ranking_singles_twos": 30,
+      "ranking_singles_twos_pct": 50.8475,
+      "composite_score": 71.4
+    }
+  ],
+  "checks": [
+    {
+      "check": "Raw recount: raw_delivery_rows",
+      "computed": 200999,
+      "reference": 200999,
+      "passed": true
+    },
+    {
+      "check": "Raw recount: raw_batter_runs_sum",
+      "computed": 269550,
+      "reference": 269550,
+      "passed": true
+    },
+    {
+      "check": "Raw recount: raw_legal_balls_all_deliveries",
+      "computed": 192444,
+      "reference": 192444,
+      "passed": true
+    },
+    {
+      "check": "Raw recount: raw_india_death_rows",
+      "computed": 22686,
+      "reference": 22686,
+      "passed": true
+    },
+    {
+      "check": "Raw recount: usable_india_death_rows",
+      "computed": 20018,
+      "reference": 20018,
+      "passed": true
+    },
+    {
+      "check": "Raw recount: unknown_legality_rows_in_cohort",
+      "computed": 76,
+      "reference": 76,
+      "passed": true
+    },
+    {
+      "check": "Raw recount: death_rows_after_unknown_state_excluded",
+      "computed": 2592,
+      "reference": 2592,
+      "passed": true
+    },
+    {
+      "check": "Raw recount: excluded_unknown_or_multi_name_ids",
+      "computed": 0,
+      "reference": 0,
+      "passed": true
+    },
+    {
+      "check": "Raw-source ordering is monotonic by innings delivery",
+      "computed": 0,
+      "reference": 0,
+      "passed": true
+    },
+    {
+      "check": "Eligible player count",
+      "computed": 51,
+      "reference": 51,
+      "passed": true
+    },
+    {
+      "check": "Players excluded at user request",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Players without a 2026 Indian death-over appearance",
+      "computed": 127,
+      "reference": 127,
+      "passed": true
+    },
+    {
+      "check": "User-excluded player IDs and names",
+      "computed": [
+        [
+          2382,
+          "Jamie Overton"
+        ],
+        [
+          4641,
+          "Lungi Ngidi"
+        ],
+        [
+          6628,
+          "Gerald Coetzee"
+        ]
+      ],
+      "reference": [
+        [
+          2382,
+          "Jamie Overton"
+        ],
+        [
+          4641,
+          "Lungi Ngidi"
+        ],
+        [
+          6628,
+          "Gerald Coetzee"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "check": "Recent-window legal balls",
+      "computed": 3624,
+      "reference": 3624,
+      "passed": true
+    },
+    {
+      "check": "Recent-window credited wickets",
+      "computed": 277,
+      "reference": 277,
+      "passed": true
+    },
+    {
+      "check": "Eligible player IDs and raw ranking rows",
+      "computed": [
+        360,
+        781,
+        829,
+        830,
+        1071,
+        1612,
+        1813,
+        2261,
+        2320,
+        2411,
+        2633,
+        2639,
+        2847,
+        2876,
+        3298,
+        3330,
+        3628,
+        3644,
+        3653,
+        4101,
+        4219,
+        4265,
+        4487,
+        4489,
+        4692,
+        4722,
+        4816,
+        5041,
+        5944,
+        6161,
+        6256,
+        6287,
+        6464,
+        6726,
+        6806,
+        7250,
+        7312,
+        7327,
+        7503,
+        7808,
+        7967,
+        8530,
+        8746,
+        20005,
+        27960,
+        27964,
+        29888,
+        36982,
+        39657,
+        58134,
+        67036
+      ],
+      "reference": [
+        360,
+        781,
+        829,
+        830,
+        1071,
+        1612,
+        1813,
+        2261,
+        2320,
+        2411,
+        2633,
+        2639,
+        2847,
+        2876,
+        3298,
+        3330,
+        3628,
+        3644,
+        3653,
+        4101,
+        4219,
+        4265,
+        4487,
+        4489,
+        4692,
+        4722,
+        4816,
+        5041,
+        5944,
+        6161,
+        6256,
+        6287,
+        6464,
+        6726,
+        6806,
+        7250,
+        7312,
+        7327,
+        7503,
+        7808,
+        7967,
+        8530,
+        8746,
+        20005,
+        27960,
+        27964,
+        29888,
+        36982,
+        39657,
+        58134,
+        67036
+      ],
+      "passed": true
+    },
+    {
+      "check": "Player 781 unique-ID row and rank",
+      "computed": 1,
+      "reference": 1,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_balls",
+      "computed": 60,
+      "reference": 60,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_runs",
+      "computed": 53,
+      "reference": 53,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_dot_balls",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_wickets",
+      "computed": 8,
+      "reference": 8,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_boundary_events",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_singles_twos",
+      "computed": 25,
+      "reference": 25,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_first_date",
+      "computed": "2025-04-26",
+      "reference": "2025-04-26",
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_latest_date",
+      "computed": "2026-05-20",
+      "reference": "2026-05-20",
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_economy",
+      "computed": 5.3,
+      "reference": 5.3,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_dot_pct",
+      "computed": 50.0,
+      "reference": 50.0,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_wickets_per_100",
+      "computed": 13.3333,
+      "reference": 13.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_boundary_pct",
+      "computed": 8.3333,
+      "reference": 8.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_singles_twos_pct",
+      "computed": 41.6667,
+      "reference": 41.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 781 adjusted_economy",
+      "computed": 8.1417,
+      "reference": 8.1417,
+      "passed": true
+    },
+    {
+      "check": "Player 781 adjusted_wickets_per_100",
+      "computed": 10.4884,
+      "reference": 10.4884,
+      "passed": true
+    },
+    {
+      "check": "Player 781 adjusted_economy_percentile",
+      "computed": 100.0,
+      "reference": 100.0,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_dot_pct_percentile",
+      "computed": 100.0,
+      "reference": 100.0,
+      "passed": true
+    },
+    {
+      "check": "Player 781 adjusted_wickets_per_100_percentile",
+      "computed": 98.0,
+      "reference": 98.0,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_boundary_pct_percentile",
+      "computed": 100.0,
+      "reference": 100.0,
+      "passed": true
+    },
+    {
+      "check": "Player 781 ranking_singles_twos_pct_percentile",
+      "computed": 78.0,
+      "reference": 78.0,
+      "passed": true
+    },
+    {
+      "check": "Player 781 composite_score",
+      "computed": 97.4,
+      "reference": 97.4,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 unique-ID row and rank",
+      "computed": 2,
+      "reference": 2,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_balls",
+      "computed": 57,
+      "reference": 57,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_runs",
+      "computed": 72,
+      "reference": 72,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_dot_balls",
+      "computed": 25,
+      "reference": 25,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_boundary_events",
+      "computed": 9,
+      "reference": 9,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_singles_twos",
+      "computed": 23,
+      "reference": 23,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_first_date",
+      "computed": "2024-04-01",
+      "reference": "2024-04-01",
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_latest_date",
+      "computed": "2026-05-29",
+      "reference": "2026-05-29",
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_economy",
+      "computed": 7.5789,
+      "reference": 7.5789,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_dot_pct",
+      "computed": 43.8596,
+      "reference": 43.8596,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_wickets_per_100",
+      "computed": 8.7719,
+      "reference": 8.7719,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_boundary_pct",
+      "computed": 15.7895,
+      "reference": 15.7895,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_singles_twos_pct",
+      "computed": 40.3509,
+      "reference": 40.3509,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 adjusted_economy",
+      "computed": 9.3248,
+      "reference": 9.3248,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 adjusted_wickets_per_100",
+      "computed": 8.1932,
+      "reference": 8.1932,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 adjusted_economy_percentile",
+      "computed": 98.0,
+      "reference": 98.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_dot_pct_percentile",
+      "computed": 98.0,
+      "reference": 98.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 adjusted_wickets_per_100_percentile",
+      "computed": 70.0,
+      "reference": 70.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_boundary_pct_percentile",
+      "computed": 94.0,
+      "reference": 94.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 ranking_singles_twos_pct_percentile",
+      "computed": 82.0,
+      "reference": 82.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7312 composite_score",
+      "computed": 90.2,
+      "reference": 90.2,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 unique-ID row and rank",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_balls",
+      "computed": 72,
+      "reference": 72,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_runs",
+      "computed": 97,
+      "reference": 97,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_dot_balls",
+      "computed": 29,
+      "reference": 29,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_wickets",
+      "computed": 6,
+      "reference": 6,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_boundary_events",
+      "computed": 11,
+      "reference": 11,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_singles_twos",
+      "computed": 31,
+      "reference": 31,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_first_date",
+      "computed": "2025-04-25",
+      "reference": "2025-04-25",
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_latest_date",
+      "computed": "2026-05-10",
+      "reference": "2026-05-10",
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_economy",
+      "computed": 8.0833,
+      "reference": 8.0833,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_dot_pct",
+      "computed": 40.2778,
+      "reference": 40.2778,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_wickets_per_100",
+      "computed": 8.3333,
+      "reference": 8.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_boundary_pct",
+      "computed": 15.2778,
+      "reference": 15.2778,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_singles_twos_pct",
+      "computed": 43.0556,
+      "reference": 43.0556,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 adjusted_economy",
+      "computed": 9.4015,
+      "reference": 9.4015,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 adjusted_wickets_per_100",
+      "computed": 8.0197,
+      "reference": 8.0197,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 adjusted_economy_percentile",
+      "computed": 96.0,
+      "reference": 96.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_dot_pct_percentile",
+      "computed": 96.0,
+      "reference": 96.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 adjusted_wickets_per_100_percentile",
+      "computed": 59.0,
+      "reference": 59.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_boundary_pct_percentile",
+      "computed": 96.0,
+      "reference": 96.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 ranking_singles_twos_pct_percentile",
+      "computed": 68.0,
+      "reference": 68.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7967 composite_score",
+      "computed": 85.8,
+      "reference": 85.8,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 unique-ID row and rank",
+      "computed": 4,
+      "reference": 4,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_balls",
+      "computed": 106,
+      "reference": 106,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_runs",
+      "computed": 187,
+      "reference": 187,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_dot_balls",
+      "computed": 36,
+      "reference": 36,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_wickets",
+      "computed": 12,
+      "reference": 12,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_boundary_events",
+      "computed": 27,
+      "reference": 27,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_singles_twos",
+      "computed": 42,
+      "reference": 42,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_first_date",
+      "computed": "2026-04-11",
+      "reference": "2026-04-11",
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_latest_date",
+      "computed": "2026-05-21",
+      "reference": "2026-05-21",
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_economy",
+      "computed": 10.5849,
+      "reference": 10.5849,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_dot_pct",
+      "computed": 33.9623,
+      "reference": 33.9623,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_wickets_per_100",
+      "computed": 11.3208,
+      "reference": 11.3208,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_boundary_pct",
+      "computed": 25.4717,
+      "reference": 25.4717,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_singles_twos_pct",
+      "computed": 39.6226,
+      "reference": 39.6226,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 adjusted_economy",
+      "computed": 10.729,
+      "reference": 10.729,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 adjusted_wickets_per_100",
+      "computed": 9.9917,
+      "reference": 9.9917,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 adjusted_economy_percentile",
+      "computed": 68.0,
+      "reference": 68.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_dot_pct_percentile",
+      "computed": 88.0,
+      "reference": 88.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 adjusted_wickets_per_100_percentile",
+      "computed": 92.0,
+      "reference": 92.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_boundary_pct_percentile",
+      "computed": 52.0,
+      "reference": 52.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 ranking_singles_twos_pct_percentile",
+      "computed": 92.0,
+      "reference": 92.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27964 composite_score",
+      "computed": 77.8,
+      "reference": 77.8,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 unique-ID row and rank",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_balls",
+      "computed": 66,
+      "reference": 66,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_runs",
+      "computed": 99,
+      "reference": 99,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_dot_balls",
+      "computed": 23,
+      "reference": 23,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_boundary_events",
+      "computed": 12,
+      "reference": 12,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_singles_twos",
+      "computed": 31,
+      "reference": 31,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_first_date",
+      "computed": "2025-03-29",
+      "reference": "2025-03-29",
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_latest_date",
+      "computed": "2026-05-29",
+      "reference": "2026-05-29",
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_economy",
+      "computed": 9.0,
+      "reference": 9.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_dot_pct",
+      "computed": 34.8485,
+      "reference": 34.8485,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_wickets_per_100",
+      "computed": 7.5758,
+      "reference": 7.5758,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_boundary_pct",
+      "computed": 18.1818,
+      "reference": 18.1818,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_singles_twos_pct",
+      "computed": 46.9697,
+      "reference": 46.9697,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 adjusted_economy",
+      "computed": 9.9445,
+      "reference": 9.9445,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 adjusted_wickets_per_100",
+      "computed": 7.608,
+      "reference": 7.608,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 adjusted_economy_percentile",
+      "computed": 84.0,
+      "reference": 84.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_dot_pct_percentile",
+      "computed": 92.0,
+      "reference": 92.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 adjusted_wickets_per_100_percentile",
+      "computed": 54.0,
+      "reference": 54.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_boundary_pct_percentile",
+      "computed": 86.0,
+      "reference": 86.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 ranking_singles_twos_pct_percentile",
+      "computed": 44.0,
+      "reference": 44.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3628 composite_score",
+      "computed": 76.3,
+      "reference": 76.3,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 unique-ID row and rank",
+      "computed": 6,
+      "reference": 6,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_balls",
+      "computed": 83,
+      "reference": 83,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_runs",
+      "computed": 138,
+      "reference": 138,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_dot_balls",
+      "computed": 25,
+      "reference": 25,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_wickets",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_boundary_events",
+      "computed": 17,
+      "reference": 17,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_singles_twos",
+      "computed": 41,
+      "reference": 41,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_first_date",
+      "computed": "2026-04-12",
+      "reference": "2026-04-12",
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_latest_date",
+      "computed": "2026-05-31",
+      "reference": "2026-05-31",
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_economy",
+      "computed": 9.9759,
+      "reference": 9.9759,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_dot_pct",
+      "computed": 30.1205,
+      "reference": 30.1205,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_wickets_per_100",
+      "computed": 12.0482,
+      "reference": 12.0482,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_boundary_pct",
+      "computed": 20.4819,
+      "reference": 20.4819,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_singles_twos_pct",
+      "computed": 49.3976,
+      "reference": 49.3976,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 adjusted_economy",
+      "computed": 10.3986,
+      "reference": 10.3986,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 adjusted_wickets_per_100",
+      "computed": 10.2001,
+      "reference": 10.2001,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 adjusted_economy_percentile",
+      "computed": 78.0,
+      "reference": 78.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_dot_pct_percentile",
+      "computed": 64.0,
+      "reference": 64.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 adjusted_wickets_per_100_percentile",
+      "computed": 94.0,
+      "reference": 94.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_boundary_pct_percentile",
+      "computed": 78.0,
+      "reference": 78.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 ranking_singles_twos_pct_percentile",
+      "computed": 32.0,
+      "reference": 32.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7327 composite_score",
+      "computed": 73.1,
+      "reference": 73.1,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 unique-ID row and rank",
+      "computed": 7,
+      "reference": 7,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_balls",
+      "computed": 61,
+      "reference": 61,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_runs",
+      "computed": 89,
+      "reference": 89,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_dot_balls",
+      "computed": 23,
+      "reference": 23,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_boundary_events",
+      "computed": 12,
+      "reference": 12,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_singles_twos",
+      "computed": 26,
+      "reference": 26,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_first_date",
+      "computed": "2024-04-30",
+      "reference": "2024-04-30",
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_latest_date",
+      "computed": "2026-10-06",
+      "reference": "2026-10-06",
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_economy",
+      "computed": 8.7541,
+      "reference": 8.7541,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_dot_pct",
+      "computed": 37.7049,
+      "reference": 37.7049,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_wickets_per_100",
+      "computed": 4.918,
+      "reference": 4.918,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_boundary_pct",
+      "computed": 19.6721,
+      "reference": 19.6721,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_singles_twos_pct",
+      "computed": 42.623,
+      "reference": 42.623,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 adjusted_economy",
+      "computed": 9.8596,
+      "reference": 9.8596,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 adjusted_wickets_per_100",
+      "computed": 6.2695,
+      "reference": 6.2695,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 adjusted_economy_percentile",
+      "computed": 88.0,
+      "reference": 88.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_dot_pct_percentile",
+      "computed": 94.0,
+      "reference": 94.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 adjusted_wickets_per_100_percentile",
+      "computed": 16.0,
+      "reference": 16.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_boundary_pct_percentile",
+      "computed": 82.0,
+      "reference": 82.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 ranking_singles_twos_pct_percentile",
+      "computed": 70.0,
+      "reference": 70.0,
+      "passed": true
+    },
+    {
+      "check": "Player 27960 composite_score",
+      "computed": 72.4,
+      "reference": 72.4,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 unique-ID row and rank",
+      "computed": 8,
+      "reference": 8,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_balls",
+      "computed": 84,
+      "reference": 84,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_runs",
+      "computed": 132,
+      "reference": 132,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_dot_balls",
+      "computed": 25,
+      "reference": 25,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_wickets",
+      "computed": 9,
+      "reference": 9,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_boundary_events",
+      "computed": 16,
+      "reference": 16,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_singles_twos",
+      "computed": 43,
+      "reference": 43,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_first_date",
+      "computed": "2025-05-07",
+      "reference": "2025-05-07",
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_latest_date",
+      "computed": "2026-05-13",
+      "reference": "2026-05-13",
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_economy",
+      "computed": 9.4286,
+      "reference": 9.4286,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_dot_pct",
+      "computed": 29.7619,
+      "reference": 29.7619,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_wickets_per_100",
+      "computed": 10.7143,
+      "reference": 10.7143,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_boundary_pct",
+      "computed": 19.0476,
+      "reference": 19.0476,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_singles_twos_pct",
+      "computed": 51.1905,
+      "reference": 51.1905,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 adjusted_economy",
+      "computed": 10.0765,
+      "reference": 10.0765,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 adjusted_wickets_per_100",
+      "computed": 9.4348,
+      "reference": 9.4348,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 adjusted_economy_percentile",
+      "computed": 82.0,
+      "reference": 82.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_dot_pct_percentile",
+      "computed": 62.0,
+      "reference": 62.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 adjusted_wickets_per_100_percentile",
+      "computed": 86.0,
+      "reference": 86.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_boundary_pct_percentile",
+      "computed": 84.0,
+      "reference": 84.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 ranking_singles_twos_pct_percentile",
+      "computed": 24.0,
+      "reference": 24.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8746 composite_score",
+      "computed": 72.3,
+      "reference": 72.3,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 unique-ID row and rank",
+      "computed": 9,
+      "reference": 9,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_balls",
+      "computed": 88,
+      "reference": 88,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_runs",
+      "computed": 148,
+      "reference": 148,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_dot_balls",
+      "computed": 27,
+      "reference": 27,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_wickets",
+      "computed": 8,
+      "reference": 8,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_boundary_events",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_singles_twos",
+      "computed": 41,
+      "reference": 41,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_first_date",
+      "computed": "2026-04-14",
+      "reference": "2026-04-14",
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_latest_date",
+      "computed": "2026-05-24",
+      "reference": "2026-05-24",
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_economy",
+      "computed": 10.0909,
+      "reference": 10.0909,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_dot_pct",
+      "computed": 30.6818,
+      "reference": 30.6818,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_wickets_per_100",
+      "computed": 9.0909,
+      "reference": 9.0909,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_boundary_pct",
+      "computed": 22.7273,
+      "reference": 22.7273,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_singles_twos_pct",
+      "computed": 46.5909,
+      "reference": 46.5909,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 adjusted_economy",
+      "computed": 10.4527,
+      "reference": 10.4527,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 adjusted_wickets_per_100",
+      "computed": 8.5041,
+      "reference": 8.5041,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 adjusted_economy_percentile",
+      "computed": 74.0,
+      "reference": 74.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_dot_pct_percentile",
+      "computed": 72.0,
+      "reference": 72.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 adjusted_wickets_per_100_percentile",
+      "computed": 80.0,
+      "reference": 80.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_boundary_pct_percentile",
+      "computed": 68.0,
+      "reference": 68.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 ranking_singles_twos_pct_percentile",
+      "computed": 50.0,
+      "reference": 50.0,
+      "passed": true
+    },
+    {
+      "check": "Player 8530 composite_score",
+      "computed": 71.4,
+      "reference": 71.4,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 unique-ID row and rank",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_balls",
+      "computed": 59,
+      "reference": 59,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_runs",
+      "computed": 78,
+      "reference": 78,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_dot_balls",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_boundary_events",
+      "computed": 9,
+      "reference": 9,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_singles_twos",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_first_date",
+      "computed": "2025-03-22",
+      "reference": "2025-03-22",
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_latest_date",
+      "computed": "2026-04-30",
+      "reference": "2026-04-30",
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_economy",
+      "computed": 7.9322,
+      "reference": 7.9322,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_dot_pct",
+      "computed": 33.8983,
+      "reference": 33.8983,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_wickets_per_100",
+      "computed": 5.0847,
+      "reference": 5.0847,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_boundary_pct",
+      "computed": 15.2542,
+      "reference": 15.2542,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_singles_twos_pct",
+      "computed": 50.8475,
+      "reference": 50.8475,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 adjusted_economy",
+      "computed": 9.4706,
+      "reference": 9.4706,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 adjusted_wickets_per_100",
+      "computed": 6.3748,
+      "reference": 6.3748,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 adjusted_economy_percentile",
+      "computed": 94.0,
+      "reference": 94.0,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_dot_pct_percentile",
+      "computed": 86.0,
+      "reference": 86.0,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 adjusted_wickets_per_100_percentile",
+      "computed": 22.0,
+      "reference": 22.0,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_boundary_pct_percentile",
+      "computed": 98.0,
+      "reference": 98.0,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 ranking_singles_twos_pct_percentile",
+      "computed": 26.0,
+      "reference": 26.0,
+      "passed": true
+    },
+    {
+      "check": "Player 36982 composite_score",
+      "computed": 71.4,
+      "reference": 71.4,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 unique-ID row and rank",
+      "computed": 11,
+      "reference": 11,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_balls",
+      "computed": 53,
+      "reference": 53,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_runs",
+      "computed": 77,
+      "reference": 77,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_dot_balls",
+      "computed": 14,
+      "reference": 14,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_wickets",
+      "computed": 7,
+      "reference": 7,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_boundary_events",
+      "computed": 9,
+      "reference": 9,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_singles_twos",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_first_date",
+      "computed": "2025-04-23",
+      "reference": "2025-04-23",
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_latest_date",
+      "computed": "2026-05-02",
+      "reference": "2026-05-02",
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_economy",
+      "computed": 8.717,
+      "reference": 8.717,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_dot_pct",
+      "computed": 26.4151,
+      "reference": 26.4151,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_wickets_per_100",
+      "computed": 13.2075,
+      "reference": 13.2075,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_boundary_pct",
+      "computed": 16.9811,
+      "reference": 16.9811,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_singles_twos_pct",
+      "computed": 56.6038,
+      "reference": 56.6038,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 adjusted_economy",
+      "computed": 9.9204,
+      "reference": 9.9204,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 adjusted_wickets_per_100",
+      "computed": 10.2532,
+      "reference": 10.2532,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 adjusted_economy_percentile",
+      "computed": 86.0,
+      "reference": 86.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_dot_pct_percentile",
+      "computed": 42.0,
+      "reference": 42.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 adjusted_wickets_per_100_percentile",
+      "computed": 96.0,
+      "reference": 96.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_boundary_pct_percentile",
+      "computed": 88.0,
+      "reference": 88.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 ranking_singles_twos_pct_percentile",
+      "computed": 2.0,
+      "reference": 2.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2320 composite_score",
+      "computed": 68.9,
+      "reference": 68.9,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 unique-ID row and rank",
+      "computed": 12,
+      "reference": 12,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_balls",
+      "computed": 78,
+      "reference": 78,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_runs",
+      "computed": 143,
+      "reference": 143,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_dot_balls",
+      "computed": 27,
+      "reference": 27,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_wickets",
+      "computed": 7,
+      "reference": 7,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_boundary_events",
+      "computed": 21,
+      "reference": 21,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_singles_twos",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_first_date",
+      "computed": "2026-04-19",
+      "reference": "2026-04-19",
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_latest_date",
+      "computed": "2026-05-29",
+      "reference": "2026-05-29",
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_economy",
+      "computed": 11.0,
+      "reference": 11.0,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_dot_pct",
+      "computed": 34.6154,
+      "reference": 34.6154,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_wickets_per_100",
+      "computed": 8.9744,
+      "reference": 8.9744,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_boundary_pct",
+      "computed": 26.9231,
+      "reference": 26.9231,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_singles_twos_pct",
+      "computed": 38.4615,
+      "reference": 38.4615,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 adjusted_economy",
+      "computed": 10.9928,
+      "reference": 10.9928,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 adjusted_wickets_per_100",
+      "computed": 8.3957,
+      "reference": 8.3957,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 adjusted_economy_percentile",
+      "computed": 51.0,
+      "reference": 51.0,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_dot_pct_percentile",
+      "computed": 90.0,
+      "reference": 90.0,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 adjusted_wickets_per_100_percentile",
+      "computed": 75.0,
+      "reference": 75.0,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_boundary_pct_percentile",
+      "computed": 37.0,
+      "reference": 37.0,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 ranking_singles_twos_pct_percentile",
+      "computed": 98.0,
+      "reference": 98.0,
+      "passed": true
+    },
+    {
+      "check": "Player 67036 composite_score",
+      "computed": 68.15,
+      "reference": 68.15,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 unique-ID row and rank",
+      "computed": 13,
+      "reference": 13,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_balls",
+      "computed": 61,
+      "reference": 61,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_runs",
+      "computed": 86,
+      "reference": 86,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_dot_balls",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_boundary_events",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_singles_twos",
+      "computed": 33,
+      "reference": 33,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_first_date",
+      "computed": "2023-01-27",
+      "reference": "2023-01-27",
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_latest_date",
+      "computed": "2026-04-12",
+      "reference": "2026-04-12",
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_economy",
+      "computed": 8.459,
+      "reference": 8.459,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_dot_pct",
+      "computed": 29.5082,
+      "reference": 29.5082,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_wickets_per_100",
+      "computed": 8.1967,
+      "reference": 8.1967,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_boundary_pct",
+      "computed": 16.3934,
+      "reference": 16.3934,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_singles_twos_pct",
+      "computed": 54.0984,
+      "reference": 54.0984,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 adjusted_economy",
+      "computed": 9.7108,
+      "reference": 9.7108,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 adjusted_wickets_per_100",
+      "computed": 7.9224,
+      "reference": 7.9224,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 adjusted_economy_percentile",
+      "computed": 90.0,
+      "reference": 90.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_dot_pct_percentile",
+      "computed": 60.0,
+      "reference": 60.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 adjusted_wickets_per_100_percentile",
+      "computed": 56.0,
+      "reference": 56.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_boundary_pct_percentile",
+      "computed": 92.0,
+      "reference": 92.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 ranking_singles_twos_pct_percentile",
+      "computed": 10.0,
+      "reference": 10.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4101 composite_score",
+      "computed": 68.0,
+      "reference": 68.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 unique-ID row and rank",
+      "computed": 14,
+      "reference": 14,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_balls",
+      "computed": 66,
+      "reference": 66,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_runs",
+      "computed": 121,
+      "reference": 121,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_dot_balls",
+      "computed": 21,
+      "reference": 21,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_wickets",
+      "computed": 7,
+      "reference": 7,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_boundary_events",
+      "computed": 17,
+      "reference": 17,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_singles_twos",
+      "computed": 28,
+      "reference": 28,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_first_date",
+      "computed": "2024-03-31",
+      "reference": "2024-03-31",
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_latest_date",
+      "computed": "2026-04-11",
+      "reference": "2026-04-11",
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_economy",
+      "computed": 11.0,
+      "reference": 11.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_dot_pct",
+      "computed": 31.8182,
+      "reference": 31.8182,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_wickets_per_100",
+      "computed": 10.6061,
+      "reference": 10.6061,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_boundary_pct",
+      "computed": 25.7576,
+      "reference": 25.7576,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_singles_twos_pct",
+      "computed": 42.4242,
+      "reference": 42.4242,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 adjusted_economy",
+      "computed": 10.9921,
+      "reference": 10.9921,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 adjusted_wickets_per_100",
+      "computed": 9.1953,
+      "reference": 9.1953,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 adjusted_economy_percentile",
+      "computed": 54.0,
+      "reference": 54.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_dot_pct_percentile",
+      "computed": 76.0,
+      "reference": 76.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 adjusted_wickets_per_100_percentile",
+      "computed": 84.0,
+      "reference": 84.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_boundary_pct_percentile",
+      "computed": 50.0,
+      "reference": 50.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 ranking_singles_twos_pct_percentile",
+      "computed": 72.0,
+      "reference": 72.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1071 composite_score",
+      "computed": 66.7,
+      "reference": 66.7,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 unique-ID row and rank",
+      "computed": 15,
+      "reference": 15,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_balls",
+      "computed": 60,
+      "reference": 60,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_runs",
+      "computed": 116,
+      "reference": 116,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_dot_balls",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_wickets",
+      "computed": 7,
+      "reference": 7,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_boundary_events",
+      "computed": 16,
+      "reference": 16,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_singles_twos",
+      "computed": 24,
+      "reference": 24,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_first_date",
+      "computed": "2025-04-26",
+      "reference": "2025-04-26",
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_latest_date",
+      "computed": "2026-05-24",
+      "reference": "2026-05-24",
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_economy",
+      "computed": 11.6,
+      "reference": 11.6,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_dot_pct",
+      "computed": 33.3333,
+      "reference": 33.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_wickets_per_100",
+      "computed": 11.6667,
+      "reference": 11.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_boundary_pct",
+      "computed": 26.6667,
+      "reference": 26.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_singles_twos_pct",
+      "computed": 40.0,
+      "reference": 40.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 adjusted_economy",
+      "computed": 11.2917,
+      "reference": 11.2917,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 adjusted_wickets_per_100",
+      "computed": 9.6551,
+      "reference": 9.6551,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 adjusted_economy_percentile",
+      "computed": 38.0,
+      "reference": 38.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_dot_pct_percentile",
+      "computed": 82.0,
+      "reference": 82.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 adjusted_wickets_per_100_percentile",
+      "computed": 89.0,
+      "reference": 89.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_boundary_pct_percentile",
+      "computed": 43.0,
+      "reference": 43.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 ranking_singles_twos_pct_percentile",
+      "computed": 85.0,
+      "reference": 85.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6256 composite_score",
+      "computed": 64.65,
+      "reference": 64.65,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 unique-ID row and rank",
+      "computed": 16,
+      "reference": 16,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_balls",
+      "computed": 82,
+      "reference": 82,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_runs",
+      "computed": 135,
+      "reference": 135,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_dot_balls",
+      "computed": 24,
+      "reference": 24,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_wickets",
+      "computed": 6,
+      "reference": 6,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_boundary_events",
+      "computed": 17,
+      "reference": 17,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_singles_twos",
+      "computed": 41,
+      "reference": 41,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_first_date",
+      "computed": "2024-05-15",
+      "reference": "2024-05-15",
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_latest_date",
+      "computed": "2026-04-05",
+      "reference": "2026-04-05",
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_economy",
+      "computed": 9.878,
+      "reference": 9.878,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_dot_pct",
+      "computed": 29.2683,
+      "reference": 29.2683,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_wickets_per_100",
+      "computed": 7.3171,
+      "reference": 7.3171,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_boundary_pct",
+      "computed": 20.7317,
+      "reference": 20.7317,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_singles_twos_pct",
+      "computed": 50.0,
+      "reference": 50.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 adjusted_economy",
+      "computed": 10.3451,
+      "reference": 10.3451,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 adjusted_wickets_per_100",
+      "computed": 7.455,
+      "reference": 7.455,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 adjusted_economy_percentile",
+      "computed": 80.0,
+      "reference": 80.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_dot_pct_percentile",
+      "computed": 56.0,
+      "reference": 56.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 adjusted_wickets_per_100_percentile",
+      "computed": 51.0,
+      "reference": 51.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_boundary_pct_percentile",
+      "computed": 76.0,
+      "reference": 76.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 ranking_singles_twos_pct_percentile",
+      "computed": 30.0,
+      "reference": 30.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2261 composite_score",
+      "computed": 62.6,
+      "reference": 62.6,
+      "passed": true
+    },
+    {
+      "check": "Player 830 unique-ID row and rank",
+      "computed": 17,
+      "reference": 17,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_balls",
+      "computed": 75,
+      "reference": 75,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_runs",
+      "computed": 125,
+      "reference": 125,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_dot_balls",
+      "computed": 22,
+      "reference": 22,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_boundary_events",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_singles_twos",
+      "computed": 35,
+      "reference": 35,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_first_date",
+      "computed": "2026-04-18",
+      "reference": "2026-04-18",
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_latest_date",
+      "computed": "2026-05-31",
+      "reference": "2026-05-31",
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_economy",
+      "computed": 10.0,
+      "reference": 10.0,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_dot_pct",
+      "computed": 29.3333,
+      "reference": 29.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_wickets_per_100",
+      "computed": 6.6667,
+      "reference": 6.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_boundary_pct",
+      "computed": 24.0,
+      "reference": 24.0,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_singles_twos_pct",
+      "computed": 46.6667,
+      "reference": 46.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 830 adjusted_economy",
+      "computed": 10.4371,
+      "reference": 10.4371,
+      "passed": true
+    },
+    {
+      "check": "Player 830 adjusted_wickets_per_100",
+      "computed": 7.1008,
+      "reference": 7.1008,
+      "passed": true
+    },
+    {
+      "check": "Player 830 adjusted_economy_percentile",
+      "computed": 76.0,
+      "reference": 76.0,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_dot_pct_percentile",
+      "computed": 58.0,
+      "reference": 58.0,
+      "passed": true
+    },
+    {
+      "check": "Player 830 adjusted_wickets_per_100_percentile",
+      "computed": 42.0,
+      "reference": 42.0,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_boundary_pct_percentile",
+      "computed": 60.0,
+      "reference": 60.0,
+      "passed": true
+    },
+    {
+      "check": "Player 830 ranking_singles_twos_pct_percentile",
+      "computed": 48.0,
+      "reference": 48.0,
+      "passed": true
+    },
+    {
+      "check": "Player 830 composite_score",
+      "computed": 59.5,
+      "reference": 59.5,
+      "passed": true
+    },
+    {
+      "check": "Player 829 unique-ID row and rank",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_balls",
+      "computed": 68,
+      "reference": 68,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_runs",
+      "computed": 116,
+      "reference": 116,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_dot_balls",
+      "computed": 16,
+      "reference": 16,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_wickets",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_boundary_events",
+      "computed": 15,
+      "reference": 15,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_singles_twos",
+      "computed": 37,
+      "reference": 37,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_first_date",
+      "computed": "2025-04-16",
+      "reference": "2025-04-16",
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_latest_date",
+      "computed": "2026-05-24",
+      "reference": "2026-05-24",
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_economy",
+      "computed": 10.2353,
+      "reference": 10.2353,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_dot_pct",
+      "computed": 23.5294,
+      "reference": 23.5294,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_wickets_per_100",
+      "computed": 14.7059,
+      "reference": 14.7059,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_boundary_pct",
+      "computed": 22.0588,
+      "reference": 22.0588,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_singles_twos_pct",
+      "computed": 54.4118,
+      "reference": 54.4118,
+      "passed": true
+    },
+    {
+      "check": "Player 829 adjusted_economy",
+      "computed": 10.586,
+      "reference": 10.586,
+      "passed": true
+    },
+    {
+      "check": "Player 829 adjusted_wickets_per_100",
+      "computed": 11.3954,
+      "reference": 11.3954,
+      "passed": true
+    },
+    {
+      "check": "Player 829 adjusted_economy_percentile",
+      "computed": 72.0,
+      "reference": 72.0,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_dot_pct_percentile",
+      "computed": 20.0,
+      "reference": 20.0,
+      "passed": true
+    },
+    {
+      "check": "Player 829 adjusted_wickets_per_100_percentile",
+      "computed": 100.0,
+      "reference": 100.0,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_boundary_pct_percentile",
+      "computed": 72.0,
+      "reference": 72.0,
+      "passed": true
+    },
+    {
+      "check": "Player 829 ranking_singles_twos_pct_percentile",
+      "computed": 8.0,
+      "reference": 8.0,
+      "passed": true
+    },
+    {
+      "check": "Player 829 composite_score",
+      "computed": 58.2,
+      "reference": 58.2,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 unique-ID row and rank",
+      "computed": 19,
+      "reference": 19,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_balls",
+      "computed": 78,
+      "reference": 78,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_runs",
+      "computed": 150,
+      "reference": 150,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_dot_balls",
+      "computed": 25,
+      "reference": 25,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_wickets",
+      "computed": 7,
+      "reference": 7,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_boundary_events",
+      "computed": 22,
+      "reference": 22,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_singles_twos",
+      "computed": 31,
+      "reference": 31,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_first_date",
+      "computed": "2025-05-25",
+      "reference": "2025-05-25",
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_latest_date",
+      "computed": "2026-05-18",
+      "reference": "2026-05-18",
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_economy",
+      "computed": 11.5385,
+      "reference": 11.5385,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_dot_pct",
+      "computed": 32.0513,
+      "reference": 32.0513,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_wickets_per_100",
+      "computed": 8.9744,
+      "reference": 8.9744,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_boundary_pct",
+      "computed": 28.2051,
+      "reference": 28.2051,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_singles_twos_pct",
+      "computed": 39.7436,
+      "reference": 39.7436,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 adjusted_economy",
+      "computed": 11.2972,
+      "reference": 11.2972,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 adjusted_wickets_per_100",
+      "computed": 8.3957,
+      "reference": 8.3957,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 adjusted_economy_percentile",
+      "computed": 36.0,
+      "reference": 36.0,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_dot_pct_percentile",
+      "computed": 78.0,
+      "reference": 78.0,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 adjusted_wickets_per_100_percentile",
+      "computed": 75.0,
+      "reference": 75.0,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_boundary_pct_percentile",
+      "computed": 26.0,
+      "reference": 26.0,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 ranking_singles_twos_pct_percentile",
+      "computed": 88.0,
+      "reference": 88.0,
+      "passed": true
+    },
+    {
+      "check": "Player 39657 composite_score",
+      "computed": 58.0,
+      "reference": 58.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 unique-ID row and rank",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_balls",
+      "computed": 60,
+      "reference": 60,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_runs",
+      "computed": 105,
+      "reference": 105,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_dot_balls",
+      "computed": 15,
+      "reference": 15,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_wickets",
+      "computed": 7,
+      "reference": 7,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_boundary_events",
+      "computed": 12,
+      "reference": 12,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_singles_twos",
+      "computed": 33,
+      "reference": 33,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_first_date",
+      "computed": "2024-05-22",
+      "reference": "2024-05-22",
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_latest_date",
+      "computed": "2026-05-14",
+      "reference": "2026-05-14",
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_economy",
+      "computed": 10.5,
+      "reference": 10.5,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_dot_pct",
+      "computed": 25.0,
+      "reference": 25.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_wickets_per_100",
+      "computed": 11.6667,
+      "reference": 11.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_boundary_pct",
+      "computed": 20.0,
+      "reference": 20.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_singles_twos_pct",
+      "computed": 55.0,
+      "reference": 55.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 adjusted_economy",
+      "computed": 10.7417,
+      "reference": 10.7417,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 adjusted_wickets_per_100",
+      "computed": 9.6551,
+      "reference": 9.6551,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 adjusted_economy_percentile",
+      "computed": 66.0,
+      "reference": 66.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_dot_pct_percentile",
+      "computed": 29.0,
+      "reference": 29.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 adjusted_wickets_per_100_percentile",
+      "computed": 89.0,
+      "reference": 89.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_boundary_pct_percentile",
+      "computed": 80.0,
+      "reference": 80.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 ranking_singles_twos_pct_percentile",
+      "computed": 4.0,
+      "reference": 4.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1612 composite_score",
+      "computed": 57.25,
+      "reference": 57.25,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 unique-ID row and rank",
+      "computed": 21,
+      "reference": 21,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_balls",
+      "computed": 60,
+      "reference": 60,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_runs",
+      "computed": 108,
+      "reference": 108,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_dot_balls",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_boundary_events",
+      "computed": 16,
+      "reference": 16,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_singles_twos",
+      "computed": 24,
+      "reference": 24,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_first_date",
+      "computed": "2025-04-04",
+      "reference": "2025-04-04",
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_latest_date",
+      "computed": "2026-09-15",
+      "reference": "2026-09-15",
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_economy",
+      "computed": 10.8,
+      "reference": 10.8,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_dot_pct",
+      "computed": 33.3333,
+      "reference": 33.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_wickets_per_100",
+      "computed": 5.0,
+      "reference": 5.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_boundary_pct",
+      "computed": 26.6667,
+      "reference": 26.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_singles_twos_pct",
+      "computed": 40.0,
+      "reference": 40.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 adjusted_economy",
+      "computed": 10.8917,
+      "reference": 10.8917,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 adjusted_wickets_per_100",
+      "computed": 6.3217,
+      "reference": 6.3217,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 adjusted_economy_percentile",
+      "computed": 60.0,
+      "reference": 60.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_dot_pct_percentile",
+      "computed": 82.0,
+      "reference": 82.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 adjusted_wickets_per_100_percentile",
+      "computed": 19.0,
+      "reference": 19.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_boundary_pct_percentile",
+      "computed": 43.0,
+      "reference": 43.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 ranking_singles_twos_pct_percentile",
+      "computed": 85.0,
+      "reference": 85.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7503 composite_score",
+      "computed": 57.25,
+      "reference": 57.25,
+      "passed": true
+    },
+    {
+      "check": "Player 360 unique-ID row and rank",
+      "computed": 22,
+      "reference": 22,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_balls",
+      "computed": 102,
+      "reference": 102,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_runs",
+      "computed": 152,
+      "reference": 152,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_dot_balls",
+      "computed": 25,
+      "reference": 25,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_wickets",
+      "computed": 7,
+      "reference": 7,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_boundary_events",
+      "computed": 17,
+      "reference": 17,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_singles_twos",
+      "computed": 60,
+      "reference": 60,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_first_date",
+      "computed": "2026-04-15",
+      "reference": "2026-04-15",
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_latest_date",
+      "computed": "2026-05-31",
+      "reference": "2026-05-31",
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_economy",
+      "computed": 8.9412,
+      "reference": 8.9412,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_dot_pct",
+      "computed": 24.5098,
+      "reference": 24.5098,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_wickets_per_100",
+      "computed": 6.8627,
+      "reference": 6.8627,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_boundary_pct",
+      "computed": 16.6667,
+      "reference": 16.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_singles_twos_pct",
+      "computed": 58.8235,
+      "reference": 58.8235,
+      "passed": true
+    },
+    {
+      "check": "Player 360 adjusted_economy",
+      "computed": 9.6976,
+      "reference": 9.6976,
+      "passed": true
+    },
+    {
+      "check": "Player 360 adjusted_wickets_per_100",
+      "computed": 7.1519,
+      "reference": 7.1519,
+      "passed": true
+    },
+    {
+      "check": "Player 360 adjusted_economy_percentile",
+      "computed": 92.0,
+      "reference": 92.0,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_dot_pct_percentile",
+      "computed": 26.0,
+      "reference": 26.0,
+      "passed": true
+    },
+    {
+      "check": "Player 360 adjusted_wickets_per_100_percentile",
+      "computed": 44.0,
+      "reference": 44.0,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_boundary_pct_percentile",
+      "computed": 90.0,
+      "reference": 90.0,
+      "passed": true
+    },
+    {
+      "check": "Player 360 ranking_singles_twos_pct_percentile",
+      "computed": 0.0,
+      "reference": 0.0,
+      "passed": true
+    },
+    {
+      "check": "Player 360 composite_score",
+      "computed": 56.4,
+      "reference": 56.4,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 unique-ID row and rank",
+      "computed": 23,
+      "reference": 23,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_balls",
+      "computed": 60,
+      "reference": 60,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_runs",
+      "computed": 115,
+      "reference": 115,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_dot_balls",
+      "computed": 19,
+      "reference": 19,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_wickets",
+      "computed": 4,
+      "reference": 4,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_boundary_events",
+      "computed": 15,
+      "reference": 15,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_singles_twos",
+      "computed": 26,
+      "reference": 26,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_first_date",
+      "computed": "2025-05-18",
+      "reference": "2025-05-18",
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_latest_date",
+      "computed": "2026-10-09",
+      "reference": "2026-10-09",
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_economy",
+      "computed": 11.5,
+      "reference": 11.5,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_dot_pct",
+      "computed": 31.6667,
+      "reference": 31.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_wickets_per_100",
+      "computed": 6.6667,
+      "reference": 6.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_boundary_pct",
+      "computed": 25.0,
+      "reference": 25.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_singles_twos_pct",
+      "computed": 43.3333,
+      "reference": 43.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 adjusted_economy",
+      "computed": 11.2417,
+      "reference": 11.2417,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 adjusted_wickets_per_100",
+      "computed": 7.1551,
+      "reference": 7.1551,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 adjusted_economy_percentile",
+      "computed": 40.0,
+      "reference": 40.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_dot_pct_percentile",
+      "computed": 74.0,
+      "reference": 74.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 adjusted_wickets_per_100_percentile",
+      "computed": 46.0,
+      "reference": 46.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_boundary_pct_percentile",
+      "computed": 55.0,
+      "reference": 55.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 ranking_singles_twos_pct_percentile",
+      "computed": 66.0,
+      "reference": 66.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3644 composite_score",
+      "computed": 54.55,
+      "reference": 54.55,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 unique-ID row and rank",
+      "computed": 24,
+      "reference": 24,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_balls",
+      "computed": 57,
+      "reference": 57,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_runs",
+      "computed": 107,
+      "reference": 107,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_dot_balls",
+      "computed": 16,
+      "reference": 16,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_boundary_events",
+      "computed": 13,
+      "reference": 13,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_singles_twos",
+      "computed": 28,
+      "reference": 28,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_first_date",
+      "computed": "2024-03-30",
+      "reference": "2024-03-30",
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_latest_date",
+      "computed": "2026-05-26",
+      "reference": "2026-05-26",
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_economy",
+      "computed": 11.2632,
+      "reference": 11.2632,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_dot_pct",
+      "computed": 28.0702,
+      "reference": 28.0702,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_wickets_per_100",
+      "computed": 8.7719,
+      "reference": 8.7719,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_boundary_pct",
+      "computed": 22.807,
+      "reference": 22.807,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_singles_twos_pct",
+      "computed": 49.1228,
+      "reference": 49.1228,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 adjusted_economy",
+      "computed": 11.1197,
+      "reference": 11.1197,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 adjusted_wickets_per_100",
+      "computed": 8.1932,
+      "reference": 8.1932,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 adjusted_economy_percentile",
+      "computed": 46.0,
+      "reference": 46.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_dot_pct_percentile",
+      "computed": 52.0,
+      "reference": 52.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 adjusted_wickets_per_100_percentile",
+      "computed": 70.0,
+      "reference": 70.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_boundary_pct_percentile",
+      "computed": 66.0,
+      "reference": 66.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 ranking_singles_twos_pct_percentile",
+      "computed": 34.0,
+      "reference": 34.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4219 composite_score",
+      "computed": 54.1,
+      "reference": 54.1,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 unique-ID row and rank",
+      "computed": 25,
+      "reference": 25,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_balls",
+      "computed": 72,
+      "reference": 72,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_runs",
+      "computed": 127,
+      "reference": 127,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_dot_balls",
+      "computed": 22,
+      "reference": 22,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_boundary_events",
+      "computed": 16,
+      "reference": 16,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_singles_twos",
+      "computed": 34,
+      "reference": 34,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_first_date",
+      "computed": "2025-04-12",
+      "reference": "2025-04-12",
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_latest_date",
+      "computed": "2026-05-31",
+      "reference": "2026-05-31",
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_economy",
+      "computed": 10.5833,
+      "reference": 10.5833,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_dot_pct",
+      "computed": 30.5556,
+      "reference": 30.5556,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_wickets_per_100",
+      "computed": 4.1667,
+      "reference": 4.1667,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_boundary_pct",
+      "computed": 22.2222,
+      "reference": 22.2222,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_singles_twos_pct",
+      "computed": 47.2222,
+      "reference": 47.2222,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 adjusted_economy",
+      "computed": 10.7652,
+      "reference": 10.7652,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 adjusted_wickets_per_100",
+      "computed": 5.7471,
+      "reference": 5.7471,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 adjusted_economy_percentile",
+      "computed": 62.0,
+      "reference": 62.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_dot_pct_percentile",
+      "computed": 70.0,
+      "reference": 70.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 adjusted_wickets_per_100_percentile",
+      "computed": 3.0,
+      "reference": 3.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_boundary_pct_percentile",
+      "computed": 70.0,
+      "reference": 70.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 ranking_singles_twos_pct_percentile",
+      "computed": 41.0,
+      "reference": 41.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4722 composite_score",
+      "computed": 51.3,
+      "reference": 51.3,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 unique-ID row and rank",
+      "computed": 26,
+      "reference": 26,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_balls",
+      "computed": 63,
+      "reference": 63,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_runs",
+      "computed": 127,
+      "reference": 127,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_dot_balls",
+      "computed": 19,
+      "reference": 19,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_wickets",
+      "computed": 6,
+      "reference": 6,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_boundary_events",
+      "computed": 19,
+      "reference": 19,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_singles_twos",
+      "computed": 25,
+      "reference": 25,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_first_date",
+      "computed": "2025-04-08",
+      "reference": "2025-04-08",
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_latest_date",
+      "computed": "2026-05-24",
+      "reference": "2026-05-24",
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_economy",
+      "computed": 12.0952,
+      "reference": 12.0952,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_dot_pct",
+      "computed": 30.1587,
+      "reference": 30.1587,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_wickets_per_100",
+      "computed": 9.5238,
+      "reference": 9.5238,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_boundary_pct",
+      "computed": 30.1587,
+      "reference": 30.1587,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_singles_twos_pct",
+      "computed": 39.6825,
+      "reference": 39.6825,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 adjusted_economy",
+      "computed": 11.5529,
+      "reference": 11.5529,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 adjusted_wickets_per_100",
+      "computed": 8.6066,
+      "reference": 8.6066,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 adjusted_economy_percentile",
+      "computed": 20.0,
+      "reference": 20.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_dot_pct_percentile",
+      "computed": 66.0,
+      "reference": 66.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 adjusted_wickets_per_100_percentile",
+      "computed": 82.0,
+      "reference": 82.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_boundary_pct_percentile",
+      "computed": 16.0,
+      "reference": 16.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 ranking_singles_twos_pct_percentile",
+      "computed": 90.0,
+      "reference": 90.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2847 composite_score",
+      "computed": 50.3,
+      "reference": 50.3,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 unique-ID row and rank",
+      "computed": 27,
+      "reference": 27,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_balls",
+      "computed": 72,
+      "reference": 72,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_runs",
+      "computed": 140,
+      "reference": 140,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_dot_balls",
+      "computed": 24,
+      "reference": 24,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_wickets",
+      "computed": 4,
+      "reference": 4,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_boundary_events",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_singles_twos",
+      "computed": 28,
+      "reference": 28,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_first_date",
+      "computed": "2024-04-15",
+      "reference": "2024-04-15",
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_latest_date",
+      "computed": "2026-05-17",
+      "reference": "2026-05-17",
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_economy",
+      "computed": 11.6667,
+      "reference": 11.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_dot_pct",
+      "computed": 33.3333,
+      "reference": 33.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_wickets_per_100",
+      "computed": 5.5556,
+      "reference": 5.5556,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_boundary_pct",
+      "computed": 27.7778,
+      "reference": 27.7778,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_singles_twos_pct",
+      "computed": 38.8889,
+      "reference": 38.8889,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 adjusted_economy",
+      "computed": 11.3561,
+      "reference": 11.3561,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 adjusted_wickets_per_100",
+      "computed": 6.5046,
+      "reference": 6.5046,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 adjusted_economy_percentile",
+      "computed": 31.0,
+      "reference": 31.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_dot_pct_percentile",
+      "computed": 82.0,
+      "reference": 82.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 adjusted_wickets_per_100_percentile",
+      "computed": 24.0,
+      "reference": 24.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_boundary_pct_percentile",
+      "computed": 29.0,
+      "reference": 29.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 ranking_singles_twos_pct_percentile",
+      "computed": 96.0,
+      "reference": 96.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4692 composite_score",
+      "computed": 48.55,
+      "reference": 48.55,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 unique-ID row and rank",
+      "computed": 28,
+      "reference": 28,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_balls",
+      "computed": 84,
+      "reference": 84,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_runs",
+      "computed": 159,
+      "reference": 159,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_dot_balls",
+      "computed": 23,
+      "reference": 23,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_wickets",
+      "computed": 7,
+      "reference": 7,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_boundary_events",
+      "computed": 24,
+      "reference": 24,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_singles_twos",
+      "computed": 37,
+      "reference": 37,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_first_date",
+      "computed": "2025-05-06",
+      "reference": "2025-05-06",
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_latest_date",
+      "computed": "2026-05-29",
+      "reference": "2026-05-29",
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_economy",
+      "computed": 11.3571,
+      "reference": 11.3571,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_dot_pct",
+      "computed": 27.381,
+      "reference": 27.381,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_wickets_per_100",
+      "computed": 8.3333,
+      "reference": 8.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_boundary_pct",
+      "computed": 28.5714,
+      "reference": 28.5714,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_singles_twos_pct",
+      "computed": 44.0476,
+      "reference": 44.0476,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 adjusted_economy",
+      "computed": 11.2014,
+      "reference": 11.2014,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 adjusted_wickets_per_100",
+      "computed": 8.0459,
+      "reference": 8.0459,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 adjusted_economy_percentile",
+      "computed": 42.0,
+      "reference": 42.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_dot_pct_percentile",
+      "computed": 50.0,
+      "reference": 50.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 adjusted_wickets_per_100_percentile",
+      "computed": 62.0,
+      "reference": 62.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_boundary_pct_percentile",
+      "computed": 24.0,
+      "reference": 24.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 ranking_singles_twos_pct_percentile",
+      "computed": 62.0,
+      "reference": 62.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4489 composite_score",
+      "computed": 47.3,
+      "reference": 47.3,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 unique-ID row and rank",
+      "computed": 29,
+      "reference": 29,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_balls",
+      "computed": 86,
+      "reference": 86,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_runs",
+      "computed": 152,
+      "reference": 152,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_dot_balls",
+      "computed": 23,
+      "reference": 23,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_boundary_events",
+      "computed": 23,
+      "reference": 23,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_singles_twos",
+      "computed": 40,
+      "reference": 40,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_first_date",
+      "computed": "2024-05-24",
+      "reference": "2024-05-24",
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_latest_date",
+      "computed": "2026-05-05",
+      "reference": "2026-05-05",
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_economy",
+      "computed": 10.6047,
+      "reference": 10.6047,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_dot_pct",
+      "computed": 26.7442,
+      "reference": 26.7442,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_wickets_per_100",
+      "computed": 5.814,
+      "reference": 5.814,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_boundary_pct",
+      "computed": 26.7442,
+      "reference": 26.7442,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_singles_twos_pct",
+      "computed": 46.5116,
+      "reference": 46.5116,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 adjusted_economy",
+      "computed": 10.7603,
+      "reference": 10.7603,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 adjusted_wickets_per_100",
+      "computed": 6.5658,
+      "reference": 6.5658,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 adjusted_economy_percentile",
+      "computed": 64.0,
+      "reference": 64.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_dot_pct_percentile",
+      "computed": 44.0,
+      "reference": 44.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 adjusted_wickets_per_100_percentile",
+      "computed": 26.0,
+      "reference": 26.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_boundary_pct_percentile",
+      "computed": 40.0,
+      "reference": 40.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 ranking_singles_twos_pct_percentile",
+      "computed": 52.0,
+      "reference": 52.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4265 composite_score",
+      "computed": 46.6,
+      "reference": 46.6,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 unique-ID row and rank",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_balls",
+      "computed": 78,
+      "reference": 78,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_runs",
+      "computed": 136,
+      "reference": 136,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_dot_balls",
+      "computed": 19,
+      "reference": 19,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_boundary_events",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_singles_twos",
+      "computed": 41,
+      "reference": 41,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_first_date",
+      "computed": "2026-04-04",
+      "reference": "2026-04-04",
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_latest_date",
+      "computed": "2026-05-29",
+      "reference": "2026-05-29",
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_economy",
+      "computed": 10.4615,
+      "reference": 10.4615,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_dot_pct",
+      "computed": 24.359,
+      "reference": 24.359,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_wickets_per_100",
+      "computed": 6.4103,
+      "reference": 6.4103,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_boundary_pct",
+      "computed": 23.0769,
+      "reference": 23.0769,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_singles_twos_pct",
+      "computed": 52.5641,
+      "reference": 52.5641,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 adjusted_economy",
+      "computed": 10.6884,
+      "reference": 10.6884,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 adjusted_wickets_per_100",
+      "computed": 6.9465,
+      "reference": 6.9465,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 adjusted_economy_percentile",
+      "computed": 70.0,
+      "reference": 70.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_dot_pct_percentile",
+      "computed": 24.0,
+      "reference": 24.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 adjusted_wickets_per_100_percentile",
+      "computed": 38.0,
+      "reference": 38.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_boundary_pct_percentile",
+      "computed": 64.0,
+      "reference": 64.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 ranking_singles_twos_pct_percentile",
+      "computed": 16.0,
+      "reference": 16.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3298 composite_score",
+      "computed": 45.8,
+      "reference": 45.8,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 unique-ID row and rank",
+      "computed": 31,
+      "reference": 31,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_balls",
+      "computed": 59,
+      "reference": 59,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_runs",
+      "computed": 124,
+      "reference": 124,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_dot_balls",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_boundary_events",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_singles_twos",
+      "computed": 23,
+      "reference": 23,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_first_date",
+      "computed": "2025-05-04",
+      "reference": "2025-05-04",
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_latest_date",
+      "computed": "2026-05-23",
+      "reference": "2026-05-23",
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_economy",
+      "computed": 12.6102,
+      "reference": 12.6102,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_dot_pct",
+      "computed": 30.5085,
+      "reference": 30.5085,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_wickets_per_100",
+      "computed": 8.4746,
+      "reference": 8.4746,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_boundary_pct",
+      "computed": 30.5085,
+      "reference": 30.5085,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_singles_twos_pct",
+      "computed": 38.9831,
+      "reference": 38.9831,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 adjusted_economy",
+      "computed": 11.79,
+      "reference": 11.79,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 adjusted_wickets_per_100",
+      "computed": 8.0556,
+      "reference": 8.0556,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 adjusted_economy_percentile",
+      "computed": 14.0,
+      "reference": 14.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_dot_pct_percentile",
+      "computed": 68.0,
+      "reference": 68.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 adjusted_wickets_per_100_percentile",
+      "computed": 64.0,
+      "reference": 64.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_boundary_pct_percentile",
+      "computed": 12.0,
+      "reference": 12.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 ranking_singles_twos_pct_percentile",
+      "computed": 94.0,
+      "reference": 94.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4487 composite_score",
+      "computed": 45.2,
+      "reference": 45.2,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 unique-ID row and rank",
+      "computed": 32,
+      "reference": 32,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_balls",
+      "computed": 78,
+      "reference": 78,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_runs",
+      "computed": 143,
+      "reference": 143,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_dot_balls",
+      "computed": 21,
+      "reference": 21,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_wickets",
+      "computed": 4,
+      "reference": 4,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_boundary_events",
+      "computed": 21,
+      "reference": 21,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_singles_twos",
+      "computed": 36,
+      "reference": 36,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_first_date",
+      "computed": "2025-04-08",
+      "reference": "2025-04-08",
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_latest_date",
+      "computed": "2026-01-28",
+      "reference": "2026-01-28",
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_economy",
+      "computed": 11.0,
+      "reference": 11.0,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_dot_pct",
+      "computed": 26.9231,
+      "reference": 26.9231,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_wickets_per_100",
+      "computed": 5.1282,
+      "reference": 5.1282,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_boundary_pct",
+      "computed": 26.9231,
+      "reference": 26.9231,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_singles_twos_pct",
+      "computed": 46.1538,
+      "reference": 46.1538,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 adjusted_economy",
+      "computed": 10.9928,
+      "reference": 10.9928,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 adjusted_wickets_per_100",
+      "computed": 6.2218,
+      "reference": 6.2218,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 adjusted_economy_percentile",
+      "computed": 51.0,
+      "reference": 51.0,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_dot_pct_percentile",
+      "computed": 48.0,
+      "reference": 48.0,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 adjusted_wickets_per_100_percentile",
+      "computed": 12.0,
+      "reference": 12.0,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_boundary_pct_percentile",
+      "computed": 37.0,
+      "reference": 37.0,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 ranking_singles_twos_pct_percentile",
+      "computed": 55.0,
+      "reference": 55.0,
+      "passed": true
+    },
+    {
+      "check": "Player 29888 composite_score",
+      "computed": 40.75,
+      "reference": 40.75,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 unique-ID row and rank",
+      "computed": 33,
+      "reference": 33,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_balls",
+      "computed": 64,
+      "reference": 64,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_runs",
+      "computed": 117,
+      "reference": 117,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_dot_balls",
+      "computed": 15,
+      "reference": 15,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_wickets",
+      "computed": 4,
+      "reference": 4,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_boundary_events",
+      "computed": 14,
+      "reference": 14,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_singles_twos",
+      "computed": 35,
+      "reference": 35,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_first_date",
+      "computed": "2023-04-13",
+      "reference": "2023-04-13",
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_latest_date",
+      "computed": "2026-04-03",
+      "reference": "2026-04-03",
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_economy",
+      "computed": 10.9688,
+      "reference": 10.9688,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_dot_pct",
+      "computed": 23.4375,
+      "reference": 23.4375,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_wickets_per_100",
+      "computed": 6.25,
+      "reference": 6.25,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_boundary_pct",
+      "computed": 21.875,
+      "reference": 21.875,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_singles_twos_pct",
+      "computed": 54.6875,
+      "reference": 54.6875,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 adjusted_economy",
+      "computed": 10.9759,
+      "reference": 10.9759,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 adjusted_wickets_per_100",
+      "computed": 6.9243,
+      "reference": 6.9243,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 adjusted_economy_percentile",
+      "computed": 56.0,
+      "reference": 56.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_dot_pct_percentile",
+      "computed": 18.0,
+      "reference": 18.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 adjusted_wickets_per_100_percentile",
+      "computed": 36.0,
+      "reference": 36.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_boundary_pct_percentile",
+      "computed": 74.0,
+      "reference": 74.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 ranking_singles_twos_pct_percentile",
+      "computed": 6.0,
+      "reference": 6.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6161 composite_score",
+      "computed": 40.2,
+      "reference": 40.2,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 unique-ID row and rank",
+      "computed": 34,
+      "reference": 34,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_balls",
+      "computed": 72,
+      "reference": 72,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_runs",
+      "computed": 140,
+      "reference": 140,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_dot_balls",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_wickets",
+      "computed": 6,
+      "reference": 6,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_boundary_events",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_singles_twos",
+      "computed": 34,
+      "reference": 34,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_first_date",
+      "computed": "2026-05-03",
+      "reference": "2026-05-03",
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_latest_date",
+      "computed": "2026-10-11",
+      "reference": "2026-10-11",
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_economy",
+      "computed": 11.6667,
+      "reference": 11.6667,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_dot_pct",
+      "computed": 25.0,
+      "reference": 25.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_wickets_per_100",
+      "computed": 8.3333,
+      "reference": 8.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_boundary_pct",
+      "computed": 27.7778,
+      "reference": 27.7778,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_singles_twos_pct",
+      "computed": 47.2222,
+      "reference": 47.2222,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 adjusted_economy",
+      "computed": 11.3561,
+      "reference": 11.3561,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 adjusted_wickets_per_100",
+      "computed": 8.0197,
+      "reference": 8.0197,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 adjusted_economy_percentile",
+      "computed": 31.0,
+      "reference": 31.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_dot_pct_percentile",
+      "computed": 29.0,
+      "reference": 29.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 adjusted_wickets_per_100_percentile",
+      "computed": 59.0,
+      "reference": 59.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_boundary_pct_percentile",
+      "computed": 29.0,
+      "reference": 29.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 ranking_singles_twos_pct_percentile",
+      "computed": 41.0,
+      "reference": 41.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6464 composite_score",
+      "computed": 36.8,
+      "reference": 36.8,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 unique-ID row and rank",
+      "computed": 35,
+      "reference": 35,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_balls",
+      "computed": 60,
+      "reference": 60,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_runs",
+      "computed": 109,
+      "reference": 109,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_dot_balls",
+      "computed": 14,
+      "reference": 14,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_boundary_events",
+      "computed": 14,
+      "reference": 14,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_singles_twos",
+      "computed": 32,
+      "reference": 32,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_first_date",
+      "computed": "2025-04-08",
+      "reference": "2025-04-08",
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_latest_date",
+      "computed": "2026-05-10",
+      "reference": "2026-05-10",
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_economy",
+      "computed": 10.9,
+      "reference": 10.9,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_dot_pct",
+      "computed": 23.3333,
+      "reference": 23.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_wickets_per_100",
+      "computed": 5.0,
+      "reference": 5.0,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_boundary_pct",
+      "computed": 23.3333,
+      "reference": 23.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_singles_twos_pct",
+      "computed": 53.3333,
+      "reference": 53.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 adjusted_economy",
+      "computed": 10.9417,
+      "reference": 10.9417,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 adjusted_wickets_per_100",
+      "computed": 6.3217,
+      "reference": 6.3217,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 adjusted_economy_percentile",
+      "computed": 58.0,
+      "reference": 58.0,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_dot_pct_percentile",
+      "computed": 16.0,
+      "reference": 16.0,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 adjusted_wickets_per_100_percentile",
+      "computed": 19.0,
+      "reference": 19.0,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_boundary_pct_percentile",
+      "computed": 62.0,
+      "reference": 62.0,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 ranking_singles_twos_pct_percentile",
+      "computed": 14.0,
+      "reference": 14.0,
+      "passed": true
+    },
+    {
+      "check": "Player 58134 composite_score",
+      "computed": 35.9,
+      "reference": 35.9,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 unique-ID row and rank",
+      "computed": 36,
+      "reference": 36,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_balls",
+      "computed": 82,
+      "reference": 82,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_runs",
+      "computed": 154,
+      "reference": 154,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_dot_balls",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_wickets",
+      "computed": 6,
+      "reference": 6,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_boundary_events",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_singles_twos",
+      "computed": 44,
+      "reference": 44,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_first_date",
+      "computed": "2025-04-27",
+      "reference": "2025-04-27",
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_latest_date",
+      "computed": "2026-05-10",
+      "reference": "2026-05-10",
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_economy",
+      "computed": 11.2683,
+      "reference": 11.2683,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_dot_pct",
+      "computed": 21.9512,
+      "reference": 21.9512,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_wickets_per_100",
+      "computed": 7.3171,
+      "reference": 7.3171,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_boundary_pct",
+      "computed": 24.3902,
+      "reference": 24.3902,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_singles_twos_pct",
+      "computed": 53.6585,
+      "reference": 53.6585,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 adjusted_economy",
+      "computed": 11.1479,
+      "reference": 11.1479,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 adjusted_wickets_per_100",
+      "computed": 7.455,
+      "reference": 7.455,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 adjusted_economy_percentile",
+      "computed": 44.0,
+      "reference": 44.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_dot_pct_percentile",
+      "computed": 10.0,
+      "reference": 10.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 adjusted_wickets_per_100_percentile",
+      "computed": 51.0,
+      "reference": 51.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_boundary_pct_percentile",
+      "computed": 58.0,
+      "reference": 58.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 ranking_singles_twos_pct_percentile",
+      "computed": 12.0,
+      "reference": 12.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3653 composite_score",
+      "computed": 35.8,
+      "reference": 35.8,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 unique-ID row and rank",
+      "computed": 37,
+      "reference": 37,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_balls",
+      "computed": 77,
+      "reference": 77,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_runs",
+      "computed": 142,
+      "reference": 142,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_dot_balls",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_wickets",
+      "computed": 4,
+      "reference": 4,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_boundary_events",
+      "computed": 21,
+      "reference": 21,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_singles_twos",
+      "computed": 36,
+      "reference": 36,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_first_date",
+      "computed": "2023-04-12",
+      "reference": "2023-04-12",
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_latest_date",
+      "computed": "2026-05-29",
+      "reference": "2026-05-29",
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_economy",
+      "computed": 11.0649,
+      "reference": 11.0649,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_dot_pct",
+      "computed": 25.974,
+      "reference": 25.974,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_wickets_per_100",
+      "computed": 5.1948,
+      "reference": 5.1948,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_boundary_pct",
+      "computed": 27.2727,
+      "reference": 27.2727,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_singles_twos_pct",
+      "computed": 46.7532,
+      "reference": 46.7532,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 adjusted_economy",
+      "computed": 11.0292,
+      "reference": 11.0292,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 adjusted_wickets_per_100",
+      "computed": 6.2672,
+      "reference": 6.2672,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 adjusted_economy_percentile",
+      "computed": 48.0,
+      "reference": 48.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_dot_pct_percentile",
+      "computed": 36.0,
+      "reference": 36.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 adjusted_wickets_per_100_percentile",
+      "computed": 14.0,
+      "reference": 14.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_boundary_pct_percentile",
+      "computed": 33.0,
+      "reference": 33.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 ranking_singles_twos_pct_percentile",
+      "computed": 46.0,
+      "reference": 46.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2633 composite_score",
+      "computed": 35.75,
+      "reference": 35.75,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 unique-ID row and rank",
+      "computed": 38,
+      "reference": 38,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_balls",
+      "computed": 57,
+      "reference": 57,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_runs",
+      "computed": 123,
+      "reference": 123,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_dot_balls",
+      "computed": 15,
+      "reference": 15,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_boundary_events",
+      "computed": 19,
+      "reference": 19,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_singles_twos",
+      "computed": 24,
+      "reference": 24,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_first_date",
+      "computed": "2025-03-23",
+      "reference": "2025-03-23",
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_latest_date",
+      "computed": "2026-04-14",
+      "reference": "2026-04-14",
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_economy",
+      "computed": 12.9474,
+      "reference": 12.9474,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_dot_pct",
+      "computed": 26.3158,
+      "reference": 26.3158,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_wickets_per_100",
+      "computed": 8.7719,
+      "reference": 8.7719,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_boundary_pct",
+      "computed": 33.3333,
+      "reference": 33.3333,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_singles_twos_pct",
+      "computed": 42.1053,
+      "reference": 42.1053,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 adjusted_economy",
+      "computed": 11.9402,
+      "reference": 11.9402,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 adjusted_wickets_per_100",
+      "computed": 8.1932,
+      "reference": 8.1932,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 adjusted_economy_percentile",
+      "computed": 12.0,
+      "reference": 12.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_dot_pct_percentile",
+      "computed": 38.0,
+      "reference": 38.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 adjusted_wickets_per_100_percentile",
+      "computed": 70.0,
+      "reference": 70.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_boundary_pct_percentile",
+      "computed": 6.0,
+      "reference": 6.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 ranking_singles_twos_pct_percentile",
+      "computed": 76.0,
+      "reference": 76.0,
+      "passed": true
+    },
+    {
+      "check": "Player 4816 composite_score",
+      "computed": 35.6,
+      "reference": 35.6,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 unique-ID row and rank",
+      "computed": 39,
+      "reference": 39,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_balls",
+      "computed": 66,
+      "reference": 66,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_runs",
+      "computed": 128,
+      "reference": 128,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_dot_balls",
+      "computed": 17,
+      "reference": 17,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_wickets",
+      "computed": 4,
+      "reference": 4,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_boundary_events",
+      "computed": 19,
+      "reference": 19,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_singles_twos",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_first_date",
+      "computed": "2025-05-25",
+      "reference": "2025-05-25",
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_latest_date",
+      "computed": "2026-05-09",
+      "reference": "2026-05-09",
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_economy",
+      "computed": 11.6364,
+      "reference": 11.6364,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_dot_pct",
+      "computed": 25.7576,
+      "reference": 25.7576,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_wickets_per_100",
+      "computed": 6.0606,
+      "reference": 6.0606,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_boundary_pct",
+      "computed": 28.7879,
+      "reference": 28.7879,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_singles_twos_pct",
+      "computed": 45.4545,
+      "reference": 45.4545,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 adjusted_economy",
+      "computed": 11.3255,
+      "reference": 11.3255,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 adjusted_wickets_per_100",
+      "computed": 6.8144,
+      "reference": 6.8144,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 adjusted_economy_percentile",
+      "computed": 34.0,
+      "reference": 34.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_dot_pct_percentile",
+      "computed": 34.0,
+      "reference": 34.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 adjusted_wickets_per_100_percentile",
+      "computed": 34.0,
+      "reference": 34.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_boundary_pct_percentile",
+      "computed": 22.0,
+      "reference": 22.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 ranking_singles_twos_pct_percentile",
+      "computed": 58.0,
+      "reference": 58.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5944 composite_score",
+      "computed": 34.6,
+      "reference": 34.6,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 unique-ID row and rank",
+      "computed": 40,
+      "reference": 40,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_balls",
+      "computed": 66,
+      "reference": 66,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_runs",
+      "computed": 131,
+      "reference": 131,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_dot_balls",
+      "computed": 19,
+      "reference": 19,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_boundary_events",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_singles_twos",
+      "computed": 27,
+      "reference": 27,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_first_date",
+      "computed": "2023-05-06",
+      "reference": "2023-05-06",
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_latest_date",
+      "computed": "2026-05-31",
+      "reference": "2026-05-31",
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_economy",
+      "computed": 11.9091,
+      "reference": 11.9091,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_dot_pct",
+      "computed": 28.7879,
+      "reference": 28.7879,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_wickets_per_100",
+      "computed": 4.5455,
+      "reference": 4.5455,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_boundary_pct",
+      "computed": 30.303,
+      "reference": 30.303,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_singles_twos_pct",
+      "computed": 40.9091,
+      "reference": 40.9091,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 adjusted_economy",
+      "computed": 11.4683,
+      "reference": 11.4683,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 adjusted_wickets_per_100",
+      "computed": 6.0207,
+      "reference": 6.0207,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 adjusted_economy_percentile",
+      "computed": 26.0,
+      "reference": 26.0,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_dot_pct_percentile",
+      "computed": 54.0,
+      "reference": 54.0,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 adjusted_wickets_per_100_percentile",
+      "computed": 10.0,
+      "reference": 10.0,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_boundary_pct_percentile",
+      "computed": 14.0,
+      "reference": 14.0,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 ranking_singles_twos_pct_percentile",
+      "computed": 80.0,
+      "reference": 80.0,
+      "passed": true
+    },
+    {
+      "check": "Player 20005 composite_score",
+      "computed": 33.4,
+      "reference": 33.4,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 unique-ID row and rank",
+      "computed": 41,
+      "reference": 41,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_balls",
+      "computed": 72,
+      "reference": 72,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_runs",
+      "computed": 142,
+      "reference": 142,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_dot_balls",
+      "computed": 19,
+      "reference": 19,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_boundary_events",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_singles_twos",
+      "computed": 35,
+      "reference": 35,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_first_date",
+      "computed": "2025-04-13",
+      "reference": "2025-04-13",
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_latest_date",
+      "computed": "2026-05-29",
+      "reference": "2026-05-29",
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_economy",
+      "computed": 11.8333,
+      "reference": 11.8333,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_dot_pct",
+      "computed": 26.3889,
+      "reference": 26.3889,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_wickets_per_100",
+      "computed": 4.1667,
+      "reference": 4.1667,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_boundary_pct",
+      "computed": 25.0,
+      "reference": 25.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_singles_twos_pct",
+      "computed": 48.6111,
+      "reference": 48.6111,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 adjusted_economy",
+      "computed": 11.447,
+      "reference": 11.447,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 adjusted_wickets_per_100",
+      "computed": 5.7471,
+      "reference": 5.7471,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 adjusted_economy_percentile",
+      "computed": 28.0,
+      "reference": 28.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_dot_pct_percentile",
+      "computed": 40.0,
+      "reference": 40.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 adjusted_wickets_per_100_percentile",
+      "computed": 3.0,
+      "reference": 3.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_boundary_pct_percentile",
+      "computed": 55.0,
+      "reference": 55.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 ranking_singles_twos_pct_percentile",
+      "computed": 36.0,
+      "reference": 36.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6806 composite_score",
+      "computed": 30.85,
+      "reference": 30.85,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 unique-ID row and rank",
+      "computed": 42,
+      "reference": 42,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_balls",
+      "computed": 58,
+      "reference": 58,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_runs",
+      "computed": 121,
+      "reference": 121,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_dot_balls",
+      "computed": 13,
+      "reference": 13,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_boundary_events",
+      "computed": 15,
+      "reference": 15,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_singles_twos",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_first_date",
+      "computed": "2023-12-01",
+      "reference": "2023-12-01",
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_latest_date",
+      "computed": "2026-05-24",
+      "reference": "2026-05-24",
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_economy",
+      "computed": 12.5172,
+      "reference": 12.5172,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_dot_pct",
+      "computed": 22.4138,
+      "reference": 22.4138,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_wickets_per_100",
+      "computed": 8.6207,
+      "reference": 8.6207,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_boundary_pct",
+      "computed": 25.8621,
+      "reference": 25.8621,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_singles_twos_pct",
+      "computed": 51.7241,
+      "reference": 51.7241,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 adjusted_economy",
+      "computed": 11.7373,
+      "reference": 11.7373,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 adjusted_wickets_per_100",
+      "computed": 8.1238,
+      "reference": 8.1238,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 adjusted_economy_percentile",
+      "computed": 18.0,
+      "reference": 18.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_dot_pct_percentile",
+      "computed": 12.0,
+      "reference": 12.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 adjusted_wickets_per_100_percentile",
+      "computed": 66.0,
+      "reference": 66.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_boundary_pct_percentile",
+      "computed": 48.0,
+      "reference": 48.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 ranking_singles_twos_pct_percentile",
+      "computed": 18.0,
+      "reference": 18.0,
+      "passed": true
+    },
+    {
+      "check": "Player 1813 composite_score",
+      "computed": 30.6,
+      "reference": 30.6,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 unique-ID row and rank",
+      "computed": 43,
+      "reference": 43,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_balls",
+      "computed": 97,
+      "reference": 97,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_runs",
+      "computed": 205,
+      "reference": 205,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_dot_balls",
+      "computed": 26,
+      "reference": 26,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_wickets",
+      "computed": 6,
+      "reference": 6,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_boundary_events",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_singles_twos",
+      "computed": 41,
+      "reference": 41,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_first_date",
+      "computed": "2024-04-02",
+      "reference": "2024-04-02",
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_latest_date",
+      "computed": "2026-05-11",
+      "reference": "2026-05-11",
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_economy",
+      "computed": 12.6804,
+      "reference": 12.6804,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_dot_pct",
+      "computed": 26.8041,
+      "reference": 26.8041,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_wickets_per_100",
+      "computed": 6.1856,
+      "reference": 6.1856,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_boundary_pct",
+      "computed": 30.9278,
+      "reference": 30.9278,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_singles_twos_pct",
+      "computed": 42.268,
+      "reference": 42.268,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 adjusted_economy",
+      "computed": 12.0319,
+      "reference": 12.0319,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 adjusted_wickets_per_100",
+      "computed": 6.7428,
+      "reference": 6.7428,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 adjusted_economy_percentile",
+      "computed": 10.0,
+      "reference": 10.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_dot_pct_percentile",
+      "computed": 46.0,
+      "reference": 46.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 adjusted_wickets_per_100_percentile",
+      "computed": 32.0,
+      "reference": 32.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_boundary_pct_percentile",
+      "computed": 10.0,
+      "reference": 10.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 ranking_singles_twos_pct_percentile",
+      "computed": 74.0,
+      "reference": 74.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6287 composite_score",
+      "computed": 29.8,
+      "reference": 29.8,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 unique-ID row and rank",
+      "computed": 44,
+      "reference": 44,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_balls",
+      "computed": 55,
+      "reference": 55,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_runs",
+      "computed": 110,
+      "reference": 110,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_dot_balls",
+      "computed": 14,
+      "reference": 14,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_boundary_events",
+      "computed": 15,
+      "reference": 15,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_singles_twos",
+      "computed": 26,
+      "reference": 26,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_first_date",
+      "computed": "2025-04-05",
+      "reference": "2025-04-05",
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_latest_date",
+      "computed": "2026-10-11",
+      "reference": "2026-10-11",
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_economy",
+      "computed": 12.0,
+      "reference": 12.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_dot_pct",
+      "computed": 25.4545,
+      "reference": 25.4545,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_wickets_per_100",
+      "computed": 5.4545,
+      "reference": 5.4545,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_boundary_pct",
+      "computed": 27.2727,
+      "reference": 27.2727,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_singles_twos_pct",
+      "computed": 47.2727,
+      "reference": 47.2727,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 adjusted_economy",
+      "computed": 11.4696,
+      "reference": 11.4696,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 adjusted_wickets_per_100",
+      "computed": 6.5966,
+      "reference": 6.5966,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 adjusted_economy_percentile",
+      "computed": 24.0,
+      "reference": 24.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_dot_pct_percentile",
+      "computed": 32.0,
+      "reference": 32.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 adjusted_wickets_per_100_percentile",
+      "computed": 28.0,
+      "reference": 28.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_boundary_pct_percentile",
+      "computed": 33.0,
+      "reference": 33.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 ranking_singles_twos_pct_percentile",
+      "computed": 38.0,
+      "reference": 38.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2876 composite_score",
+      "computed": 29.55,
+      "reference": 29.55,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 unique-ID row and rank",
+      "computed": 45,
+      "reference": 45,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_balls",
+      "computed": 69,
+      "reference": 69,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_runs",
+      "computed": 137,
+      "reference": 137,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_dot_balls",
+      "computed": 16,
+      "reference": 16,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_wickets",
+      "computed": 4,
+      "reference": 4,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_boundary_events",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_singles_twos",
+      "computed": 35,
+      "reference": 35,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_first_date",
+      "computed": "2022-03-31",
+      "reference": "2022-03-31",
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_latest_date",
+      "computed": "2026-05-21",
+      "reference": "2026-05-21",
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_economy",
+      "computed": 11.913,
+      "reference": 11.913,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_dot_pct",
+      "computed": 23.1884,
+      "reference": 23.1884,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_wickets_per_100",
+      "computed": 5.7971,
+      "reference": 5.7971,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_boundary_pct",
+      "computed": 26.087,
+      "reference": 26.087,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_singles_twos_pct",
+      "computed": 50.7246,
+      "reference": 50.7246,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 adjusted_economy",
+      "computed": 11.4806,
+      "reference": 11.4806,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 adjusted_wickets_per_100",
+      "computed": 6.6559,
+      "reference": 6.6559,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 adjusted_economy_percentile",
+      "computed": 22.0,
+      "reference": 22.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_dot_pct_percentile",
+      "computed": 14.0,
+      "reference": 14.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 adjusted_wickets_per_100_percentile",
+      "computed": 30.0,
+      "reference": 30.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_boundary_pct_percentile",
+      "computed": 46.0,
+      "reference": 46.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 ranking_singles_twos_pct_percentile",
+      "computed": 28.0,
+      "reference": 28.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7250 composite_score",
+      "computed": 25.8,
+      "reference": 25.8,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 unique-ID row and rank",
+      "computed": 46,
+      "reference": 46,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_balls",
+      "computed": 65,
+      "reference": 65,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_runs",
+      "computed": 150,
+      "reference": 150,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_dot_balls",
+      "computed": 13,
+      "reference": 13,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_wickets",
+      "computed": 6,
+      "reference": 6,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_boundary_events",
+      "computed": 22,
+      "reference": 22,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_singles_twos",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_first_date",
+      "computed": "2025-03-29",
+      "reference": "2025-03-29",
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_latest_date",
+      "computed": "2026-04-29",
+      "reference": "2026-04-29",
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_economy",
+      "computed": 13.8462,
+      "reference": 13.8462,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_dot_pct",
+      "computed": 20.0,
+      "reference": 20.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_wickets_per_100",
+      "computed": 9.2308,
+      "reference": 9.2308,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_boundary_pct",
+      "computed": 33.8462,
+      "reference": 33.8462,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_singles_twos_pct",
+      "computed": 46.1538,
+      "reference": 46.1538,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 adjusted_economy",
+      "computed": 12.4721,
+      "reference": 12.4721,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 adjusted_wickets_per_100",
+      "computed": 8.4689,
+      "reference": 8.4689,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 adjusted_economy_percentile",
+      "computed": 8.0,
+      "reference": 8.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_dot_pct_percentile",
+      "computed": 6.0,
+      "reference": 6.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 adjusted_wickets_per_100_percentile",
+      "computed": 78.0,
+      "reference": 78.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_boundary_pct_percentile",
+      "computed": 4.0,
+      "reference": 4.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 ranking_singles_twos_pct_percentile",
+      "computed": 55.0,
+      "reference": 55.0,
+      "passed": true
+    },
+    {
+      "check": "Player 3330 composite_score",
+      "computed": 25.6,
+      "reference": 25.6,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 unique-ID row and rank",
+      "computed": 47,
+      "reference": 47,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_balls",
+      "computed": 76,
+      "reference": 76,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_runs",
+      "computed": 178,
+      "reference": 178,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_dot_balls",
+      "computed": 18,
+      "reference": 18,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_boundary_events",
+      "computed": 24,
+      "reference": 24,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_singles_twos",
+      "computed": 34,
+      "reference": 34,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_first_date",
+      "computed": "2024-04-07",
+      "reference": "2024-04-07",
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_latest_date",
+      "computed": "2026-10-14",
+      "reference": "2026-10-14",
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_economy",
+      "computed": 14.0526,
+      "reference": 14.0526,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_dot_pct",
+      "computed": 23.6842,
+      "reference": 23.6842,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_wickets_per_100",
+      "computed": 6.5789,
+      "reference": 6.5789,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_boundary_pct",
+      "computed": 31.5789,
+      "reference": 31.5789,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_singles_twos_pct",
+      "computed": 44.7368,
+      "reference": 44.7368,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 adjusted_economy",
+      "computed": 12.6986,
+      "reference": 12.6986,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 adjusted_wickets_per_100",
+      "computed": 7.0486,
+      "reference": 7.0486,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 adjusted_economy_percentile",
+      "computed": 4.0,
+      "reference": 4.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_dot_pct_percentile",
+      "computed": 22.0,
+      "reference": 22.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 adjusted_wickets_per_100_percentile",
+      "computed": 40.0,
+      "reference": 40.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_boundary_pct_percentile",
+      "computed": 8.0,
+      "reference": 8.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 ranking_singles_twos_pct_percentile",
+      "computed": 60.0,
+      "reference": 60.0,
+      "passed": true
+    },
+    {
+      "check": "Player 6726 composite_score",
+      "computed": 21.9,
+      "reference": 21.9,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 unique-ID row and rank",
+      "computed": 48,
+      "reference": 48,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_balls",
+      "computed": 56,
+      "reference": 56,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_runs",
+      "computed": 146,
+      "reference": 146,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_dot_balls",
+      "computed": 12,
+      "reference": 12,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_wickets",
+      "computed": 4,
+      "reference": 4,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_boundary_events",
+      "computed": 23,
+      "reference": 23,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_singles_twos",
+      "computed": 21,
+      "reference": 21,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_first_date",
+      "computed": "2022-05-01",
+      "reference": "2022-05-01",
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_latest_date",
+      "computed": "2026-05-11",
+      "reference": "2026-05-11",
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_economy",
+      "computed": 15.6429,
+      "reference": 15.6429,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_dot_pct",
+      "computed": 21.4286,
+      "reference": 21.4286,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_wickets_per_100",
+      "computed": 7.1429,
+      "reference": 7.1429,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_boundary_pct",
+      "computed": 41.0714,
+      "reference": 41.0714,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_singles_twos_pct",
+      "computed": 37.5,
+      "reference": 37.5,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 adjusted_economy",
+      "computed": 13.2328,
+      "reference": 13.2328,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 adjusted_wickets_per_100",
+      "computed": 7.4018,
+      "reference": 7.4018,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 adjusted_economy_percentile",
+      "computed": 0.0,
+      "reference": 0.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_dot_pct_percentile",
+      "computed": 8.0,
+      "reference": 8.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 adjusted_wickets_per_100_percentile",
+      "computed": 48.0,
+      "reference": 48.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_boundary_pct_percentile",
+      "computed": 0.0,
+      "reference": 0.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 ranking_singles_twos_pct_percentile",
+      "computed": 100.0,
+      "reference": 100.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2639 composite_score",
+      "computed": 21.6,
+      "reference": 21.6,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 unique-ID row and rank",
+      "computed": 49,
+      "reference": 49,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_balls",
+      "computed": 68,
+      "reference": 68,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_runs",
+      "computed": 141,
+      "reference": 141,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_dot_balls",
+      "computed": 13,
+      "reference": 13,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_boundary_events",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_singles_twos",
+      "computed": 35,
+      "reference": 35,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_first_date",
+      "computed": "2026-03-31",
+      "reference": "2026-03-31",
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_latest_date",
+      "computed": "2026-05-23",
+      "reference": "2026-05-23",
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_economy",
+      "computed": 12.4412,
+      "reference": 12.4412,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_dot_pct",
+      "computed": 19.1176,
+      "reference": 19.1176,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_wickets_per_100",
+      "computed": 4.4118,
+      "reference": 4.4118,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_boundary_pct",
+      "computed": 29.4118,
+      "reference": 29.4118,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_singles_twos_pct",
+      "computed": 51.4706,
+      "reference": 51.4706,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 adjusted_economy",
+      "computed": 11.7579,
+      "reference": 11.7579,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 adjusted_wickets_per_100",
+      "computed": 5.9267,
+      "reference": 5.9267,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 adjusted_economy_percentile",
+      "computed": 16.0,
+      "reference": 16.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_dot_pct_percentile",
+      "computed": 2.0,
+      "reference": 2.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 adjusted_wickets_per_100_percentile",
+      "computed": 8.0,
+      "reference": 8.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_boundary_pct_percentile",
+      "computed": 18.0,
+      "reference": 18.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 ranking_singles_twos_pct_percentile",
+      "computed": 20.0,
+      "reference": 20.0,
+      "passed": true
+    },
+    {
+      "check": "Player 7808 composite_score",
+      "computed": 11.6,
+      "reference": 11.6,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 unique-ID row and rank",
+      "computed": 50,
+      "reference": 50,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_balls",
+      "computed": 103,
+      "reference": 103,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_runs",
+      "computed": 230,
+      "reference": 230,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_dot_balls",
+      "computed": 20,
+      "reference": 20,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_wickets",
+      "computed": 5,
+      "reference": 5,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_boundary_events",
+      "computed": 30,
+      "reference": 30,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_singles_twos",
+      "computed": 53,
+      "reference": 53,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_first_date",
+      "computed": "2025-04-09",
+      "reference": "2025-04-09",
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_latest_date",
+      "computed": "2026-04-13",
+      "reference": "2026-04-13",
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_economy",
+      "computed": 13.3981,
+      "reference": 13.3981,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_dot_pct",
+      "computed": 19.4175,
+      "reference": 19.4175,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_wickets_per_100",
+      "computed": 4.8544,
+      "reference": 4.8544,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_boundary_pct",
+      "computed": 29.1262,
+      "reference": 29.1262,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_singles_twos_pct",
+      "computed": 51.4563,
+      "reference": 51.4563,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 adjusted_economy",
+      "computed": 12.5093,
+      "reference": 12.5093,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 adjusted_wickets_per_100",
+      "computed": 5.8811,
+      "reference": 5.8811,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 adjusted_economy_percentile",
+      "computed": 6.0,
+      "reference": 6.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_dot_pct_percentile",
+      "computed": 4.0,
+      "reference": 4.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 adjusted_wickets_per_100_percentile",
+      "computed": 6.0,
+      "reference": 6.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_boundary_pct_percentile",
+      "computed": 20.0,
+      "reference": 20.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 ranking_singles_twos_pct_percentile",
+      "computed": 22.0,
+      "reference": 22.0,
+      "passed": true
+    },
+    {
+      "check": "Player 2411 composite_score",
+      "computed": 9.2,
+      "reference": 9.2,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 unique-ID row and rank",
+      "computed": 51,
+      "reference": 51,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_innings",
+      "computed": 10,
+      "reference": 10,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_balls",
+      "computed": 73,
+      "reference": 73,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_runs",
+      "computed": 173,
+      "reference": 173,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_dot_balls",
+      "computed": 13,
+      "reference": 13,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_wickets",
+      "computed": 3,
+      "reference": 3,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_boundary_events",
+      "computed": 28,
+      "reference": 28,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_singles_twos",
+      "computed": 32,
+      "reference": 32,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_first_date",
+      "computed": "2025-04-22",
+      "reference": "2025-04-22",
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_latest_date",
+      "computed": "2026-05-11",
+      "reference": "2026-05-11",
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_economy",
+      "computed": 14.2192,
+      "reference": 14.2192,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_dot_pct",
+      "computed": 17.8082,
+      "reference": 17.8082,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_wickets_per_100",
+      "computed": 4.1096,
+      "reference": 4.1096,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_boundary_pct",
+      "computed": 38.3562,
+      "reference": 38.3562,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_singles_twos_pct",
+      "computed": 43.8356,
+      "reference": 43.8356,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 adjusted_economy",
+      "computed": 12.7595,
+      "reference": 12.7595,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 adjusted_wickets_per_100",
+      "computed": 5.7038,
+      "reference": 5.7038,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 adjusted_economy_percentile",
+      "computed": 2.0,
+      "reference": 2.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_dot_pct_percentile",
+      "computed": 0.0,
+      "reference": 0.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 adjusted_wickets_per_100_percentile",
+      "computed": 0.0,
+      "reference": 0.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_boundary_pct_percentile",
+      "computed": 2.0,
+      "reference": 2.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 ranking_singles_twos_pct_percentile",
+      "computed": 64.0,
+      "reference": 64.0,
+      "passed": true
+    },
+    {
+      "check": "Player 5041 composite_score",
+      "computed": 7.3,
+      "reference": 7.3,
+      "passed": true
+    },
+    {
+      "check": "Top 10 player IDs in order",
+      "computed": [
+        781,
+        7312,
+        7967,
+        27964,
+        3628,
+        7327,
+        27960,
+        8746,
+        8530,
+        36982
+      ],
+      "reference": [
+        781,
+        7312,
+        7967,
+        27964,
+        3628,
+        7327,
+        27960,
+        8746,
+        8530,
+        36982
+      ],
+      "passed": true
+    }
+  ]
+}

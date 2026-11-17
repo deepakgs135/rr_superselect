@@ -1,11 +1,11 @@
 ﻿rank,player,source_player_id,reference_status,source_active_2026_all_venues,source_recent_chase_innings,selection_gate_status,reference_innings,source_innings,reference_balls,source_balls,reference_runs,source_runs,reference_strike_rate,source_strike_rate,reference_balls_per_innings,source_balls_per_innings,reference_boundaries_per_100,source_boundaries_per_100,reference_dot_pct,source_dot_pct,reference_stayed_to_16,source_stayed_to_16,all_reference_figures_match
-1,David Miller,1077,Compared,True,29,10+ chase innings available,3,2,80,33,158,52,197.5,157.6,26.7,16.5,27.5,21.2,20.0,30.3,1 of 3,0 of 2,False
-2,Tim David,6396,Compared,True,26,10+ chase innings available,4,3,59,37,116,79,196.6,213.5,14.8,12.3,30.5,32.4,22.0,16.2,3 of 4,1 of 3,False
-3,Namboori Tilak Varma,7897,Compared,True,36,10+ chase innings available,6,5,148,122,286,242,193.2,198.4,24.7,24.4,27.0,28.7,22.3,21.3,3 of 5,2 of 4,False
-4,Marcus Stoinis,2639,Compared,True,28,10+ chase innings available,5,4,112,85,212,159,189.3,187.1,22.4,21.2,27.7,27.1,25.0,23.5,1 of 3,1 of 2,False
-5,Hardik Pandya,3330,Compared,True,29,10+ chase innings available,5,4,51,46,103,101,202.0,219.6,10.2,11.5,31.4,34.8,25.5,21.7,1 of 4,1 of 3,False
-6,Sherfane Rutherford,6725,Compared,True,14,10+ chase innings available,3,2,42,5,84,0,200.0,0.0,14.0,2.5,33.3,0.0,40.5,100.0,0 of 3,0 of 2,False
-7,Rajat Patidar,5039,Compared,True,20,10+ chase innings available,3,3,44,43,87,86,197.7,200.0,14.7,14.3,25.0,25.6,22.7,23.3,0 of 2,0 of 2,False
-8,Shivam Dube,4755,Compared,True,25,10+ chase innings available,6,5,90,67,174,109,193.3,162.7,15.0,13.4,30.0,25.4,32.2,37.3,1 of 4,1 of 3,False
+1,David Miller,1077,Compared,True,29,10+ Indian-venue chase innings available,3,2,80,33,158,52,197.5,157.6,26.7,16.5,27.5,21.2,20.0,30.3,1 of 3,0 of 2,False
+2,Tim David,6396,Compared,True,26,10+ Indian-venue chase innings available,4,3,59,37,116,79,196.6,213.5,14.8,12.3,30.5,32.4,22.0,16.2,3 of 4,1 of 3,False
+3,Namboori Tilak Varma,7897,Compared,True,33,10+ Indian-venue chase innings available,6,5,148,122,286,242,193.2,198.4,24.7,24.4,27.0,28.7,22.3,21.3,3 of 5,2 of 4,False
+4,Marcus Stoinis,2639,Compared,True,28,10+ Indian-venue chase innings available,5,4,112,85,212,159,189.3,187.1,22.4,21.2,27.7,27.1,25.0,23.5,1 of 3,1 of 2,False
+5,Hardik Pandya,3330,Compared,True,29,10+ Indian-venue chase innings available,5,4,51,46,103,101,202.0,219.6,10.2,11.5,31.4,34.8,25.5,21.7,1 of 4,1 of 3,False
+6,Sherfane Rutherford,6725,Compared,True,14,10+ Indian-venue chase innings available,3,2,42,5,84,0,200.0,0.0,14.0,2.5,33.3,0.0,40.5,100.0,0 of 3,0 of 2,False
+7,Rajat Patidar,5039,Compared,True,20,10+ Indian-venue chase innings available,3,3,44,43,87,86,197.7,200.0,14.7,14.3,25.0,25.6,22.7,23.3,0 of 2,0 of 2,False
+8,Shivam Dube,4755,Compared,True,25,10+ Indian-venue chase innings available,6,5,90,67,174,109,193.3,162.7,15.0,13.4,30.0,25.4,32.2,37.3,1 of 4,1 of 3,False
 9,Daryl Mitchell,4106,Compared,False,6,Not active in 2026,3,1,69,27,117,55,169.6,203.7,23.0,27.0,24.6,33.3,27.5,22.2,1 of 2,0 of 1,False
-10,Nicholas Pooran,3125,Compared,True,33,10+ chase innings available,5,5,68,68,132,132,194.1,194.1,13.6,13.6,29.4,29.4,36.8,36.8,2 of 4,2 of 4,True
+10,Nicholas Pooran,3125,Compared,True,33,10+ Indian-venue chase innings available,5,5,68,68,132,132,194.1,194.1,13.6,13.6,29.4,29.4,36.8,36.8,2 of 4,2 of 4,True

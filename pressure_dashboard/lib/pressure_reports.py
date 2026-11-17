@@ -10,6 +10,7 @@ from typing import Any
 APP_DIR = Path(__file__).resolve().parents[1]
 REPORT_PATH = APP_DIR / "data" / "pressure_report" / "pressure_report.json"
 CLUTCH_REPORT_PATH = APP_DIR / "data" / "pressure_report" / "clutch_batting_report.json"
+DEATH_BOWLING_REPORT_PATH = APP_DIR / "data" / "pressure_report" / "death_bowling_report.json"
 
 
 @lru_cache(maxsize=4)
@@ -27,3 +28,15 @@ def clutch_batting_report() -> dict[str, Any]:
     if not CLUTCH_REPORT_PATH.exists():
         return {}
     return json.loads(_load_report(str(CLUTCH_REPORT_PATH), CLUTCH_REPORT_PATH.stat().st_mtime_ns))
+
+
+def death_bowling_report() -> dict[str, Any]:
+    """Load the raw-CSV Indian death-over bowling selection report."""
+    if not DEATH_BOWLING_REPORT_PATH.exists():
+        return {}
+    return json.loads(
+        _load_report(
+            str(DEATH_BOWLING_REPORT_PATH),
+            DEATH_BOWLING_REPORT_PATH.stat().st_mtime_ns,
+        )
+    )

@@ -33,10 +33,16 @@ DB_DIR = APP_DIR / "data" / "processed"
 QUALITY_DIR = APP_DIR / "data" / "validation"
 DB_PATH = DB_DIR / "analytics.sqlite3"
 QUALITY_PATH = QUALITY_DIR / "quality.json"
+CLUTCH_REPORT_PATH = APP_DIR / "data" / "pressure_report" / "clutch_batting_report.json"
 
 sys.path.insert(0, str(APP_DIR))
 sys.path.insert(0, str(APP_DIR / "build"))
 from clutch_batting import build_clutch_report
+from validate_clutch_batting import save_validation as save_clutch_batting_validation
+from validate_clutch_batting import validate_clutch_batting_report
+from death_bowling import build_death_bowling_report, save_report as save_death_bowling_report
+from validate_death_bowling import save_validation as save_death_bowling_validation
+from validate_death_bowling import validate_death_bowling_report
 from lib.states import (
     batter_dismissal,
     bowler_runs_charged,
@@ -1262,10 +1268,20 @@ def main() -> None:
     conn.close()
     QUALITY_PATH.write_text(json.dumps(quality, indent=2), encoding="utf-8")
     clutch_report = build_clutch_report()
+    clutch_batting_validation = validate_clutch_batting_report(clutch_report)
+    clutch_report["validation"] = clutch_batting_validation
+    CLUTCH_REPORT_PATH.write_text(json.dumps(clutch_report, indent=2, ensure_ascii=False), encoding="utf-8")
+    save_clutch_batting_validation(clutch_batting_validation)
+    death_bowling_report = build_death_bowling_report()
+    death_bowling_validation = validate_death_bowling_report(death_bowling_report)
+    death_bowling_report["validation"] = death_bowling_validation
+    save_death_bowling_validation(death_bowling_validation)
+    save_death_bowling_report(death_bowling_report)
     print(f"Built {DB_PATH}")
     print(json.dumps(quality["scope"], indent=2))
     print(json.dumps(quality["quality"], indent=2))
-    print(json.dumps({"clutch_batting": clutch_report["cohort"], "reference_audit": clutch_report["reference_audit"]}, indent=2))
+    print(json.dumps({"clutch_batting": clutch_report["cohort"], "reference_audit": clutch_report["reference_audit"], "validation": {"all_passed": clutch_batting_validation["all_passed"], "checks_passed": clutch_batting_validation["checks_passed"], "checks_total": clutch_batting_validation["checks_total"]}}, indent=2))
+    print(json.dumps({"death_bowling": death_bowling_report["counts"], "validation": {"all_passed": death_bowling_validation["all_passed"], "checks_passed": death_bowling_validation["checks_passed"], "checks_total": death_bowling_validation["checks_total"]}, "ranking_status": death_bowling_report["ranking_status"]}, indent=2))
 
 
 if __name__ == "__main__":
